@@ -55,7 +55,7 @@
 - (OTRXMPPAccount *)moveValues:(XLFormDescriptor *)form intoAccount:(OTRXMPPAccount *)account
 {
     if (!account) {
-         BOOL useTor = [[form formRowWithTag:kOTRXLFormUseTorTag].value boolValue];
+        BOOL useTor = [[form formRowWithTag:kOTRXLFormUseTorTag].value boolValue];
         if (useTor) {
             account = [[OTRXMPPTorAccount alloc] initWithAccountType:OTRAccountTypeXMPPTor];
         } else {
@@ -68,7 +68,7 @@
     
     NSString *jidNode = nil; // aka 'username' from username@example.com
     NSString *jidDomain = nil;
-
+    
     if (![usernameRow isHidden]) {
         NSArray *components = [usernameRow.value componentsSeparatedByString:@"@"];
         if (components.count == 2) {
@@ -78,7 +78,7 @@
             jidNode = usernameRow.value;
         }
     }
-
+    
     if (!jidNode.length) {
         // strip whitespace and make nickname lowercase
         jidNode = [nickname stringByReplacingOccurrencesOfString:@" " withString:@""];
@@ -102,7 +102,7 @@
     } else {
         self.password = account.password;
     }
-
+    
     
     NSNumber *autologin = [[form formRowWithTag:kOTRXLFormLoginAutomaticallySwitchTag] value];
     if (autologin) {
@@ -115,9 +115,13 @@
         account.autologin = NO;
     }
     
-    NSString *hostname = [[form formRowWithTag:kOTRXLFormHostnameTextFieldTag] value];
-    NSNumber *port = [[form formRowWithTag:kOTRXLFormPortTextFieldTag] value];
-    NSString *resource = [[form formRowWithTag:kOTRXLFormResourceTextFieldTag] value];
+    NSString *hostname = [OTRXMPPAccount defaultHostname];
+    NSNumber *port = [NSNumber numberWithInt:[OTRXMPPAccount defaultPort]];
+    NSString *resource = [OTRXMPPAccount newResource];
+    
+    //NSString *hostname = [[form formRowWithTag:kOTRXLFormHostnameTextFieldTag] value];
+    //NSNumber *port = [[form formRowWithTag:kOTRXLFormPortTextFieldTag] value];
+    //NSString *resource = [[form formRowWithTag:kOTRXLFormResourceTextFieldTag] value];
     
     if (![hostname length]) {
         XLFormRowDescriptor *serverRow = [form formRowWithTag:kOTRXLFormXMPPServerTag];
@@ -127,7 +131,7 @@
         }
     }
     account.domain = hostname;
-
+    
     
     if (port) {
         account.port = [port intValue];
@@ -232,8 +236,8 @@
     OTRLoginStatus newStatus = [notification.userInfo[OTRXMPPNewLoginStatusKey] integerValue];
     NSError *error = notification.userInfo[OTRXMPPLoginErrorKey];
     OTRAccount *account = self.xmppManager.account;
-
-    if (newStatus == OTRLoginStatusAuthenticated) {        
+    
+    if (newStatus == OTRLoginStatusAuthenticated) {
         // Account has been created, so save the password
         account.password = self.password;
         

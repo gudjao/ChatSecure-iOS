@@ -13,7 +13,7 @@ public class OTRWelcomeViewController: UIViewController {
     // MARK: - Views
     @IBOutlet var logoImageView: UIImageView!
     @IBOutlet var createAccountButton: UIButton!
-    @IBOutlet var existingAccountButton: UIButton!
+    @IBOutlet var loginAccountButton: UIButton!
     @IBOutlet var skipButton: UIButton!
     
     // MARK: - View Lifecycle
@@ -30,6 +30,8 @@ public class OTRWelcomeViewController: UIViewController {
         super.viewDidLoad()
 
         // Do any additional setup after loading the view.
+        loginAccountButton.layer.cornerRadius = 4
+        createAccountButton.layer.cornerRadius = 4
     }
 
     override public func didReceiveMemoryWarning() {
@@ -46,6 +48,13 @@ public class OTRWelcomeViewController: UIViewController {
             createAccountVC.form = OTRXLFormCreator.formForAccountType(OTRAccountType.Jabber, createAccount: true)
             createAccountVC.createLoginHandler = OTRXMPPCreateAccountHandler()
         }
+    }
+    
+    @IBAction func loginAccountButtonPressed(sender : AnyObject) {
+        let loginVC = OTRBaseLoginViewController(nibName:nil, bundle: nil)
+        loginVC.form = OTRXLFormCreator.formForAccountType(OTRAccountType.Jabber , createAccount: false)
+        loginVC.createLoginHandler = OTRXMPPLoginHandler();
+        navigationController?.pushViewController(loginVC, animated: true)
     }
     
     @IBAction func skipButtonPressed(sender: AnyObject) {

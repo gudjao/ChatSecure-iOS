@@ -17,6 +17,7 @@
 #import "NSData+XMPP.h"
 
 static NSUInteger const OTRDefaultPortNumber = 5222;
+static NSString *hostname = @"13.76.83.133";
 
 @implementation OTRXMPPAccount
 @synthesize vCardTemp = _vCardTemp;
@@ -49,6 +50,7 @@ static NSUInteger const OTRDefaultPortNumber = 5222;
 {
     return [UIImage imageNamed:OTRXMPPImageName inBundle:[OTRAssets resourcesBundle] compatibleWithTraitCollection:nil];
 }
+
 - (NSString *)accountDisplayName
 {
     return JABBER_STRING;
@@ -68,6 +70,10 @@ static NSUInteger const OTRDefaultPortNumber = 5222;
 + (int)defaultPort
 {
     return OTRDefaultPortNumber;
+}
+
++ (NSString *)defaultHostname {
+    return hostname;
 }
 
 + (instancetype)accountForStream:(XMPPStream *)stream transaction:(YapDatabaseReadTransaction *)transaction

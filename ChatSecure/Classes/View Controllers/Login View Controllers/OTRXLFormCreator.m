@@ -122,8 +122,9 @@ NSString *const kOTRXLFormUseTorTag               = @"kOTRXLFormUseTorTag";
         [descriptor addFormSection:serverSection];
     } else {
         descriptor = [XLFormDescriptor formDescriptorWithTitle:NSLocalizedString(@"Log In", @"title for logging in")];
-        XLFormSectionDescriptor *basicSection = [XLFormSectionDescriptor formSectionWithTitle:BASIC_STRING];
-        XLFormSectionDescriptor *advancedSection = [XLFormSectionDescriptor formSectionWithTitle:ADVANCED_STRING];
+        XLFormSectionDescriptor *basicSection = [XLFormSectionDescriptor formSection];
+        //XLFormSectionDescriptor *basicSection = [XLFormSectionDescriptor formSectionWithTitle:BASIC_STRING];
+        //XLFormSectionDescriptor *advancedSection = [XLFormSectionDescriptor formSectionWithTitle:ADVANCED_STRING];
         
         [nicknameRow.cellConfigAtConfigure setObject:OPTIONAL_STRING forKey:@"textField.placeholder"];
         [basicSection addFormRow:nicknameRow];
@@ -136,11 +137,11 @@ NSString *const kOTRXLFormUseTorTag               = @"kOTRXLFormUseTorTag";
                 [basicSection addFormRow:[self rememberPasswordRowDescriptorWithValue:YES]];
                 [basicSection addFormRow:[self loginAutomaticallyRowDescriptorWithValue:YES]];
                 
-                [advancedSection addFormRow:[self hostnameRowDescriptorWithValue:nil]];
-                [advancedSection addFormRow:[self portRowDescriptorWithValue:@([OTRXMPPAccount defaultPort])]];
-                [advancedSection addFormRow:[self resourceRowDescriptorWithValue:[OTRXMPPAccount newResource]]];
+                //[advancedSection addFormRow:[self hostnameRowDescriptorWithValue:nil]];
+                //[advancedSection addFormRow:[self portRowDescriptorWithValue:@([OTRXMPPAccount defaultPort])]];
+                //[advancedSection addFormRow:[self resourceRowDescriptorWithValue:[OTRXMPPAccount newResource]]];
                 
-                [advancedSection addFormRow:[self torRowDescriptorWithValue:NO]];
+                //[advancedSection addFormRow:[self torRowDescriptorWithValue:NO]];
                 
                 break;
             }
@@ -151,7 +152,7 @@ NSString *const kOTRXLFormUseTorTag               = @"kOTRXLFormUseTorTag";
                 [basicSection addFormRow:usernameRow];
                 [basicSection addFormRow:[self loginAutomaticallyRowDescriptorWithValue:YES]];
                 
-                [advancedSection addFormRow:[self resourceRowDescriptorWithValue:nil]];
+                //[advancedSection addFormRow:[self resourceRowDescriptorWithValue:nil]];
                 
                 break;
             }
@@ -161,7 +162,7 @@ NSString *const kOTRXLFormUseTorTag               = @"kOTRXLFormUseTorTag";
         }
         
         [descriptor addFormSection:basicSection];
-        [descriptor addFormSection:advancedSection];
+        //[descriptor addFormSection:advancedSection];
     }
     return descriptor;
 }

@@ -45,7 +45,7 @@
     
     if ([UIImagePickerController isSourceTypeAvailable:UIImagePickerControllerSourceTypePhotoLibrary]) {
         UIAlertAction *openLibraryAction = [UIAlertAction actionWithTitle:PHOTO_LIBRARY_STRING style:UIAlertActionStyleDefault handler:^(UIAlertAction *action) {
-            [self showImagePickerForSourceType:UIImagePickerControllerSourceTypePhotoLibrary];
+            [self showImagePickerForSourceType:UIImagePickerControllerSourceTypeSavedPhotosAlbum];
         }];
         [alertController addAction:openLibraryAction];
     }

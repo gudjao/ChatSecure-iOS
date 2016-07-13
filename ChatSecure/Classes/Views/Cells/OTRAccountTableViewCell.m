@@ -13,6 +13,8 @@
 #import "OTRLanguageManager.h"
 @import OTRAssets;
 
+NSString *const userImageName = @"user.png";
+
 @implementation OTRAccountTableViewCell
 
 - (instancetype) initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier {
@@ -35,7 +37,8 @@
         self.textLabel.text = account.displayName;
     }
     
-    self.imageView.image = [account accountImage];
+    self.imageView.image = [UIImage imageNamed:userImageName inBundle:[OTRAssets resourcesBundle] compatibleWithTraitCollection:nil];
+    //self.imageView.image = [account accountImage];
 }
 
 - (void)setConnectedText:(OTRProtocolConnectionStatus)connectionStatus {

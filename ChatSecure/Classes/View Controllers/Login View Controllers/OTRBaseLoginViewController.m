@@ -89,6 +89,8 @@ static NSUInteger kOTRMaxLoginAttempts = 5;
         self.navigationItem.leftBarButtonItem.enabled = NO;
         self.navigationItem.backBarButtonItem.enabled = NO;
 
+        [self.view endEditing:YES];
+        
 		__weak __typeof__(self) weakSelf = self;
         self.loginAttempts += 1;
         [self.createLoginHandler performActionWithValidForm:self.form account:self.account progress:^(NSInteger progress, NSString *summaryString) {
@@ -130,7 +132,7 @@ static NSUInteger kOTRMaxLoginAttempts = 5;
     }
 }
 
-- (void) pushInviteViewController {
+- (void)pushInviteViewController {
     if (self.existingAccount) {
         [self dismissViewControllerAnimated:YES completion:nil];
     } else {

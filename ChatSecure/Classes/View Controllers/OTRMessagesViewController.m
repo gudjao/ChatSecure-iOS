@@ -142,6 +142,9 @@ typedef NS_ENUM(int, OTRDropDownType) {
     
     self.audioPlaybackController = [[OTRAudioPlaybackController alloc] init];
     
+    ////// TextView //////
+    self.inputToolbar.contentView.textView.autocorrectionType = UITextAutocorrectionTypeNo;
+    
     ////// TextViewUpdates //////
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(receivedTextViewChangedNotification:) name:UITextViewTextDidChangeNotification object:self.inputToolbar.contentView.textView];
     

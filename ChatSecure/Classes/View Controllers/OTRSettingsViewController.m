@@ -52,6 +52,7 @@
 #import "NSURL+ChatSecure.h"
 
 static NSString *const circleImageName = @"31-circle-plus-large.png";
+static NSString *const logoutImageName = @"logout.png";
 
 @interface OTRSettingsViewController () <UITableViewDataSource, UITableViewDelegate, OTRShareSettingDelegate>
 
@@ -106,9 +107,12 @@ static NSString *const circleImageName = @"31-circle-plus-large.png";
     [self.view addSubview:self.tableView];
     [self.tableView registerClass:[OTRAccountTableViewCell class] forCellReuseIdentifier:[OTRAccountTableViewCell cellIdentifier]];
     
+    // Disable About Button
+    /*
     UIBarButtonItem *aboutButton = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"OTRInfoIcon" inBundle:[OTRAssets resourcesBundle] compatibleWithTraitCollection:nil] style:UIBarButtonItemStylePlain target:self action:@selector(showAboutScreen)];
-
+    
     self.navigationItem.rightBarButtonItem = aboutButton;
+    */
     
     ////// KVO //////
     __weak typeof(self)weakSelf = self;
@@ -155,27 +159,34 @@ static NSString *const circleImageName = @"31-circle-plus-large.png";
 
 - (UITableViewCellEditingStyle)tableView:(UITableView *)tableView editingStyleForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    if (indexPath.section == 0 && indexPath.row != [self.mappings numberOfItemsInSection:0])
-    {
-        return UITableViewCellEditingStyleDelete;
-    }
-    else
-    {
-        return UITableViewCellEditingStyleNone;     
-    }
+    return UITableViewCellEditingStyleNone;
+    
+    // Enable swipe delete account option
+    /*
+     if (indexPath.section == 0 && indexPath.row != [self.mappings numberOfItemsInSection:0])
+     {
+     return UITableViewCellEditingStyleDelete;
+     }
+     else
+     {
+     return UITableViewCellEditingStyleNone;
+     }
+     */
 }
 
 -(UITableViewCell*)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    if (indexPath.section == 0) { // Accounts 
+    if (indexPath.section == 0) { // Accounts
         static NSString *addAccountCellIdentifier = @"addAccountCellIdentifier";
         UITableViewCell * cell = nil;
         if (indexPath.row == [self.mappings numberOfItemsInSection:indexPath.section]) {
             cell = [tableView dequeueReusableCellWithIdentifier:addAccountCellIdentifier];
             if (cell == nil) {
                 cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:addAccountCellIdentifier];
-                cell.textLabel.text = NEW_ACCOUNT_STRING;
-                cell.imageView.image = [UIImage imageNamed:circleImageName inBundle:[OTRAssets resourcesBundle] compatibleWithTraitCollection:nil];
+                //cell.textLabel.text = NEW_ACCOUNT_STRING;
+                //cell.imageView.image = [UIImage imageNamed:circleImageName inBundle:[OTRAssets resourcesBundle] compatibleWithTraitCollection:nil];
+                cell.textLabel.text = LOGOUT_STRING;
+                cell.imageView.image = [UIImage imageNamed:logoutImageName inBundle:[OTRAssets resourcesBundle] compatibleWithTraitCollection:nil];
                 cell.detailTextLabel.text = nil;
             }
         }
@@ -195,17 +206,17 @@ static NSString *const circleImageName = @"31-circle-plus-large.png";
             else {
                 [accountCell setConnectedText:OTRProtocolConnectionStatusDisconnected];
             }
-
+            
             cell = accountCell;
         }
         return cell;
     }
     static NSString *cellIdentifier = @"Cell";
     OTRSettingTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:cellIdentifier];
-	if (cell == nil)
-	{
-		cell = [[OTRSettingTableViewCell alloc] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:cellIdentifier];
-	}
+    if (cell == nil)
+    {
+        cell = [[OTRSettingTableViewCell alloc] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:cellIdentifier];
+    }
     OTRSetting *setting = [self.settingsManager settingAtIndexPath:indexPath];
     setting.delegate = self;
     cell.otrSetting = setting;
@@ -222,7 +233,7 @@ static NSString *const circleImageName = @"31-circle-plus-large.png";
     }
 }
 
--(NSInteger)numberOfSectionsInTableView:(UITableView *)tableView 
+-(NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
     return [self.settingsManager.settingsGroups count];
 }
@@ -248,9 +259,15 @@ static NSString *const circleImageName = @"31-circle-plus-large.png";
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
     if (indexPath.section == 0) { // Accounts
-        if (indexPath.row == [self.mappings numberOfItemsInSection:0]) {
-            [self addAccount:[tableView cellForRowAtIndexPath:indexPath]];
+        NSUInteger numOfAccounts = [self.mappings numberOfItemsInSection:0];
+        if (indexPath.row == numOfAccounts && numOfAccounts > 0) {
+            //[self addAccount:[tableView cellForRowAtIndexPath:indexPath]];
+            NSIndexPath *accountIndexPath = [NSIndexPath indexPathForRow:indexPath.row - 1 inSection:0];
+            OTRAccount *account = [self accountAtIndexPath:accountIndexPath];
+            [self logoutAccount:account];
         } else {
+            // Other Options
+            /*
             OTRAccount *account = [self accountAtIndexPath:indexPath];
             
             BOOL connected = [[OTRProtocolManager sharedInstance] isAccountConnected:account];
@@ -263,6 +280,7 @@ static NSString *const circleImageName = @"31-circle-plus-large.png";
             } else {
                 [self logoutAccount:account sender:[tableView cellForRowAtIndexPath:indexPath]];
             }
+             */
         }
     } else {
         OTRSetting *setting = [self.settingsManager settingAtIndexPath:indexPath];
@@ -279,13 +297,12 @@ static NSString *const circleImageName = @"31-circle-plus-large.png";
     if (indexPath.section != 0) {
         return;
     }
-    if (editingStyle == UITableViewCellEditingStyleDelete) 
+    if (editingStyle == UITableViewCellEditingStyleDelete)
     {
         OTRAccount *account = [self accountAtIndexPath:indexPath];
         
         UIAlertAction * cancelButtonItem = [UIAlertAction actionWithTitle:CANCEL_STRING style:UIAlertActionStyleCancel handler:nil];
         UIAlertAction * okButtonItem = [UIAlertAction actionWithTitle:OK_STRING style:UIAlertActionStyleDestructive handler:^(UIAlertAction * _Nonnull action) {
-            
             if( [[OTRProtocolManager sharedInstance] isAccountConnected:account])
             {
                 id<OTRProtocol> protocol = [[OTRProtocolManager sharedInstance] protocolForAccount:account];
@@ -315,9 +332,36 @@ static NSString *const circleImageName = @"31-circle-plus-large.png";
         [self.navigationController presentViewController:navController animated:YES completion:nil];
     }
     else {
-       [self.navigationController pushViewController:aboutController animated:YES];
+        [self.navigationController pushViewController:aboutController animated:YES];
     }
     
+}
+
+- (void)logoutAccount:(OTRAccount *)account {
+    UIAlertController *alertController = [UIAlertController alertControllerWithTitle:@"Do you want to logout?" message:nil preferredStyle:UIAlertControllerStyleActionSheet];
+    UIAlertAction *cancelAlertAction = [UIAlertAction actionWithTitle:CANCEL_STRING style:UIAlertActionStyleCancel handler:nil];
+    UIAlertAction *logoutAlertAction = [UIAlertAction actionWithTitle:LOGOUT_STRING style:UIAlertActionStyleDestructive handler:^(UIAlertAction *action) {
+        
+        id<OTRProtocol> protocol = [[OTRProtocolManager sharedInstance] protocolForAccount:account];
+        [protocol disconnect];
+        
+        [[OTRProtocolManager sharedInstance] removeProtocolForAccount:account];
+        [OTRAccountsManager removeAccount:account];
+        
+        UIStoryboard *onboardingStoryboard = [UIStoryboard storyboardWithName:@"Onboarding" bundle:[OTRAssets resourcesBundle]];
+        UINavigationController *welcomeNavController = [onboardingStoryboard instantiateInitialViewController];
+        OTRWelcomeViewController *welcomeViewController = welcomeNavController.viewControllers[0];
+        UINavigationController *nav = [[UINavigationController alloc] initWithRootViewController:welcomeViewController];
+        nav.modalPresentationStyle = UIModalPresentationFormSheet;
+        [self presentViewController:nav animated:YES completion:^{
+            [self.navigationController popViewControllerAnimated:YES];
+        }];
+    }];
+    
+    [alertController addAction:logoutAlertAction];
+    [alertController addAction:cancelAlertAction];
+    
+    [self presentViewController:alertController animated:YES completion:nil];
 }
 
 - (void)logoutAccount:(OTRAccount *)account sender:(id)sender
@@ -346,7 +390,7 @@ static NSString *const circleImageName = @"31-circle-plus-large.png";
     [self presentViewController:alertController animated:YES completion:nil];
 }
 
-- (void) addAccount:(id)sender {
+- (void)addAccount:(id)sender {
     UIStoryboard *onboardingStoryboard = [UIStoryboard storyboardWithName:@"Onboarding" bundle:[OTRAssets resourcesBundle]];
     UINavigationController *welcomeNavController = [onboardingStoryboard instantiateInitialViewController];
     OTRWelcomeViewController *welcomeViewController = welcomeNavController.viewControllers[0];
@@ -368,7 +412,7 @@ static NSString *const circleImageName = @"31-circle-plus-large.png";
 }
 
 #pragma mark OTRSettingViewDelegate method
-- (void) otrSetting:(OTRSetting*)setting showDetailViewControllerClass:(Class)viewControllerClass
+- (void)otrSetting:(OTRSetting*)setting showDetailViewControllerClass:(Class)viewControllerClass
 {
     if (viewControllerClass == [EnablePushViewController class]) {
         UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Onboarding" bundle:[OTRAssets resourcesBundle]];
@@ -381,7 +425,7 @@ static NSString *const circleImageName = @"31-circle-plus-large.png";
     }
     UIViewController *viewController = [[viewControllerClass alloc] init];
     viewController.title = setting.title;
-    if ([viewController isKindOfClass:[OTRSettingDetailViewController class]]) 
+    if ([viewController isKindOfClass:[OTRSettingDetailViewController class]])
     {
         OTRSettingDetailViewController *detailSettingViewController = (OTRSettingDetailViewController*)viewController;
         detailSettingViewController.otrSetting = setting;

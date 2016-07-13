@@ -57,6 +57,9 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    
+    self.collectionView.collectionViewLayout.incomingAvatarViewSize = CGSizeZero;
+    self.collectionView.collectionViewLayout.outgoingAvatarViewSize = CGSizeZero;
 }
 
 #pragma - mark Button Actions
@@ -104,10 +107,13 @@
                     *stop = YES;
                 }];
             }];
-            UIImage *avatarImage = [roomOccupant avatarImage];
-            if (avatarImage) {
-                NSUInteger diameter = MIN(avatarImage.size.width, avatarImage.size.height);
-                imageDataSource = [JSQMessagesAvatarImageFactory avatarImageWithImage:avatarImage diameter:diameter];
+            if(roomOccupant) {
+                NSLog(@"%@", roomOccupant);
+            //UIImage *avatarImage = roomOccupant.avatarImage;
+//            if (avatarImage) {
+//                NSUInteger diameter = MIN(avatarImage.size.width, avatarImage.size.height);
+//                imageDataSource = [JSQMessagesAvatarImageFactory avatarImageWithImage:avatarImage diameter:diameter];
+//            }
             }
         }
         

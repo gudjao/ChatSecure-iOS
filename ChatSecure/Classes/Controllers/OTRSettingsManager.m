@@ -65,8 +65,9 @@
     self.settingsGroups = [NSMutableArray array];
     NSMutableDictionary *newSettingsDictionary = [NSMutableDictionary dictionary];
     // Leave this in for now
-    OTRViewSetting *accountsViewSetting = [[OTRViewSetting alloc] initWithTitle:ACCOUNTS_STRING description:nil viewControllerClass:nil];
-    OTRSettingsGroup *accountsGroup = [[OTRSettingsGroup alloc] initWithTitle:ACCOUNTS_STRING settings:[NSArray arrayWithObject:accountsViewSetting]];
+    //OTRViewSetting *accountsViewSetting = [[OTRViewSetting alloc] initWithTitle:ACCOUNTS_STRING description:nil viewControllerClass:nil];
+    OTRViewSetting *accountsViewSetting = [[OTRViewSetting alloc] initWithTitle:MY_ACCOUNT_STRING description:nil viewControllerClass:nil];
+    OTRSettingsGroup *accountsGroup = [[OTRSettingsGroup alloc] initWithTitle:MY_ACCOUNT_STRING settings:[NSArray arrayWithObject:accountsViewSetting]];
     [self.settingsGroups addObject:accountsGroup];
     
     OTRBoolSetting *deletedDisconnectedConversations = [[OTRBoolSetting alloc] initWithTitle:DELETE_CONVERSATIONS_ON_DISCONNECT_TITLE_STRING
@@ -78,7 +79,7 @@
     OTRBoolSetting *showDisconnectionWarning = [[OTRBoolSetting alloc] initWithTitle:DISCONNECTION_WARNING_TITLE_STRING
                                                                          description:DISCONNECTION_WARNING_DESC_STRING
                                                                          settingsKey:kOTRSettingKeyShowDisconnectionWarning];
-    showDisconnectionWarning.defaultValue = @(NO);
+    showDisconnectionWarning.defaultValue = @(YES);
     [newSettingsDictionary setObject:showDisconnectionWarning forKey:kOTRSettingKeyShowDisconnectionWarning];
     
     OTRBoolSetting *opportunisticOtrSetting = [[OTRBoolSetting alloc] initWithTitle:OPPORTUNISTIC_OTR_SETTING_TITLE
@@ -113,11 +114,11 @@
     chatSettings = [NSArray arrayWithObjects:deletedDisconnectedConversations, showDisconnectionWarning, nil];
     
     OTRSettingsGroup *chatSettingsGroup = [[OTRSettingsGroup alloc] initWithTitle:CHAT_STRING settings:chatSettings];
-    [self.settingsGroups addObject:chatSettingsGroup];
+    //[self.settingsGroups addObject:chatSettingsGroup];
     
     securitySettings = @[opportunisticOtrSetting,certSetting,fingerprintSetting];
     OTRSettingsGroup *securitySettingsGroup = [[OTRSettingsGroup alloc] initWithTitle:SECURITY_STRING settings:securitySettings];
-    [self.settingsGroups addObject:securitySettingsGroup];
+    //[self.settingsGroups addObject:securitySettingsGroup];
     
     OTRFeedbackSetting * feedbackViewSetting = [[OTRFeedbackSetting alloc] initWithTitle:SEND_FEEDBACK_STRING description:nil];
     feedbackViewSetting.imageName = @"18-envelope.png";
@@ -133,7 +134,7 @@
     donateSetting.imageName = @"29-heart.png";
     
     NSMutableArray *otherSettings = [NSMutableArray arrayWithCapacity:5];
-    [otherSettings addObjectsFromArray:@[languageSetting,donateSetting, shareViewSetting,feedbackViewSetting]];
+    [otherSettings addObjectsFromArray:@[languageSetting, feedbackViewSetting]];
     OTRSettingsGroup *otherGroup = [[OTRSettingsGroup alloc] initWithTitle:OTHER_STRING settings:otherSettings];
     [self.settingsGroups addObject:otherGroup];
     self.settingsDictionary = newSettingsDictionary;

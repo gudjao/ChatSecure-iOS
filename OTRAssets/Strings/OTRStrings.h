@@ -56,6 +56,7 @@
 #define SAVE_STRING [OTRLanguageManager translatedString: @"Save"]
 #define errSSLNoRootCertString [OTRLanguageManager translatedString: @"Cert chain not verified by root"]
 #define ACCOUNTS_STRING [OTRLanguageManager translatedString: @"Accounts"]
+#define MY_ACCOUNT_STRING [OTRLanguageManager translatedString: @"My Account"]
 #define PENDING_APPROVAL_STRING [OTRLanguageManager translatedString: @"Pending Approval"]
 #define errSSLPeerDecryptionFailString [OTRLanguageManager translatedString: @"Decryption failed"]
 #define JABBER_STRING [OTRLanguageManager translatedString: @"Jabber (XMPP)"]
