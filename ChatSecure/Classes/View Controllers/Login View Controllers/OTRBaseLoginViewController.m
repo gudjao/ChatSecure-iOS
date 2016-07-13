@@ -196,7 +196,7 @@ static NSUInteger kOTRMaxLoginAttempts = 5;
 }
 
 - (void)tableView:(UITableView *)tableView willDisplayCell:(UITableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath {
-    [super tableView:tableView willDisplayCell:cell forRowAtIndexPath:indexPath];
+    //[super tableView:tableView willDisplayCell:cell forRowAtIndexPath:indexPath];
     XLFormRowDescriptor *desc = [self.form formRowAtIndex:indexPath];
     if (desc != nil && desc.tag == kOTRXLFormPasswordTextFieldTag) {
         XLFormBaseCell *xlCell = [desc cellForFormController:self];

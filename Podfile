@@ -19,13 +19,13 @@ source 'https://github.com/CocoaPods/Specs.git'
 
 target 'ChatSecureCore' do
   pod 'AFNetworking', '~> 3.1'
-  pod "Appirater", '~> 2.0'
+  pod 'Appirater', '~> 2.0'
   pod 'OpenInChrome', '~> 0.0'
   pod 'MWFeedParser', '~> 1.0'
-  pod "CocoaLumberjack", '~> 2.0'
-  pod "HockeySDK-Source", '~> 3.7'
+  pod 'CocoaLumberjack', '~> 2.0'
+  pod 'HockeySDK-Source', '~> 3.7'
   pod 'MBProgressHUD', '~> 0.9'
-  pod "SSKeychain", '~> 1.2'
+  pod 'SSKeychain', '~> 1.2'
   # pod 'gtm-oauth2', '~> 0.1.0' # Trunk is outdated, using local podspec
   pod 'YapDatabase/SQLCipher', '~> 2.9'
   pod 'Mantle', '~> 2.0'

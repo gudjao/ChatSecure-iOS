@@ -183,7 +183,7 @@
                                     <constraint firstAttribute="height" constant="150" id="3tJ-xn-20o"/>
                                     <constraint firstAttribute="width" constant="283" id="K1M-Mc-jMV"/>
                                 </constraints>
-                                <string key="text">ChatSecure can now automatically notify compatible offline contacts that you'd like to establish a secure conversation. To protect your privacy, these notifications currently do not contain any content.</string>
+                                <string key="text">You can now automatically notify compatible offline contacts that you'd like to establish a secure conversation. To protect your privacy, these notifications currently do not contain any content.</string>
                                 <fontDescription key="fontDescription" type="system" pointSize="16"/>
                                 <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                             </textView>

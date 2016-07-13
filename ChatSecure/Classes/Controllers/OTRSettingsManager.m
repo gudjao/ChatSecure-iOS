@@ -100,7 +100,7 @@
     
     if (![OTRNotificationPermissions canSendNotifications] ||
         [PushController getPushPreference] != PushPreferenceEnabled) {
-        OTRViewSetting *pushViewSetting = [[OTRViewSetting alloc] initWithTitle:CHATSECURE_PUSH_STRING description:nil viewControllerClass:[EnablePushViewController class]];
+        OTRViewSetting *pushViewSetting = [[OTRViewSetting alloc] initWithTitle:UPSCHAT_PUSH_STRING description:nil viewControllerClass:[EnablePushViewController class]];
         pushViewSetting.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
         OTRSettingsGroup *pushGroup = [[OTRSettingsGroup alloc] initWithTitle:PUSH_TITLE_STRING settings:@[pushViewSetting]];
         [self.settingsGroups addObject:pushGroup];
