@@ -209,8 +209,6 @@ static CGFloat kOTRConversationCellHeight = 80.0;
     else {
         [self disableComposeButton];
     }
-    
-    
 }
 
 - (void)viewDidAppear:(BOOL)animated
@@ -479,7 +477,7 @@ static CGFloat kOTRConversationCellHeight = 80.0;
     
     YapDatabaseViewConnection *unreadExt = [self.databaseConnection ext:OTRUnreadMessagesViewExtensionName];
     if (unreadExt) {
-        if (!self.unreadMessagesMappings) {
+       if (!self.unreadMessagesMappings) {
             [self setupUnreadMappings:YES];
             [self updateTitle];
         } else {
@@ -488,7 +486,6 @@ static CGFloat kOTRConversationCellHeight = 80.0;
                         forNotifications:notifications
                             withMappings:self.unreadMessagesMappings];
         }
-        
     }
     
     if ([unreadMessagesSectionChanges count] || [unreadMessagesRowChanges count]) {

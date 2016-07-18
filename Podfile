@@ -66,7 +66,7 @@ target 'ChatSecureCore' do
 
   # Forks
   #pod 'JSQMessagesViewController', :git => 'https://github.com/ChatSecure/JSQMessagesViewController', :branch => '7.2.0-send_button'
-  pod 'JSQMessagesViewController', :git => 'https://github.com/gudjao/JSQMessagesViewController.git', :branch => 'custom'
+  pod 'JSQMessagesViewController', :git => 'https://github.com/gudjao/JSQMessagesViewController.git', :branch => 'custom_7.3'
   pod 'JSQSystemSoundPlayer'
   
   # Submodules

@@ -85,6 +85,8 @@ typedef NS_ENUM(int, OTRDropDownType) {
 - (instancetype)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
     if (self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil]) {
+        self.senderId = @"";
+        self.senderDisplayName = @"";
         _state = [[MessagesViewControllerState alloc] init];
     }
     return self;
@@ -120,8 +122,8 @@ typedef NS_ENUM(int, OTRDropDownType) {
     [self refreshTitleView];
     
     ////// Send Button //////
-    self.sendButton = [[[JSQMessagesToolbarButtonFactory alloc] init] defaultSendButtonItem];
-    
+    self.sendButton = [JSQMessagesToolbarButtonFactory defaultSendButtonItem];
+
     ////// Attachment Button //////
     self.inputToolbar.contentView.leftBarButtonItem = nil;
     self.cameraButton = [UIButton buttonWithType:UIButtonTypeRoundedRect];
@@ -266,7 +268,7 @@ typedef NS_ENUM(int, OTRDropDownType) {
     
     self.threadKey = key;
     self.threadCollection = collection;
-    [self senderId];
+    self.senderId = [self.threadObject threadAccountIdentifier];
     
     if (![oldKey isEqualToString:key] || ![oldCollection isEqualToString:collection]) {
         [self saveCurrentMessageText:self.inputToolbar.contentView.textView.text threadKey:oldKey colleciton:oldCollection];
@@ -1167,10 +1169,6 @@ typedef NS_ENUM(int, OTRDropDownType) {
     return senderDisplayName;
 }
 
-- (NSString *)senderId {
-    return [self.threadObject threadAccountIdentifier];
-}
-
 - (id<JSQMessageData>)collectionView:(JSQMessagesCollectionView *)collectionView messageDataForItemAtIndexPath:(NSIndexPath *)indexPath
 {
     return (id <JSQMessageData>)[self messageAtIndexPath:indexPath];
@@ -1209,7 +1207,7 @@ typedef NS_ENUM(int, OTRDropDownType) {
     
     if (avatarImage) {
         NSUInteger diameter = MIN(avatarImage.size.width, avatarImage.size.height);
-        return [[[JSQMessagesAvatarImageFactory alloc] initWithDiameter:diameter] avatarImageWithImage:avatarImage];
+        return [JSQMessagesAvatarImageFactory avatarImageWithImage:avatarImage diameter:diameter];
     }
     return nil;
 }

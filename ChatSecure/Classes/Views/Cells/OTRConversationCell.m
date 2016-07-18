@@ -86,6 +86,12 @@
         account = [transaction objectForKey:[thread threadAccountIdentifier] inCollection:[OTRAccount collection]];
         
         lastMessage = [thread lastMessageWithTransaction:transaction];
+        
+        if (![lastMessage messageRead]) {
+            NSLog(@"debug last unread message: %@", lastMessage.text);
+        } else {
+            NSLog(@"debug last read message: %@", lastMessage.text);
+        }
     }];
     
     
@@ -96,11 +102,12 @@
     self.conversationLabel.text = lastMessage.text;
     if (![lastMessage messageRead]) {
         //unread message
+        //NSLog(@"debug last unread message: %@", lastMessage.text);
         self.nameLabel.font = [UIFont boldSystemFontOfSize:fontSize];
         self.nameLabel.textColor = [UIColor blackColor];
-        
     }
     else {
+        //NSLog(@"debug last read message: %@", lastMessage.text);
         self.nameLabel.font = [UIFont systemFontOfSize:fontSize];
         self.nameLabel.textColor = [UIColor colorWithWhite:.45 alpha:1.0];
     }
