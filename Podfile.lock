@@ -52,9 +52,8 @@ PODS:
   - IOCipher/GCDWebServer (0.1.0):
     - GCDWebServer/CocoaLumberjack
     - IOCipher/common
-  - JSQMessagesViewController (7.2.0):
-    - JSQSystemSoundPlayer (~> 2.0.1)
-  - JSQSystemSoundPlayer (2.0.1)
+  - JSQMessagesViewController (7.3.3.1)
+  - JSQSystemSoundPlayer (4.4.0)
   - JTSImageViewController (1.5.1)
   - JVFloatLabeledTextField (1.1.1)
   - KissXML (5.1.2):
@@ -322,15 +321,16 @@ DEPENDENCIES:
   - BButton (~> 4.0)
   - ChatSecure-Push-iOS (from `Submodules/ChatSecure-Push-iOS/ChatSecure-Push-iOS.podspec`)
   - CocoaAsyncSocket (from `https://github.com/robbiehanson/CocoaAsyncSocket.git`,
-    commit `071109901100334ad54ae704b4c644b6bb89ad21`)
+    branch `master`)
   - CocoaLumberjack (~> 2.0)
   - CPAProxy (from `Submodules/CPAProxy/CPAProxy.podspec`)
   - gtm-http-fetcher (from `Podspecs/gtm-http-fetcher.podspec`)
   - gtm-oauth2 (from `Podspecs/gtm-oauth2.podspec`)
   - HockeySDK-Source (~> 3.7)
   - IOCipher/GCDWebServer (from `Submodules/IOCipher/IOCipher.podspec`)
-  - JSQMessagesViewController (from `https://github.com/ChatSecure/JSQMessagesViewController`,
-    branch `7.2.0-send_button`)
+  - JSQMessagesViewController (from `https://github.com/gudjao/JSQMessagesViewController.git`,
+    branch `custom`)
+  - JSQSystemSoundPlayer
   - JTSImageViewController (~> 1.4)
   - JVFloatLabeledTextField (~> 1.0)
   - KVOController (~> 1.0)
@@ -359,7 +359,7 @@ EXTERNAL SOURCES:
   ChatSecure-Push-iOS:
     :path: Submodules/ChatSecure-Push-iOS/ChatSecure-Push-iOS.podspec
   CocoaAsyncSocket:
-    :commit: 071109901100334ad54ae704b4c644b6bb89ad21
+    :branch: master
     :git: https://github.com/robbiehanson/CocoaAsyncSocket.git
   CPAProxy:
     :path: Submodules/CPAProxy/CPAProxy.podspec
@@ -370,8 +370,8 @@ EXTERNAL SOURCES:
   IOCipher:
     :path: Submodules/IOCipher/IOCipher.podspec
   JSQMessagesViewController:
-    :branch: 7.2.0-send_button
-    :git: https://github.com/ChatSecure/JSQMessagesViewController
+    :branch: custom
+    :git: https://github.com/gudjao/JSQMessagesViewController.git
   OTRKit:
     :path: Submodules/OTRKit/OTRKit.podspec
   ProxyKit:
@@ -381,11 +381,11 @@ EXTERNAL SOURCES:
 
 CHECKOUT OPTIONS:
   CocoaAsyncSocket:
-    :commit: 071109901100334ad54ae704b4c644b6bb89ad21
+    :commit: f477467fa793f7a012d3af9c373c6014d7267a55
     :git: https://github.com/robbiehanson/CocoaAsyncSocket.git
   JSQMessagesViewController:
-    :commit: 4bae8b303c4f7e3c34571a4c898bd1f11ecc65a5
-    :git: https://github.com/ChatSecure/JSQMessagesViewController
+    :commit: 012f2ede263d800e571cc5d2ec03cc82f0246e92
+    :git: https://github.com/gudjao/JSQMessagesViewController.git
 
 SPEC CHECKSUMS:
   AFNetworking: 5e0e199f73d8626b11e79750991f5d173d1f8b67
@@ -402,8 +402,8 @@ SPEC CHECKSUMS:
   gtm-oauth2: b31c9d7c82f773f7b7094cbb7da8dc7b5968ce16
   HockeySDK-Source: c6c66ea12e59f0d756fe9989cbc45eda017fc41c
   IOCipher: 4cb4cd9a5998f69f4578a51501987dc5951ff092
-  JSQMessagesViewController: 73cab48aa92fc2d512f3b6724f3425cc47a19eb5
-  JSQSystemSoundPlayer: c5850e77a4363ffd374cd851154b9af93264ed8d
+  JSQMessagesViewController: 53dd2ce6afb3a378d4b21a1012cce3d40c285436
+  JSQSystemSoundPlayer: 126ccc4a08db8fc3036bd07d33b0f8eda1559476
   JTSImageViewController: 1f8ce1cc93dab0d0af8e53badeea7528560cfec9
   JVFloatLabeledTextField: 0e5524b097f102036214dd8279edc8ecf08b5e18
   KissXML: 246c842586bb77110e04fb88e19376d96245c856

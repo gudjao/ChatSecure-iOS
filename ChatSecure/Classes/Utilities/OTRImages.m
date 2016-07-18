@@ -102,7 +102,7 @@ NSString *const OTRDuckDuckGoImageKey = @"OTRMicrophoneImageKey";
     UIEdgeInsets capInsets = UIEdgeInsetsMake(center.y, center.x, center.y, center.x);
     
     bubbleImage = [bubbleImage resizableImageWithCapInsets:capInsets
-                                                resizingMode:UIImageResizingModeStretch];
+                                              resizingMode:UIImageResizingModeStretch];
     
     bubbleImageView = [[OTRComposingImageView alloc] initWithImage:bubbleImage];
     CGRect rect = bubbleImageView.frame;
@@ -146,7 +146,7 @@ NSString *const OTRDuckDuckGoImageKey = @"OTRMicrophoneImageKey";
         
         [color setFill];
         [bezierPath fill];
-
+        
     }];
 }
 
@@ -179,7 +179,7 @@ NSString *const OTRDuckDuckGoImageKey = @"OTRMicrophoneImageKey";
         
         [color setFill];
         [bezier2Path fill];
-
+        
     }];
 }
 
@@ -495,7 +495,7 @@ NSString *const OTRDuckDuckGoImageKey = @"OTRMicrophoneImageKey";
         CGGradientRelease(linearGradient3082);
         CGGradientRelease(linearGradient3084);
         CGColorSpaceRelease(colorSpace);
-
+        
     }];
 }
 
@@ -557,7 +557,7 @@ NSString *const OTRDuckDuckGoImageKey = @"OTRMicrophoneImageKey";
         
         [color setFill];
         [bezierPath fill];
-
+        
     }];
 }
 
@@ -823,7 +823,7 @@ NSString *const OTRDuckDuckGoImageKey = @"OTRMicrophoneImageKey";
             [color setFill];
             [bezier3Path fill];
         }
-
+        
     }];
 }
 
@@ -855,11 +855,12 @@ NSString *const OTRDuckDuckGoImageKey = @"OTRMicrophoneImageKey";
 + (UIImage *)avatarImageWithUsername:(NSString *)username
 {
     NSString *initials = [username otr_stringInitialsWithMaxCharacters:2];
-    JSQMessagesAvatarImage *jsqImage = [JSQMessagesAvatarImageFactory avatarImageWithUserInitials:initials
-                                                                                  backgroundColor:[UIColor colorWithWhite:0.85f alpha:1.0f]
-                                                                                        textColor:[UIColor colorWithWhite:0.60f alpha:1.0f]
-                                                                                             font:[UIFont systemFontOfSize:30.0f]
-                                                                                         diameter:60];
+    JSQMessagesAvatarImageFactory *jsqImageFactory = [[JSQMessagesAvatarImageFactory alloc] initWithDiameter:60];
+    JSQMessagesAvatarImage *jsqImage = [jsqImageFactory avatarImageWithUserInitials:initials
+                                                                    backgroundColor:[UIColor colorWithWhite:0.85f alpha:1.0f]
+                                                                          textColor:[UIColor colorWithWhite:0.60f alpha:1.0f]
+                                                                               font:[UIFont systemFontOfSize:30.0f]];
+    
     return jsqImage.avatarImage;
 }
 

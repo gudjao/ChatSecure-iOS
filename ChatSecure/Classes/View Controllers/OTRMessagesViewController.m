@@ -85,8 +85,6 @@ typedef NS_ENUM(int, OTRDropDownType) {
 - (instancetype)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
     if (self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil]) {
-        self.senderId = @"";
-        self.senderDisplayName = @"";
         _state = [[MessagesViewControllerState alloc] init];
     }
     return self;
@@ -104,9 +102,9 @@ typedef NS_ENUM(int, OTRDropDownType) {
     
     self.automaticallyScrollsToMostRecentMessage = YES;
     
-     ////// bubbles //////
+    ////// bubbles //////
     JSQMessagesBubbleImageFactory *bubbleImageFactory = [[JSQMessagesBubbleImageFactory alloc] init];
-                                                         
+    
     self.outgoingBubbleImage = [bubbleImageFactory outgoingMessagesBubbleImageWithColor:[UIColor jsq_messageBubbleBlueColor]];
     
     self.incomingBubbleImage = [bubbleImageFactory incomingMessagesBubbleImageWithColor:[UIColor jsq_messageBubbleLightGrayColor]];
@@ -114,7 +112,7 @@ typedef NS_ENUM(int, OTRDropDownType) {
     ////// Lock Button //////
     [self setupLockButton];
     
-     ////// TitleView //////
+    ////// TitleView //////
     self.titleView = [[OTRTitleSubtitleView alloc] initWithFrame:CGRectMake(0, 0, 200, 44)];
     self.titleView.autoresizingMask = UIViewAutoresizingFlexibleHeight | UIViewAutoresizingFlexibleLeftMargin | UIViewAutoresizingFlexibleRightMargin;
     self.navigationItem.titleView = self.titleView;
@@ -122,7 +120,7 @@ typedef NS_ENUM(int, OTRDropDownType) {
     [self refreshTitleView];
     
     ////// Send Button //////
-    self.sendButton = [JSQMessagesToolbarButtonFactory defaultSendButtonItem];
+    self.sendButton = [[[JSQMessagesToolbarButtonFactory alloc] init] defaultSendButtonItem];
     
     ////// Attachment Button //////
     self.inputToolbar.contentView.leftBarButtonItem = nil;
@@ -138,7 +136,7 @@ typedef NS_ENUM(int, OTRDropDownType) {
     self.microphoneButton.titleLabel.font = [UIFont fontWithName:kFontAwesomeFont size:20];
     self.microphoneButton.titleLabel.textAlignment = NSTextAlignmentCenter;
     [self.microphoneButton setTitle:[NSString fa_stringForFontAwesomeIcon:FAMicrophone]
-          forState:UIControlStateNormal];
+                           forState:UIControlStateNormal];
     
     self.audioPlaybackController = [[OTRAudioPlaybackController alloc] init];
     
@@ -180,7 +178,7 @@ typedef NS_ENUM(int, OTRDropDownType) {
             refreshGeneratingLock(note.object);
         }
     }];
-   
+    
     self.messageStateDidChangeNotificationObject = [[NSNotificationCenter defaultCenter] addObserverForName:OTRMessageStateDidChangeNotification object:nil queue:[NSOperationQueue mainQueue] usingBlock:^(NSNotification *note) {
         __strong typeof(weakSelf)strongSelf = weakSelf;
         if ([note.object isKindOfClass:[OTRBuddy class]]) {
@@ -268,7 +266,7 @@ typedef NS_ENUM(int, OTRDropDownType) {
     
     self.threadKey = key;
     self.threadCollection = collection;
-    self.senderId = [self.threadObject threadAccountIdentifier];
+    [self senderId];
     
     if (![oldKey isEqualToString:key] || ![oldCollection isEqualToString:collection]) {
         [self saveCurrentMessageText:self.inputToolbar.contentView.textView.text threadKey:oldKey colleciton:oldCollection];
@@ -366,7 +364,7 @@ typedef NS_ENUM(int, OTRDropDownType) {
     if (!self.buddy) {
         self.titleView.titleImageView.image = nil;
     } else {
-       self.titleView.titleImageView.image = [OTRImages circleWithRadius:50 lineWidth:0 lineColor:nil fillColor:[OTRColors colorWithStatus:[thread currentStatus]]];
+        self.titleView.titleImageView.image = [OTRImages circleWithRadius:50 lineWidth:0 lineColor:nil fillColor:[OTRColors colorWithStatus:[thread currentStatus]]];
     }
     
 }
@@ -558,7 +556,7 @@ typedef NS_ENUM(int, OTRDropDownType) {
                 if(ourFingerprintString && theirFingerprintString) {
                     NSString *msg = [NSString stringWithFormat:@"%@, %@:\n%@\n\n%@ %@:\n%@\n", YOUR_FINGERPRINT_STRING, self.account.username, ourFingerprintString, THEIR_FINGERPRINT_STRING, self.buddy.username, theirFingerprintString];
                     alert = [UIAlertController alertControllerWithTitle:VERIFY_FINGERPRINT_STRING message:msg preferredStyle:UIAlertControllerStyleAlert];
-
+                    
                     if(verified)
                     {
                         [alert addAction:verifiedButtonItem];
@@ -778,7 +776,7 @@ typedef NS_ENUM(int, OTRDropDownType) {
     }
     
     return;
-
+    
 }
 
 #pragma - mark Update UI
@@ -865,9 +863,9 @@ typedef NS_ENUM(int, OTRDropDownType) {
     }
     
     if (error) {
-         DDLogError(@"Audio Playback Error: %@",error);
+        DDLogError(@"Audio Playback Error: %@",error);
     }
-   
+    
 }
 
 - (OTRAudioControlsView *)audioControllsfromCollectionView:(JSQMessagesCollectionView *)collectionView atIndexPath:(NSIndexPath *)indexPath {
@@ -909,8 +907,8 @@ typedef NS_ENUM(int, OTRDropDownType) {
     }
     if (cell.textView != nil)
         cell.textView.textColor = textColor;
-
-	// Do not allow clickable links for Tor accounts to prevent information leakage
+    
+    // Do not allow clickable links for Tor accounts to prevent information leakage
     if ([self.account isKindOfClass:[OTRXMPPTorAccount class]]) {
         cell.textView.dataDetectorTypes = UIDataDetectorTypeNone;
     }
@@ -1051,7 +1049,7 @@ typedef NS_ENUM(int, OTRDropDownType) {
             }];
         });
     }
-
+    
 }
 
 #pragma - mark OTRAttachmentPickerDelegate Methods
@@ -1129,7 +1127,7 @@ typedef NS_ENUM(int, OTRDropDownType) {
             [audioItem saveWithTransaction:transaction];
         }];
         
-        [self sendMediaItem:audioItem data:nil tag:message];        
+        [self sendMediaItem:audioItem data:nil tag:message];
     }];
 }
 
@@ -1167,6 +1165,10 @@ typedef NS_ENUM(int, OTRDropDownType) {
     }
     
     return senderDisplayName;
+}
+
+- (NSString *)senderId {
+    return [self.threadObject threadAccountIdentifier];
 }
 
 - (id<JSQMessageData>)collectionView:(JSQMessagesCollectionView *)collectionView messageDataForItemAtIndexPath:(NSIndexPath *)indexPath
@@ -1207,7 +1209,7 @@ typedef NS_ENUM(int, OTRDropDownType) {
     
     if (avatarImage) {
         NSUInteger diameter = MIN(avatarImage.size.width, avatarImage.size.height);
-        return [JSQMessagesAvatarImageFactory avatarImageWithImage:avatarImage diameter:diameter];
+        return [[[JSQMessagesAvatarImageFactory alloc] initWithDiameter:diameter] avatarImageWithImage:avatarImage];
     }
     return nil;
 }
@@ -1385,7 +1387,7 @@ heightForCellBottomLabelAtIndexPath:(NSIndexPath *)indexPath
     if ([message isMediaMessage]) {
         __block OTRMediaItem *item = nil;
         [[OTRDatabaseManager sharedInstance].readWriteDatabaseConnection asyncReadWithBlock:^(YapDatabaseReadTransaction *transaction) {
-             item = [OTRImageItem fetchObjectWithUniqueID:[message messageMediaItemKey] transaction:transaction];
+            item = [OTRImageItem fetchObjectWithUniqueID:[message messageMediaItemKey] transaction:transaction];
         } completionBlock:^{
             if ([item isKindOfClass:[OTRImageItem class]]) {
                 [self showImage:(OTRImageItem *)item fromCollectionView:collectionView atIndexPath:indexPath];

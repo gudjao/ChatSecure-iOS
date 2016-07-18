@@ -44,8 +44,9 @@ target 'ChatSecureCore' do
   pod 'ARChromeActivity', '~> 1.0'
   # We need a commit from next release
   #pod 'CocoaAsyncSocket', '~> 7.4'
-  pod 'CocoaAsyncSocket', :git => 'https://github.com/robbiehanson/CocoaAsyncSocket.git', :commit => '071109901100334ad54ae704b4c644b6bb89ad21'
-
+  #pod 'CocoaAsyncSocket', :git => 'https://github.com/robbiehanson/CocoaAsyncSocket.git', :commit => '071109901100334ad54ae704b4c644b6bb89ad21'
+  pod 'CocoaAsyncSocket', :git => 'https://github.com/robbiehanson/CocoaAsyncSocket.git', :branch => 'master'
+  
   pod 'JTSImageViewController', '~> 1.4'
   pod 'KVOController', '~> 1.0'
   #Reachability only needed for YapActionItems
@@ -64,8 +65,10 @@ target 'ChatSecureCore' do
   #pod 'SQLCipher/fts', :podspec => 'Podspecs/SQLCipher.podspec.json'
 
   # Forks
-  pod 'JSQMessagesViewController', :git => 'https://github.com/ChatSecure/JSQMessagesViewController', :branch => '7.2.0-send_button'
-
+  #pod 'JSQMessagesViewController', :git => 'https://github.com/ChatSecure/JSQMessagesViewController', :branch => '7.2.0-send_button'
+  pod 'JSQMessagesViewController', :git => 'https://github.com/gudjao/JSQMessagesViewController.git', :branch => 'custom'
+  pod 'JSQSystemSoundPlayer'
+  
   # Submodules
   pod 'ChatSecure-Push-iOS', :path => 'Submodules/ChatSecure-Push-iOS/ChatSecure-Push-iOS.podspec'
   pod 'ProxyKit/Client', :path => 'Submodules/ProxyKit/ProxyKit.podspec'
