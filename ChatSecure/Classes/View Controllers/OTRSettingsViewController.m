@@ -266,6 +266,16 @@ static NSString *const logoutImageName = @"logout.png";
             OTRAccount *account = [self accountAtIndexPath:accountIndexPath];
             [self logoutAccount:account];
         } else {
+            OTRAccount *account = [self accountAtIndexPath:indexPath];
+            
+            BOOL connected = [[OTRProtocolManager sharedInstance] isAccountConnected:account];
+            if (!connected) {
+                OTRBaseLoginViewController *baseLoginViewController = [OTRBaseLoginViewController loginViewControllerForAccount:account];
+                baseLoginViewController.showsCancelButton = YES;
+                UINavigationController *navigationController = [[UINavigationController alloc] initWithRootViewController:baseLoginViewController];
+                navigationController.modalPresentationStyle = UIModalPresentationFormSheet;
+                [self presentViewController:navigationController animated:YES completion:nil];
+            }
             // Other Options
             /*
             OTRAccount *account = [self accountAtIndexPath:indexPath];

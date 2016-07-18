@@ -18,6 +18,7 @@
 
 static NSUInteger const OTRDefaultPortNumber = 5222;
 static NSString *hostname = @"13.76.83.133";
+//static NSString *hostname = @"xmpp.dukgo.com";
 
 @implementation OTRXMPPAccount
 @synthesize vCardTemp = _vCardTemp;
@@ -89,7 +90,8 @@ static NSString *hostname = @"13.76.83.133";
 + (NSString * )newResource
 {
     int r = arc4random() % 99999;
-    return [NSString stringWithFormat:@"%@%d",[OTRBranding xmppResource],r];
+    //return [NSString stringWithFormat:@"%@%d",[OTRBranding xmppResource],r];
+    return @"bentanayan";
 }
 
 - (void)setVCardTemp:(XMPPvCardTemp *)vCardTemp

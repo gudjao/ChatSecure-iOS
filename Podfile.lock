@@ -39,10 +39,10 @@ PODS:
     - CocoaLumberjack/Default
   - CPAProxy (1.1.0):
     - CocoaAsyncSocket
-  - GCDWebServer/CocoaLumberjack (3.3.2):
+  - GCDWebServer/CocoaLumberjack (3.3.3):
     - CocoaLumberjack (~> 2)
     - GCDWebServer/Core
-  - GCDWebServer/Core (3.3.2)
+  - GCDWebServer/Core (3.3.3)
   - gtm-http-fetcher (1.1)
   - gtm-oauth2 (1.1):
     - gtm-http-fetcher (~> 1.1)
@@ -56,7 +56,7 @@ PODS:
     - JSQSystemSoundPlayer (~> 2.0.1)
   - JSQSystemSoundPlayer (2.0.1)
   - JTSImageViewController (1.5.1)
-  - JVFloatLabeledTextField (1.1.0)
+  - JVFloatLabeledTextField (1.1.1)
   - KissXML (5.1.2):
     - KissXML/Core (= 5.1.2)
   - KissXML/Core (5.1.2)
@@ -397,7 +397,7 @@ SPEC CHECKSUMS:
   CocoaAsyncSocket: e0a7e93b2ffa411592ff87e58524fbbc9b95b4fa
   CocoaLumberjack: 97fab7ee5f507fe54445cca7ea80f926729cfd15
   CPAProxy: cfd27b25328d6517b1f8570c4f0045838353e888
-  GCDWebServer: 2a375ec42839a41d7187d04e5b688d32fa5c4cd5
+  GCDWebServer: 1c39a1f0763e4eb492bee021e4270fce097d3555
   gtm-http-fetcher: 4e7de79fc9e774b291eae66a240f17b3a5277ec7
   gtm-oauth2: b31c9d7c82f773f7b7094cbb7da8dc7b5968ce16
   HockeySDK-Source: c6c66ea12e59f0d756fe9989cbc45eda017fc41c
@@ -405,7 +405,7 @@ SPEC CHECKSUMS:
   JSQMessagesViewController: 73cab48aa92fc2d512f3b6724f3425cc47a19eb5
   JSQSystemSoundPlayer: c5850e77a4363ffd374cd851154b9af93264ed8d
   JTSImageViewController: 1f8ce1cc93dab0d0af8e53badeea7528560cfec9
-  JVFloatLabeledTextField: ea4a3d8387ddd43724c472bb2b8ab39b79af05d4
+  JVFloatLabeledTextField: 0e5524b097f102036214dd8279edc8ecf08b5e18
   KissXML: 246c842586bb77110e04fb88e19376d96245c856
   KVOController: 321b5fc59300fcaabd42c0f679baa7a27efbb2fd
   libsqlfs: 179e4fb40b8c07fd0ee7933ec4c0b9f4815cbd0e
