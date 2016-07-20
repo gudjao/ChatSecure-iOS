@@ -34,8 +34,10 @@
 
 - (void)setupGroupChat:(NSArray <NSString *>*)buddies account:(OTRAccount *)account name:(NSString *)name {
     NSString *service = [self.xmppManager.roomManager.conferenceServicesJID firstObject];
-    NSString *roomName = [NSUUID UUID].UUIDString;
+    //NSString *roomName = [NSUUID UUID].UUIDString;
+    NSString *roomName = name;
     XMPPJID *roomJID = [XMPPJID jidWithString:[NSString stringWithFormat:@"%@@%@",roomName,service]];
+    //NSLog(@"USER: %@ -- DOMAIN: %@ -- RESOURCE: %@", [roomJID user], [roomJID domain], [roomJID resource]);
     self.threadKey = [self.xmppManager.roomManager startGroupChatWithBuddies:buddies roomJID:roomJID nickname:account.username subject:name];
     [self setThreadKey:self.threadKey collection:[OTRXMPPRoom collection]];
 }

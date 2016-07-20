@@ -18,7 +18,7 @@
 #import "OTRXMPPServerInfo.h"
 #import "OTRPasswordGenerator.h"
 #import "OTRTorManager.h"
-
+#import "OTRAPIClient.h"
 
 @implementation OTRXMPPCreateAccountHandler
 

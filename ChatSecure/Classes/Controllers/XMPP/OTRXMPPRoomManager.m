@@ -288,6 +288,7 @@
         //Set Rome Subject
         NSString *subject = [self.tempRoomSubject objectForKey:sender.roomJID.bare];
         if (subject) {
+            NSLog(@"SUBJECT: %@", subject);
             [self.tempRoomSubject removeObjectForKey:sender.roomJID.bare];
             [sender changeRoomSubject:subject];
         }
@@ -326,18 +327,23 @@
 {
     NSXMLElement *form = [[NSXMLElement alloc] initWithName:@"x" xmlns:@"jabber:x:data"];
     [form addAttributeWithName:@"typ" stringValue:@"form"];
+  
+    NSXMLElement * field = [[XMPPElement  alloc] initWithName:@"field"];
+    [field addAttributeWithName:@"var" stringValue:@"FORM_TYPE"];
+    [field addChild:[NSXMLElement elementWithName:@"value" stringValue:@"http://jabber.org/protocol/muc#roomconfig"]];
+    [form addChild:field];
     
     NSXMLElement *publicField = [[NSXMLElement alloc] initWithName:@"field"];
     [publicField addAttributeWithName:@"var" stringValue:@"muc#roomconfig_publicroom"];
     [publicField addChild:[[NSXMLElement alloc] initWithName:@"value" numberValue:@(0)]];
-    
+   
     NSXMLElement *persistentField = [[NSXMLElement alloc] initWithName:@"field"];
-    [publicField addAttributeWithName:@"var" stringValue:@"muc#roomconfig_persistentroom"];
-    [publicField addChild:[[NSXMLElement alloc] initWithName:@"value" numberValue:@(1)]];
+    [persistentField addAttributeWithName:@"var" stringValue:@"muc#roomconfig_persistentroom"];
+    [persistentField addChild:[[NSXMLElement alloc] initWithName:@"value" numberValue:@(1)]];
     
     NSXMLElement *whoisField = [[NSXMLElement alloc] initWithName:@"field"];
-    [publicField addAttributeWithName:@"var" stringValue:@"muc#roomconfig_whois"];
-    [publicField addChild:[[NSXMLElement alloc] initWithName:@"value" stringValue:@"anyone"]];
+    [whoisField addAttributeWithName:@"var" stringValue:@"muc#roomconfig_whois"];
+    [whoisField addChild:[[NSXMLElement alloc] initWithName:@"value" stringValue:@"anyone"]];
     
     [form addChild:publicField];
     [form addChild:persistentField];

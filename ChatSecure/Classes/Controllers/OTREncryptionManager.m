@@ -146,6 +146,10 @@ NSString *const OTRMessageStateKey = @"OTREncryptionManagerMessageStateKey";
 }
 
 - (void)maybeRefreshOTRSessionForBuddyKey:(NSString *)buddyKey collection:(NSString *)collection {
+    if(![buddyKey length] || ![collection length]) {
+        return;
+    }
+    
     __block OTRBuddy *buddy = nil;
     __block OTRAccount *account = nil;
     [[OTRDatabaseManager sharedInstance].readOnlyDatabaseConnection asyncReadWithBlock:^(YapDatabaseReadTransaction * _Nonnull transaction) {
@@ -156,7 +160,11 @@ NSString *const OTRMessageStateKey = @"OTREncryptionManagerMessageStateKey";
         }
     } completionQueue:dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0) completionBlock:^{
         
-        if (buddy.status == OTRThreadStatusOffline) {
+        if(!buddy) {
+            return;
+        }
+        
+        if(buddy.status == OTRThreadStatusOffline) {
             //If the buddy if offline then don't try to start the session up
             return;
         }
