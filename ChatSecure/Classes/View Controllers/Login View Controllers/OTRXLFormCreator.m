@@ -29,6 +29,12 @@ NSString *const kOTRXLFormPortTextFieldTag            = @"kOTRXLFormPortTextFiel
 NSString *const kOTRXLFormResourceTextFieldTag        = @"kOTRXLFormResourceTextFieldTag";
 NSString *const kOTRXLFormXMPPServerTag               = @"kOTRXLFormXMPPServerTag";
 
+NSString *const kFormUsernameTag = @"username";
+NSString *const kFormFirstNameTag = @"firstName";
+NSString *const kFormLastNameTag = @"lastName";
+NSString *const kFormPasswordTag = @"password";
+NSString *const kFormPasswordConfirmTag = @"confirmPassword";
+
 NSString *const kOTRXLFormShowAdvancedTag               = @"kOTRXLFormShowAdvancedTag";
 
 NSString *const kOTRXLFormGenerateSecurePasswordTag               = @"kOTRXLFormGenerateSecurePasswordTag";
@@ -78,6 +84,38 @@ NSString *const kOTRXLFormUseTorTag               = @"kOTRXLFormUseTorTag";
         descriptor = [XLFormDescriptor formDescriptorWithTitle:NSLocalizedString(@"Sign Up", @"title for creating a new account")];
         descriptor.assignFirstResponderOnShow = YES;
         
+        XLFormSectionDescriptor *basicSection = [XLFormSectionDescriptor formSectionWithTitle:@"Account Setup"];
+        [descriptor addFormSection:basicSection];
+        
+        XLFormRowDescriptor *usernameRow = [XLFormRowDescriptor formRowDescriptorWithTag:kFormUsernameTag rowType:XLFormRowDescriptorTypeAccount title:USERNAME_STRING];
+        usernameRow.value = nil;
+        usernameRow.required = YES;
+        //[usernameRow addValidator:[[OTRUsernameValidator alloc] init]];
+        
+        XLFormRowDescriptor *firstNameRow = [XLFormRowDescriptor formRowDescriptorWithTag:kFormFirstNameTag rowType:XLFormRowDescriptorTypeName title:FIRSTNAME_STRING];
+        firstNameRow.value = nil;
+        firstNameRow.required = YES;
+        
+        XLFormRowDescriptor *lastNameRow = [XLFormRowDescriptor formRowDescriptorWithTag:kFormLastNameTag rowType:XLFormRowDescriptorTypeName title:LASTNAME_STRING];
+        lastNameRow.value = nil;
+        lastNameRow.required = YES;
+        
+        XLFormRowDescriptor *passwordRow = [XLFormRowDescriptor formRowDescriptorWithTag:kFormPasswordTag rowType:XLFormRowDescriptorTypePassword title:PASSWORD_STRING];
+        passwordRow.value = nil;
+        passwordRow.required = YES;
+        
+        XLFormRowDescriptor *passwordConfirmRow = [XLFormRowDescriptor formRowDescriptorWithTag:kFormPasswordConfirmTag rowType:XLFormRowDescriptorTypePassword title:PASSWORD_CONFIRM_STRING];
+        passwordConfirmRow.value = nil;
+        passwordConfirmRow.required = YES;
+        
+        [basicSection addFormRow:usernameRow];
+        [basicSection addFormRow:firstNameRow];
+        [basicSection addFormRow:lastNameRow];
+        [basicSection addFormRow:passwordRow];
+        [basicSection addFormRow:passwordConfirmRow];
+        
+        ///////////////////////////
+        /*
         XLFormSectionDescriptor *basicSection = [XLFormSectionDescriptor formSectionWithTitle:NSLocalizedString(@"Basic Setup", @"username section")];
         basicSection.footerTitle = NSLocalizedString(@"Think of a unique nickname that you don't use anywhere else and doesn't contain personal information.", @"basic setup selection footer");
         nicknameRow.required = YES;
@@ -120,6 +158,7 @@ NSString *const kOTRXLFormUseTorTag               = @"kOTRXLFormUseTorTag";
         [descriptor addFormSection:accountSection];
         [descriptor addFormSection:torSection];
         [descriptor addFormSection:serverSection];
+         */
     } else {
         descriptor = [XLFormDescriptor formDescriptorWithTitle:NSLocalizedString(@"Log In", @"title for logging in")];
         XLFormSectionDescriptor *basicSection = [XLFormSectionDescriptor formSection];

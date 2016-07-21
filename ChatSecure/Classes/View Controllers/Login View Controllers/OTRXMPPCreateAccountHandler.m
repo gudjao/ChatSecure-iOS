@@ -50,29 +50,38 @@
 - (void)performActionWithValidForm:(XLFormDescriptor *)form account:(OTRAccount *)account progress:(void (^)(NSInteger, NSString *))progress completion:(void (^)(OTRAccount * account, NSError *error))completion
 {
     if (form) {
-        account = (OTRXMPPAccount *)[super moveValues:form intoAccount:(OTRXMPPAccount*)account];
+        [[OTRAPIClient sharedClient]
+         POST:@"/users"
+         parameters:form.formValues
+         progress:nil
+         success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
+             NSLog(@"POST - REGISTRATION SUCCESS: %@", [self getJSONObject:responseObject]);
+         } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
+             NSLog(@"POST - REGISTRATION FAILED: %@", error.localizedDescription);
+         }];
+        //account = (OTRXMPPAccount *)[super moveValues:form intoAccount:(OTRXMPPAccount*)account];
     }
     self.completion = completion;
     
-    if (account.accountType == OTRAccountTypeXMPPTor) {
-        //check tor is running
-        if ([OTRTorManager sharedInstance].torManager.status == CPAStatusOpen) {
-            [self finishRegisteringWithForm:form account:account];
-        } else if ([OTRTorManager sharedInstance].torManager.status == CPAStatusClosed) {
-            [[OTRTorManager sharedInstance].torManager setupWithCompletion:^(NSString *socksHost, NSUInteger socksPort, NSError *error) {
-                
-                if (error) {
-                    dispatch_async(dispatch_get_main_queue(), ^{
-                        completion(account,error);
-                    });
-                } else {
-                    [self finishRegisteringWithForm:form account:account];
-                }
-            } progress:progress];
-        }
-    } else {
-        [self finishRegisteringWithForm:form account:account];
-    }
+//    if (account.accountType == OTRAccountTypeXMPPTor) {
+//        //check tor is running
+//        if ([OTRTorManager sharedInstance].torManager.status == CPAStatusOpen) {
+//            [self finishRegisteringWithForm:form account:account];
+//        } else if ([OTRTorManager sharedInstance].torManager.status == CPAStatusClosed) {
+//            [[OTRTorManager sharedInstance].torManager setupWithCompletion:^(NSString *socksHost, NSUInteger socksPort, NSError *error) {
+//                
+//                if (error) {
+//                    dispatch_async(dispatch_get_main_queue(), ^{
+//                        completion(account,error);
+//                    });
+//                } else {
+//                    [self finishRegisteringWithForm:form account:account];
+//                }
+//            } progress:progress];
+//        }
+//    } else {
+//        [self finishRegisteringWithForm:form account:account];
+//    }
 }
 
 - (void) finishRegisteringWithForm:(XLFormDescriptor *)form account:(OTRAccount *)account {
@@ -88,6 +97,33 @@
         _password = [OTRPasswordGenerator passwordWithLength:11];
     }
     [self.xmppManager registerNewAccountWithPassword:self.password];
+}
+
+#pragma mark - Helpers
+
+- (id<NSObject>)getJSONObject:(id)responseObject {
+    if([responseObject isKindOfClass:[NSData class]]) {
+        id serializedObject = [NSJSONSerialization JSONObjectWithData:(NSData *)responseObject
+                                                              options:kNilOptions error:nil];
+        if([serializedObject isKindOfClass:[NSDictionary class]] ||
+           [serializedObject isKindOfClass:[NSMutableDictionary class]])
+        {
+            return [[NSMutableDictionary alloc] initWithDictionary:serializedObject];
+        }
+        else if([serializedObject isKindOfClass:[NSArray class]] ||
+                [serializedObject isKindOfClass:[NSMutableArray class]])
+        {
+            return [[NSMutableArray alloc] initWithArray:serializedObject];
+        }
+        else
+        {
+            NSLog(@"Response is not a valid object");
+            return nil;
+        }
+    } else {
+        NSLog(@"Reponse is not a NSData class");
+        return nil;
+    }
 }
 
 @end

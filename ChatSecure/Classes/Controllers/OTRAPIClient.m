@@ -14,7 +14,8 @@
     static OTRAPIClient *_sharedClient = nil;
     static dispatch_once_t onceToken;
     dispatch_once(&onceToken, ^{
-        _sharedClient = [[OTRAPIClient alloc] initWithBaseURL:[NSURL URLWithString:@"13.76.83.133"]];
+        _sharedClient = [[OTRAPIClient alloc] initWithBaseURL:[NSURL URLWithString:@"http://13.76.83.133"]];
+        //_sharedClient = [[OTRAPIClient alloc] initWithBaseURL:[NSURL URLWithString:@"https://api.bentanayan.com"]];
         _sharedClient.responseSerializer = [AFHTTPResponseSerializer serializer];
         _sharedClient.responseSerializer.acceptableContentTypes = [NSSet setWithObjects:@"text/html", @"text/plain", @"application/json", nil];
         [_sharedClient.requestSerializer setValue:@"zcommerce"
