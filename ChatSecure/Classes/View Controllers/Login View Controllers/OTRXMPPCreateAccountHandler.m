@@ -50,6 +50,8 @@
 - (void)performActionWithValidForm:(XLFormDescriptor *)form account:(OTRAccount *)account progress:(void (^)(NSInteger, NSString *))progress completion:(void (^)(OTRAccount * account, NSError *error))completion
 {
     if (form) {
+        NSLog(@"FORM: %@", form.formValues);
+        
         [[OTRAPIClient sharedClient]
          POST:@"/users"
          parameters:form.formValues

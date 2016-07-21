@@ -32,6 +32,7 @@ NSString *const kOTRXLFormXMPPServerTag               = @"kOTRXLFormXMPPServerTa
 NSString *const kFormUsernameTag = @"username";
 NSString *const kFormFirstNameTag = @"firstName";
 NSString *const kFormLastNameTag = @"lastName";
+NSString *const kFormEmailTag = @"email";
 NSString *const kFormPasswordTag = @"password";
 NSString *const kFormPasswordConfirmTag = @"confirmPassword";
 
@@ -100,6 +101,11 @@ NSString *const kOTRXLFormUseTorTag               = @"kOTRXLFormUseTorTag";
         lastNameRow.value = nil;
         lastNameRow.required = YES;
         
+        XLFormRowDescriptor *emailRow = [XLFormRowDescriptor formRowDescriptorWithTag:kFormEmailTag rowType:XLFormRowDescriptorTypeEmail title:EMAIL_STRING];
+        emailRow.value = nil;
+        emailRow.required = YES;
+        [emailRow addValidator:[XLFormValidator emailValidator]];
+        
         XLFormRowDescriptor *passwordRow = [XLFormRowDescriptor formRowDescriptorWithTag:kFormPasswordTag rowType:XLFormRowDescriptorTypePassword title:PASSWORD_STRING];
         passwordRow.value = nil;
         passwordRow.required = YES;
@@ -111,6 +117,7 @@ NSString *const kOTRXLFormUseTorTag               = @"kOTRXLFormUseTorTag";
         [basicSection addFormRow:usernameRow];
         [basicSection addFormRow:firstNameRow];
         [basicSection addFormRow:lastNameRow];
+        [basicSection addFormRow:emailRow];
         [basicSection addFormRow:passwordRow];
         [basicSection addFormRow:passwordConfirmRow];
         

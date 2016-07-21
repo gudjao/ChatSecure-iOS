@@ -382,7 +382,7 @@ EXTERNAL SOURCES:
 
 CHECKOUT OPTIONS:
   CocoaAsyncSocket:
-    :commit: f477467fa793f7a012d3af9c373c6014d7267a55
+    :commit: b392b5c15151b65823223713985463e6627cf3ad
     :git: https://github.com/robbiehanson/CocoaAsyncSocket.git
   JSQMessagesViewController:
     :commit: d0c8a87f3299dcae4ed61b3859df5cff054a2273
