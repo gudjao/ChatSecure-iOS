@@ -265,6 +265,7 @@ static CGFloat OTRBuddyInfoCellHeight = 80.0;
 {
     NSIndexPath *viewIndexPath = [NSIndexPath indexPathForItem:indexPath.row inSection:0];
     OTRYapViewHandler *viewHandler = [self viewHandlerForTableView:tableView];
+    NSLog(@"DEBUG: %@", [viewHandler object:viewIndexPath]);
     return [viewHandler object:viewIndexPath];
 }
 
@@ -390,8 +391,10 @@ static CGFloat OTRBuddyInfoCellHeight = 80.0;
         OTRBuddy * buddy = [self buddyAtIndexPath:databaseIndexPath withTableView:tableView];
         
         __block NSString *buddyAccountName = nil;
+        //__block OTRXMPPRoom *room;
         [viewHandler.databaseConnection readWithBlock:^(YapDatabaseReadTransaction *transaction) {
             buddyAccountName = [OTRAccount fetchObjectWithUniqueID:buddy.accountUniqueId transaction:transaction].username;
+            //room = [OTRXMPPRoom fetchObjectWithUniqueID:[NSString stringWithFormat:@"%@%@", buddy.accountUniqueId, buddy.username] transaction:transaction];
         }];
         
         [cell setThread:buddy withAccountName:buddyAccountName];

@@ -18,6 +18,7 @@
 
 static NSUInteger const OTRDefaultPortNumber = 5222;
 static NSString *hostname = @"13.76.83.133";
+static NSString *loginDomain = @"upsexpress.com";
 //static NSString *hostname = @"xmpp.dukgo.com";
 
 @implementation OTRXMPPAccount
@@ -75,6 +76,10 @@ static NSString *hostname = @"13.76.83.133";
 
 + (NSString *)defaultHostname {
     return hostname;
+}
+
++ (NSString *)defaultLoginDomain {
+    return loginDomain;
 }
 
 + (instancetype)accountForStream:(XMPPStream *)stream transaction:(YapDatabaseReadTransaction *)transaction

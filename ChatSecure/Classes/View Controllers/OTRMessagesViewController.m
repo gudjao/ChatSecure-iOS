@@ -123,7 +123,7 @@ typedef NS_ENUM(int, OTRDropDownType) {
     
     ////// Send Button //////
     self.sendButton = [JSQMessagesToolbarButtonFactory defaultSendButtonItem];
-
+    
     ////// Attachment Button //////
     self.inputToolbar.contentView.leftBarButtonItem = nil;
     self.cameraButton = [UIButton buttonWithType:UIButtonTypeRoundedRect];
@@ -164,6 +164,15 @@ typedef NS_ENUM(int, OTRDropDownType) {
     [super viewWillAppear:animated];
     [[UIApplication sharedApplication] setStatusBarHidden:NO];
     
+    /*
+    [[OTRKit sharedInstance] initiateEncryptionWithUsername:self.buddy.username
+                                                accountName:self.account.username
+                                                   protocol:self.account.protocolTypeString];
+    
+    [[OTRKit sharedInstance] messageStateForUsername:self.buddy.username accountName:self.account.username protocol:self.account.protocolTypeString completion:^(OTRKitMessageState messageState) {
+        NSLog(@"Encrypt State: %lu", (unsigned long)messageState);
+    }];
+    */
     
     __weak typeof(self)weakSelf = self;
     

@@ -189,6 +189,14 @@ NSString *OTRPushAccountGroup = @"Account";
             
             //Checking to see if the buddy username is equal to the account username in order to remove 'self' buddy
             OTRBuddy *buddy = (OTRBuddy *)object;
+            OTRXMPPRoom *room = [OTRXMPPRoom fetchObjectWithUniqueID:[NSString stringWithFormat:@"%@%@", buddy.accountUniqueId, buddy.username] transaction:transaction];
+            
+            if(room) {
+                return nil;
+            } else if([buddy.username hasSuffix:@"@conference.upsexpress.com"]) {
+                return nil;
+            }
+            
             OTRAccount *account = [buddy accountWithTransaction:transaction];
             if (![account.username isEqualToString:buddy.username]) {
                 return OTRBuddyGroup;

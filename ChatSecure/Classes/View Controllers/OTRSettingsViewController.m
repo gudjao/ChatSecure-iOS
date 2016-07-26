@@ -109,10 +109,10 @@ static NSString *const logoutImageName = @"logout.png";
     
     // Disable About Button
     /*
-    UIBarButtonItem *aboutButton = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"OTRInfoIcon" inBundle:[OTRAssets resourcesBundle] compatibleWithTraitCollection:nil] style:UIBarButtonItemStylePlain target:self action:@selector(showAboutScreen)];
-    
-    self.navigationItem.rightBarButtonItem = aboutButton;
-    */
+     UIBarButtonItem *aboutButton = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"OTRInfoIcon" inBundle:[OTRAssets resourcesBundle] compatibleWithTraitCollection:nil] style:UIBarButtonItemStylePlain target:self action:@selector(showAboutScreen)];
+     
+     self.navigationItem.rightBarButtonItem = aboutButton;
+     */
     
     ////// KVO //////
     __weak typeof(self)weakSelf = self;
@@ -261,7 +261,6 @@ static NSString *const logoutImageName = @"logout.png";
     if (indexPath.section == 0) { // Accounts
         NSUInteger numOfAccounts = [self.mappings numberOfItemsInSection:0];
         if (indexPath.row == numOfAccounts && numOfAccounts > 0) {
-            //[self addAccount:[tableView cellForRowAtIndexPath:indexPath]];
             NSIndexPath *accountIndexPath = [NSIndexPath indexPathForRow:indexPath.row - 1 inSection:0];
             OTRAccount *account = [self accountAtIndexPath:accountIndexPath];
             [self logoutAccount:account];
@@ -278,18 +277,18 @@ static NSString *const logoutImageName = @"logout.png";
             }
             // Other Options
             /*
-            OTRAccount *account = [self accountAtIndexPath:indexPath];
-            
-            BOOL connected = [[OTRProtocolManager sharedInstance] isAccountConnected:account];
-            if (!connected) {
-                OTRBaseLoginViewController *baseLoginViewController = [OTRBaseLoginViewController loginViewControllerForAccount:account];
-                baseLoginViewController.showsCancelButton = YES;
-                UINavigationController *navigationController = [[UINavigationController alloc] initWithRootViewController:baseLoginViewController];
-                navigationController.modalPresentationStyle = UIModalPresentationFormSheet;
-                [self presentViewController:navigationController animated:YES completion:nil];
-            } else {
-                [self logoutAccount:account sender:[tableView cellForRowAtIndexPath:indexPath]];
-            }
+             OTRAccount *account = [self accountAtIndexPath:indexPath];
+             
+             BOOL connected = [[OTRProtocolManager sharedInstance] isAccountConnected:account];
+             if (!connected) {
+             OTRBaseLoginViewController *baseLoginViewController = [OTRBaseLoginViewController loginViewControllerForAccount:account];
+             baseLoginViewController.showsCancelButton = YES;
+             UINavigationController *navigationController = [[UINavigationController alloc] initWithRootViewController:baseLoginViewController];
+             navigationController.modalPresentationStyle = UIModalPresentationFormSheet;
+             [self presentViewController:navigationController animated:YES completion:nil];
+             } else {
+             [self logoutAccount:account sender:[tableView cellForRowAtIndexPath:indexPath]];
+             }
              */
         }
     } else {
@@ -352,11 +351,28 @@ static NSString *const logoutImageName = @"logout.png";
     UIAlertAction *cancelAlertAction = [UIAlertAction actionWithTitle:CANCEL_STRING style:UIAlertActionStyleCancel handler:nil];
     UIAlertAction *logoutAlertAction = [UIAlertAction actionWithTitle:LOGOUT_STRING style:UIAlertActionStyleDestructive handler:^(UIAlertAction *action) {
         
-        id<OTRProtocol> protocol = [[OTRProtocolManager sharedInstance] protocolForAccount:account];
-        [protocol disconnect];
+        NSUInteger numOfAccounts = [self.mappings numberOfItemsInSection:0];
         
-        [[OTRProtocolManager sharedInstance] removeProtocolForAccount:account];
-        [OTRAccountsManager removeAccount:account];
+        if(numOfAccounts > 1) {
+            for (int x = 0; x < numOfAccounts; x++) {
+                NSIndexPath *accountIndexPath = [NSIndexPath indexPathForRow:x inSection:0];
+                OTRAccount *account = [self accountAtIndexPath:accountIndexPath];
+                
+                if( [[OTRProtocolManager sharedInstance] isAccountConnected:account])
+                {
+                    id<OTRProtocol> protocol = [[OTRProtocolManager sharedInstance] protocolForAccount:account];
+                    [protocol disconnect];
+                }
+                [[OTRProtocolManager sharedInstance] removeProtocolForAccount:account];
+                [OTRAccountsManager removeAccount:account];
+            }
+        } else {
+            id<OTRProtocol> protocol = [[OTRProtocolManager sharedInstance] protocolForAccount:account];
+            [protocol disconnect];
+            
+            [[OTRProtocolManager sharedInstance] removeProtocolForAccount:account];
+            [OTRAccountsManager removeAccount:account];
+        }
         
         UIStoryboard *onboardingStoryboard = [UIStoryboard storyboardWithName:@"Onboarding" bundle:[OTRAssets resourcesBundle]];
         UINavigationController *welcomeNavController = [onboardingStoryboard instantiateInitialViewController];

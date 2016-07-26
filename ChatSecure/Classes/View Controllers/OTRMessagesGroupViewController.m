@@ -36,7 +36,7 @@
     NSString *service = [self.xmppManager.roomManager.conferenceServicesJID firstObject];
     //NSString *roomName = [NSUUID UUID].UUIDString;
     NSString *roomName = name;
-    XMPPJID *roomJID = [XMPPJID jidWithString:[NSString stringWithFormat:@"%@@%@",roomName,service]];
+    XMPPJID *roomJID = [XMPPJID jidWithString:[NSString stringWithFormat:@"%@@%@", [roomName stringByReplacingOccurrencesOfString:@" " withString:@"_"], service]];
     //NSLog(@"USER: %@ -- DOMAIN: %@ -- RESOURCE: %@", [roomJID user], [roomJID domain], [roomJID resource]);
     self.threadKey = [self.xmppManager.roomManager startGroupChatWithBuddies:buddies roomJID:roomJID nickname:account.username subject:name];
     [self setThreadKey:self.threadKey collection:[OTRXMPPRoom collection]];
@@ -60,8 +60,11 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    self.collectionView.collectionViewLayout.incomingAvatarViewSize = CGSizeZero;
-    self.collectionView.collectionViewLayout.outgoingAvatarViewSize = CGSizeZero;
+    //self.collectionView.collectionViewLayout.incomingAvatarViewSize = CGSizeZero;
+    //self.collectionView.collectionViewLayout.outgoingAvatarViewSize = CGSizeZero;
+    
+    self.collectionView.collectionViewLayout.incomingAvatarViewSize = CGSizeMake(kJSQMessagesCollectionViewAvatarSizeDefault, kJSQMessagesCollectionViewAvatarSizeDefault);;
+    self.collectionView.collectionViewLayout.outgoingAvatarViewSize = CGSizeMake(kJSQMessagesCollectionViewAvatarSizeDefault, kJSQMessagesCollectionViewAvatarSizeDefault);;
 }
 
 #pragma - mark Button Actions
@@ -111,11 +114,11 @@
             }];
             if(roomOccupant) {
                 NSLog(@"%@", roomOccupant);
-            //UIImage *avatarImage = roomOccupant.avatarImage;
-//            if (avatarImage) {
-//                NSUInteger diameter = MIN(avatarImage.size.width, avatarImage.size.height);
-//                imageDataSource = [JSQMessagesAvatarImageFactory avatarImageWithImage:avatarImage diameter:diameter];
-//            }
+                UIImage *avatarImage = roomOccupant.avatarImage;
+                if (avatarImage) {
+                    NSUInteger diameter = MIN(avatarImage.size.width, avatarImage.size.height);
+                    imageDataSource = [JSQMessagesAvatarImageFactory avatarImageWithImage:avatarImage diameter:diameter];
+                }
             }
         }
         

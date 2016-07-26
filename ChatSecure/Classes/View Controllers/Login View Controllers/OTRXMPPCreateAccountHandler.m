@@ -50,40 +50,52 @@
 - (void)performActionWithValidForm:(XLFormDescriptor *)form account:(OTRAccount *)account progress:(void (^)(NSInteger, NSString *))progress completion:(void (^)(OTRAccount * account, NSError *error))completion
 {
     if (form) {
-        NSLog(@"FORM: %@", form.formValues);
+        NSMutableDictionary *formMutable = [[NSMutableDictionary alloc] initWithDictionary:form.formValues];
+        [formMutable setObject:[formMutable objectForKey:kOTRXLFormUsernameTextFieldTag] forKey:kFormUsernameTag];
+        [formMutable removeObjectForKey:kOTRXLFormUsernameTextFieldTag];
+        [formMutable setObject:[formMutable objectForKey:kOTRXLFormPasswordTextFieldTag] forKey:kFormPasswordTag];
+        [formMutable removeObjectForKey:kOTRXLFormPasswordTextFieldTag];
+        [formMutable setObject:[formMutable objectForKey:kOTRXLFormNicknameTextFieldTag] forKey:kFormFirstNameTag];
+        [formMutable removeObjectForKey:kOTRXLFormNicknameTextFieldTag];
+        
+        NSLog(@"FORM: %@", formMutable);
         
         [[OTRAPIClient sharedClient]
          POST:@"/users"
-         parameters:form.formValues
+         parameters:formMutable
          progress:nil
          success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
              NSLog(@"POST - REGISTRATION SUCCESS: %@", [self getJSONObject:responseObject]);
+             self.completion = completion;
+             OTRAccount *accountTest = (OTRXMPPAccount *)[super moveValues:form intoAccount:(OTRXMPPAccount*)account];
+             XLFormRowDescriptor *passwordRow = [form formRowWithTag:kOTRXLFormPasswordTextFieldTag];
+             NSString *passwordFromForm = [passwordRow value];
+             [self prepareForXMPPConnectionFrom:form account:(OTRXMPPAccount *)accountTest];
+             [self.xmppManager connectWithJID:accountTest.username password:passwordFromForm];
          } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
              NSLog(@"POST - REGISTRATION FAILED: %@", error.localizedDescription);
          }];
-        //account = (OTRXMPPAccount *)[super moveValues:form intoAccount:(OTRXMPPAccount*)account];
     }
-    self.completion = completion;
     
-//    if (account.accountType == OTRAccountTypeXMPPTor) {
-//        //check tor is running
-//        if ([OTRTorManager sharedInstance].torManager.status == CPAStatusOpen) {
-//            [self finishRegisteringWithForm:form account:account];
-//        } else if ([OTRTorManager sharedInstance].torManager.status == CPAStatusClosed) {
-//            [[OTRTorManager sharedInstance].torManager setupWithCompletion:^(NSString *socksHost, NSUInteger socksPort, NSError *error) {
-//                
-//                if (error) {
-//                    dispatch_async(dispatch_get_main_queue(), ^{
-//                        completion(account,error);
-//                    });
-//                } else {
+//            if (account.accountType == OTRAccountTypeXMPPTor) {
+//                //check tor is running
+//                if ([OTRTorManager sharedInstance].torManager.status == CPAStatusOpen) {
 //                    [self finishRegisteringWithForm:form account:account];
+//                } else if ([OTRTorManager sharedInstance].torManager.status == CPAStatusClosed) {
+//                    [[OTRTorManager sharedInstance].torManager setupWithCompletion:^(NSString *socksHost, NSUInteger socksPort, NSError *error) {
+//    
+//                        if (error) {
+//                            dispatch_async(dispatch_get_main_queue(), ^{
+//                                completion(account,error);
+//                            });
+//                        } else {
+//                            [self finishRegisteringWithForm:form account:account];
+//                        }
+//                    } progress:progress];
 //                }
-//            } progress:progress];
-//        }
-//    } else {
-//        [self finishRegisteringWithForm:form account:account];
-//    }
+//            } else {
+//                [self finishRegisteringWithForm:form account:account];
+//            }
 }
 
 - (void) finishRegisteringWithForm:(XLFormDescriptor *)form account:(OTRAccount *)account {

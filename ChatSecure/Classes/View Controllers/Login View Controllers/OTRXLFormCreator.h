@@ -23,6 +23,13 @@ extern NSString *const kOTRXLFormResourceTextFieldTag;
 extern NSString *const kOTRXLFormXMPPServerTag;
 extern NSString *const kOTRXLFormUseTorTag;
 
+extern NSString *const kFormUsernameTag;
+extern NSString *const kFormFirstNameTag;
+extern NSString *const kFormLastNameTag;
+extern NSString *const kFormEmailTag;
+extern NSString *const kFormPasswordTag;
+extern NSString *const kFormPasswordConfirmTag;
+
 @interface OTRXLFormCreator : NSObject
 
 + (XLFormDescriptor *)formForAccount:(OTRAccount *)account;

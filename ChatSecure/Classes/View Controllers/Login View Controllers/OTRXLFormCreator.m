@@ -88,12 +88,12 @@ NSString *const kOTRXLFormUseTorTag               = @"kOTRXLFormUseTorTag";
         XLFormSectionDescriptor *basicSection = [XLFormSectionDescriptor formSectionWithTitle:@"Account Setup"];
         [descriptor addFormSection:basicSection];
         
-        XLFormRowDescriptor *usernameRow = [XLFormRowDescriptor formRowDescriptorWithTag:kFormUsernameTag rowType:XLFormRowDescriptorTypeAccount title:USERNAME_STRING];
+        XLFormRowDescriptor *usernameRow = [XLFormRowDescriptor formRowDescriptorWithTag:kOTRXLFormUsernameTextFieldTag rowType:XLFormRowDescriptorTypeAccount title:USERNAME_STRING];
         usernameRow.value = nil;
         usernameRow.required = YES;
         //[usernameRow addValidator:[[OTRUsernameValidator alloc] init]];
         
-        XLFormRowDescriptor *firstNameRow = [XLFormRowDescriptor formRowDescriptorWithTag:kFormFirstNameTag rowType:XLFormRowDescriptorTypeName title:FIRSTNAME_STRING];
+        XLFormRowDescriptor *firstNameRow = [XLFormRowDescriptor formRowDescriptorWithTag:kOTRXLFormNicknameTextFieldTag rowType:XLFormRowDescriptorTypeName title:FIRSTNAME_STRING];
         firstNameRow.value = nil;
         firstNameRow.required = YES;
         
@@ -106,7 +106,7 @@ NSString *const kOTRXLFormUseTorTag               = @"kOTRXLFormUseTorTag";
         emailRow.required = YES;
         [emailRow addValidator:[XLFormValidator emailValidator]];
         
-        XLFormRowDescriptor *passwordRow = [XLFormRowDescriptor formRowDescriptorWithTag:kFormPasswordTag rowType:XLFormRowDescriptorTypePassword title:PASSWORD_STRING];
+        XLFormRowDescriptor *passwordRow = [XLFormRowDescriptor formRowDescriptorWithTag:kOTRXLFormPasswordTextFieldTag rowType:XLFormRowDescriptorTypePassword title:PASSWORD_STRING];
         passwordRow.value = nil;
         passwordRow.required = YES;
         
@@ -226,10 +226,10 @@ NSString *const kOTRXLFormUseTorTag               = @"kOTRXLFormUseTorTag";
 
 + (XLFormRowDescriptor *)jidTextFieldRowDescriptorWithValue:(NSString *)value
 {
-    XLFormRowDescriptor *usernameDescriptor = [self textfieldFormDescriptorType:XLFormRowDescriptorTypeEmail withTag:kOTRXLFormUsernameTextFieldTag title:USERNAME_STRING placeHolder:XMPP_USERNAME_EXAMPLE_STRING value:value];
+    XLFormRowDescriptor *usernameDescriptor = [self textfieldFormDescriptorType:XLFormRowDescriptorTypeEmail withTag:kOTRXLFormUsernameTextFieldTag title:USERNAME_STRING placeHolder:REQUIRED_STRING value:value];
     usernameDescriptor.value = value;
     usernameDescriptor.required = YES;
-    [usernameDescriptor addValidator:[XLFormValidator emailValidatorLong]];
+    //[usernameDescriptor addValidator:[XLFormValidator emailValidatorLong]];
     return usernameDescriptor;
 }
 

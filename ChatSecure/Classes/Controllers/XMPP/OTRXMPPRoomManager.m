@@ -76,7 +76,6 @@
     NSString *databaseRoomKey = [OTRXMPPRoom createUniqueId:self.xmppStream.tag jid:jid.bare];
     if (!room) {
         
-        
         //Update view mappings with this room
         NSArray *groups = [self.unsentMessagesViewHandler groupsArray];
         if (!groups) {
@@ -94,6 +93,25 @@
         [room activate:self.xmppStream];
         [room addDelegate:self delegateQueue:moduleQueue];
     }
+    
+    /*
+    NSString * newBuddyAccountName = [[self.accountNameTextField.text stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceCharacterSet]] lowercaseString];
+    NSString * newBuddyDisplayName = [self.displayNameTextField.text stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceCharacterSet]];
+    __block OTRXMPPBuddy *buddy = nil;
+    [[OTRDatabaseManager sharedInstance].readWriteDatabaseConnection readWriteWithBlock:^(YapDatabaseReadWriteTransaction *transaction) {
+        buddy = [OTRXMPPBuddy fetchBuddyWithUsername:newBuddyAccountName withAccountUniqueId:self.account.uniqueId transaction:transaction];
+        if (!buddy) {
+            buddy = [[OTRXMPPBuddy alloc] init];
+            buddy.username = newBuddyAccountName;
+            buddy.accountUniqueId = self.account.uniqueId;
+            // hack to show buddy in conversations view
+            buddy.lastMessageDate = [NSDate date];
+        }
+        
+        buddy.displayName = newBuddyDisplayName;
+        [buddy saveWithTransaction:transaction];
+    }];
+    */
     
     /** Create room database object */
     [self.databaseConnection readWriteWithBlock:^(YapDatabaseReadWriteTransaction * _Nonnull transaction) {

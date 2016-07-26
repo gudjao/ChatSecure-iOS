@@ -62,12 +62,13 @@
             account = [[OTRXMPPAccount alloc] initWithAccountType:OTRAccountTypeJabber];
         }
     }
+    
     NSString *nickname = [[form formRowWithTag:kOTRXLFormNicknameTextFieldTag] value];
     
     XLFormRowDescriptor *usernameRow = [form formRowWithTag:kOTRXLFormUsernameTextFieldTag];
     
     NSString *jidNode = nil; // aka 'username' from username@example.com
-    NSString *jidDomain = nil;
+    NSString *jidDomain = [OTRXMPPAccount defaultLoginDomain];
     
     if (![usernameRow isHidden]) {
         NSArray *components = [usernameRow.value componentsSeparatedByString:@"@"];
@@ -131,8 +132,7 @@
         }
     }
     account.domain = hostname;
-    
-    
+        
     if (port) {
         account.port = [port intValue];
     }

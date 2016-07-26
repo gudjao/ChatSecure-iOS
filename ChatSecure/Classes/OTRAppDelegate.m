@@ -61,6 +61,9 @@
 #import "OTRMessagesViewController.h"
 @import OTRAssets;
 
+#import <Fabric/Fabric.h>
+#import <Crashlytics/Crashlytics.h>
+
 #if CHATSECURE_DEMO
 #import "OTRChatDemo.h"
 #endif
@@ -76,6 +79,8 @@
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
+    [Fabric with:@[[Crashlytics class]]];
+
     [DDLog addLogger:[DDTTYLogger sharedInstance]];
     
     [[BITHockeyManager sharedHockeyManager] configureWithBetaIdentifier:[OTRSecrets hockeyBetaIdentifier]

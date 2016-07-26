@@ -58,7 +58,10 @@ target 'ChatSecureCore' do
   pod 'QRCodeReaderViewController', '~> 4.0'
   pod 'ZXingObjC', '~> 3.0'
 
-
+  # Distribution
+  pod 'Fabric'
+  pod 'Crashlytics'
+  
   # Local Podspecs
   pod 'gtm-http-fetcher', :podspec => 'Podspecs/gtm-http-fetcher.podspec'
   pod 'gtm-oauth2', :podspec => 'Podspecs/gtm-oauth2.podspec'

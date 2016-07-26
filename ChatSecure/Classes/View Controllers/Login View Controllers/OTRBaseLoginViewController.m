@@ -88,10 +88,10 @@ static NSUInteger kOTRMaxLoginAttempts = 5;
         self.navigationItem.rightBarButtonItem.enabled = NO;
         self.navigationItem.leftBarButtonItem.enabled = NO;
         self.navigationItem.backBarButtonItem.enabled = NO;
-
+        
         [self.view endEditing:YES];
         
-		__weak __typeof__(self) weakSelf = self;
+        __weak __typeof__(self) weakSelf = self;
         self.loginAttempts += 1;
         [self.createLoginHandler performActionWithValidForm:self.form account:self.account progress:^(NSInteger progress, NSString *summaryString) {
             __typeof__(self) strongSelf = weakSelf;
@@ -99,35 +99,35 @@ static NSUInteger kOTRMaxLoginAttempts = 5;
             [[MBProgressHUD HUDForView:strongSelf.view] setProgress:progress/100.0f];
             [[MBProgressHUD HUDForView:strongSelf.view] setLabelText:summaryString];
             
-            } completion:^(OTRAccount *account, NSError *error) {
-                __typeof__(self) strongSelf = weakSelf;
-                strongSelf.form.disabled = NO;
-                strongSelf.navigationItem.rightBarButtonItem.enabled = YES;
-                strongSelf.navigationItem.backBarButtonItem.enabled = YES;
-                strongSelf.navigationItem.leftBarButtonItem.enabled = YES;
-                [MBProgressHUD hideAllHUDsForView:self.view animated:YES];
-                if (error) {
-                    [strongSelf handleError:error];
+        } completion:^(OTRAccount *account, NSError *error) {
+            __typeof__(self) strongSelf = weakSelf;
+            strongSelf.form.disabled = NO;
+            strongSelf.navigationItem.rightBarButtonItem.enabled = YES;
+            strongSelf.navigationItem.backBarButtonItem.enabled = YES;
+            strongSelf.navigationItem.leftBarButtonItem.enabled = YES;
+            [MBProgressHUD hideAllHUDsForView:self.view animated:YES];
+            if (error) {
+                [strongSelf handleError:error];
+            } else {
+                strongSelf.account = account;
+                [[OTRDatabaseManager sharedInstance].readWriteDatabaseConnection readWriteWithBlock:^(YapDatabaseReadWriteTransaction *transaction) {
+                    [account saveWithTransaction:transaction];
+                }];
+                
+                // If push isn't enabled, prompt to enable it
+                if ([PushController getPushPreference] == PushPreferenceEnabled) {
+                    [strongSelf pushInviteViewController];
                 } else {
-                    strongSelf.account = account;
-                    [[OTRDatabaseManager sharedInstance].readWriteDatabaseConnection readWriteWithBlock:^(YapDatabaseReadWriteTransaction *transaction) {
-                        [account saveWithTransaction:transaction];
-                    }];
-                    
-                    // If push isn't enabled, prompt to enable it
-                    if ([PushController getPushPreference] == PushPreferenceEnabled) {
-                        [strongSelf pushInviteViewController];
+                    UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Onboarding" bundle:[OTRAssets resourcesBundle]];
+                    EnablePushViewController *pushVC = [storyboard instantiateViewControllerWithIdentifier:@"enablePush"];
+                    if (pushVC) {
+                        pushVC.account = account;
+                        [strongSelf.navigationController pushViewController:pushVC animated:YES];
                     } else {
-                        UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Onboarding" bundle:[OTRAssets resourcesBundle]];
-                        EnablePushViewController *pushVC = [storyboard instantiateViewControllerWithIdentifier:@"enablePush"];
-                        if (pushVC) {
-                            pushVC.account = account;
-                            [strongSelf.navigationController pushViewController:pushVC animated:YES];
-                        } else {
-                            [strongSelf pushInviteViewController];
-                        }
+                        [strongSelf pushInviteViewController];
                     }
                 }
+            }
         }];
     }
 }
@@ -188,7 +188,7 @@ static NSUInteger kOTRMaxLoginAttempts = 5;
         cell.userInteractionEnabled = NO;
     } else {
         XLFormRowDescriptor *desc = [self.form formRowAtIndex:indexPath];
-        if (desc != nil && desc.tag == kOTRXLFormPasswordTextFieldTag) {
+        if (desc != nil && (desc.tag == kOTRXLFormPasswordTextFieldTag)) {
             cell.accessoryType = UITableViewCellAccessoryDetailButton;
         }
     }
@@ -198,7 +198,7 @@ static NSUInteger kOTRMaxLoginAttempts = 5;
 - (void)tableView:(UITableView *)tableView willDisplayCell:(UITableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath {
     //[super tableView:tableView willDisplayCell:cell forRowAtIndexPath:indexPath];
     XLFormRowDescriptor *desc = [self.form formRowAtIndex:indexPath];
-    if (desc != nil && desc.tag == kOTRXLFormPasswordTextFieldTag) {
+    if (desc != nil && (desc.tag == kOTRXLFormPasswordTextFieldTag || desc.tag == kFormPasswordConfirmTag)) {
         XLFormBaseCell *xlCell = [desc cellForFormController:self];
         if (xlCell != nil && [cell isKindOfClass:XLFormTextFieldCell.class]) {
             [[(XLFormTextFieldCell*)cell textField] setSecureTextEntry:!self.showPasswordsAsText];
@@ -208,8 +208,10 @@ static NSUInteger kOTRMaxLoginAttempts = 5;
 
 - (void)tableView:(UITableView *)tableView accessoryButtonTappedForRowWithIndexPath:(NSIndexPath *)indexPath {
     XLFormRowDescriptor *desc = [self.form formRowAtIndex:indexPath];
-    if (desc != nil && desc.tag == kOTRXLFormPasswordTextFieldTag) {
-        self.showPasswordsAsText = !self.showPasswordsAsText;
+    if (desc != nil) {
+        if(desc.tag == kOTRXLFormPasswordTextFieldTag) {
+            self.showPasswordsAsText = !self.showPasswordsAsText;
+        } 
         [self.tableView reloadData];
     }
 }
@@ -224,7 +226,7 @@ static NSUInteger kOTRMaxLoginAttempts = 5;
     }
 }
 
- #pragma - mark Errors and Alert Views
+#pragma - mark Errors and Alert Views
 
 - (void)handleError:(NSError *)error
 {

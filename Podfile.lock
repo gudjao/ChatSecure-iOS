@@ -39,6 +39,9 @@ PODS:
     - CocoaLumberjack/Default
   - CPAProxy (1.1.0):
     - CocoaAsyncSocket
+  - Crashlytics (3.7.2):
+    - Fabric (~> 1.6.3)
+  - Fabric (1.6.7)
   - GCDWebServer/CocoaLumberjack (3.3.3):
     - CocoaLumberjack (~> 2)
     - GCDWebServer/Core
@@ -325,6 +328,8 @@ DEPENDENCIES:
     branch `master`)
   - CocoaLumberjack (~> 2.0)
   - CPAProxy (from `Submodules/CPAProxy/CPAProxy.podspec`)
+  - Crashlytics
+  - Fabric
   - gtm-http-fetcher (from `Podspecs/gtm-http-fetcher.podspec`)
   - gtm-oauth2 (from `Podspecs/gtm-oauth2.podspec`)
   - HockeySDK-Source (~> 3.7)
@@ -397,7 +402,9 @@ SPEC CHECKSUMS:
   ChatSecure-Push-iOS: fe8577fd81ff76b1f303dcd51a350fb0c964a6d0
   CocoaAsyncSocket: e0a7e93b2ffa411592ff87e58524fbbc9b95b4fa
   CocoaLumberjack: 97fab7ee5f507fe54445cca7ea80f926729cfd15
-  CPAProxy: cfd27b25328d6517b1f8570c4f0045838353e888
+  CPAProxy: 40278db66c183fd64452825f3db54ec27e27a0b3
+  Crashlytics: 130ab943f8c78cda7a814b434f270b2e2c8a3cba
+  Fabric: caf7580c725e64db144f610ac65cd60956911dc7
   GCDWebServer: 1c39a1f0763e4eb492bee021e4270fce097d3555
   gtm-http-fetcher: 4e7de79fc9e774b291eae66a240f17b3a5277ec7
   gtm-oauth2: b31c9d7c82f773f7b7094cbb7da8dc7b5968ce16
@@ -428,7 +435,7 @@ SPEC CHECKSUMS:
   uservoice-iphone-sdk: 7e58403a8bb7d1de7d960eee728b0a5d184594ee
   VTAcknowledgementsViewController: 6056f5f5e5ed995bbf0581bed6ddd29355ca9a80
   XLForm: 2250b4e96ab8ffa5f3355838c79edd90de451782
-  XMPPFramework: b5673e137fa3081a8b446fefbb8da5a57637192a
+  XMPPFramework: a586693d719855396f6713bb604d214514251447
   YapDatabase: 713d4018cfacbd6e77dd430710ca84730e450980
   ZXingObjC: bf15b3814f7a105b6d99f47da2333c93a063650a
 

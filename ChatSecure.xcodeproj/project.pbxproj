@@ -1757,9 +1757,10 @@
 				6396AF971A169D54009F3E6C /* Frameworks */,
 				6396AF981A169D54009F3E6C /* Resources */,
 				8A2E66B35EF52AF3A8D65276 /* Copy Pods Resources */,
-				6386E24E1A16DBAD003465DC /* ShellScript */,
+				6386E24E1A16DBAD003465DC /* Run Script */,
 				A60AF14A61B7922CB2D653D0 /* Embed Pods Frameworks */,
 				D9227C481BA7952100B5E1D0 /* Embed Frameworks */,
+				B02FC37E1D475FFC001AA54E /* Fabric */,
 			);
 			buildRules = (
 			);
@@ -1864,6 +1865,7 @@
 				TargetAttributes = {
 					6396AF991A169D54009F3E6C = {
 						CreatedOnToolsVersion = 6.1;
+						DevelopmentTeam = 8H5SYM9GR5;
 						SystemCapabilities = {
 							com.apple.DataProtection = {
 								enabled = 1;
@@ -2018,13 +2020,14 @@
 			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-ChatSecureCore/Pods-ChatSecureCore-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
-		6386E24E1A16DBAD003465DC /* ShellScript */ = {
+		6386E24E1A16DBAD003465DC /* Run Script */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 			);
 			inputPaths = (
 			);
+			name = "Run Script";
 			outputPaths = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -2060,6 +2063,20 @@
 			shellPath = /bin/sh;
 			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-ChatSecureCore/Pods-ChatSecureCore-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
+		};
+		B02FC37E1D475FFC001AA54E /* Fabric */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = Fabric;
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Fabric/run\" dc1377db1979e7f436e91d886994915f7a032ede 414b94ea1561ecd9dbddda8349e3762ea58fd2db927ad246a1ac922229e8803e";
 		};
 		C51DC9AFCD4F8C0D582CD146 /* Copy Pods Resources */ = {
 			isa = PBXShellScriptBuildPhase;
@@ -2479,8 +2496,8 @@
 				CLANG_ALLOW_NON_MODULAR_INCLUDES_IN_FRAMEWORK_MODULES = YES;
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_ENTITLEMENTS = ChatSecure/ChatSecure.entitlements;
-				CODE_SIGN_IDENTITY = "iPhone Developer";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				CODE_SIGN_IDENTITY = "iPhone Developer: Eddie Ybanez (EWQGD7J979)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Eddie Ybanez (EWQGD7J979)";
 				DEFINES_MODULE = YES;
 				EMBEDDED_CONTENT_CONTAINS_SWIFT = YES;
 				INFOPLIST_FILE = ChatSecure/Info.plist;
@@ -2489,7 +2506,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.bentanayan.UPSChat;
 				PRODUCT_MODULE_NAME = "$(TARGET_NAME:c99extidentifier)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "";
+				PROVISIONING_PROFILE = "a6ff2613-a96a-42dc-b104-dc107de3b8fe";
 				PUBLIC_HEADERS_FOLDER_PATH = "$(CONTENTS_FOLDER_PATH)/Headers";
 			};
 			name = Beta;
@@ -2605,8 +2622,8 @@
 				CLANG_ALLOW_NON_MODULAR_INCLUDES_IN_FRAMEWORK_MODULES = YES;
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_ENTITLEMENTS = ChatSecure/ChatSecure.entitlements;
-				CODE_SIGN_IDENTITY = "iPhone Developer";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				CODE_SIGN_IDENTITY = "iPhone Developer: Eddie Ybanez (EWQGD7J979)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Eddie Ybanez (EWQGD7J979)";
 				EMBEDDED_CONTENT_CONTAINS_SWIFT = YES;
 				INFOPLIST_FILE = ChatSecure/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
@@ -2614,7 +2631,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.bentanayan.UPSChat;
 				PRODUCT_MODULE_NAME = "$(TARGET_NAME:c99extidentifier)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "";
+				PROVISIONING_PROFILE = "a6ff2613-a96a-42dc-b104-dc107de3b8fe";
 				PUBLIC_HEADERS_FOLDER_PATH = "$(CONTENTS_FOLDER_PATH)/Headers";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 			};
@@ -2630,8 +2647,8 @@
 				CLANG_ALLOW_NON_MODULAR_INCLUDES_IN_FRAMEWORK_MODULES = YES;
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_ENTITLEMENTS = ChatSecure/ChatSecure.entitlements;
-				CODE_SIGN_IDENTITY = "iPhone Developer";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				CODE_SIGN_IDENTITY = "iPhone Developer: Eddie Ybanez (EWQGD7J979)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Eddie Ybanez (EWQGD7J979)";
 				EMBEDDED_CONTENT_CONTAINS_SWIFT = YES;
 				INFOPLIST_FILE = ChatSecure/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
@@ -2639,7 +2656,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.bentanayan.UPSChat;
 				PRODUCT_MODULE_NAME = "$(TARGET_NAME:c99extidentifier)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "";
+				PROVISIONING_PROFILE = "a6ff2613-a96a-42dc-b104-dc107de3b8fe";
 				PUBLIC_HEADERS_FOLDER_PATH = "$(CONTENTS_FOLDER_PATH)/Headers";
 			};
 			name = Release;

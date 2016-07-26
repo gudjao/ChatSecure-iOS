@@ -334,6 +334,21 @@ static CGFloat kOTRConversationCellHeight = 80.0;
         
         if ([thread isKindOfClass:[OTRXMPPRoom class]]) {
             
+            /*
+            __block NSString *key = buddy.uniqueId;
+            
+            [self.readWriteConnection asyncReadWriteWithBlock:^(YapDatabaseReadWriteTransaction * _Nonnull transaction) {
+                OTRBuddy *dbBuddy = [OTRBuddy fetchObjectWithUniqueID:key transaction:transaction];
+                if (dbBuddy) {
+                    BuddyAction *action = [[BuddyAction alloc] init];
+                    action.buddy = dbBuddy;
+                    action.action = BuddyActionTypeDelete;
+                    [action saveWithTransaction:transaction];
+                    [dbBuddy removeWithTransaction:transaction];
+                }
+            }];
+             */
+
             //Leave room
             NSString *accountKey = [thread threadAccountIdentifier];
             __block OTRAccount *account = nil;
@@ -347,6 +362,18 @@ static CGFloat kOTRConversationCellHeight = 80.0;
             //Delete database items
             [[OTRDatabaseManager sharedInstance].readWriteDatabaseConnection asyncReadWriteWithBlock:^(YapDatabaseReadWriteTransaction *transaction) {
                 [((OTRXMPPRoom *)thread) removeWithTransaction:transaction];
+                for(OTRBuddy *buddy in [account allBuddiesWithTransaction:transaction]) {
+                    if([buddy.username hasSuffix:@"@conference.upsexpress.com"]) {
+                        BuddyAction *action = [[BuddyAction alloc] init];
+                        action.buddy = buddy;
+                        action.action = BuddyActionTypeDelete;
+                        [action saveWithTransaction:transaction];
+                        [buddy removeWithTransaction:transaction];
+                    }
+                }
+                for(OTRBuddy *buddy in [account allBuddiesWithTransaction:transaction]) {
+                    NSLog(@"[Buddy]: %@", buddy.username);
+                }
             }];
         }
     }
