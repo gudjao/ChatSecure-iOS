@@ -20,6 +20,8 @@
 #import "OTRTorManager.h"
 #import "OTRAPIClient.h"
 
+NSString* const RegistrationFormValidationErrorDomain = @"RegistrationValidationErrorDomain";
+
 @implementation OTRXMPPCreateAccountHandler
 
 - (OTRXMPPAccount *)moveValues:(XLFormDescriptor *)form intoAccount:(OTRXMPPAccount *)account
@@ -60,6 +62,24 @@
         
         NSLog(@"FORM: %@", formMutable);
         
+        NSError *validationError;
+        
+        if(![self validateUsername:[formMutable objectForKey:kFormUsernameTag]
+                             error:&validationError]) {
+            dispatch_async(dispatch_get_main_queue(), ^{
+                completion(nil, validationError);
+            });
+        }
+        
+        if(![self validatePasswordConfirmation:[formMutable objectForKey:kFormPasswordConfirmTag]
+                                      password:[formMutable objectForKey:kFormPasswordTag]
+                                         error:&validationError]) {
+            dispatch_async(dispatch_get_main_queue(), ^{
+                completion(nil, validationError);
+            });
+        }
+        
+        
         [[OTRAPIClient sharedClient]
          POST:@"/users"
          parameters:formMutable
@@ -74,28 +94,31 @@
              [self.xmppManager connectWithJID:accountTest.username password:passwordFromForm];
          } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
              NSLog(@"POST - REGISTRATION FAILED: %@", error.localizedDescription);
+             dispatch_async(dispatch_get_main_queue(), ^{
+                 completion(nil,error);
+             });
          }];
     }
     
-//            if (account.accountType == OTRAccountTypeXMPPTor) {
-//                //check tor is running
-//                if ([OTRTorManager sharedInstance].torManager.status == CPAStatusOpen) {
-//                    [self finishRegisteringWithForm:form account:account];
-//                } else if ([OTRTorManager sharedInstance].torManager.status == CPAStatusClosed) {
-//                    [[OTRTorManager sharedInstance].torManager setupWithCompletion:^(NSString *socksHost, NSUInteger socksPort, NSError *error) {
-//    
-//                        if (error) {
-//                            dispatch_async(dispatch_get_main_queue(), ^{
-//                                completion(account,error);
-//                            });
-//                        } else {
-//                            [self finishRegisteringWithForm:form account:account];
-//                        }
-//                    } progress:progress];
-//                }
-//            } else {
-//                [self finishRegisteringWithForm:form account:account];
-//            }
+    //            if (account.accountType == OTRAccountTypeXMPPTor) {
+    //                //check tor is running
+    //                if ([OTRTorManager sharedInstance].torManager.status == CPAStatusOpen) {
+    //                    [self finishRegisteringWithForm:form account:account];
+    //                } else if ([OTRTorManager sharedInstance].torManager.status == CPAStatusClosed) {
+    //                    [[OTRTorManager sharedInstance].torManager setupWithCompletion:^(NSString *socksHost, NSUInteger socksPort, NSError *error) {
+    //
+    //                        if (error) {
+    //                            dispatch_async(dispatch_get_main_queue(), ^{
+    //                                completion(account,error);
+    //                            });
+    //                        } else {
+    //                            [self finishRegisteringWithForm:form account:account];
+    //                        }
+    //                    } progress:progress];
+    //                }
+    //            } else {
+    //                [self finishRegisteringWithForm:form account:account];
+    //            }
 }
 
 - (void) finishRegisteringWithForm:(XLFormDescriptor *)form account:(OTRAccount *)account {
@@ -138,6 +161,43 @@
         NSLog(@"Reponse is not a NSData class");
         return nil;
     }
+}
+
+#pragma mark - Validations
+
+- (BOOL)validateUsername:(NSString *)value error:(NSError* __autoreleasing*)error
+{
+    if ([value length] < 8)
+    {
+        if (error != NULL)
+        {
+            NSDictionary* userInfoDict = @{ NSLocalizedDescriptionKey: @"Username must be more than 7 characters." };
+            *error = [[NSError alloc] initWithDomain:RegistrationFormValidationErrorDomain
+                                                code:6969
+                                            userInfo:userInfoDict];
+        }
+        
+        return NO;
+    }
+    
+    return YES;
+}
+
+- (BOOL)validatePasswordConfirmation:(NSString *)confirmPassword password:(NSString *)password error:(NSError* __autoreleasing*)error;
+{
+    if (![confirmPassword isEqualToString:password])
+    {
+        if (error != NULL)
+        {
+            *error = [[NSError alloc] initWithDomain:RegistrationFormValidationErrorDomain
+                                                code:6969
+                                            userInfo:@{ NSLocalizedDescriptionKey: @"Password do not match." }];
+        }
+        
+        return NO;
+    }
+    
+    return YES;
 }
 
 @end

@@ -22,6 +22,7 @@
 #import "OTRLanguageManager.h"
 #import "OTRInviteViewController.h"
 #import "NSString+ChatSecure.h"
+#import "OTRAPIClient.h"
 
 static NSUInteger kOTRMaxLoginAttempts = 5;
 
@@ -211,7 +212,7 @@ static NSUInteger kOTRMaxLoginAttempts = 5;
     if (desc != nil) {
         if(desc.tag == kOTRXLFormPasswordTextFieldTag) {
             self.showPasswordsAsText = !self.showPasswordsAsText;
-        } 
+        }
         [self.tableView reloadData];
     }
 }
@@ -231,7 +232,29 @@ static NSUInteger kOTRMaxLoginAttempts = 5;
 - (void)handleError:(NSError *)error
 {
     //show xmpp erors, cert errors, tor errors, oauth errors.
-    if (error.code == OTRXMPPSSLError) {
+    if ([error.domain isEqualToString:@"com.alamofire.error.serialization.response"]) {
+        NSDictionary *errorJson = [NSJSONSerialization JSONObjectWithData:(NSData *)error.userInfo[AFNetworkingOperationFailingURLResponseDataErrorKey]
+                                                                  options:kNilOptions
+                                                                    error:nil];
+        
+        NSLog(@"Error: %@", errorJson);
+        NSDictionary *invalidAttributes = errorJson[@"raw"][@"invalidAttributes"];
+        NSArray *errorKeys = [invalidAttributes allKeys];
+        if(errorKeys.count > 0) {
+            NSArray *errorMessages = invalidAttributes[[errorKeys firstObject]];
+            if(errorMessages.count > 0) {
+                NSDictionary *attribute = [errorMessages firstObject];
+                NSString *errorMessage = attribute[@"message"];
+                [self showAlertViewWithTitle:@"Registration Error" message:errorMessage error:nil];
+            } else {
+                [self showAlertViewWithTitle:@"Registration Error" message:@"Could not connect to server." error:nil];
+            }
+        } else {
+            [self showAlertViewWithTitle:@"Registration Error" message:@"Could not connect to server." error:nil];
+        }
+    } else if([error.domain isEqualToString:RegistrationFormValidationErrorDomain]) {
+        [self showAlertViewWithTitle:@"Registration Error" message:error.localizedDescription error:nil];
+    } else if (error.code == OTRXMPPSSLError) {
         NSData * certData = error.userInfo[OTRXMPPSSLCertificateDataKey];
         NSString * hostname = error.userInfo[OTRXMPPSSLHostnameKey];
         uint32_t trustResultType = [error.userInfo[OTRXMPPSSLTrustResultKey] unsignedIntValue];

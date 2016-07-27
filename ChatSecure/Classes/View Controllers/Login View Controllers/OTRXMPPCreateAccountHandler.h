@@ -9,6 +9,8 @@
 #import <Foundation/Foundation.h>
 #import "OTRXMPPLoginHandler.h"
 
+extern NSString* const RegistrationFormValidationErrorDomain;
+
 @interface OTRXMPPCreateAccountHandler : OTRXMPPLoginHandler
 
 @property (nonatomic, strong) NSString *password;
