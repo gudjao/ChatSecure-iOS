@@ -45,6 +45,7 @@
 #import "OTRBaseLoginViewController.h"
 #import "OTRLanguageManager.h"
 #import "OTRDataHandler.h"
+#import "Cloudinary/Cloudinary.h"
 #import <ChatSecureCore/ChatSecureCore-Swift.h>
 @import YapDatabase.YapDatabaseView;
 @import PureLayout;
@@ -53,6 +54,7 @@
 @import MediaPlayer;
 
 static NSTimeInterval const kOTRMessageSentDateShowTimeInterval = 5 * 60;
+NSString * const UPS_CLOUDINARY_URL = @"cloudinary://731558458281122:wmO6ivp-DY-pr5-bg15lBA5i84U@bentanayan-com";
 
 typedef NS_ENUM(int, OTRDropDownType) {
     OTRDropDownTypeNone          = 0,
@@ -165,14 +167,14 @@ typedef NS_ENUM(int, OTRDropDownType) {
     [[UIApplication sharedApplication] setStatusBarHidden:NO];
     
     /*
-    [[OTRKit sharedInstance] initiateEncryptionWithUsername:self.buddy.username
-                                                accountName:self.account.username
-                                                   protocol:self.account.protocolTypeString];
-    
-    [[OTRKit sharedInstance] messageStateForUsername:self.buddy.username accountName:self.account.username protocol:self.account.protocolTypeString completion:^(OTRKitMessageState messageState) {
-        NSLog(@"Encrypt State: %lu", (unsigned long)messageState);
-    }];
-    */
+     [[OTRKit sharedInstance] initiateEncryptionWithUsername:self.buddy.username
+     accountName:self.account.username
+     protocol:self.account.protocolTypeString];
+     
+     [[OTRKit sharedInstance] messageStateForUsername:self.buddy.username accountName:self.account.username protocol:self.account.protocolTypeString completion:^(OTRKitMessageState messageState) {
+     NSLog(@"Encrypt State: %lu", (unsigned long)messageState);
+     }];
+     */
     
     __weak typeof(self)weakSelf = self;
     
@@ -1054,13 +1056,48 @@ typedef NS_ENUM(int, OTRDropDownType) {
                             [message saveWithTransaction:transaction];
                         }];
                     }
-                    [self sendMediaItem:imageItem data:imageData tag:message];
+                    //[self sendMediaItem:imageItem data:imageData tag:message];
+                    [self sendMediaCloudinaryItem:imageItem data:imageData tag:message];
                     
                 } completionQueue:dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0)];
             }];
         });
     }
+}
+
+- (void)sendMediaCloudinaryItem:(OTRMediaItem *)mediaItem data:(NSData *)data tag:(id)tag {
     
+    __weak OTRMessagesViewController *weakSelf = self;
+    
+    CLCloudinary *cloudinary = [[CLCloudinary alloc] initWithUrl:UPS_CLOUDINARY_URL];
+    
+    CLUploader *uploader = [[CLUploader alloc] init:cloudinary delegate:nil];
+    
+    CLTransformation *imageTransformation = [CLTransformation transformation];
+    [imageTransformation setCrop:@"fill"];
+    
+    [uploader upload:data
+             options:@{@"resource_type" : @"image",
+                       @"format" : @"png",
+                       @"transformation" : imageTransformation
+                       }
+     
+      withCompletion:^(NSDictionary *successResult, NSString *errorResult, NSInteger code, id context) {
+          if(successResult) {
+              NSString *publicId = [successResult valueForKey:@"public_id"];
+              NSLog(@"Block upload success. Public ID=%@, image URL=%@", publicId, successResult[@"secure_url"]);
+              [weakSelf didPressSendButton:self.sendButton
+                           withMessageText:successResult[@"secure_url"]
+                                  senderId:self.senderId
+                         senderDisplayName:self.senderDisplayName
+                                      date:[NSDate date]];
+          } else {
+              NSLog(@"Block upload error: %@, %lu", errorResult, (long)code);
+          }
+      } andProgress:^(NSInteger bytesWritten, NSInteger totalBytesWritten, NSInteger totalBytesExpectedToWrite, id context) {
+          NSLog(@"Block upload progress: %lu/%lu (+%lu)", (long)totalBytesWritten, (long)totalBytesExpectedToWrite, (long)bytesWritten);
+          CGFloat progress = (float)totalBytesWritten / (float)totalBytesExpectedToWrite;
+      }];
 }
 
 #pragma - mark OTRAttachmentPickerDelegate Methods

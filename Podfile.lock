@@ -26,6 +26,7 @@ PODS:
   - BBlock/UIKit (1.2.1)
   - BButton (4.0.2)
   - ChatSecure-Push-iOS (0.2)
+  - Cloudinary (1.0.15)
   - CocoaAsyncSocket (7.5.1):
     - CocoaAsyncSocket/GCD (= 7.5.1)
   - CocoaAsyncSocket/GCD (7.5.1)
@@ -333,6 +334,7 @@ DEPENDENCIES:
   - BBlock (~> 1.2)
   - BButton (~> 4.0)
   - ChatSecure-Push-iOS (from `Submodules/ChatSecure-Push-iOS/ChatSecure-Push-iOS.podspec`)
+  - Cloudinary
   - CocoaAsyncSocket (from `https://github.com/robbiehanson/CocoaAsyncSocket.git`,
     branch `master`)
   - CocoaLumberjack (~> 2.0)
@@ -409,6 +411,7 @@ SPEC CHECKSUMS:
   BBlock: c56d7f72597ffe1634fcdc73836c5c0fed3271be
   BButton: ab0f2ed3b998ae73c5188b57d270d81e4a1eeb27
   ChatSecure-Push-iOS: fe8577fd81ff76b1f303dcd51a350fb0c964a6d0
+  Cloudinary: f80af4565ec08c521d5e58cb56d9fbe1e4595e40
   CocoaAsyncSocket: e0a7e93b2ffa411592ff87e58524fbbc9b95b4fa
   CocoaLumberjack: 97fab7ee5f507fe54445cca7ea80f926729cfd15
   CPAProxy: 40278db66c183fd64452825f3db54ec27e27a0b3

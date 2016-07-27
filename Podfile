@@ -62,6 +62,9 @@ target 'ChatSecureCore' do
   pod 'Fabric'
   pod 'Crashlytics'
   
+  # Cloudinary
+  pod 'Cloudinary'
+  
   # Local Podspecs
   pod 'gtm-http-fetcher', :podspec => 'Podspecs/gtm-http-fetcher.podspec'
   pod 'gtm-oauth2', :podspec => 'Podspecs/gtm-oauth2.podspec'
