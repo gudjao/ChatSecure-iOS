@@ -2076,7 +2076,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\"${PODS_ROOT}/Fabric/run\" dc1377db1979e7f436e91d886994915f7a032ede 414b94ea1561ecd9dbddda8349e3762ea58fd2db927ad246a1ac922229e8803e";
+			shellScript = "\"${PODS_ROOT}/Fabric/run\" 413c90937b9528a038fc013f777ef6a27df04bce c6324207a759d8fef71de3f106ecc852d12051d8ecfefaa0245d6f8b4ac704cb";
 		};
 		C51DC9AFCD4F8C0D582CD146 /* Copy Pods Resources */ = {
 			isa = PBXShellScriptBuildPhase;
@@ -2506,7 +2506,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.bentanayan.UPSChat;
 				PRODUCT_MODULE_NAME = "$(TARGET_NAME:c99extidentifier)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "a6ff2613-a96a-42dc-b104-dc107de3b8fe";
+				PROVISIONING_PROFILE = "ab0e5d69-44d8-4bbd-8640-e23ea3217275";
 				PUBLIC_HEADERS_FOLDER_PATH = "$(CONTENTS_FOLDER_PATH)/Headers";
 			};
 			name = Beta;
@@ -2631,7 +2631,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.bentanayan.UPSChat;
 				PRODUCT_MODULE_NAME = "$(TARGET_NAME:c99extidentifier)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "a6ff2613-a96a-42dc-b104-dc107de3b8fe";
+				PROVISIONING_PROFILE = "ab0e5d69-44d8-4bbd-8640-e23ea3217275";
 				PUBLIC_HEADERS_FOLDER_PATH = "$(CONTENTS_FOLDER_PATH)/Headers";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 			};
@@ -2656,7 +2656,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.bentanayan.UPSChat;
 				PRODUCT_MODULE_NAME = "$(TARGET_NAME:c99extidentifier)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "a6ff2613-a96a-42dc-b104-dc107de3b8fe";
+				PROVISIONING_PROFILE = "ab0e5d69-44d8-4bbd-8640-e23ea3217275";
 				PUBLIC_HEADERS_FOLDER_PATH = "$(CONTENTS_FOLDER_PATH)/Headers";
 			};
 			name = Release;

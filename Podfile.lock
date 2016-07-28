@@ -118,7 +118,6 @@ PODS:
     - XMPPFramework/XEP-0009
     - XMPPFramework/XEP-0012
     - XMPPFramework/XEP-0016
-    - XMPPFramework/XEP-0033
     - XMPPFramework/XEP-0045
     - XMPPFramework/XEP-0054
     - XMPPFramework/XEP-0059
@@ -129,8 +128,6 @@ PODS:
     - XMPPFramework/XEP-0082
     - XMPPFramework/XEP-0085
     - XMPPFramework/XEP-0092
-    - XMPPFramework/XEP-0095
-    - XMPPFramework/XEP-0096
     - XMPPFramework/XEP-0100
     - XMPPFramework/XEP-0106
     - XMPPFramework/XEP-0115
@@ -183,8 +180,6 @@ PODS:
     - XMPPFramework/Core
   - XMPPFramework/XEP-0016 (3.7.0):
     - XMPPFramework/Core
-  - XMPPFramework/XEP-0033 (3.7.0):
-    - XMPPFramework/Core
   - XMPPFramework/XEP-0045 (3.7.0):
     - XMPPFramework/Core
     - XMPPFramework/CoreDataStorage
@@ -207,10 +202,6 @@ PODS:
   - XMPPFramework/XEP-0085 (3.7.0):
     - XMPPFramework/Core
   - XMPPFramework/XEP-0092 (3.7.0):
-    - XMPPFramework/Core
-  - XMPPFramework/XEP-0095 (3.7.0):
-    - XMPPFramework/Core
-  - XMPPFramework/XEP-0096 (3.7.0):
     - XMPPFramework/Core
   - XMPPFramework/XEP-0100 (3.7.0):
     - XMPPFramework/Core
@@ -447,7 +438,7 @@ SPEC CHECKSUMS:
   uservoice-iphone-sdk: 7e58403a8bb7d1de7d960eee728b0a5d184594ee
   VTAcknowledgementsViewController: 6056f5f5e5ed995bbf0581bed6ddd29355ca9a80
   XLForm: 2250b4e96ab8ffa5f3355838c79edd90de451782
-  XMPPFramework: a0d3744be00c4ac7f6bf0e255ff970c2c83204d2
+  XMPPFramework: a586693d719855396f6713bb604d214514251447
   YapDatabase: 713d4018cfacbd6e77dd430710ca84730e450980
   ZXingObjC: bf15b3814f7a105b6d99f47da2333c93a063650a
 

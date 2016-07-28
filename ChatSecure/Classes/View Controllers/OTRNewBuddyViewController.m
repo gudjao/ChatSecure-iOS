@@ -196,7 +196,7 @@
 -(IBAction)doneButtonPressed:(id)sender
 {
     if ([self checkFields]) {
-        NSString * newBuddyAccountName = [[self.accountNameTextField.text stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceCharacterSet]] lowercaseString];
+        NSString * newBuddyAccountName = [NSString stringWithFormat:@"%@@%@", [[self.accountNameTextField.text stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceCharacterSet]] lowercaseString], [OTRXMPPAccount defaultLoginDomain]];
         NSString * newBuddyDisplayName = [self.displayNameTextField.text stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceCharacterSet]];
         __block OTRXMPPBuddy *buddy = nil;
         [[OTRDatabaseManager sharedInstance].readWriteDatabaseConnection readWriteWithBlock:^(YapDatabaseReadWriteTransaction *transaction) {

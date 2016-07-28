@@ -1096,7 +1096,14 @@ typedef NS_ENUM(int, OTRDropDownType) {
           }
       } andProgress:^(NSInteger bytesWritten, NSInteger totalBytesWritten, NSInteger totalBytesExpectedToWrite, id context) {
           NSLog(@"Block upload progress: %lu/%lu (+%lu)", (long)totalBytesWritten, (long)totalBytesExpectedToWrite, (long)bytesWritten);
-          CGFloat progress = (float)totalBytesWritten / (float)totalBytesExpectedToWrite;
+          __block CGFloat progress = (float)totalBytesWritten / (float)totalBytesExpectedToWrite;
+          
+          [[OTRDatabaseManager sharedInstance].readWriteDatabaseConnection readWriteWithBlock:^(YapDatabaseReadWriteTransaction *transaction) {
+              //OTRMediaItem *mediaItem = [OTRMediaItem fetchObjectWithUniqueID:databaseMessage.mediaItemUniqueId transaction:transaction];
+              mediaItem.transferProgress = progress;
+              [mediaItem saveWithTransaction:transaction];
+              [mediaItem touchParentMessageWithTransaction:transaction];
+          }];
       }];
 }
 
