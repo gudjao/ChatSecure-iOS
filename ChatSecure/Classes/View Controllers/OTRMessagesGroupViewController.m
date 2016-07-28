@@ -63,8 +63,11 @@
     //self.collectionView.collectionViewLayout.incomingAvatarViewSize = CGSizeZero;
     //self.collectionView.collectionViewLayout.outgoingAvatarViewSize = CGSizeZero;
     
-    self.collectionView.collectionViewLayout.incomingAvatarViewSize = CGSizeMake(kJSQMessagesCollectionViewAvatarSizeDefault, kJSQMessagesCollectionViewAvatarSizeDefault);;
-    self.collectionView.collectionViewLayout.outgoingAvatarViewSize = CGSizeMake(kJSQMessagesCollectionViewAvatarSizeDefault, kJSQMessagesCollectionViewAvatarSizeDefault);;
+    self.collectionView.collectionViewLayout.incomingAvatarViewSize = CGSizeMake(kJSQMessagesCollectionViewAvatarSizeDefault, kJSQMessagesCollectionViewAvatarSizeDefault);
+    self.collectionView.collectionViewLayout.outgoingAvatarViewSize = CGSizeMake(kJSQMessagesCollectionViewAvatarSizeDefault, kJSQMessagesCollectionViewAvatarSizeDefault);
+    
+    self.inputToolbar.contentView.leftBarButtonItem = self.cameraButton;
+    
 }
 
 #pragma - mark Button Actions

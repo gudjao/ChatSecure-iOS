@@ -1057,7 +1057,7 @@ typedef NS_ENUM(int, OTRDropDownType) {
                         }];
                     }
                     //[self sendMediaItem:imageItem data:imageData tag:message];
-                    [self sendMediaCloudinaryItem:imageItem data:imageData tag:message];
+                    [self sendMediaCloudinaryItem:imageItem data:imageData message:message type:@"image"];
                     
                 } completionQueue:dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0)];
             }];
@@ -1065,7 +1065,7 @@ typedef NS_ENUM(int, OTRDropDownType) {
     }
 }
 
-- (void)sendMediaCloudinaryItem:(OTRMediaItem *)mediaItem data:(NSData *)data tag:(id)tag {
+- (void)sendMediaCloudinaryItem:(OTRMediaItem *)mediaItem data:(id)data message:(OTRMessage *)message type:(NSString *)type {
     
     __weak OTRMessagesViewController *weakSelf = self;
     
@@ -1076,21 +1076,46 @@ typedef NS_ENUM(int, OTRDropDownType) {
     CLTransformation *imageTransformation = [CLTransformation transformation];
     [imageTransformation setCrop:@"fill"];
     
+    NSDictionary *cloudinaryOption;
+    if([type isEqualToString:@"image"]) {
+        cloudinaryOption = @{
+                             @"resource_type" : type,
+                             @"format" : @"png",
+                             @"transformation" : imageTransformation
+                             };
+    } else if([type isEqualToString:@"video"]) {
+        cloudinaryOption = @{
+                             @"resource_type" : type,
+                             @"format" : @"mp4"
+                             };
+    } else {
+        cloudinaryOption = nil;
+    }
+    
     [uploader upload:data
-             options:@{@"resource_type" : @"image",
-                       @"format" : @"png",
-                       @"transformation" : imageTransformation
-                       }
-     
+             options:cloudinaryOption
       withCompletion:^(NSDictionary *successResult, NSString *errorResult, NSInteger code, id context) {
           if(successResult) {
               NSString *publicId = [successResult valueForKey:@"public_id"];
               NSLog(@"Block upload success. Public ID=%@, image URL=%@", publicId, successResult[@"secure_url"]);
+              
+              
+              if([type isEqualToString:@"video"]) {
+                  if([[NSFileManager defaultManager] fileExistsAtPath:data]) {
+                      NSError *err = nil;
+                      [[NSFileManager defaultManager] removeItemAtPath:data error:&err];
+                      if (err) {
+                          DDLogError(@"Error Removing Video/Audio File");
+                      }
+                  }
+              }
+              
               [weakSelf didPressSendButton:self.sendButton
                            withMessageText:successResult[@"secure_url"]
                                   senderId:self.senderId
                          senderDisplayName:self.senderDisplayName
                                       date:[NSDate date]];
+              
           } else {
               NSLog(@"Block upload error: %@, %lu", errorResult, (long)code);
           }
@@ -1099,7 +1124,6 @@ typedef NS_ENUM(int, OTRDropDownType) {
           __block CGFloat progress = (float)totalBytesWritten / (float)totalBytesExpectedToWrite;
           
           [[OTRDatabaseManager sharedInstance].readWriteDatabaseConnection readWriteWithBlock:^(YapDatabaseReadWriteTransaction *transaction) {
-              //OTRMediaItem *mediaItem = [OTRMediaItem fetchObjectWithUniqueID:databaseMessage.mediaItemUniqueId transaction:transaction];
               mediaItem.transferProgress = progress;
               [mediaItem saveWithTransaction:transaction];
               [mediaItem touchParentMessageWithTransaction:transaction];
@@ -1128,14 +1152,13 @@ typedef NS_ENUM(int, OTRDropDownType) {
     NSString *newPath = [OTRMediaFileManager pathForMediaItem:videoItem buddyUniqueId:self.buddy.uniqueId];
     [[OTRMediaFileManager sharedInstance] copyDataFromFilePath:videoURL.path toEncryptedPath:newPath completionQueue:dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0) completion:^(NSError *error) {
         
-        if ([[NSFileManager defaultManager] fileExistsAtPath:videoURL.path]) {
-            NSError *err = nil;
-            [[NSFileManager defaultManager] removeItemAtPath:videoURL.path error:&err];
-            if (err) {
-                DDLogError(@"Error Removing Video File");
-            }
-            
-        }
+        //        if ([[NSFileManager defaultManager] fileExistsAtPath:videoURL.path]) {
+        //            NSError *err = nil;
+        //            [[NSFileManager defaultManager] removeItemAtPath:videoURL.path error:&err];
+        //            if (err) {
+        //                DDLogError(@"Error Removing Video File");
+        //            }
+        //        }
         
         message.error = error;
         [[OTRDatabaseManager sharedInstance].readWriteDatabaseConnection readWriteWithBlock:^(YapDatabaseReadWriteTransaction *transaction) {
@@ -1143,7 +1166,10 @@ typedef NS_ENUM(int, OTRDropDownType) {
             [message saveWithTransaction:transaction];
         }];
         
-        [self sendMediaItem:videoItem data:nil tag:message];
+        //[self sendMediaItem:videoItem data:nil tag:message];
+        if ([[NSFileManager defaultManager] fileExistsAtPath:videoURL.path]) {
+            [self sendMediaCloudinaryItem:videoItem data:videoURL.path message:message type:@"video"];
+        }
         
     }];
 }
@@ -1168,13 +1194,13 @@ typedef NS_ENUM(int, OTRDropDownType) {
     
     [[OTRMediaFileManager sharedInstance] copyDataFromFilePath:url.path toEncryptedPath:newPath completionQueue:dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0) completion:^(NSError *error) {
         
-        if ([[NSFileManager defaultManager] fileExistsAtPath:url.path]) {
-            NSError *err = nil;
-            [[NSFileManager defaultManager] removeItemAtPath:url.path error:&err];
-            if (err) {
-                DDLogError(@"Error Removing Audio File");
-            }
-        }
+        //        if ([[NSFileManager defaultManager] fileExistsAtPath:url.path]) {
+        //            NSError *err = nil;
+        //            [[NSFileManager defaultManager] removeItemAtPath:url.path error:&err];
+        //            if (err) {
+        //                DDLogError(@"Error Removing Audio File");
+        //            }
+        //        }
         
         message.error = error;
         [[OTRDatabaseManager sharedInstance].readWriteDatabaseConnection readWriteWithBlock:^(YapDatabaseReadWriteTransaction *transaction) {
@@ -1182,7 +1208,11 @@ typedef NS_ENUM(int, OTRDropDownType) {
             [audioItem saveWithTransaction:transaction];
         }];
         
-        [self sendMediaItem:audioItem data:nil tag:message];
+        //[self sendMediaItem:audioItem data:nil tag:message];
+        if ([[NSFileManager defaultManager] fileExistsAtPath:url.path]) {
+            [self sendMediaCloudinaryItem:audioItem data:url.path message:message type:@"video"];
+        }
+        
     }];
 }
 
@@ -1353,7 +1383,9 @@ typedef NS_ENUM(int, OTRDropDownType) {
                 progressString = [NSString stringWithFormat:@" %@ %.0f%%",INCOMING_STRING,percentProgress];
                 insertIndex = [attributedString length];
             } else if (!mediaItem.isIncoming) {
-                if(percentProgress > 0) {
+                if(percentProgress >= 100) {
+                    progressString = [NSString stringWithFormat:@"%@ %.0f%% ",SENT_STRING,percentProgress];
+                } else if(percentProgress > 0) {
                     progressString = [NSString stringWithFormat:@"%@ %.0f%% ",SENDING_STRING,percentProgress];
                 } else {
                     progressString = [NSString stringWithFormat:@"%@ ",WAITING_STRING];
@@ -1368,8 +1400,6 @@ typedef NS_ENUM(int, OTRDropDownType) {
             
         }
     }
-    
-    
     
     return attributedString;
 }

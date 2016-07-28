@@ -23,6 +23,7 @@
 #define INITIATE_ENCRYPTED_CHAT_STRING [OTRLanguageManager translatedString: @"Initiate Encrypted Chat"]
 #define INVALID_EMAIL_TITLE_STRING [OTRLanguageManager translatedString: @"Invalid Email"]
 #define SENDING_STRING [OTRLanguageManager translatedString: @"Sending"]
+#define SENT_STRING [OTRLanguageManager translatedString: @"Sent"]
 #define OTRL_MSGEVENT_CONNECTION_ENDED_STRING [OTRLanguageManager translatedString: @"Message has not been sent because our buddy has ended the private conversation. We should either close the connection, or refresh it."]
 #define ACCOUNT_DISCONNECTED_DESCRIPTION_STRING [OTRLanguageManager translatedString: @"Please log into this account before managing requests."]
 #define ADD_STRING [OTRLanguageManager translatedString: @"Add"]
