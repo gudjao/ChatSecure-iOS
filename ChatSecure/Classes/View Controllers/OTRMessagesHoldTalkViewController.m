@@ -53,7 +53,7 @@
     self.keyboardButton.titleLabel.font = [UIFont fontWithName:kFontAwesomeFont size:20];
     self.keyboardButton.titleLabel.textAlignment = NSTextAlignmentCenter;
     [self.keyboardButton setTitle:[NSString fa_stringForFontAwesomeIcon:FAKeyboardO]
-                           forState:UIControlStateNormal];
+                         forState:UIControlStateNormal];
     
     self.knockButton = [JSQMessagesToolbarButtonFactory defaultSendButtonItem];
     NSString *title = KNOCK_STRING;
@@ -61,14 +61,14 @@
     [self.knockButton setTitle:title forState:UIControlStateNormal];
     
     CGRect sendTitleRect = [title boundingRectWithSize:CGSizeMake(CGFLOAT_MAX, maxHeight)
-                                                   options:NSStringDrawingUsesLineFragmentOrigin | NSStringDrawingUsesFontLeading
-                                                attributes:@{ NSFontAttributeName : self.knockButton.titleLabel.font }
-                                                   context:nil];
+                                               options:NSStringDrawingUsesLineFragmentOrigin | NSStringDrawingUsesFontLeading
+                                            attributes:@{ NSFontAttributeName : self.knockButton.titleLabel.font }
+                                               context:nil];
     
     self.knockButton.frame = CGRectMake(0.0f,
-                                  0.0f,
-                                  CGRectGetWidth(CGRectIntegral(sendTitleRect)),
-                                  maxHeight);
+                                        0.0f,
+                                        CGRectGetWidth(CGRectIntegral(sendTitleRect)),
+                                        maxHeight);
     
     [self.view setNeedsUpdateConstraints];
 }
@@ -194,41 +194,57 @@
 
 - (void)didUpdateState
 {
-    if (self.state.canKnock && !self.state.isThreadOnline && !self.state.hasText) {
-        //Show Knock Button
-        self.inputToolbar.contentView.rightBarButtonItem = self.knockButton;
+    self.inputToolbar.contentView.leftBarButtonItem = self.cameraButton;
+    
+    if (!self.state.hasText) {
+        //No text then show microphone
+        if ([self.hold2TalkButton superview]) {
+            self.inputToolbar.contentView.rightBarButtonItem = self.keyboardButton;
+        } else {
+            self.inputToolbar.contentView.rightBarButtonItem = self.microphoneButton;
+        }
         self.inputToolbar.sendButtonLocation = JSQMessagesInputSendButtonLocationNone;
         self.inputToolbar.contentView.rightBarButtonItem.enabled = YES;
-    }
-    else if (self.state.isThreadOnline && self.state.isEncrypted) {
-        //Encrypted Show camera button
-        self.inputToolbar.contentView.leftBarButtonItem = self.cameraButton;
-        
-        if (!self.state.hasText) {
-            //No text then show microphone
-            if ([self.hold2TalkButton superview]) {
-                self.inputToolbar.contentView.rightBarButtonItem = self.keyboardButton;
-            } else {
-                self.inputToolbar.contentView.rightBarButtonItem = self.microphoneButton;
-            }
-            self.inputToolbar.sendButtonLocation = JSQMessagesInputSendButtonLocationNone;
-            self.inputToolbar.contentView.rightBarButtonItem.enabled = YES;
-        } else {
-            //Default Send button
-            [self setupDefaultSendButton];
-            self.inputToolbar.contentView.rightBarButtonItem.enabled = YES;
-        }
-        
-        
     } else {
-        [self removeMediaButtons];
+        //Default Send button
         [self setupDefaultSendButton];
-        if (self.state.hasText) {
-            self.inputToolbar.contentView.rightBarButtonItem.enabled = YES;
-        } else {
-            self.inputToolbar.contentView.rightBarButtonItem.enabled = NO;
-        }
-    }
+        self.inputToolbar.contentView.rightBarButtonItem.enabled = YES;
+    }    
+//    if (self.state.canKnock && !self.state.isThreadOnline && !self.state.hasText) {
+//        //Show Knock Button
+//        self.inputToolbar.contentView.rightBarButtonItem = self.knockButton;
+//        self.inputToolbar.sendButtonLocation = JSQMessagesInputSendButtonLocationNone;
+//        self.inputToolbar.contentView.rightBarButtonItem.enabled = YES;
+//    }
+//    else if (self.state.isThreadOnline && self.state.isEncrypted) {
+//        //Encrypted Show camera button
+//        self.inputToolbar.contentView.leftBarButtonItem = self.cameraButton;
+//        
+//        if (!self.state.hasText) {
+//            //No text then show microphone
+//            if ([self.hold2TalkButton superview]) {
+//                self.inputToolbar.contentView.rightBarButtonItem = self.keyboardButton;
+//            } else {
+//                self.inputToolbar.contentView.rightBarButtonItem = self.microphoneButton;
+//            }
+//            self.inputToolbar.sendButtonLocation = JSQMessagesInputSendButtonLocationNone;
+//            self.inputToolbar.contentView.rightBarButtonItem.enabled = YES;
+//        } else {
+//            //Default Send button
+//            [self setupDefaultSendButton];
+//            self.inputToolbar.contentView.rightBarButtonItem.enabled = YES;
+//        }
+//        
+//        
+//    } else {
+//        [self removeMediaButtons];
+//        [self setupDefaultSendButton];
+//        if (self.state.hasText) {
+//            self.inputToolbar.contentView.rightBarButtonItem.enabled = YES;
+//        } else {
+//            self.inputToolbar.contentView.rightBarButtonItem.enabled = NO;
+//        }
+//    }
 }
 
 - (void)removeMediaButtons {
@@ -304,7 +320,7 @@
         }
     } else {
         [self sendAudioFileURL:currentURL];
-
+        
     }
     
     [self removeTrashViewItems];

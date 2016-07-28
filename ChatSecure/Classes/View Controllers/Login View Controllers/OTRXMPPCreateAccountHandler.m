@@ -69,6 +69,7 @@ NSString* const RegistrationFormValidationErrorDomain = @"RegistrationValidation
             dispatch_async(dispatch_get_main_queue(), ^{
                 completion(nil, validationError);
             });
+            return;
         }
         
         if(![self validatePasswordConfirmation:[formMutable objectForKey:kFormPasswordConfirmTag]
@@ -77,6 +78,7 @@ NSString* const RegistrationFormValidationErrorDomain = @"RegistrationValidation
             dispatch_async(dispatch_get_main_queue(), ^{
                 completion(nil, validationError);
             });
+            return;
         }
         
         
@@ -192,6 +194,17 @@ NSString* const RegistrationFormValidationErrorDomain = @"RegistrationValidation
             *error = [[NSError alloc] initWithDomain:RegistrationFormValidationErrorDomain
                                                 code:6969
                                             userInfo:@{ NSLocalizedDescriptionKey: @"Password do not match." }];
+        }
+        
+        return NO;
+    } else if ([password length] < 8)
+    {
+        if (error != NULL)
+        {
+            NSDictionary* userInfoDict = @{ NSLocalizedDescriptionKey: @"Password must be more than 7 characters." };
+            *error = [[NSError alloc] initWithDomain:RegistrationFormValidationErrorDomain
+                                                code:6969
+                                            userInfo:userInfoDict];
         }
         
         return NO;

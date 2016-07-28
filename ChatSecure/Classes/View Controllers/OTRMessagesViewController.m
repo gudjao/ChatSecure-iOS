@@ -114,7 +114,7 @@ typedef NS_ENUM(int, OTRDropDownType) {
     self.incomingBubbleImage = [bubbleImageFactory incomingMessagesBubbleImageWithColor:[UIColor jsq_messageBubbleLightGrayColor]];
     
     ////// Lock Button //////
-    [self setupLockButton];
+    //[self setupLockButton];
     
     ////// TitleView //////
     self.titleView = [[OTRTitleSubtitleView alloc] initWithFrame:CGRectMake(0, 0, 200, 44)];

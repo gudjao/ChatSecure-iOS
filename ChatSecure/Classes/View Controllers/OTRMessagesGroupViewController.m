@@ -63,6 +63,8 @@
     //self.collectionView.collectionViewLayout.incomingAvatarViewSize = CGSizeZero;
     //self.collectionView.collectionViewLayout.outgoingAvatarViewSize = CGSizeZero;
     
+    [self.navigationItem setRightBarButtonItem:[self rightBarButtonItem]];
+    
     self.collectionView.collectionViewLayout.incomingAvatarViewSize = CGSizeMake(kJSQMessagesCollectionViewAvatarSizeDefault, kJSQMessagesCollectionViewAvatarSizeDefault);
     self.collectionView.collectionViewLayout.outgoingAvatarViewSize = CGSizeMake(kJSQMessagesCollectionViewAvatarSizeDefault, kJSQMessagesCollectionViewAvatarSizeDefault);
     

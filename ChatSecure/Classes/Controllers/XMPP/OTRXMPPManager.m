@@ -169,7 +169,9 @@ NSString *const OTRXMPPLoginErrorKey = @"OTRXMPPLoginErrorKey";
     //Used to fetch correct account from XMPPStream in delegate methods especailly
     self.xmppStream.tag = self.account.uniqueId;
     
-    self.xmppStream.startTLSPolicy = XMPPStreamStartTLSPolicyRequired;
+    //self.xmppStream.startTLSPolicy = XMPPStreamStartTLSPolicyRequired;
+    //self.xmppStream.startTLSPolicy = XMPPStreamStartTLSPolicyAllowed;
+    self.xmppStream.startTLSPolicy = XMPPStreamStartTLSPolicyPreferred;
     
     [self.certificatePinningModule activate:self.xmppStream];
     
@@ -359,7 +361,9 @@ NSString *const OTRXMPPLoginErrorKey = @"OTRXMPPLoginErrorKey";
     if(!_xmppStream)
     {
         _xmppStream = [[XMPPStream alloc] init];
-        _xmppStream.startTLSPolicy = XMPPStreamStartTLSPolicyRequired;
+        //_xmppStream.startTLSPolicy = XMPPStreamStartTLSPolicyRequired;
+        //_xmppStream.startTLSPolicy = XMPPStreamStartTLSPolicyAllowed;
+        _xmppStream.startTLSPolicy = XMPPStreamStartTLSPolicyPreferred;
     }
     return _xmppStream;
 }
