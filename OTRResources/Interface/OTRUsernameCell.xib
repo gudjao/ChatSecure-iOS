@@ -15,28 +15,28 @@
                 <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
-                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Username" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Up3-rC-vaX">
-                        <rect key="frame" x="8" y="12" width="75" height="20"/>
-                        <fontDescription key="fontDescription" style="UICTFontTextStyleBody"/>
-                        <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
-                        <nil key="highlightedColor"/>
-                    </label>
                     <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="kEP-B8-ru7" customClass="ParkedTextField" customModule="ParkedTextField">
-                        <rect key="frame" x="91" y="8" width="221" height="28"/>
+                        <rect key="frame" x="97" y="8" width="215" height="28"/>
                         <fontDescription key="fontDescription" style="UICTFontTextStyleBody"/>
                         <textInputTraits key="textInputTraits" autocorrectionType="no" spellCheckingType="no" returnKeyType="go" enablesReturnKeyAutomatically="YES"/>
                         <userDefinedRuntimeAttributes>
-                            <userDefinedRuntimeAttribute type="string" keyPath="parkedText" value="@dukgo.com"/>
+                            <userDefinedRuntimeAttribute type="string" keyPath="parkedText" value="@upsexpress.com"/>
                             <userDefinedRuntimeAttribute type="string" keyPath="placeholderText" value="username"/>
                         </userDefinedRuntimeAttributes>
                         <connections>
                             <action selector="textFieldValueChanged:" destination="KGk-i7-Jjw" eventType="editingChanged" id="6M4-Q7-pA8"/>
                         </connections>
                     </textField>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" horizontalCompressionResistancePriority="751" verticalCompressionResistancePriority="751" text="Username" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Up3-rC-vaX">
+                        <rect key="frame" x="14" y="12" width="75" height="20"/>
+                        <fontDescription key="fontDescription" style="UICTFontTextStyleBody"/>
+                        <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                        <nil key="highlightedColor"/>
+                    </label>
                 </subviews>
                 <constraints>
                     <constraint firstAttribute="bottomMargin" secondItem="kEP-B8-ru7" secondAttribute="bottom" id="FmS-Xj-tRx"/>
-                    <constraint firstItem="Up3-rC-vaX" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leadingMargin" id="Jd4-td-F01"/>
+                    <constraint firstItem="Up3-rC-vaX" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leadingMargin" constant="6" id="Jd4-td-F01"/>
                     <constraint firstItem="kEP-B8-ru7" firstAttribute="trailing" secondItem="H2p-sc-9uM" secondAttribute="trailingMargin" id="obx-Lu-8dX"/>
                     <constraint firstAttribute="centerY" secondItem="Up3-rC-vaX" secondAttribute="centerY" id="uSD-rR-tjL"/>
                     <constraint firstItem="kEP-B8-ru7" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="topMargin" id="w8J-rI-Til"/>

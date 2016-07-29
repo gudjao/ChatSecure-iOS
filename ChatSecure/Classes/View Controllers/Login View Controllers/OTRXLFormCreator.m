@@ -88,10 +88,11 @@ NSString *const kOTRXLFormUseTorTag               = @"kOTRXLFormUseTorTag";
         XLFormSectionDescriptor *basicSection = [XLFormSectionDescriptor formSectionWithTitle:@"Account Setup"];
         [descriptor addFormSection:basicSection];
         
-        XLFormRowDescriptor *usernameRow = [XLFormRowDescriptor formRowDescriptorWithTag:kOTRXLFormUsernameTextFieldTag rowType:XLFormRowDescriptorTypeAccount title:USERNAME_STRING];
+        //XLFormRowDescriptor *usernameRow = [XLFormRowDescriptor formRowDescriptorWithTag:kOTRXLFormUsernameTextFieldTag rowType:XLFormRowDescriptorTypeAccount title:USERNAME_STRING];
+        XLFormRowDescriptor *usernameRow = [XLFormRowDescriptor formRowDescriptorWithTag:kOTRXLFormUsernameTextFieldTag rowType:[OTRUsernameCell kOTRFormRowDescriptorTypeUsername] title:USERNAME_STRING];
         usernameRow.value = nil;
         usernameRow.required = YES;
-        //[usernameRow addValidator:[[OTRUsernameValidator alloc] init]];
+        [usernameRow addValidator:[[OTRUsernameValidator alloc] init]];
         
         XLFormRowDescriptor *firstNameRow = [XLFormRowDescriptor formRowDescriptorWithTag:kOTRXLFormNicknameTextFieldTag rowType:XLFormRowDescriptorTypeName title:FIRSTNAME_STRING];
         firstNameRow.value = nil;
@@ -178,7 +179,7 @@ NSString *const kOTRXLFormUseTorTag               = @"kOTRXLFormUseTorTag";
         switch (accountType) {
             case OTRAccountTypeJabber:
             case OTRAccountTypeXMPPTor:{
-                [basicSection addFormRow:[self jidTextFieldRowDescriptorWithValue:nil]];
+                [basicSection addFormRow:[self usernameTextFieldRowDescriptorWithValue:nil]];
                 [basicSection addFormRow:[self passwordTextFieldRowDescriptorWithValue:nil]];
                 [basicSection addFormRow:[self rememberPasswordRowDescriptorWithValue:YES]];
                 [basicSection addFormRow:[self loginAutomaticallyRowDescriptorWithValue:YES]];

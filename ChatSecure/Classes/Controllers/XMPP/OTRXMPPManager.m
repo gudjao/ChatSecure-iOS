@@ -170,8 +170,8 @@ NSString *const OTRXMPPLoginErrorKey = @"OTRXMPPLoginErrorKey";
     self.xmppStream.tag = self.account.uniqueId;
     
     //self.xmppStream.startTLSPolicy = XMPPStreamStartTLSPolicyRequired;
-    //self.xmppStream.startTLSPolicy = XMPPStreamStartTLSPolicyAllowed;
-    self.xmppStream.startTLSPolicy = XMPPStreamStartTLSPolicyPreferred;
+    self.xmppStream.startTLSPolicy = XMPPStreamStartTLSPolicyAllowed;
+    //self.xmppStream.startTLSPolicy = XMPPStreamStartTLSPolicyPreferred;
     
     [self.certificatePinningModule activate:self.xmppStream];
     
@@ -362,8 +362,8 @@ NSString *const OTRXMPPLoginErrorKey = @"OTRXMPPLoginErrorKey";
     {
         _xmppStream = [[XMPPStream alloc] init];
         //_xmppStream.startTLSPolicy = XMPPStreamStartTLSPolicyRequired;
-        //_xmppStream.startTLSPolicy = XMPPStreamStartTLSPolicyAllowed;
-        _xmppStream.startTLSPolicy = XMPPStreamStartTLSPolicyPreferred;
+        _xmppStream.startTLSPolicy = XMPPStreamStartTLSPolicyAllowed;
+        //_xmppStream.startTLSPolicy = XMPPStreamStartTLSPolicyPreferred;
     }
     return _xmppStream;
 }

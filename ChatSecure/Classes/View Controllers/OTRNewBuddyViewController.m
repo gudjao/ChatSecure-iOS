@@ -98,7 +98,7 @@
     }
     
     [self.accountNameTextField becomeFirstResponder];
-	// Do any additional setup after loading the view.
+    // Do any additional setup after loading the view.
 }
 
 -(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
@@ -196,7 +196,14 @@
 -(IBAction)doneButtonPressed:(id)sender
 {
     if ([self checkFields]) {
-        NSString * newBuddyAccountName = [NSString stringWithFormat:@"%@@%@", [[self.accountNameTextField.text stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceCharacterSet]] lowercaseString], [OTRXMPPAccount defaultLoginDomain]];
+        NSString *accountName = [[self.accountNameTextField.text stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceCharacterSet]] lowercaseString];
+        NSString *loginDomain = [NSString stringWithFormat:@"@%@", [OTRXMPPAccount defaultLoginDomain]];
+        NSString *newBuddyAccountName;
+        if([accountName hasSuffix:loginDomain]) {
+            newBuddyAccountName = accountName;
+        } else {
+            newBuddyAccountName = [NSString stringWithFormat:@"%@%@", accountName, loginDomain];
+        }
         NSString * newBuddyDisplayName = [self.displayNameTextField.text stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceCharacterSet]];
         __block OTRXMPPBuddy *buddy = nil;
         [[OTRDatabaseManager sharedInstance].readWriteDatabaseConnection readWriteWithBlock:^(YapDatabaseReadWriteTransaction *transaction) {
@@ -215,7 +222,7 @@
         
         id<OTRProtocol> protocol = [[OTRProtocolManager sharedInstance] protocolForAccount:self.account];
         [protocol addBuddy:buddy];
-
+        
         if (self.delegate != nil && [self.delegate respondsToSelector:@selector(controller:didAddBuddy:)]) {
             [self.delegate controller:self didAddBuddy:buddy];
         }

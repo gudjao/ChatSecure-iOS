@@ -30,7 +30,7 @@
 
 static CGFloat OTRBuddyInfoCellHeight = 80.0;
 
-@interface OTRComposeViewController () <UITableViewDataSource, UITableViewDelegate, OTRYapViewHandlerDelegateProtocol, UISearchResultsUpdating, UISearchControllerDelegate, UISearchBarDelegate>
+@interface OTRComposeViewController () <UITableViewDataSource, UITableViewDelegate, OTRYapViewHandlerDelegateProtocol, UISearchResultsUpdating, UISearchControllerDelegate, UISearchBarDelegate, OTRNewBuddyViewControllerDelegate>
 
 @property (nonatomic, strong) UITableView *tableView;
 @property (nonatomic, strong) NSLayoutConstraint *  tableViewBottomConstraint;
@@ -407,8 +407,6 @@ static CGFloat OTRBuddyInfoCellHeight = 80.0;
         }
         return cell;
     }
-    
-    
 }
 
 #pragma - mark UITableViewDelegate Methods
@@ -487,8 +485,17 @@ static CGFloat OTRBuddyInfoCellHeight = 80.0;
     else {
         OTRAccount *account = [accountsAbleToAddBuddies firstObject];
         viewController = [[OTRNewBuddyViewController alloc] initWithAccountId:account.uniqueId];
+        [(OTRNewBuddyViewController *)viewController setDelegate:self];
     }
     [self.navigationController pushViewController:viewController animated:YES];
+}
+
+- (void)controller:(OTRNewBuddyViewController *)viewController didAddBuddy:(OTRBuddy *)buddy {
+    NSLog(@"Did add buddy: %@", buddy);
+}
+
+- (bool)shouldDismissViewController:(OTRNewBuddyViewController *)viewController {
+    return YES;
 }
 
 #pragma - mark UIScrollViewDelegate
@@ -518,6 +525,14 @@ static CGFloat OTRBuddyInfoCellHeight = 80.0;
         // Nothing has changed that affects our tableView
         return;
     }
+    
+    /*
+     __block OTRAccount *account = [[OTRAccountsManager allAccountsAbleToAddBuddies] firstObject];
+    [handler.databaseConnection readWithBlock:^(YapDatabaseReadTransaction * _Nonnull transaction) {
+        NSArray *buddies = [account allBuddiesWithTransaction:transaction];
+        NSLog(@"ALL BUDDIES: %@", buddies);
+    }];
+     */
     
     UITableView *tableView = self.tableView;
     BOOL isSearchViewHandler = NO;
