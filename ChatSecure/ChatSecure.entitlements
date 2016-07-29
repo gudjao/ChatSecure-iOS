@@ -6,5 +6,7 @@
 	<array>
 		<string>applinks:chatsecure.org</string>
 	</array>
+	<key>com.apple.developer.icloud-container-identifiers</key>
+	<array/>
 </dict>
 </plist>
