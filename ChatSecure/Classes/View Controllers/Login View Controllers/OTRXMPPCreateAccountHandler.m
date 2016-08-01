@@ -20,6 +20,8 @@
 #import "OTRTorManager.h"
 #import "OTRAPIClient.h"
 
+#import "OTRBaseLoginViewController.h"
+
 NSString* const RegistrationFormValidationErrorDomain = @"RegistrationValidationErrorDomain";
 
 @implementation OTRXMPPCreateAccountHandler
@@ -60,7 +62,25 @@ NSString* const RegistrationFormValidationErrorDomain = @"RegistrationValidation
         [formMutable setObject:[formMutable objectForKey:kOTRXLFormNicknameTextFieldTag] forKey:kFormFirstNameTag];
         [formMutable removeObjectForKey:kOTRXLFormNicknameTextFieldTag];
         
+        NSString *userName = [formMutable objectForKey:kFormUsernameTag];
+        NSString *loginDomain = [NSString stringWithFormat:@"@%@", [OTRXMPPAccount defaultLoginDomain]];
+        NSString *newUsername = @"";
+        if([userName hasSuffix:loginDomain]) {
+            NSArray *components = [userName componentsSeparatedByString:@"@"];
+            if(components.count > 1) {
+                for (int x = 0; x < components.count - 1; x++) {
+                    newUsername = [newUsername stringByAppendingString:[components objectAtIndex:x]];
+                }
+                [formMutable setObject:newUsername forKey:kFormUsernameTag];
+            } else if(components.count > 0) {
+                userName = [components firstObject];
+                [formMutable setObject:newUsername forKey:kFormUsernameTag];
+                
+            }
+        }
+        
         NSLog(@"FORM: %@", formMutable);
+        
         
         NSError *validationError;
         
@@ -90,10 +110,15 @@ NSString* const RegistrationFormValidationErrorDomain = @"RegistrationValidation
              NSLog(@"POST - REGISTRATION SUCCESS: %@", [self getJSONObject:responseObject]);
              self.completion = completion;
              OTRAccount *accountTest = (OTRXMPPAccount *)[super moveValues:form intoAccount:(OTRXMPPAccount*)account];
-             XLFormRowDescriptor *passwordRow = [form formRowWithTag:kOTRXLFormPasswordTextFieldTag];
-             NSString *passwordFromForm = [passwordRow value];
-             [self prepareForXMPPConnectionFrom:form account:(OTRXMPPAccount *)accountTest];
-             [self.xmppManager connectWithJID:accountTest.username password:passwordFromForm];
+             
+             dispatch_async(dispatch_get_main_queue(), ^{
+                 completion(accountTest,nil);
+             });
+             // Autologin
+             //XLFormRowDescriptor *passwordRow = [form formRowWithTag:kOTRXLFormPasswordTextFieldTag];
+             //NSString *passwordFromForm = [passwordRow value];
+             //[self prepareForXMPPConnectionFrom:form account:(OTRXMPPAccount *)accountTest];
+             //[self.xmppManager connectWithJID:accountTest.username password:passwordFromForm];
          } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
              NSLog(@"POST - REGISTRATION FAILED: %@", error.localizedDescription);
              dispatch_async(dispatch_get_main_queue(), ^{
@@ -102,6 +127,7 @@ NSString* const RegistrationFormValidationErrorDomain = @"RegistrationValidation
          }];
     }
     
+    // TOR
     //            if (account.accountType == OTRAccountTypeXMPPTor) {
     //                //check tor is running
     //                if ([OTRTorManager sharedInstance].torManager.status == CPAStatusOpen) {

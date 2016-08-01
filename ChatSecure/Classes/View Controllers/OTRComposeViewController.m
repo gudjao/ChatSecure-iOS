@@ -26,6 +26,8 @@
 #import "OTRLanguageManager.h"
 #import <ChatSecureCore/ChatSecureCore-Swift.h>
 
+#import "OTRBuddyViewController.h"
+
 @import OTRAssets;
 
 static CGFloat OTRBuddyInfoCellHeight = 80.0;
@@ -249,8 +251,6 @@ static CGFloat OTRBuddyInfoCellHeight = 80.0;
         self.navigationItem.rightBarButtonItem = self.doneBarButtonItem;
         self.navigationItem.rightBarButtonItem.enabled = NO;
     }
-    
-    
 }
 
 - (BOOL)canAddBuddies
@@ -265,7 +265,6 @@ static CGFloat OTRBuddyInfoCellHeight = 80.0;
 {
     NSIndexPath *viewIndexPath = [NSIndexPath indexPathForItem:indexPath.row inSection:0];
     OTRYapViewHandler *viewHandler = [self viewHandlerForTableView:tableView];
-    NSLog(@"DEBUG: %@", [viewHandler object:viewIndexPath]);
     return [viewHandler object:viewIndexPath];
 }
 
@@ -445,6 +444,18 @@ static CGFloat OTRBuddyInfoCellHeight = 80.0;
         if (self.selectionModeIsSingle == YES) {
             NSSet <NSString *>*buddySet = [NSSet setWithObject:buddy.uniqueId];
             [self completeSelectingBuddies:buddySet groupName:nil];
+            
+            /*
+            __block OTRAccount *account = nil;
+            OTRBuddy *buddy = [self buddyAtIndexPath:indexPath withTableView:tableView];
+            [[OTRDatabaseManager sharedInstance].readOnlyDatabaseConnection readWithBlock:^(YapDatabaseReadTransaction * _Nonnull transaction) {
+                account = [OTRAccount fetchObjectWithUniqueID:buddy.accountUniqueId transaction:transaction];
+                for(OTRBuddy *buddy in [account allBuddiesWithTransaction:transaction]) {
+                    NSLog(@"[Buddy]: %@", buddy.username);
+                }
+            }];
+             */
+            
         } else {
             [self selectedBuddy:buddy.uniqueId];
             [tableView reloadRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationAutomatic];
@@ -462,6 +473,7 @@ static CGFloat OTRBuddyInfoCellHeight = 80.0;
 
 - (void)removeBuddy:(OTRBuddy *)buddy {
     __block NSString *key = buddy.uniqueId;
+    
     [self.readWriteConnection asyncReadWriteWithBlock:^(YapDatabaseReadWriteTransaction * _Nonnull transaction) {
         OTRBuddy *dbBuddy = [OTRBuddy fetchObjectWithUniqueID:key transaction:transaction];
         if (dbBuddy) {

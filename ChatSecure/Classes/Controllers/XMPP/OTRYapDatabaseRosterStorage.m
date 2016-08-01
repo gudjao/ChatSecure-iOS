@@ -90,9 +90,9 @@
 -(BOOL)isPendingApprovalElement:(NSXMLElement *)item
 {
     NSString *subscription = [item attributeStringValueForName:@"subscription"];
-	NSString *ask = [item attributeStringValueForName:@"ask"];
-	
-	if ([subscription isEqualToString:@"none"] || [subscription isEqualToString:@"from"])
+    NSString *ask = [item attributeStringValueForName:@"ask"];
+    
+    if ([subscription isEqualToString:@"none"] || [subscription isEqualToString:@"from"])
     {
         if([ask isEqualToString:@"subscribe"])
         {
@@ -227,9 +227,13 @@
         
         [buddy setStatus:newStatus forResource:resource];
         
-        [buddy saveWithTransaction:transaction];
+        //NSLog(@"Presence - Status: %@ Show: %@ Type: %@ intShow: %d", [presence status], [presence show], [presence type], [presence intShow]);
+        
+        OTRBuddy *dbBuddy = [OTRBuddy fetchObjectWithUniqueID:buddy.uniqueId transaction:transaction];
+        if(dbBuddy) {
+            [buddy saveWithTransaction:transaction];
+        }
     }];
-    
 }
 
 - (BOOL)userExistsWithJID:(XMPPJID *)jid xmppStream:(XMPPStream *)stream
@@ -245,12 +249,12 @@
 - (void)clearAllResourcesForXMPPStream:(XMPPStream *)stream
 {
     DDLogVerbose(@"%@ - %@",THIS_FILE,THIS_METHOD);
-
+    
 }
 - (void)clearAllUsersAndResourcesForXMPPStream:(XMPPStream *)stream
 {
     DDLogVerbose(@"%@ - %@",THIS_FILE,THIS_METHOD);
-
+    
 }
 
 - (NSArray *)jidsForXMPPStream:(XMPPStream *)stream

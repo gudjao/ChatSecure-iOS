@@ -261,29 +261,29 @@
     tempFrame.origin = CGPointMake(xPos, 5.0);
     nameLabel.frame = tempFrame;
     
-    TTTAttributedLabel * statusMessageLabel = [[TTTAttributedLabel alloc] initWithFrame:CGRectZero];
-    NSMutableDictionary *mutableLinkAttributes = [NSMutableDictionary dictionary];
-    [mutableLinkAttributes setObject:(id)[statusMessageLabel.textColor CGColor] forKey:(NSString*)kCTForegroundColorAttributeName];
-    [mutableLinkAttributes setObject:[NSNumber numberWithBool:YES] forKey:(NSString *)kCTUnderlineStyleAttributeName];
-    statusMessageLabel.linkAttributes = mutableLinkAttributes;
-    statusMessageLabel.delegate = self;
-    statusMessageLabel.enabledTextCheckingTypes = UIDataDetectorTypeLink;
-    statusMessageLabel.numberOfLines = 0;
-    statusMessageLabel.lineBreakMode = NSLineBreakByTruncatingTail;
-    statusMessageLabel.adjustsFontSizeToFitWidth = YES;
-    statusMessageLabel.backgroundColor = [UIColor clearColor];
-    statusMessageLabel.shadowOffset = CGSizeMake(1, 1);
-    statusMessageLabel.textColor = [UIColor blackColor];
-    statusMessageLabel.autoresizingMask = UIViewAutoresizingFlexibleWidth;
-    [cell.contentView addSubview:statusMessageLabel];
-    statusMessageLabel.text = self.buddy.statusMessage;
-    
-    tempFrame = statusMessageLabel.frame;
-    tempFrame.size.width = cell.contentView.frame.size.width -xPos - 5.0;
-    double yPos = nameLabel.frame.origin.y+nameLabel.frame.size.height+5.0;
-    tempFrame.size.height = (buddyImageView.frame.origin.y+buddyImageView.frame.size.height)-yPos;
-    tempFrame.origin = CGPointMake(xPos, yPos);
-    statusMessageLabel.frame = tempFrame;
+//    TTTAttributedLabel * statusMessageLabel = [[TTTAttributedLabel alloc] initWithFrame:CGRectZero];
+//    NSMutableDictionary *mutableLinkAttributes = [NSMutableDictionary dictionary];
+//    [mutableLinkAttributes setObject:(id)[statusMessageLabel.textColor CGColor] forKey:(NSString*)kCTForegroundColorAttributeName];
+//    [mutableLinkAttributes setObject:[NSNumber numberWithBool:YES] forKey:(NSString *)kCTUnderlineStyleAttributeName];
+//    statusMessageLabel.linkAttributes = mutableLinkAttributes;
+//    statusMessageLabel.delegate = self;
+//    statusMessageLabel.enabledTextCheckingTypes = UIDataDetectorTypeLink;
+//    statusMessageLabel.numberOfLines = 0;
+//    statusMessageLabel.lineBreakMode = NSLineBreakByTruncatingTail;
+//    statusMessageLabel.adjustsFontSizeToFitWidth = YES;
+//    statusMessageLabel.backgroundColor = [UIColor clearColor];
+//    statusMessageLabel.shadowOffset = CGSizeMake(1, 1);
+//    statusMessageLabel.textColor = [UIColor blackColor];
+//    statusMessageLabel.autoresizingMask = UIViewAutoresizingFlexibleWidth;
+//    [cell.contentView addSubview:statusMessageLabel];
+//    statusMessageLabel.text = self.buddy.statusMessage;
+//    
+//    tempFrame = statusMessageLabel.frame;
+//    tempFrame.size.width = cell.contentView.frame.size.width -xPos - 5.0;
+//    double yPos = nameLabel.frame.origin.y+nameLabel.frame.size.height+5.0;
+//    tempFrame.size.height = (buddyImageView.frame.origin.y+buddyImageView.frame.size.height)-yPos;
+//    tempFrame.origin = CGPointMake(xPos, yPos);
+//    statusMessageLabel.frame = tempFrame;
 }
 
 -(void)doneButtonPressed:(id)sender

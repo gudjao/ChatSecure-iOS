@@ -36,7 +36,7 @@ import YapDatabase.YapDatabaseActionManager
         switch action {
         case .Delete:
             let action = YapActionItem(identifier:"delete", date: nil, retryTimeout: 30, requiresInternet: true, block: { (collection, key, object, metadata) -> Void in
-                
+                print("DELETE BUDDY", buddy)
                 let connection = OTRDatabaseManager.sharedInstance().readWriteDatabaseConnection
                 
                 var account:OTRAccount? = nil

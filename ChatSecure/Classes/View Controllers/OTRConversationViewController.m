@@ -371,9 +371,6 @@ static CGFloat kOTRConversationCellHeight = 80.0;
                         [buddy removeWithTransaction:transaction];
                     }
                 }
-                for(OTRBuddy *buddy in [account allBuddiesWithTransaction:transaction]) {
-                    NSLog(@"[Buddy]: %@", buddy.username);
-                }
             }];
         }
     }

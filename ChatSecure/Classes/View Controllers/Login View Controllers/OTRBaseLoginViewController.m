@@ -107,27 +107,41 @@ static NSUInteger kOTRMaxLoginAttempts = 5;
             strongSelf.navigationItem.backBarButtonItem.enabled = YES;
             strongSelf.navigationItem.leftBarButtonItem.enabled = YES;
             [MBProgressHUD hideAllHUDsForView:self.view animated:YES];
-            if (error) {
-                [strongSelf handleError:error];
-            } else {
-                strongSelf.account = account;
-                [[OTRDatabaseManager sharedInstance].readWriteDatabaseConnection readWriteWithBlock:^(YapDatabaseReadWriteTransaction *transaction) {
-                    [account saveWithTransaction:transaction];
-                }];
+            
+            if([self.createLoginHandler isKindOfClass:[OTRXMPPCreateAccountHandler class]] && !(error)) {
                 
-                // If push isn't enabled, prompt to enable it
-                if ([PushController getPushPreference] == PushPreferenceEnabled) {
-                    [strongSelf pushInviteViewController];
+                OTRBaseLoginViewController *loginVc = [[OTRBaseLoginViewController alloc] init];
+                loginVc.form = [OTRXLFormCreator formForAccount:account];
+                loginVc.account = account;
+                loginVc.createLoginHandler = [OTRLoginHandler loginHandlerForAccount:account];
+                [strongSelf.navigationController pushViewController:loginVc
+                                                           animated:YES];
+                
+            } else {
+                
+                if (error) {
+                    [strongSelf handleError:error];
                 } else {
-                    UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Onboarding" bundle:[OTRAssets resourcesBundle]];
-                    EnablePushViewController *pushVC = [storyboard instantiateViewControllerWithIdentifier:@"enablePush"];
-                    if (pushVC) {
-                        pushVC.account = account;
-                        [strongSelf.navigationController pushViewController:pushVC animated:YES];
-                    } else {
+                    strongSelf.account = account;
+                    [[OTRDatabaseManager sharedInstance].readWriteDatabaseConnection readWriteWithBlock:^(YapDatabaseReadWriteTransaction *transaction) {
+                        [account saveWithTransaction:transaction];
+                    }];
+                    
+                    // If push isn't enabled, prompt to enable it
+                    if ([PushController getPushPreference] == PushPreferenceEnabled) {
                         [strongSelf pushInviteViewController];
+                    } else {
+                        UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Onboarding" bundle:[OTRAssets resourcesBundle]];
+                        EnablePushViewController *pushVC = [storyboard instantiateViewControllerWithIdentifier:@"enablePush"];
+                        if (pushVC) {
+                            pushVC.account = account;
+                            [strongSelf.navigationController pushViewController:pushVC animated:YES];
+                        } else {
+                            [strongSelf pushInviteViewController];
+                        }
                     }
                 }
+                
             }
         }];
     }
