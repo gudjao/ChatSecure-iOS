@@ -95,8 +95,8 @@ static NSString *loginDomain = @"upsexpress.com";
 + (NSString * )newResource
 {
     int r = arc4random() % 99999;
-    //return [NSString stringWithFormat:@"%@%d",[OTRBranding xmppResource],r];
-    return @"bentanayan";
+    return [NSString stringWithFormat:@"%@%d",[OTRBranding xmppResource],r];
+    //return @"bentanayan";
 }
 
 - (void)setVCardTemp:(XMPPvCardTemp *)vCardTemp

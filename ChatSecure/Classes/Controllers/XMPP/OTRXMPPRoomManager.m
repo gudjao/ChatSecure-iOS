@@ -74,6 +74,7 @@
     XMPPRoom *room = [self.rooms objectForKey:jid.bare];
     NSString* accountId = self.xmppStream.tag;
     NSString *databaseRoomKey = [OTRXMPPRoom createUniqueId:self.xmppStream.tag jid:jid.bare];
+    
     if (!room) {
         
         //Update view mappings with this room
@@ -129,6 +130,7 @@
             room.subject = subject;
         }
         
+        NSLog(@"Did create room: %@", room);
         [room saveWithTransaction:transaction];
     }];
     
@@ -306,7 +308,6 @@
         //Set Rome Subject
         NSString *subject = [self.tempRoomSubject objectForKey:sender.roomJID.bare];
         if (subject) {
-            NSLog(@"SUBJECT: %@", subject);
             [self.tempRoomSubject removeObjectForKey:sender.roomJID.bare];
             [sender changeRoomSubject:subject];
         }

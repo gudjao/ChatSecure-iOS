@@ -66,7 +66,6 @@ public class OTRSplitViewCoordinator: NSObject, OTRConversationViewControllerDel
             }
         }
         
-        
         guard let mVC = messagesViewController, navController = appDelegate?.messagesNavigationController else {
             return
         }

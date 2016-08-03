@@ -1,3 +1,4 @@
+
 //
 //  OTRConversationViewController.m
 //  Off the Record
@@ -21,7 +22,7 @@
 #import "UIViewController+ChatSecure.h"
 #import "OTRLog.h"
 @import YapDatabase.YapDatabaseView;
-
+#import "OTRAccountsManager.h"
 #import "OTRDatabaseManager.h"
 #import "OTRDatabaseView.h"
 #import <KVOController/NSObject+FBKVOController.h>
@@ -56,8 +57,8 @@ static CGFloat kOTRConversationCellHeight = 80.0;
 
 - (void)viewDidLoad
 {
-    [super viewDidLoad];    
-   
+    [super viewDidLoad];
+    
     ///////////// Setup Navigation Bar //////////////
     
     self.title = CHATS_STRING;
@@ -175,7 +176,7 @@ static CGFloat kOTRConversationCellHeight = 80.0;
         }
     }];
     UIStoryboard *onboardingStoryboard = [UIStoryboard storyboardWithName:@"Onboarding" bundle:[OTRAssets resourcesBundle]];
-
+    
     //If there is any number of accounts launch into default conversation view otherwise onboarding time
     if (!hasAccounts) {
         UINavigationController *welcomeNavController = [onboardingStoryboard instantiateInitialViewController];
@@ -277,7 +278,32 @@ static CGFloat kOTRConversationCellHeight = 80.0;
         buddy.displayName = request.displayName;
         buddy.username = request.jid;
         thread = buddy;
-    } else {
+    }
+    /*
+    else if([object isKindOfClass:[OTRXMPPRoom class]]) {
+        OTRXMPPRoom *room = ((OTRXMPPRoom *)object);
+        NSLog(@"ROOM THREAD: %@", room);
+        // remove unjoined room
+        NSArray *accounts = [OTRAccountsManager allAccountsAbleToAddBuddies];
+        __block OTRAccount *account = [accounts firstObject];
+        
+        [[OTRDatabaseManager sharedInstance].readWriteDatabaseConnection asyncReadWriteWithBlock:^(YapDatabaseReadWriteTransaction *transaction) {
+            if(![account.uniqueId isEqualToString:room.accountUniqueId]) {
+                
+                OTRXMPPManager *xmppManager = (OTRXMPPManager *)[[OTRProtocolManager sharedInstance] protocolForAccount:account];
+                XMPPJID *jid = [XMPPJID jidWithString:room.jid];
+                [xmppManager.roomManager leaveRoom:jid];
+                
+                [room removeWithTransaction:transaction];
+            }
+        }];
+        NSLog(@"ACCOUNT: %@", account);
+        if([account.uniqueId isEqualToString:room.accountUniqueId]) {
+            thread = object;
+        }
+    }
+     */
+     else {
         thread = object;
     }
     
@@ -335,20 +361,20 @@ static CGFloat kOTRConversationCellHeight = 80.0;
         if ([thread isKindOfClass:[OTRXMPPRoom class]]) {
             
             /*
-            __block NSString *key = buddy.uniqueId;
-            
-            [self.readWriteConnection asyncReadWriteWithBlock:^(YapDatabaseReadWriteTransaction * _Nonnull transaction) {
-                OTRBuddy *dbBuddy = [OTRBuddy fetchObjectWithUniqueID:key transaction:transaction];
-                if (dbBuddy) {
-                    BuddyAction *action = [[BuddyAction alloc] init];
-                    action.buddy = dbBuddy;
-                    action.action = BuddyActionTypeDelete;
-                    [action saveWithTransaction:transaction];
-                    [dbBuddy removeWithTransaction:transaction];
-                }
-            }];
+             __block NSString *key = buddy.uniqueId;
+             
+             [self.readWriteConnection asyncReadWriteWithBlock:^(YapDatabaseReadWriteTransaction * _Nonnull transaction) {
+             OTRBuddy *dbBuddy = [OTRBuddy fetchObjectWithUniqueID:key transaction:transaction];
+             if (dbBuddy) {
+             BuddyAction *action = [[BuddyAction alloc] init];
+             action.buddy = dbBuddy;
+             action.action = BuddyActionTypeDelete;
+             [action saveWithTransaction:transaction];
+             [dbBuddy removeWithTransaction:transaction];
+             }
+             }];
              */
-
+            
             //Leave room
             NSString *accountKey = [thread threadAccountIdentifier];
             __block OTRAccount *account = nil;
@@ -465,10 +491,10 @@ static CGFloat kOTRConversationCellHeight = 80.0;
     // Bail out if it's a subscription request or pending approval
     if ([thread isKindOfClass:[OTRXMPPBuddy class]] &&
         (((OTRXMPPBuddy*)thread).hasIncomingSubscriptionRequest ||
-        ((OTRXMPPBuddy*)thread).isPendingApproval)) {
-        return;
-    }
-
+         ((OTRXMPPBuddy*)thread).isPendingApproval)) {
+            return;
+        }
+    
     if ([self.delegate respondsToSelector:@selector(conversationViewController:didSelectThread:)]) {
         [self.delegate conversationViewController:self didSelectThread:thread];
     }
@@ -501,7 +527,7 @@ static CGFloat kOTRConversationCellHeight = 80.0;
     
     YapDatabaseViewConnection *unreadExt = [self.databaseConnection ext:OTRUnreadMessagesViewExtensionName];
     if (unreadExt) {
-       if (!self.unreadMessagesMappings) {
+        if (!self.unreadMessagesMappings) {
             [self setupUnreadMappings:YES];
             [self updateTitle];
         } else {

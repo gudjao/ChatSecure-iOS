@@ -215,6 +215,12 @@ typedef NS_ENUM(int, OTRDropDownType) {
     [self.collectionView reloadData];
 }
 
+- (void)viewDidAppear:(BOOL)animated {
+    [super viewDidAppear:animated];
+    
+    NSLog(@"NAVIGATION: %@", self.navigationController.viewControllers);
+}
+
 - (void)viewWillDisappear:(BOOL)animated
 {
     [super viewWillDisappear:animated];
