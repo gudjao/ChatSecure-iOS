@@ -56,7 +56,7 @@ PODS:
   - IOCipher/GCDWebServer (0.1.0):
     - GCDWebServer/CocoaLumberjack
     - IOCipher/common
-  - JSQMessagesViewController (7.3.3.1):
+  - JSQMessagesViewController (7.3.4.1):
     - JSQSystemSoundPlayer (~> 2.0.1)
   - JSQSystemSoundPlayer (2.0.1)
   - JTSImageViewController (1.5.1)
@@ -392,7 +392,7 @@ CHECKOUT OPTIONS:
     :commit: b392b5c15151b65823223713985463e6627cf3ad
     :git: https://github.com/robbiehanson/CocoaAsyncSocket.git
   JSQMessagesViewController:
-    :commit: d0c8a87f3299dcae4ed61b3859df5cff054a2273
+    :commit: d2ff3b17fccb0946aa8d3abafd56d06af3ea061b
     :git: https://github.com/gudjao/JSQMessagesViewController.git
 
 SPEC CHECKSUMS:
@@ -413,7 +413,7 @@ SPEC CHECKSUMS:
   gtm-oauth2: b31c9d7c82f773f7b7094cbb7da8dc7b5968ce16
   HockeySDK-Source: c6c66ea12e59f0d756fe9989cbc45eda017fc41c
   IOCipher: 4cb4cd9a5998f69f4578a51501987dc5951ff092
-  JSQMessagesViewController: 0dcae1e5cc7d7c7059d13319e5a8a50c295232d8
+  JSQMessagesViewController: 61999f68b1c068918101a5d8412e9ed1f0137494
   JSQSystemSoundPlayer: c5850e77a4363ffd374cd851154b9af93264ed8d
   JTSImageViewController: 1f8ce1cc93dab0d0af8e53badeea7528560cfec9
   JVFloatLabeledTextField: 0e5524b097f102036214dd8279edc8ecf08b5e18

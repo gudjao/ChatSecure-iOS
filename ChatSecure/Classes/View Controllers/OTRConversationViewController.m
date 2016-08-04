@@ -279,31 +279,28 @@ static CGFloat kOTRConversationCellHeight = 80.0;
         buddy.username = request.jid;
         thread = buddy;
     }
-    /*
     else if([object isKindOfClass:[OTRXMPPRoom class]]) {
         OTRXMPPRoom *room = ((OTRXMPPRoom *)object);
-        NSLog(@"ROOM THREAD: %@", room);
-        // remove unjoined room
-        NSArray *accounts = [OTRAccountsManager allAccountsAbleToAddBuddies];
-        __block OTRAccount *account = [accounts firstObject];
         
-        [[OTRDatabaseManager sharedInstance].readWriteDatabaseConnection asyncReadWriteWithBlock:^(YapDatabaseReadWriteTransaction *transaction) {
+        // remove unjoined room
+        __block OTRAccount *account = nil;
+        [[OTRDatabaseManager sharedInstance].readWriteDatabaseConnection readWriteWithBlock:^(YapDatabaseReadWriteTransaction * _Nonnull transaction) {
+            account = [OTRAccount fetchObjectWithUniqueID:room.accountUniqueId transaction:transaction];
             if(![account.uniqueId isEqualToString:room.accountUniqueId]) {
-                
-                OTRXMPPManager *xmppManager = (OTRXMPPManager *)[[OTRProtocolManager sharedInstance] protocolForAccount:account];
-                XMPPJID *jid = [XMPPJID jidWithString:room.jid];
-                [xmppManager.roomManager leaveRoom:jid];
-                
+                /*
+                 OTRXMPPManager *xmppManager = (OTRXMPPManager *)[[OTRProtocolManager sharedInstance] protocolForAccount:account];
+                 XMPPJID *jid = [XMPPJID jidWithString:room.jid];
+                 [xmppManager.roomManager leaveRoom:jid];
+                 */
                 [room removeWithTransaction:transaction];
             }
         }];
-        NSLog(@"ACCOUNT: %@", account);
+        
         if([account.uniqueId isEqualToString:room.accountUniqueId]) {
             thread = object;
         }
     }
-     */
-     else {
+    else {
         thread = object;
     }
     

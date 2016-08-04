@@ -210,6 +210,7 @@
         [self setupDefaultSendButton];
         self.inputToolbar.contentView.rightBarButtonItem.enabled = YES;
     }    
+
 //    if (self.state.canKnock && !self.state.isThreadOnline && !self.state.hasText) {
 //        //Show Knock Button
 //        self.inputToolbar.contentView.rightBarButtonItem = self.knockButton;

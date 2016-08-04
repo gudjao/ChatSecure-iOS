@@ -75,11 +75,10 @@ public class OTRSplitViewCoordinator: NSObject, OTRConversationViewControllerDel
         //Set nav controller root view controller to mVC and then show detail with nav controller
         
         mVC.setThreadKey(threadOwner.threadIdentifier(), collection: threadOwner.threadCollection())
-        
+    
         if (!navController.viewControllers.contains(mVC)) {
-            navController.setViewControllers([mVC], animated: true)
+            navController.setViewControllers([mVC], animated: false)
         }
-        
         
         navController.topViewController!.navigationItem.leftBarButtonItem = splitVC.displayModeButtonItem();
         navController.topViewController!.navigationItem.leftItemsSupplementBackButton = true;
@@ -101,7 +100,7 @@ public class OTRSplitViewCoordinator: NSObject, OTRConversationViewControllerDel
                 }
             }
         }
-        
+
         splitVC.showDetailViewController(navController, sender: sender)
     }
     

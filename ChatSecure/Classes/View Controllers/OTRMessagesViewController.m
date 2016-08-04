@@ -461,7 +461,7 @@ typedef NS_ENUM(int, OTRDropDownType) {
         }
     }];
     
-    [self.navigationItem setRightBarButtonItem:[self rightBarButtonItem]];
+    //[self.navigationItem setRightBarButtonItem:[self rightBarButtonItem]];
 }
 
 - (UIBarButtonItem *)rightBarButtonItem

@@ -93,7 +93,8 @@
     databaseMessage.roomUniqueId = room.uniqueId;
     databaseMessage.senderJID = room.ownJID;
     databaseMessage.state = RoomMessageStateNeedsSending;
-    
+    NSLog(@"Room %@", room);
+    NSLog(@"Message %@", databaseMessage);
     [self.databaseConnection asyncReadWriteWithBlock:^(YapDatabaseReadWriteTransaction * _Nonnull transaction) {
         [databaseMessage saveWithTransaction:transaction];
     }];
@@ -118,7 +119,6 @@
                 }];
             }];
             if(roomOccupant) {
-                NSLog(@"%@", roomOccupant);
                 UIImage *avatarImage = roomOccupant.avatarImage;
                 if (avatarImage) {
                     NSUInteger diameter = MIN(avatarImage.size.width, avatarImage.size.height);

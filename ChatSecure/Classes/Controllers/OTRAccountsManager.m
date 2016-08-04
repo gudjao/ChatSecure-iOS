@@ -41,6 +41,7 @@
     [[OTRDatabaseManager sharedInstance].readWriteDatabaseConnection readWriteWithBlock:^(YapDatabaseReadWriteTransaction *transaction) {
         
         [transaction setObject:nil forKey:account.uniqueId inCollection:[OTRAccount collection]];
+        
     }];
 }
 
