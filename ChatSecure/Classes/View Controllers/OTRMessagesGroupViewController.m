@@ -10,6 +10,7 @@
 #import "OTRXMPPManager.h"
 #import "OTRXMPPRoomManager.h"
 #import <ChatSecureCore/ChatSecureCore-Swift.h>
+
 @import OTRAssets;
 
 @interface OTRMessagesGroupViewController ()
@@ -93,8 +94,7 @@
     databaseMessage.roomUniqueId = room.uniqueId;
     databaseMessage.senderJID = room.ownJID;
     databaseMessage.state = RoomMessageStateNeedsSending;
-    NSLog(@"Room %@", room);
-    NSLog(@"Message %@", databaseMessage);
+    
     [self.databaseConnection asyncReadWriteWithBlock:^(YapDatabaseReadWriteTransaction * _Nonnull transaction) {
         [databaseMessage saveWithTransaction:transaction];
     }];

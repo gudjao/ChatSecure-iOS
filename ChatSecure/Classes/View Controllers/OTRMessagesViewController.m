@@ -1043,6 +1043,11 @@ typedef NS_ENUM(int, OTRDropDownType) {
             imageItem.isIncoming = NO;
             imageItem.filename = [UUID stringByAppendingPathExtension:(asJPEG ? @"jpg" : @"png")];
             
+            id <OTRThreadOwner> object = [self threadObject];
+            if([object isKindOfClass:[OTRXMPPRoomMessage class]]) {
+                OTRXMPPRoomMessage *roomMessage = (OTRXMPPRoomMessage *)object;
+            }
+            
             __block OTRMessage *message = [[OTRMessage alloc] init];
             message.read = YES;
             message.incoming = NO;
@@ -1148,14 +1153,20 @@ typedef NS_ENUM(int, OTRDropDownType) {
 {
     __block OTRVideoItem *videoItem = [OTRVideoItem videoItemWithFileURL:videoURL];
     
+    OTRXMPPRoom *room = (OTRXMPPRoom *)[self threadObject];
+    
     __block OTRMessage *message = [[OTRMessage alloc] init];
     message.read = YES;
     message.incoming = NO;
     message.mediaItemUniqueId = videoItem.uniqueId;
-    message.buddyUniqueId = self.buddy.uniqueId;
+    if(self.buddy.uniqueId) {
+        message.buddyUniqueId = self.buddy.uniqueId;
+    } else {
+        message.buddyUniqueId = room.uniqueId;
+    }
     message.transportedSecurely = YES;
     
-    NSString *newPath = [OTRMediaFileManager pathForMediaItem:videoItem buddyUniqueId:self.buddy.uniqueId];
+    NSString *newPath = [OTRMediaFileManager pathForMediaItem:videoItem buddyUniqueId:message.uniqueId];
     [[OTRMediaFileManager sharedInstance] copyDataFromFilePath:videoURL.path toEncryptedPath:newPath completionQueue:dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0) completion:^(NSError *error) {
         
         //        if ([[NSFileManager defaultManager] fileExistsAtPath:videoURL.path]) {
