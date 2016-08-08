@@ -38,6 +38,9 @@ public class OTRXMPPRoomMessage: OTRYapDatabaseObject {
     public var xmppId:String? = NSUUID().UUIDString
     public var read = true
     
+    public var isMediaItem = false
+    public var transferProgress = 0
+    
     public var roomUniqueId:String?
     
     public override var hash: Int {

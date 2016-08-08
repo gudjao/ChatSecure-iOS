@@ -1044,39 +1044,69 @@ typedef NS_ENUM(int, OTRDropDownType) {
             imageItem.filename = [UUID stringByAppendingPathExtension:(asJPEG ? @"jpg" : @"png")];
             
             id <OTRThreadOwner> object = [self threadObject];
-            if([object isKindOfClass:[OTRXMPPRoomMessage class]]) {
-                OTRXMPPRoomMessage *roomMessage = (OTRXMPPRoomMessage *)object;
+            if([object isKindOfClass:[OTRXMPPRoom class]]) {
+                OTRXMPPRoom *room = (OTRXMPPRoom *)object;
+                
+                OTRXMPPRoomMessage *message = [[OTRXMPPRoomMessage alloc] init];
+                message.messageText = @"uploading...";
+                message.messageDate = [NSDate date];
+                message.roomUniqueId = self.threadKey;
+                message.roomJID = room.jid;
+                message.roomUniqueId = room.uniqueId;
+                message.senderJID = room.ownJID;
+                message.state = RoomMessageStateNeedsSending;
+                message.isMediaItem = YES;
+                
+                [[OTRDatabaseManager sharedInstance].readWriteDatabaseConnection asyncReadWriteWithBlock:^(YapDatabaseReadWriteTransaction *transaction) {
+                    [message saveWithTransaction:transaction];
+                    [imageItem saveWithTransaction:transaction];
+                } completionBlock:^{
+                    [[OTRMediaFileManager sharedInstance] setData:imageData forItem:imageItem buddyUniqueId:self.buddy.uniqueId completion:^(NSInteger bytesWritten, NSError *error) {
+                        [imageItem touchParentMessage];
+                        if (error) {
+                            message.messageText = error.localizedDescription;
+                            [[OTRDatabaseManager sharedInstance].readWriteDatabaseConnection readWriteWithBlock:^(YapDatabaseReadWriteTransaction *transaction) {
+                                [message saveWithTransaction:transaction];
+                            }];
+                        }
+                        //[self sendMediaItem:imageItem data:imageData tag:message];
+                        [self sendMediaCloudinaryItem:imageItem data:imageData message:message type:@"image"];
+                        
+                    } completionQueue:dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0)];
+                }];
+                
+            } else {
+                
+                __block OTRMessage *message = [[OTRMessage alloc] init];
+                message.read = YES;
+                message.incoming = NO;
+                message.buddyUniqueId = self.buddy.uniqueId;
+                message.mediaItemUniqueId = imageItem.uniqueId;
+                message.transportedSecurely = YES;
+                
+                [[OTRDatabaseManager sharedInstance].readWriteDatabaseConnection asyncReadWriteWithBlock:^(YapDatabaseReadWriteTransaction *transaction) {
+                    [message saveWithTransaction:transaction];
+                    [imageItem saveWithTransaction:transaction];
+                } completionBlock:^{
+                    [[OTRMediaFileManager sharedInstance] setData:imageData forItem:imageItem buddyUniqueId:self.buddy.uniqueId completion:^(NSInteger bytesWritten, NSError *error) {
+                        [imageItem touchParentMessage];
+                        if (error) {
+                            message.error = error;
+                            [[OTRDatabaseManager sharedInstance].readWriteDatabaseConnection readWriteWithBlock:^(YapDatabaseReadWriteTransaction *transaction) {
+                                [message saveWithTransaction:transaction];
+                            }];
+                        }
+                        //[self sendMediaItem:imageItem data:imageData tag:message];
+                        [self sendMediaCloudinaryItem:imageItem data:imageData message:message type:@"image"];
+                        
+                    } completionQueue:dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0)];
+                }];
             }
-            
-            __block OTRMessage *message = [[OTRMessage alloc] init];
-            message.read = YES;
-            message.incoming = NO;
-            message.buddyUniqueId = self.buddy.uniqueId;
-            message.mediaItemUniqueId = imageItem.uniqueId;
-            message.transportedSecurely = YES;
-            
-            [[OTRDatabaseManager sharedInstance].readWriteDatabaseConnection asyncReadWriteWithBlock:^(YapDatabaseReadWriteTransaction *transaction) {
-                [message saveWithTransaction:transaction];
-                [imageItem saveWithTransaction:transaction];
-            } completionBlock:^{
-                [[OTRMediaFileManager sharedInstance] setData:imageData forItem:imageItem buddyUniqueId:self.buddy.uniqueId completion:^(NSInteger bytesWritten, NSError *error) {
-                    [imageItem touchParentMessage];
-                    if (error) {
-                        message.error = error;
-                        [[OTRDatabaseManager sharedInstance].readWriteDatabaseConnection readWriteWithBlock:^(YapDatabaseReadWriteTransaction *transaction) {
-                            [message saveWithTransaction:transaction];
-                        }];
-                    }
-                    //[self sendMediaItem:imageItem data:imageData tag:message];
-                    [self sendMediaCloudinaryItem:imageItem data:imageData message:message type:@"image"];
-                    
-                } completionQueue:dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0)];
-            }];
         });
     }
 }
 
-- (void)sendMediaCloudinaryItem:(OTRMediaItem *)mediaItem data:(id)data message:(OTRMessage *)message type:(NSString *)type {
+- (void)sendMediaCloudinaryItem:(OTRMediaItem *)mediaItem data:(id)data message:(id)message type:(NSString *)type {
     
     __weak OTRMessagesViewController *weakSelf = self;
     
@@ -1135,9 +1165,15 @@ typedef NS_ENUM(int, OTRDropDownType) {
           __block CGFloat progress = (float)totalBytesWritten / (float)totalBytesExpectedToWrite;
           
           [[OTRDatabaseManager sharedInstance].readWriteDatabaseConnection readWriteWithBlock:^(YapDatabaseReadWriteTransaction *transaction) {
-              mediaItem.transferProgress = progress;
-              [mediaItem saveWithTransaction:transaction];
-              [mediaItem touchParentMessageWithTransaction:transaction];
+              if([message isKindOfClass:[OTRXMPPRoomMessage class]]) {
+                  OTRXMPPRoomMessage *msg = (OTRXMPPRoomMessage *)message;
+                  msg.transferProgress = progress;
+                  [msg saveWithTransaction:transaction];
+              } else {
+                  mediaItem.transferProgress = progress;
+                  [mediaItem saveWithTransaction:transaction];
+                  [mediaItem touchParentMessageWithTransaction:transaction];
+              }
           }];
       }];
 }
@@ -1355,6 +1391,7 @@ typedef NS_ENUM(int, OTRDropDownType) {
 - (NSAttributedString *)collectionView:(JSQMessagesCollectionView *)collectionView attributedTextForCellBottomLabelAtIndexPath:(NSIndexPath *)indexPath
 {
     id <OTRMessageProtocol> message = [self messageAtIndexPath:indexPath];
+    NSLog(@"MESSAGE>> %@", message);
     
     UIFont *font = [UIFont fontWithName:kFontAwesomeFont size:12];
     if (!font) {
@@ -1375,48 +1412,70 @@ typedef NS_ENUM(int, OTRDropDownType) {
     NSMutableAttributedString *attributedString = [[NSMutableAttributedString alloc] initWithString:lockString attributes:iconAttributes];
     
     ////// Delivered Icon //////
-    if([message isKindOfClass:[OTRMessage class]]) {
-        OTRMessage *msg = (OTRMessage *)message;
-        if (msg.isDelivered) {
-            NSString *iconString = [NSString stringWithFormat:@"%@ ",[NSString fa_stringForFontAwesomeIcon:FACheck]];
-            
-            [attributedString appendAttributedString:[[NSAttributedString alloc] initWithString:iconString attributes:iconAttributes]];
-        }
-        
-        if([msg isMediaMessage]) {
-            
-            __block OTRMediaItem *mediaItem = nil;
-            //Get the media item
-            [self.databaseConnection readWithBlock:^(YapDatabaseReadTransaction *transaction) {
-                mediaItem = [OTRMediaItem fetchObjectWithUniqueID:msg.mediaItemUniqueId transaction:transaction];
-            }];
-            
-            float percentProgress = mediaItem.transferProgress * 100;
-            
+    if([message isKindOfClass:[OTRXMPPRoomMessage class]]) {
+        OTRXMPPRoomMessage *msg = (OTRXMPPRoomMessage *)message;
+        if([msg isMediaItem]) {
             NSString *progressString = nil;
             NSUInteger insertIndex = 0;
             
-            if (mediaItem.isIncoming && mediaItem.transferProgress < 1) {
-                progressString = [NSString stringWithFormat:@" %@ %.0f%%",INCOMING_STRING,percentProgress];
-                insertIndex = [attributedString length];
-            } else if (!mediaItem.isIncoming) {
-                if(percentProgress >= 100) {
+            float percentProgress = msg.transferProgress * 100;
+            
+            if(percentProgress >= 100) {
                     progressString = [NSString stringWithFormat:@"%@ %.0f%% ",SENT_STRING,percentProgress];
                 } else if(percentProgress > 0) {
                     progressString = [NSString stringWithFormat:@"%@ %.0f%% ",SENDING_STRING,percentProgress];
                 } else {
                     progressString = [NSString stringWithFormat:@"%@ ",WAITING_STRING];
                 }
-            }
             
             if ([progressString length]) {
                 UIFont *font = [UIFont systemFontOfSize:12];
                 [attributedString insertAttributedString:[[NSAttributedString alloc] initWithString:progressString attributes:@{NSFontAttributeName: font}] atIndex:insertIndex];
             }
-            
-            
         }
-    }
+    } else
+        if([message isKindOfClass:[OTRMessage class]]) {
+            OTRMessage *msg = (OTRMessage *)message;
+            if (msg.isDelivered) {
+                NSString *iconString = [NSString stringWithFormat:@"%@ ",[NSString fa_stringForFontAwesomeIcon:FACheck]];
+                
+                [attributedString appendAttributedString:[[NSAttributedString alloc] initWithString:iconString attributes:iconAttributes]];
+            }
+            
+            if([msg isMediaMessage]) {
+                
+                __block OTRMediaItem *mediaItem = nil;
+                //Get the media item
+                [self.databaseConnection readWithBlock:^(YapDatabaseReadTransaction *transaction) {
+                    mediaItem = [OTRMediaItem fetchObjectWithUniqueID:msg.mediaItemUniqueId transaction:transaction];
+                }];
+                
+                float percentProgress = mediaItem.transferProgress * 100;
+                
+                NSString *progressString = nil;
+                NSUInteger insertIndex = 0;
+                
+                if (mediaItem.isIncoming && mediaItem.transferProgress < 1) {
+                    progressString = [NSString stringWithFormat:@" %@ %.0f%%",INCOMING_STRING,percentProgress];
+                    insertIndex = [attributedString length];
+                } else if (!mediaItem.isIncoming) {
+                    if(percentProgress >= 100) {
+                        progressString = [NSString stringWithFormat:@"%@ %.0f%% ",SENT_STRING,percentProgress];
+                    } else if(percentProgress > 0) {
+                        progressString = [NSString stringWithFormat:@"%@ %.0f%% ",SENDING_STRING,percentProgress];
+                    } else {
+                        progressString = [NSString stringWithFormat:@"%@ ",WAITING_STRING];
+                    }
+                }
+                
+                if ([progressString length]) {
+                    UIFont *font = [UIFont systemFontOfSize:12];
+                    [attributedString insertAttributedString:[[NSAttributedString alloc] initWithString:progressString attributes:@{NSFontAttributeName: font}] atIndex:insertIndex];
+                }
+                
+                
+            }
+        }
     
     return attributedString;
 }
