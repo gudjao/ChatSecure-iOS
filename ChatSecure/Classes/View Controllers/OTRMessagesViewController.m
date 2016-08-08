@@ -1044,15 +1044,18 @@ typedef NS_ENUM(int, OTRDropDownType) {
             imageItem.filename = [UUID stringByAppendingPathExtension:(asJPEG ? @"jpg" : @"png")];
             
             id <OTRThreadOwner> object = [self threadObject];
+            NSString *uniqueId;
+            
             if([object isKindOfClass:[OTRXMPPRoom class]]) {
                 OTRXMPPRoom *room = (OTRXMPPRoom *)object;
+                uniqueId = room.uniqueId;
                 
                 OTRXMPPRoomMessage *message = [[OTRXMPPRoomMessage alloc] init];
                 message.messageText = @"uploading...";
                 message.messageDate = [NSDate date];
                 message.roomUniqueId = self.threadKey;
                 message.roomJID = room.jid;
-                message.roomUniqueId = room.uniqueId;
+                message.roomUniqueId = uniqueId;
                 message.senderJID = room.ownJID;
                 message.state = RoomMessageStateNeedsSending;
                 message.isMediaItem = YES;
@@ -1061,7 +1064,7 @@ typedef NS_ENUM(int, OTRDropDownType) {
                     [message saveWithTransaction:transaction];
                     [imageItem saveWithTransaction:transaction];
                 } completionBlock:^{
-                    [[OTRMediaFileManager sharedInstance] setData:imageData forItem:imageItem buddyUniqueId:self.buddy.uniqueId completion:^(NSInteger bytesWritten, NSError *error) {
+                    [[OTRMediaFileManager sharedInstance] setData:imageData forItem:imageItem buddyUniqueId:uniqueId completion:^(NSInteger bytesWritten, NSError *error) {
                         [imageItem touchParentMessage];
                         if (error) {
                             message.messageText = error.localizedDescription;
@@ -1076,11 +1079,12 @@ typedef NS_ENUM(int, OTRDropDownType) {
                 }];
                 
             } else {
+                uniqueId = self.buddy.uniqueId;
                 
                 __block OTRMessage *message = [[OTRMessage alloc] init];
                 message.read = YES;
                 message.incoming = NO;
-                message.buddyUniqueId = self.buddy.uniqueId;
+                message.buddyUniqueId = uniqueId;
                 message.mediaItemUniqueId = imageItem.uniqueId;
                 message.transportedSecurely = YES;
                 
@@ -1088,7 +1092,7 @@ typedef NS_ENUM(int, OTRDropDownType) {
                     [message saveWithTransaction:transaction];
                     [imageItem saveWithTransaction:transaction];
                 } completionBlock:^{
-                    [[OTRMediaFileManager sharedInstance] setData:imageData forItem:imageItem buddyUniqueId:self.buddy.uniqueId completion:^(NSInteger bytesWritten, NSError *error) {
+                    [[OTRMediaFileManager sharedInstance] setData:imageData forItem:imageItem buddyUniqueId:uniqueId completion:^(NSInteger bytesWritten, NSError *error) {
                         [imageItem touchParentMessage];
                         if (error) {
                             message.error = error;
@@ -1149,6 +1153,13 @@ typedef NS_ENUM(int, OTRDropDownType) {
                           DDLogError(@"Error Removing Video/Audio File");
                       }
                   }
+              }
+              
+              if([message isKindOfClass:[OTRXMPPRoomMessage class]]) {
+                  [[OTRDatabaseManager sharedInstance].readWriteDatabaseConnection readWriteWithBlock:^(YapDatabaseReadWriteTransaction *transaction) {
+                      OTRXMPPRoomMessage *msg = (OTRXMPPRoomMessage *)message;
+                      [msg removeWithTransaction:transaction];
+                  }];
               }
               
               [weakSelf didPressSendButton:self.sendButton
@@ -1391,7 +1402,6 @@ typedef NS_ENUM(int, OTRDropDownType) {
 - (NSAttributedString *)collectionView:(JSQMessagesCollectionView *)collectionView attributedTextForCellBottomLabelAtIndexPath:(NSIndexPath *)indexPath
 {
     id <OTRMessageProtocol> message = [self messageAtIndexPath:indexPath];
-    NSLog(@"MESSAGE>> %@", message);
     
     UIFont *font = [UIFont fontWithName:kFontAwesomeFont size:12];
     if (!font) {
@@ -1420,13 +1430,18 @@ typedef NS_ENUM(int, OTRDropDownType) {
             
             float percentProgress = msg.transferProgress * 100;
             
-            if(percentProgress >= 100) {
+            if (msg.messageIncoming && percentProgress < 1) {
+                progressString = [NSString stringWithFormat:@" %@ %.0f%%",INCOMING_STRING,percentProgress];
+                insertIndex = [attributedString length];
+            } else if (!msg.messageIncoming) {
+                if(percentProgress >= 100) {
                     progressString = [NSString stringWithFormat:@"%@ %.0f%% ",SENT_STRING,percentProgress];
                 } else if(percentProgress > 0) {
                     progressString = [NSString stringWithFormat:@"%@ %.0f%% ",SENDING_STRING,percentProgress];
                 } else {
                     progressString = [NSString stringWithFormat:@"%@ ",WAITING_STRING];
                 }
+            }
             
             if ([progressString length]) {
                 UIFont *font = [UIFont systemFontOfSize:12];

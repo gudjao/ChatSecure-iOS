@@ -201,7 +201,7 @@
         [self.databaseConnection asyncReadWriteWithBlock:^(YapDatabaseReadWriteTransaction * _Nonnull transaction) {
             [messagesTosend enumerateObjectsUsingBlock:^(OTRXMPPRoomMessage *roomMessage, NSUInteger idx, BOOL * _Nonnull stop) {
                 XMPPRoom *room = [self.rooms objectForKey:roomMessage.roomJID];
-                if (room) {
+                if (room && !([roomMessage isMediaItem])) {
                     XMPPMessage *message = [[self class] xmppMessage:roomMessage];
                     [room sendMessage:message];
                 }
