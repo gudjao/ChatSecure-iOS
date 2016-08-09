@@ -83,7 +83,7 @@
     [[OTRDatabaseManager sharedInstance].readWriteDatabaseConnection readWithBlock:^(YapDatabaseReadTransaction *transaction) {
         accounts = [OTRAccount allAccountsWithTransaction:transaction];
     }];
-
+    
     
     NSPredicate *predicate = [NSPredicate predicateWithBlock:^BOOL(id evaluatedObject, NSDictionary *bindings) {
         if ([evaluatedObject isKindOfClass:[OTRAccount class]]) {
@@ -99,6 +99,51 @@
     return [accounts filteredArrayUsingPredicate:predicate];
 }
 
-
++ (OTRAccount *)activeAccount {
+    __block NSArray *accounts = nil;
+    [[OTRDatabaseManager sharedInstance].readWriteDatabaseConnection readWithBlock:^(YapDatabaseReadTransaction *transaction) {
+        accounts = [OTRAccount allAccountsWithTransaction:transaction];
+    }];
+    
+    NSPredicate *predicate = [NSPredicate predicateWithBlock:^BOOL(id evaluatedObject, NSDictionary *bindings) {
+        if ([evaluatedObject isKindOfClass:[OTRAccount class]]) {
+            OTRAccount *account = (OTRAccount *)evaluatedObject;
+            if (account.accountType != OTRAccountTypeXMPPTor && account.activeAccount && account.autologin) {
+                return YES;
+            }
+            
+        }
+        return NO;
+    }];
+    
+    NSArray *filteredArray = [accounts filteredArrayUsingPredicate:predicate];
+    __block OTRAccount *newActiveAccount = nil;
+    if(filteredArray.count == 0) {
+        newActiveAccount = [accounts firstObject];
+        newActiveAccount.activeAccount = 1;
+        [[OTRDatabaseManager sharedInstance].readWriteDatabaseConnection readWriteWithBlock:^(YapDatabaseReadWriteTransaction * _Nonnull transaction) {
+            [newActiveAccount saveWithTransaction:transaction];
+        }];
+        return newActiveAccount;
+    } if(filteredArray.count == 1) {
+        return [filteredArray firstObject];
+    } else {
+        for (int x = 0; x < filteredArray.count; x++) {
+            __block OTRAccount *deacAccount = [accounts objectAtIndex:x];
+            if(x > 0) {
+                deacAccount.activeAccount = 0;
+                [[OTRDatabaseManager sharedInstance].readWriteDatabaseConnection readWriteWithBlock:^(YapDatabaseReadWriteTransaction * _Nonnull transaction) {
+                    [deacAccount saveWithTransaction:transaction];
+                }];
+            }
+        }
+        newActiveAccount = [accounts firstObject];
+        newActiveAccount.activeAccount = 1;
+        [[OTRDatabaseManager sharedInstance].readWriteDatabaseConnection readWriteWithBlock:^(YapDatabaseReadWriteTransaction * _Nonnull transaction) {
+            [newActiveAccount saveWithTransaction:transaction];
+        }];
+        return newActiveAccount;
+    }
+}
 
 @end

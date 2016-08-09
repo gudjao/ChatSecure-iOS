@@ -352,7 +352,8 @@
     //Auto Login
     if (![BITHockeyManager sharedHockeyManager].crashManager.didCrashInLastSession
         || fromBackground) {
-        [[OTRProtocolManager sharedInstance] loginAccounts:[OTRAccountsManager allAutoLoginAccounts]];
+        //[[OTRProtocolManager sharedInstance] loginAccounts:[OTRAccountsManager allAutoLoginAccounts]];
+        [[OTRProtocolManager sharedInstance] loginAccount:[OTRAccountsManager activeAccount]];
     }
 }
 

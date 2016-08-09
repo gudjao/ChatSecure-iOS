@@ -132,7 +132,7 @@
         }
     }
     account.domain = hostname;
-        
+    
     if (port) {
         account.port = [port intValue];
     }
@@ -200,8 +200,22 @@
 - (void)performActionWithValidForm:(XLFormDescriptor *)form account:(OTRXMPPAccount *)account progress:(void (^)(NSInteger progress, NSString *summaryString))progress completion:(void (^)(OTRAccount * account, NSError *error))completion
 {
     if (form) {
-        account = (OTRXMPPAccount *)[self moveValues:form intoAccount:(OTRXMPPAccount*)account];
+        __block NSArray *accounts = nil;
+        [[OTRDatabaseManager sharedInstance].readWriteDatabaseConnection readWriteWithBlock:^(YapDatabaseReadWriteTransaction * _Nonnull transaction) {
+            
+            XLFormRowDescriptor *usernameRow = [form formRowWithTag:kOTRXLFormUsernameTextFieldTag];
+            
+            accounts = [OTRAccount allAccountsWithUsername:usernameRow.value transaction:transaction];
+        }];
+        
+        if(accounts.count > 0) {
+            account = (OTRXMPPAccount *)[accounts firstObject];
+        } else {
+            account = (OTRXMPPAccount *)[self moveValues:form intoAccount:(OTRXMPPAccount*)account];
+        }
+        account.activeAccount = 1;
     }
+    
     self.completion = completion;
     
     if (account.accountType == OTRAccountTypeXMPPTor) {

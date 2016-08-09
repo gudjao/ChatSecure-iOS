@@ -30,6 +30,7 @@
 + (void)removeAccount:(OTRAccount*)account;
 + (NSArray *)allAccountsAbleToAddBuddies;
 + (OTRAccount *)accountWithUsername:(NSString *)username;
++ (OTRAccount *)activeAccount;
 
 + (NSArray *)allAutoLoginAccounts;
 

@@ -37,6 +37,7 @@ extern NSString *const OTRXMPPTorImageName;
 @property (nonatomic, strong) NSString *username;
 @property (nonatomic) BOOL rememberPassword;
 @property (nonatomic) BOOL autologin;
+@property (nonatomic) BOOL activeAccount;
 
 /**
  * Setting this value does a comparison of against the previously value

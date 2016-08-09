@@ -155,6 +155,23 @@ static NSString *const logoutImageName = @"logout.png";
     return account;
 }
 
+- (OTRAccount *)connectedAccount {
+    NSUInteger numOfAccounts = [self.mappings numberOfItemsInSection:0];
+    OTRAccount *account = nil;
+    
+    for (int x = 0; x < numOfAccounts; x++) {
+        NSIndexPath *accountIndexPath = [NSIndexPath indexPathForRow:x inSection:0];
+        account = [self accountAtIndexPath:accountIndexPath];
+        
+        if( [[OTRProtocolManager sharedInstance] isAccountConnected:account])
+        {
+            return account;
+        }
+    }
+    
+    return account;
+}
+
 #pragma mark UITableViewDataSource methods
 
 - (UITableViewCellEditingStyle)tableView:(UITableView *)tableView editingStyleForRowAtIndexPath:(NSIndexPath *)indexPath
@@ -180,6 +197,7 @@ static NSString *const logoutImageName = @"logout.png";
         static NSString *addAccountCellIdentifier = @"addAccountCellIdentifier";
         UITableViewCell * cell = nil;
         if (indexPath.row == [self.mappings numberOfItemsInSection:indexPath.section]) {
+            //if(indexPath.row == 1) {
             cell = [tableView dequeueReusableCellWithIdentifier:addAccountCellIdentifier];
             if (cell == nil) {
                 cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:addAccountCellIdentifier];
@@ -192,6 +210,8 @@ static NSString *const logoutImageName = @"logout.png";
         }
         else {
             OTRAccount *account = [self accountAtIndexPath:indexPath];
+            //OTRAccount *account = [self connectedAccount];
+            
             OTRAccountTableViewCell *accountCell = (OTRAccountTableViewCell*)[tableView dequeueReusableCellWithIdentifier:[OTRAccountTableViewCell cellIdentifier] forIndexPath:indexPath];
             [accountCell.shareButton addTarget:self action:@selector(accountCellShareButtonPressed:) forControlEvents:UIControlEventTouchUpInside];
             
@@ -242,6 +262,7 @@ static NSString *const logoutImageName = @"logout.png";
 {
     if (sectionIndex == 0) {
         return [self.mappings numberOfItemsInSection:0]+1;
+        //return 2;
     }
     return [self.settingsManager numberOfSettingsInSection:sectionIndex];
 }
@@ -357,21 +378,49 @@ static NSString *const logoutImageName = @"logout.png";
             for (int x = 0; x < numOfAccounts; x++) {
                 NSIndexPath *accountIndexPath = [NSIndexPath indexPathForRow:x inSection:0];
                 OTRAccount *account = [self accountAtIndexPath:accountIndexPath];
+                NSLog(@"Account> : %@ Active: %d", account.username, account.activeAccount);
                 
                 if( [[OTRProtocolManager sharedInstance] isAccountConnected:account])
                 {
                     id<OTRProtocol> protocol = [[OTRProtocolManager sharedInstance] protocolForAccount:account];
                     [protocol disconnect];
                 }
-                [[OTRProtocolManager sharedInstance] removeProtocolForAccount:account];
-                [OTRAccountsManager removeAccount:account];
+                
+                if(x == 0 && numOfAccounts > 3) {
+                    [[OTRProtocolManager sharedInstance] removeProtocolForAccount:account];
+                    [OTRAccountsManager removeAccount:account];
+                } else {
+                    [[OTRDatabaseManager sharedInstance].readWriteDatabaseConnection asyncReadWriteWithBlock:^(YapDatabaseReadWriteTransaction * _Nonnull transaction) {
+                        account.activeAccount = 0;
+                        [account saveWithTransaction:transaction];
+                    }];
+                }
             }
+            /*
+             for (int x = 0; x < numOfAccounts; x++) {
+             NSIndexPath *accountIndexPath = [NSIndexPath indexPathForRow:x inSection:0];
+             OTRAccount *account = [self accountAtIndexPath:accountIndexPath];
+             
+             if( [[OTRProtocolManager sharedInstance] isAccountConnected:account])
+             {
+             id<OTRProtocol> protocol = [[OTRProtocolManager sharedInstance] protocolForAccount:account];
+             [protocol disconnect];
+             }
+             [[OTRProtocolManager sharedInstance] removeProtocolForAccount:account];
+             [OTRAccountsManager removeAccount:account];
+             }
+             */
         } else {
             id<OTRProtocol> protocol = [[OTRProtocolManager sharedInstance] protocolForAccount:account];
             [protocol disconnect];
             
-            [[OTRProtocolManager sharedInstance] removeProtocolForAccount:account];
-            [OTRAccountsManager removeAccount:account];
+            [[OTRDatabaseManager sharedInstance].readWriteDatabaseConnection asyncReadWriteWithBlock:^(YapDatabaseReadWriteTransaction * _Nonnull transaction) {
+                account.activeAccount = 0;
+                [account saveWithTransaction:transaction];
+            }];
+            
+            //[[OTRProtocolManager sharedInstance] removeProtocolForAccount:account];
+            //[OTRAccountsManager removeAccount:account];
         }
         
         UIStoryboard *onboardingStoryboard = [UIStoryboard storyboardWithName:@"Onboarding" bundle:[OTRAssets resourcesBundle]];

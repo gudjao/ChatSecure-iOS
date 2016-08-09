@@ -102,6 +102,7 @@ static NSUInteger kOTRMaxLoginAttempts = 5;
             
         } completion:^(OTRAccount *account, NSError *error) {
             __typeof__(self) strongSelf = weakSelf;
+            account.activeAccount = 1;
             strongSelf.form.disabled = NO;
             strongSelf.navigationItem.rightBarButtonItem.enabled = YES;
             strongSelf.navigationItem.backBarButtonItem.enabled = YES;
