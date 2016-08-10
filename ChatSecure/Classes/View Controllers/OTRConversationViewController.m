@@ -168,17 +168,39 @@ static CGFloat kOTRConversationCellHeight = 80.0;
     if (self.hasPresentedOnboarding) {
         return;
     }
-    __block BOOL hasAccounts = NO;
+    //__block BOOL hasAccounts = NO;
+    __block NSArray *accounts = nil;
     [[OTRDatabaseManager sharedInstance].readOnlyDatabaseConnection readWithBlock:^(YapDatabaseReadTransaction *transaction) {
-        NSUInteger count = [transaction numberOfKeysInCollection:[OTRAccount collection]];
-        if (count > 0) {
-            hasAccounts = YES;
-        }
+        accounts = [OTRAccount allAccountsWithTransaction:transaction];
+        //NSUInteger count = [transaction numberOfKeysInCollection:[OTRAccount collection]];
+        /*
+         if (count > 0) {
+         hasAccounts = YES;
+         }
+         */
     }];
+    
+    NSPredicate *predicate = [NSPredicate predicateWithBlock:^BOOL(id evaluatedObject, NSDictionary *bindings) {
+        if ([evaluatedObject isKindOfClass:[OTRAccount class]]) {
+            OTRAccount *account = (OTRAccount *)evaluatedObject;
+            if (account.accountType != OTRAccountTypeXMPPTor && account.activeAccount && account.autologin) {
+                return YES;
+            }
+            
+        }
+        return NO;
+    }];
+    
+    BOOL hasActiveAccounts = NO;
+    NSArray *filteredArray = [accounts filteredArrayUsingPredicate:predicate];
+    if(filteredArray.count > 0) {
+        hasActiveAccounts = YES;
+    }
+    
     UIStoryboard *onboardingStoryboard = [UIStoryboard storyboardWithName:@"Onboarding" bundle:[OTRAssets resourcesBundle]];
     
     //If there is any number of accounts launch into default conversation view otherwise onboarding time
-    if (!hasAccounts) {
+    if (!hasActiveAccounts) {
         UINavigationController *welcomeNavController = [onboardingStoryboard instantiateInitialViewController];
         OTRWelcomeViewController *welcomeViewController = welcomeNavController.viewControllers[0];
         UINavigationController *nav = [[UINavigationController alloc] initWithRootViewController:welcomeViewController];

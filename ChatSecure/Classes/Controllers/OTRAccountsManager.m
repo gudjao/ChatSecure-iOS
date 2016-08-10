@@ -118,16 +118,9 @@
     
     NSArray *filteredArray = [accounts filteredArrayUsingPredicate:predicate];
     __block OTRAccount *newActiveAccount = nil;
-    if(filteredArray.count == 0) {
-        newActiveAccount = [accounts firstObject];
-        newActiveAccount.activeAccount = 1;
-        [[OTRDatabaseManager sharedInstance].readWriteDatabaseConnection readWriteWithBlock:^(YapDatabaseReadWriteTransaction * _Nonnull transaction) {
-            [newActiveAccount saveWithTransaction:transaction];
-        }];
-        return newActiveAccount;
-    } if(filteredArray.count == 1) {
+    if(filteredArray.count == 1) {
         return [filteredArray firstObject];
-    } else {
+    } else if(filteredArray.count > 1) {
         for (int x = 0; x < filteredArray.count; x++) {
             __block OTRAccount *deacAccount = [accounts objectAtIndex:x];
             if(x > 0) {
@@ -143,6 +136,8 @@
             [newActiveAccount saveWithTransaction:transaction];
         }];
         return newActiveAccount;
+    } else {
+        return nil;
     }
 }
 
