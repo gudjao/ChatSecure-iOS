@@ -81,7 +81,7 @@ static CGFloat OTRBuddyInfoCellHeight = 80.0;
     NSString *groupString = [NSString fa_stringForFontAwesomeIcon:FAGroup];
     self.groupBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:groupString style:UIBarButtonItemStylePlain target:self action:@selector(groupButtonPressed:)];
     [self.groupBarButtonItem setTitleTextAttributes:@{NSFontAttributeName: [UIFont fontWithName:kFontAwesomeFont size:[UIFont buttonFontSize]]}
-                                      forState:UIControlStateNormal];
+                                           forState:UIControlStateNormal];
     
     
     self.navigationItem.leftBarButtonItem = cancelBarButtonItem;
@@ -113,6 +113,7 @@ static CGFloat OTRBuddyInfoCellHeight = 80.0;
     self.searchViewHandler = [[OTRYapViewHandler alloc] initWithDatabaseConnection:[self.database newConnection]];
     self.searchViewHandler.delegate = self;
     NSString *searchViewName = [YapDatabaseConstants extensionName:DatabaseExtensionNameBuddySearchResultsViewName];
+    NSLog(@"Search> : %@", searchViewName);
     [self.searchViewHandler setup:searchViewName groupBlock:^BOOL(NSString * _Nonnull group, YapDatabaseReadTransaction * _Nonnull transaction) {
         return YES;
     } sortBlock:^NSComparisonResult(NSString * _Nonnull group1, NSString * _Nonnull group2, YapDatabaseReadTransaction * _Nonnull transaction) {
@@ -364,8 +365,20 @@ static CGFloat OTRBuddyInfoCellHeight = 80.0;
     else {
         OTRYapViewHandler *viewHandler = [self viewHandlerForTableView:tableView];
         numberOfRows = [viewHandler.mappings numberOfItemsInSection:0];
+        
+        __block NSArray *buddies = nil;
+        __block OTRAccount *activeAccount = [OTRAccountsManager activeAccount];
+        NSLog(@"Active Account> : %@", activeAccount);
+        if(activeAccount) {
+            [viewHandler.databaseConnection readWithBlock:^(YapDatabaseReadTransaction *transaction) {
+                buddies = [activeAccount allBuddiesWithTransaction:transaction];
+            }];
+            for (OTRBuddy *buddy in buddies) {
+                NSLog(@"Buddy>: %@", buddy);
+            }
+        }
     }
-   
+    
     return numberOfRows;
 }
 
@@ -446,14 +459,14 @@ static CGFloat OTRBuddyInfoCellHeight = 80.0;
             [self completeSelectingBuddies:buddySet groupName:nil];
             
             /*
-            __block OTRAccount *account = nil;
-            OTRBuddy *buddy = [self buddyAtIndexPath:indexPath withTableView:tableView];
-            [[OTRDatabaseManager sharedInstance].readOnlyDatabaseConnection readWithBlock:^(YapDatabaseReadTransaction * _Nonnull transaction) {
-                account = [OTRAccount fetchObjectWithUniqueID:buddy.accountUniqueId transaction:transaction];
-                for(OTRBuddy *buddy in [account allBuddiesWithTransaction:transaction]) {
-                    NSLog(@"[Buddy]: %@", buddy.username);
-                }
-            }];
+             __block OTRAccount *account = nil;
+             OTRBuddy *buddy = [self buddyAtIndexPath:indexPath withTableView:tableView];
+             [[OTRDatabaseManager sharedInstance].readOnlyDatabaseConnection readWithBlock:^(YapDatabaseReadTransaction * _Nonnull transaction) {
+             account = [OTRAccount fetchObjectWithUniqueID:buddy.accountUniqueId transaction:transaction];
+             for(OTRBuddy *buddy in [account allBuddiesWithTransaction:transaction]) {
+             NSLog(@"[Buddy]: %@", buddy.username);
+             }
+             }];
              */
             
         } else {
@@ -540,10 +553,10 @@ static CGFloat OTRBuddyInfoCellHeight = 80.0;
     
     /*
      __block OTRAccount *account = [[OTRAccountsManager allAccountsAbleToAddBuddies] firstObject];
-    [handler.databaseConnection readWithBlock:^(YapDatabaseReadTransaction * _Nonnull transaction) {
-        NSArray *buddies = [account allBuddiesWithTransaction:transaction];
-        NSLog(@"ALL BUDDIES: %@", buddies);
-    }];
+     [handler.databaseConnection readWithBlock:^(YapDatabaseReadTransaction * _Nonnull transaction) {
+     NSArray *buddies = [account allBuddiesWithTransaction:transaction];
+     NSLog(@"ALL BUDDIES: %@", buddies);
+     }];
      */
     
     UITableView *tableView = self.tableView;
@@ -569,13 +582,13 @@ static CGFloat OTRBuddyInfoCellHeight = 80.0;
             case YapDatabaseViewChangeDelete :
             {
                 [tableView deleteSections:[NSIndexSet indexSetWithIndex:sectionIndex]
-                              withRowAnimation:UITableViewRowAnimationAutomatic];
+                         withRowAnimation:UITableViewRowAnimationAutomatic];
                 break;
             }
             case YapDatabaseViewChangeInsert :
             {
                 [tableView insertSections:[NSIndexSet indexSetWithIndex:sectionIndex]
-                              withRowAnimation:UITableViewRowAnimationAutomatic];
+                         withRowAnimation:UITableViewRowAnimationAutomatic];
                 break;
             }
             case YapDatabaseViewChangeMove :
@@ -600,27 +613,27 @@ static CGFloat OTRBuddyInfoCellHeight = 80.0;
             case YapDatabaseViewChangeDelete :
             {
                 [tableView deleteRowsAtIndexPaths:@[ indexPath ]
-                                      withRowAnimation:UITableViewRowAnimationAutomatic];
+                                 withRowAnimation:UITableViewRowAnimationAutomatic];
                 break;
             }
             case YapDatabaseViewChangeInsert :
             {
                 [tableView insertRowsAtIndexPaths:@[ newIndexPath ]
-                                      withRowAnimation:UITableViewRowAnimationAutomatic];
+                                 withRowAnimation:UITableViewRowAnimationAutomatic];
                 break;
             }
             case YapDatabaseViewChangeMove :
             {
                 [tableView deleteRowsAtIndexPaths:@[ indexPath ]
-                                      withRowAnimation:UITableViewRowAnimationAutomatic];
+                                 withRowAnimation:UITableViewRowAnimationAutomatic];
                 [tableView insertRowsAtIndexPaths:@[ newIndexPath ]
-                                      withRowAnimation:UITableViewRowAnimationAutomatic];
+                                 withRowAnimation:UITableViewRowAnimationAutomatic];
                 break;
             }
             case YapDatabaseViewChangeUpdate :
             {
                 [tableView reloadRowsAtIndexPaths:@[ indexPath ]
-                                      withRowAnimation:UITableViewRowAnimationNone];
+                                 withRowAnimation:UITableViewRowAnimationNone];
                 break;
             }
         }
