@@ -108,6 +108,8 @@ NSString *const OTRXMPPLoginErrorKey = @"OTRXMPPLoginErrorKey";
 @property (nonatomic) OTRLoginStatus loginStatus;
 @property (nonatomic, strong) OTRXMPPBuddyManager* xmppBuddyManager;
 
+@property (nonatomic, strong) XMPPMessageArchiveManagement *xmppMessageArchive;
+
 @property (nonatomic, strong) YapDatabaseConnection *databaseConnection;
 @property (nonatomic, strong) XMPPMessageDeliveryReceipts *deliveryReceipts;
 
@@ -197,6 +199,8 @@ NSString *const OTRXMPPLoginErrorKey = @"OTRXMPPLoginErrorKey";
 	}
 #endif
 	
+    self.xmppMessageArchive = [[XMPPMessageArchiveManagement alloc] init];
+    
 	// Setup reconnect
 	// 
 	// The XMPPReconnect module monitors for "accidental disconnections" and
@@ -269,6 +273,7 @@ NSString *const OTRXMPPLoginErrorKey = @"OTRXMPPLoginErrorKey";
 	[self.xmppvCardTempModule   activate:self.xmppStream];
 	[self.xmppvCardAvatarModule activate:self.xmppStream];
 	[self.xmppCapabilities      activate:self.xmppStream];
+    [self.xmppMessageArchive    activate:self.xmppStream];
     
 	// Add ourself as a delegate to anything we may be interested in
     
@@ -276,6 +281,7 @@ NSString *const OTRXMPPLoginErrorKey = @"OTRXMPPLoginErrorKey";
 	[self.xmppRoster addDelegate:self delegateQueue:self.workQueue];
     [self.xmppCapabilities addDelegate:self delegateQueue:self.workQueue];
     [self.xmppvCardTempModule addDelegate:self delegateQueue:self.workQueue];
+    [self.xmppMessageArchive addDelegate:self delegateQueue:self.workQueue];
     
     // Message Carbons
     self.messageCarbons = [[XMPPMessageCarbons alloc] init];
@@ -744,6 +750,14 @@ NSString *const OTRXMPPLoginErrorKey = @"OTRXMPPLoginErrorKey";
     DDLogVerbose(@"%@: %@ %@ %@", THIS_FILE, THIS_METHOD, presence, error);
 }
 
+- (void)xmppMessageArchiveManagement:(XMPPMessageArchiveManagement *)xmppMessageArchiveManagement didReceiveFormFields:(XMPPIQ *)iq {
+    DDLogVerbose(@"%@: %@", xmppMessageArchiveManagement, iq);
+}
+
+- (void)xmppMessageArchiveManagement:(XMPPMessageArchiveManagement *)xmppMessageArchiveManagement didFailToReceiveFormFields:(XMPPIQ *)iq {
+    DDLogVerbose(@"%@: %@", xmppMessageArchiveManagement, iq);
+}
+
 #pragma mark XMPPvCardTempModuleDelegate
 
 - (void)xmppvCardTempModule:(XMPPvCardTempModule *)vCardTempModule
@@ -990,6 +1004,27 @@ NSString *const OTRXMPPLoginErrorKey = @"OTRXMPPLoginErrorKey";
 		
 		[self.xmppStream sendElement:xmppMessage];
     }
+    
+    // <iq type="set">
+    //   <query xmlns="jabber:iq:roster">
+    //     <item jid="bareJID" name="nickname"/>
+    //   </query>
+    // </iq>
+    
+    //NSXMLElement *item = [NSXMLElement elementWithName:@"item"];
+    //[item addAttributeWithName:@"jid" stringValue:[jid bare]];
+    //[item addAttributeWithName:@"name" stringValue:nickname];
+    
+//    NSXMLElement *query = [NSXMLElement elementWithName:@"query" xmlns:@"jabber:iq:roster"];
+//    //[query addChild:item];
+//    
+//    XMPPIQ *iq = [XMPPIQ iqWithType:@"get"];
+//    [iq addAttributeWithName:@"from" stringValue:[[XMPPJID jidWithString:buddy.username] fullUPS]];
+//    [iq addChild:query];
+//    
+//    [self.xmppStream sendElement:iq];
+    
+    [self.xmppMessageArchive retrieveFormFields];
 }
 
 - (NSString*) accountName

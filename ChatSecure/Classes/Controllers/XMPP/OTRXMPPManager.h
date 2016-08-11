@@ -23,6 +23,9 @@
 @import Foundation;
 @import UIKit;
 
+//#import "XMPPMessageArchiveManagement.h"
+#import "XMPPFramework/XMPPMessageArchiveManagement.h"
+
 #import "OTRBuddy.h"
 #import "OTRMessage.h"
 #import "XMPPFramework.h"
@@ -77,6 +80,9 @@ extern NSString *const OTRXMPPLoginErrorKey;
 @property (nonatomic, readonly) XMPPCapabilitiesCoreDataStorage *xmppCapabilitiesStorage;
 @property (nonatomic, readonly) OTRCertificatePinning * certificatePinningModule;
 @property (nonatomic, readonly) OTRXMPPRoomManager *roomManager;
+
+@property (nonatomic, readonly) XMPPMessageArchiveManagement *xmppMessageArchive;
+
 @property BOOL didSecure;
 
 @property (nonatomic, strong, readonly) OTRXMPPAccount *account;
