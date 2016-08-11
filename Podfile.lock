@@ -40,9 +40,9 @@ PODS:
     - CocoaLumberjack/Default
   - CPAProxy (1.1.0):
     - CocoaAsyncSocket
-  - Crashlytics (3.7.2):
+  - Crashlytics (3.7.3):
     - Fabric (~> 1.6.3)
-  - Fabric (1.6.7)
+  - Fabric (1.6.8)
   - GCDWebServer/CocoaLumberjack (3.3.3):
     - CocoaLumberjack (~> 2)
     - GCDWebServer/Core
@@ -406,8 +406,8 @@ SPEC CHECKSUMS:
   CocoaAsyncSocket: e0a7e93b2ffa411592ff87e58524fbbc9b95b4fa
   CocoaLumberjack: 97fab7ee5f507fe54445cca7ea80f926729cfd15
   CPAProxy: 40278db66c183fd64452825f3db54ec27e27a0b3
-  Crashlytics: 130ab943f8c78cda7a814b434f270b2e2c8a3cba
-  Fabric: caf7580c725e64db144f610ac65cd60956911dc7
+  Crashlytics: 76f6beaff70acf226139582c09c78461597c2b98
+  Fabric: 5755268d0171435ab167e3d0878a28a777deaf10
   GCDWebServer: 1c39a1f0763e4eb492bee021e4270fce097d3555
   gtm-http-fetcher: 4e7de79fc9e774b291eae66a240f17b3a5277ec7
   gtm-oauth2: b31c9d7c82f773f7b7094cbb7da8dc7b5968ce16
