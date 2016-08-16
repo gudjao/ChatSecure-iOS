@@ -43,6 +43,7 @@ PODS:
   - Crashlytics (3.7.3):
     - Fabric (~> 1.6.3)
   - Fabric (1.6.8)
+  - FLAnimatedImage (1.0.12)
   - GCDWebServer/CocoaLumberjack (3.3.3):
     - CocoaLumberjack (~> 2)
     - GCDWebServer/Core
@@ -86,6 +87,17 @@ PODS:
   - OpenInChrome (0.0.1)
   - OTRKit (1.1.2)
   - ParkedTextField (0.2.1)
+  - PINCache (3.0.1-beta)
+  - PINRemoteImage (3.0.0-beta.3):
+    - PINRemoteImage/FLAnimatedImage (= 3.0.0-beta.3)
+    - PINRemoteImage/PINCache (= 3.0.0-beta.3)
+  - PINRemoteImage/Core (3.0.0-beta.3)
+  - PINRemoteImage/FLAnimatedImage (3.0.0-beta.3):
+    - FLAnimatedImage (>= 1.0)
+    - PINRemoteImage/Core
+  - PINRemoteImage/PINCache (3.0.0-beta.3):
+    - PINCache (>= 3.0.0-beta)
+    - PINRemoteImage/Core
   - ProxyKit/Client (1.1.0):
     - ProxyKit/common
   - ProxyKit/common (1.1.0):
@@ -349,6 +361,8 @@ DEPENDENCIES:
   - OpenInChrome (~> 0.0)
   - OTRKit (from `Submodules/OTRKit/OTRKit.podspec`)
   - ParkedTextField (~> 0.2)
+  - PINRemoteImage (from `https://github.com/pinterest/PINRemoteImage.git`, branch
+    `master`)
   - ProxyKit/Client (from `Submodules/ProxyKit/ProxyKit.podspec`)
   - PureLayout (~> 3.0)
   - QRCodeReaderViewController (~> 4.0)
@@ -382,6 +396,9 @@ EXTERNAL SOURCES:
     :git: https://github.com/gudjao/JSQMessagesViewController.git
   OTRKit:
     :path: Submodules/OTRKit/OTRKit.podspec
+  PINRemoteImage:
+    :branch: master
+    :git: https://github.com/pinterest/PINRemoteImage.git
   ProxyKit:
     :path: Submodules/ProxyKit/ProxyKit.podspec
   XMPPFramework:
@@ -394,6 +411,9 @@ CHECKOUT OPTIONS:
   JSQMessagesViewController:
     :commit: d2ff3b17fccb0946aa8d3abafd56d06af3ea061b
     :git: https://github.com/gudjao/JSQMessagesViewController.git
+  PINRemoteImage:
+    :commit: 3a6bc57ae7aadceae07e9f5064ab4a622c245710
+    :git: https://github.com/pinterest/PINRemoteImage.git
 
 SPEC CHECKSUMS:
   AFNetworking: 5e0e199f73d8626b11e79750991f5d173d1f8b67
@@ -408,6 +428,7 @@ SPEC CHECKSUMS:
   CPAProxy: 40278db66c183fd64452825f3db54ec27e27a0b3
   Crashlytics: 76f6beaff70acf226139582c09c78461597c2b98
   Fabric: 5755268d0171435ab167e3d0878a28a777deaf10
+  FLAnimatedImage: 4a0b56255d9b05f18b6dd7ee06871be5d3b89e31
   GCDWebServer: 1c39a1f0763e4eb492bee021e4270fce097d3555
   gtm-http-fetcher: 4e7de79fc9e774b291eae66a240f17b3a5277ec7
   gtm-oauth2: b31c9d7c82f773f7b7094cbb7da8dc7b5968ce16
@@ -427,6 +448,8 @@ SPEC CHECKSUMS:
   OpenInChrome: f1f3f9dec682216fe78a0d7fe0b5b263d6312c32
   OTRKit: 03e81b5196986bbe65491846a346dfa0aebfee02
   ParkedTextField: 72d02a5fdadc089ff25efac04ea21dcc5a2467d3
+  PINCache: 6911fe422a633e18b3d3ddf2bd4f0e55e36e2892
+  PINRemoteImage: 837165b18a33aabc177c2919c04015367c24fe8f
   ProxyKit: 1f35adc913debc7ca6748c02487361dabaaea532
   PureLayout: 4d550abe49a94f24c2808b9b95db9131685fe4cd
   QRCodeReaderViewController: 6538745c8f4ffa9407a26bd7f9489ea01739e7b0

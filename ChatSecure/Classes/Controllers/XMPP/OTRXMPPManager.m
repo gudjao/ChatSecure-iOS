@@ -319,7 +319,8 @@ NSString *const OTRXMPPLoginErrorKey = @"OTRXMPPLoginErrorKey";
     [_xmppRoster removeDelegate:self];
     [_xmppCapabilities removeDelegate:self];
     [_xmppvCardTempModule removeDelegate:self];
-
+    [_xmppMessageArchive removeDelegate:self];
+    
     [_xmppReconnect         deactivate];
     [_xmppRoster            deactivate];
     [_xmppvCardTempModule   deactivate];
@@ -333,10 +334,12 @@ NSString *const OTRXMPPLoginErrorKey = @"OTRXMPPLoginErrorKey";
     [_streamManagement deactivate];
     [_roomManager deactivate];
     [_xmppBuddyManager deactivate];
-
+    [_xmppMessageArchive deactivate];
+    
     [_xmppStream disconnect];
 
     _xmppStream = nil;
+    _xmppMessageArchive = nil;
     _xmppReconnect = nil;
     _xmppRoster = nil;
     _xmppRosterStorage = nil;
@@ -1033,7 +1036,29 @@ NSString *const OTRXMPPLoginErrorKey = @"OTRXMPPLoginErrorKey";
 //    
 //    [self.xmppStream sendElement:iq];
     
-    [self.xmppMessageArchive retrieveFormFields];
+    /*
+    <iq type="set" id="B881B8DF-DD45-4483-B276-A8B602D19483">
+        <query xmlns="urn:xmpp:mam:1" queryid="EDDFF06F-DFE3-4A62-882E-A826B4805533">
+            <x xmlns="jabber:x:data" type="submit">
+                <field var="FORM_TYPE" type="hidden">
+                    <value>urn:xmpp:mam:1</value>
+                </field>
+                <field var="with">
+                    <value>vtomol1234@upsexpress.com</value>
+                </field>
+            </x>
+        </query>
+    </iq>
+    */
+    
+    NSArray *fields = @[
+                        [XMPPMessageArchiveManagement fieldWithVar:@"with" type:nil andValue:[[XMPPJID jidWithString:buddy.username] full]]
+                        ];
+    
+    [self.xmppMessageArchive retrieveMessageArchiveWithFields:fields
+                                                withResultSet:nil];
+    
+    //[self.xmppMessageArchive retrieveFormFields];
 }
 
 - (NSString*) accountName

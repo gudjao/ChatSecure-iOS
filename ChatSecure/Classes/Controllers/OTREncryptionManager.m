@@ -42,6 +42,12 @@
 #import "OTRXMPPManager.h"
 #import <ChatSecureCore/ChatSecureCore-Swift.h>
 
+#import <AFNetworking/AFNetworking.h>
+
+#import <PINRemoteImage/PINRemoteImage.h>
+#import <PINRemoteImage/PINImageView+PINRemoteImage.h>
+#import <PINRemoteImage/PINRemoteImageCaching.h>
+
 @import AVFoundation;
 @import XMPPFramework;
 @import OTRAssets;
@@ -263,7 +269,7 @@ NSString *const OTRMessageStateKey = @"OTREncryptionManagerMessageStateKey";
 - (void)otrKit:(OTRKit *)otrKit decodedMessage:(NSString *)decodedMessage wasEncrypted:(BOOL)wasEncrypted tlvs:(NSArray *)tlvs username:(NSString *)username accountName:(NSString *)accountName protocol:(NSString *)protocol tag:(id)tag
 {
     //decodedMessage can be nil if just TLV
-    OTRMessage *originalMessage = nil;
+    __block OTRMessage *originalMessage = nil;
     if ([tag isKindOfClass:[OTRMessage class]]) {
         originalMessage = [tag copy];
     }
@@ -271,7 +277,7 @@ NSString *const OTRMessageStateKey = @"OTREncryptionManagerMessageStateKey";
     
     decodedMessage = [OTRUtilities stripHTML:decodedMessage];
     decodedMessage = [decodedMessage stringByTrimmingCharactersInSet:
-     [NSCharacterSet whitespaceCharacterSet]];
+                      [NSCharacterSet whitespaceCharacterSet]];
     
     if ([decodedMessage length]) {
         originalMessage.text = decodedMessage;
@@ -279,20 +285,247 @@ NSString *const OTRMessageStateKey = @"OTREncryptionManagerMessageStateKey";
         if (wasEncrypted) {
             originalMessage.transportedSecurely = YES;
         }
-        [[OTRDatabaseManager sharedInstance].readWriteDatabaseConnection asyncReadWriteWithBlock:^(YapDatabaseReadWriteTransaction *transaction) {
-            [originalMessage saveWithTransaction:transaction];
-            //Update lastMessageDate for sorting and grouping
-            OTRBuddy *buddy = [OTRBuddy fetchObjectWithUniqueID:originalMessage.buddyUniqueId transaction:transaction];
-            buddy.lastMessageDate = originalMessage.date;
-            [buddy saveWithTransaction:transaction];
+        
+        //////////////////////////////////
+        
+        NSURL *mediaUrl = [NSURL URLWithString:originalMessage.text];
+        if (mediaUrl && mediaUrl.scheme && mediaUrl.host)
+        {
+            NSArray *imageExtensions = @[@"png", @"jpg", @"gif"];
             
-            // Send delivery receipt
-            OTRAccount *account = [OTRAccount fetchObjectWithUniqueID:buddy.accountUniqueId transaction:transaction];
-            OTRXMPPManager *protocol = (OTRXMPPManager*) [[OTRProtocolManager sharedInstance] protocolForAccount:account];
-            [protocol sendDeliveryReceiptForMessage:originalMessage];
-        } completionBlock:^{
-            [[UIApplication sharedApplication] showLocalNotification:originalMessage];
-        }];
+            NSString *extension = [mediaUrl pathExtension];
+            if ([imageExtensions containsObject:extension]) {
+                
+                __block OTRImageItem *imageItem  = [[OTRImageItem alloc] init];
+                imageItem.isIncoming = YES;
+                
+                originalMessage.mediaItemUniqueId = imageItem.uniqueId;
+                
+                [[OTRDatabaseManager sharedInstance].readWriteDatabaseConnection asyncReadWriteWithBlock:^(YapDatabaseReadWriteTransaction *transaction) {
+                    [originalMessage saveWithTransaction:transaction];
+                    [imageItem saveWithTransaction:transaction];
+                }];
+                
+                [[PINRemoteImageManager sharedImageManager]
+                 downloadImageWithURL:mediaUrl
+                 options:PINRemoteImageManagerDownloadOptionsNone
+                 progressDownload:^(int64_t completedBytes, int64_t totalBytes)
+                 {
+                     __block CGFloat progress = (float)completedBytes / (float)totalBytes;
+                     NSLog(@"Download Progress: %f", progress);
+                     
+                     [[OTRDatabaseManager sharedInstance].readWriteDatabaseConnection readWriteWithBlock:^(YapDatabaseReadWriteTransaction *transaction) {
+                         imageItem.transferProgress = progress;
+                         [imageItem saveWithTransaction:transaction];
+                         [imageItem touchParentMessageWithTransaction:transaction];
+                     }];
+                     
+                 } completion:^(PINRemoteImageManagerResult * _Nonnull result)
+                 {
+                     UIImage *photo = result.image;
+                     
+                     __block NSData *imageData = nil;
+                     imageData = UIImagePNGRepresentation(photo);
+                     
+                     NSString *UUID = [[NSUUID UUID] UUIDString];
+                     
+                     NSString *uniqueId;
+                     if([originalMessage isKindOfClass:[OTRXMPPRoomMessage class]]) {
+                         OTRXMPPRoomMessage *msg = (OTRXMPPRoomMessage *)originalMessage;
+                         uniqueId = msg.roomUniqueId;
+                     } else {
+                         OTRMessage *msg = (OTRMessage *)originalMessage;
+                         uniqueId = msg.buddyUniqueId;
+                     }
+                     
+                     //__block OTRImageItem *imageItem  = [[OTRImageItem alloc] init];
+                     imageItem.width = photo.size.width;
+                     imageItem.height = photo.size.height;
+                     imageItem.filename = [UUID stringByAppendingPathExtension:(@"jpg")];
+                     imageItem.transferProgress = 1.0;
+                     
+                     //originalMessage.mediaItemUniqueId = imageItem.uniqueId;
+                     
+                     [[OTRDatabaseManager sharedInstance].readWriteDatabaseConnection asyncReadWriteWithBlock:^(YapDatabaseReadWriteTransaction *transaction) {
+                         [originalMessage saveWithTransaction:transaction];
+                         [imageItem saveWithTransaction:transaction];
+                         
+                         OTRBuddy *buddy = [[OTRBuddy fetchObjectWithUniqueID:originalMessage.buddyUniqueId transaction:transaction] copy];
+                         buddy.composingMessageString = nil;
+                         buddy.lastMessageDate = originalMessage.date;
+                         [buddy saveWithTransaction:transaction];
+                         
+                         OTRAccount *account = [OTRAccount fetchObjectWithUniqueID:buddy.accountUniqueId transaction:transaction];
+                         OTRXMPPManager *protocol = (OTRXMPPManager*) [[OTRProtocolManager sharedInstance] protocolForAccount:account];
+                         [protocol sendDeliveryReceiptForMessage:originalMessage];
+                     } completionBlock:^{
+                         [[OTRMediaFileManager sharedInstance] setData:imageData forItem:imageItem buddyUniqueId:uniqueId completion:^(NSInteger bytesWritten, NSError *error) {
+                             [imageItem touchParentMessage];
+                             if (error) {
+                                 originalMessage.error = error;
+                                 [[OTRDatabaseManager sharedInstance].readWriteDatabaseConnection readWriteWithBlock:^(YapDatabaseReadWriteTransaction *transaction) {
+                                     [originalMessage saveWithTransaction:transaction];
+                                 }];
+                             }
+                         } completionQueue:dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0)];
+                         [[UIApplication sharedApplication] showLocalNotification:originalMessage];
+                     }];
+                     
+                 }];
+            } else {
+                /*
+                 NSURLSessionConfiguration *configuration = [NSURLSessionConfiguration defaultSessionConfiguration];
+                 AFURLSessionManager *manager = [[AFURLSessionManager alloc] initWithSessionConfiguration:configuration];
+                 
+                 NSURLRequest *request = [NSURLRequest requestWithURL:mediaUrl];
+                 
+                 NSURLSessionDownloadTask *downloadTask = [manager downloadTaskWithRequest:request progress:nil destination:^NSURL *(NSURL *targetPath, NSURLResponse *response) {
+                 NSURL *documentsDirectoryURL = [[NSFileManager defaultManager] URLForDirectory:NSDocumentDirectory inDomain:NSUserDomainMask appropriateForURL:nil create:NO error:nil];
+                 return [documentsDirectoryURL URLByAppendingPathComponent:[response suggestedFilename]];
+                 } completionHandler:^(NSURLResponse *response, NSURL *filePath, NSError *error) {
+                 
+                 OTRVideoItem *videoItem = [[OTRVideoItem alloc] init];
+                 videoItem.isIncoming = YES;
+                 videoItem.filename = [response suggestedFilename];
+                 originalMessage.mediaItemUniqueId = videoItem.uniqueId;
+                 
+                 NSString *newPath = [OTRMediaFileManager pathForMediaItem:videoItem buddyUniqueId:originalMessage.uniqueId];
+                 
+                 [[OTRMediaFileManager sharedInstance] copyDataFromFilePath:filePath.path toEncryptedPath:newPath completionQueue:dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0) completion:^(NSError *error) {
+                 
+                 //        if ([[NSFileManager defaultManager] fileExistsAtPath:videoURL.path]) {
+                 //            NSError *err = nil;
+                 //            [[NSFileManager defaultManager] removeItemAtPath:videoURL.path error:&err];
+                 //            if (err) {
+                 //                DDLogError(@"Error Removing Video File");
+                 //            }
+                 //        }
+                 
+                 //message.error = error;
+                 [[OTRDatabaseManager sharedInstance].readWriteDatabaseConnection readWriteWithBlock:^(YapDatabaseReadWriteTransaction *transaction) {
+                 [videoItem saveWithTransaction:transaction];
+                 [originalMessage saveWithTransaction:transaction];
+                 }];
+                 }];
+                 
+                 NSLog(@"File downloaded to: %@ New Path: %@", filePath, newPath);
+                 }];
+                 
+                 [downloadTask resume];
+                 */
+                
+                /*
+                 dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+                 NSLog(@"Downloading Started");
+                 NSData *urlData = [NSData dataWithContentsOfURL:mediaUrl];
+                 if (urlData)
+                 {
+                 //NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
+                 //NSString *documentsDirectory = [paths objectAtIndex:0];
+                 
+                 //NSString *filePath = [NSString stringWithFormat:@"%@/%@", documentsDirectory,@"thefile.mp4"];
+                 
+                 //saving is done on main thread
+                 dispatch_async(dispatch_get_main_queue(), ^{
+                 //[urlData writeToFile:filePath atomically:YES];
+                 //NSLog(@"File Saved !");
+                 
+                 __block OTRVideoItem *videoItem = [OTRVideoItem videoItemWithFileURL:mediaUrl];
+                 videoItem.isIncoming = YES;
+                 
+                 NSLog(@"Video: %@ Data: %@", videoItem, urlData);
+                 
+                 //OTRXMPPRoom *room = (OTRXMPPRoom *)[self threadObject];
+                 
+                 originalMessage.mediaItemUniqueId = videoItem.uniqueId;
+                 
+                 [[OTRMediaFileManager sharedInstance] setData:urlData
+                 forItem:videoItem
+                 buddyUniqueId:originalMessage.buddyUniqueId
+                 completion:^(NSInteger bytesWritten, NSError *error)
+                 {
+                 NSLog(@"Progress: %ld", (long)bytesWritten);
+                 
+                 [[OTRDatabaseManager sharedInstance].readWriteDatabaseConnection readWriteWithBlock:^(YapDatabaseReadWriteTransaction *transaction) {
+                 [videoItem saveWithTransaction:transaction];
+                 [originalMessage saveWithTransaction:transaction];
+                 }];
+                 
+                 } completionQueue:dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0)];
+                 
+                 });
+                 }
+                 
+                 });
+                 */
+                
+                //__block OTRVideoItem *videoItem = [OTRVideoItem videoItemWithFileURL:mediaUrl];
+                
+                /*
+                 if(originalMessage.uniqueId) {
+                 message.buddyUniqueId = self.buddy.uniqueId;
+                 } else {
+                 message.buddyUniqueId = room.uniqueId;
+                 }
+                 */
+                
+                //NSString *newPath = [OTRMediaFileManager pathForMediaItem:videoItem buddyUniqueId:originalMessage.uniqueId];
+                
+                /*
+                 [[OTRDatabaseManager sharedInstance].readWriteDatabaseConnection readWriteWithBlock:^(YapDatabaseReadWriteTransaction *transaction) {
+                 [videoItem saveWithTransaction:transaction];
+                 [originalMessage saveWithTransaction:transaction];
+                 }];
+                 */
+                
+                /*
+                 [[OTRMediaFileManager sharedInstance] copyDataFromFilePath:videoURL.path toEncryptedPath:newPath completionQueue:dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0) completion:^(NSError *error) {
+                 
+                 //        if ([[NSFileManager defaultManager] fileExistsAtPath:videoURL.path]) {
+                 //            NSError *err = nil;
+                 //            [[NSFileManager defaultManager] removeItemAtPath:videoURL.path error:&err];
+                 //            if (err) {
+                 //                DDLogError(@"Error Removing Video File");
+                 //            }
+                 //        }
+                 
+                 message.error = error;
+                 [[OTRDatabaseManager sharedInstance].readWriteDatabaseConnection readWriteWithBlock:^(YapDatabaseReadWriteTransaction *transaction) {
+                 [videoItem saveWithTransaction:transaction];
+                 [message saveWithTransaction:transaction];
+                 }];
+                 
+                 //[self sendMediaItem:videoItem data:nil tag:message];
+                 if ([[NSFileManager defaultManager] fileExistsAtPath:videoURL.path]) {
+                 NSLog(@"Exists");
+                 //[self sendMediaCloudinaryItem:videoItem data:videoURL.path message:message type:@"video"];
+                 }
+                 
+                 }];
+                 */
+            }
+        }
+        
+        //////////////////////////////////
+        
+        // Ordinary Message
+        else {
+            [[OTRDatabaseManager sharedInstance].readWriteDatabaseConnection asyncReadWriteWithBlock:^(YapDatabaseReadWriteTransaction *transaction) {
+                [originalMessage saveWithTransaction:transaction];
+                
+                //Update lastMessageDate for sorting and grouping
+                OTRBuddy *buddy = [OTRBuddy fetchObjectWithUniqueID:originalMessage.buddyUniqueId transaction:transaction];
+                buddy.lastMessageDate = originalMessage.date;
+                [buddy saveWithTransaction:transaction];
+                
+                // Send delivery receipt
+                OTRAccount *account = [OTRAccount fetchObjectWithUniqueID:buddy.accountUniqueId transaction:transaction];
+                OTRXMPPManager *protocol = (OTRXMPPManager*) [[OTRProtocolManager sharedInstance] protocolForAccount:account];
+                [protocol sendDeliveryReceiptForMessage:originalMessage];
+            } completionBlock:^{
+                [[UIApplication sharedApplication] showLocalNotification:originalMessage];
+            }];
+        }
     }
     
     if ([tlvs count]) {
@@ -361,7 +594,7 @@ NSString *const OTRMessageStateKey = @"OTREncryptionManagerMessageStateKey";
     if ([tag isKindOfClass:[OTRMessage class]]) {
         __block NSError *error = nil;
         
-        // These are the errors caught and 
+        // These are the errors caught and
         switch (event) {
             case OTRKitMessageEventEncryptionError:
             case OTRKitMessageEventReceivedMessageNotInPrivate:
@@ -401,7 +634,7 @@ NSString *const OTRMessageStateKey = @"OTREncryptionManagerMessageStateKey";
     DDLogVerbose(@"Received Symetric Key");
 }
 
- ////// Optional //////
+////// Optional //////
 
 - (void)otrKit:(OTRKit *)otrKit willStartGeneratingPrivateKeyForAccountName:(NSString *)accountName protocol:(NSString *)protocol
 {
@@ -581,10 +814,10 @@ NSString *const OTRMessageStateKey = @"OTREncryptionManagerMessageStateKey";
     
     
     //Todo This needs to be moved
-//    if ([[OTRAppDelegate appDelegate].messagesViewController otr_isVisible] && [[OTRAppDelegate appDelegate].messagesViewController.buddy.uniqueId isEqualToString:newMessage.buddyUniqueId])
-//    {
-//        newMessage.read = YES;
-//    }
+    //    if ([[OTRAppDelegate appDelegate].messagesViewController otr_isVisible] && [[OTRAppDelegate appDelegate].messagesViewController.buddy.uniqueId isEqualToString:newMessage.buddyUniqueId])
+    //    {
+    //        newMessage.read = YES;
+    //    }
     
     [[OTRDatabaseManager sharedInstance].readWriteDatabaseConnection readWriteWithBlock:^(YapDatabaseReadWriteTransaction *transaction) {
         [newMessage saveWithTransaction:transaction];
@@ -668,7 +901,7 @@ NSString *const OTRMessageStateKey = @"OTREncryptionManagerMessageStateKey";
                     [imageItem touchParentMessage];
                 } completionQueue:dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0)];
             }];
-             
+            
             
         } else if ([mediaItem isKindOfClass:[OTRVideoItem class]]) {
             OTRVideoItem *videoItem = (OTRVideoItem *)mediaItem;

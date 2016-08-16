@@ -65,6 +65,9 @@ target 'ChatSecureCore' do
   # Cloudinary
   pod 'Cloudinary'
   
+  # PINRemoteImage
+  pod 'PINRemoteImage', :git => 'https://github.com/pinterest/PINRemoteImage.git', :branch => 'master'
+  
   # Local Podspecs
   pod 'gtm-http-fetcher', :podspec => 'Podspecs/gtm-http-fetcher.podspec'
   pod 'gtm-oauth2', :podspec => 'Podspecs/gtm-oauth2.podspec'

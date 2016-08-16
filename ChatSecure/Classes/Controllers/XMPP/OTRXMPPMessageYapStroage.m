@@ -85,7 +85,7 @@
                 return;
             }
             
-            OTRMessage *message = [self messageFromXMPPMessage:xmppMessage buddyId:messageBuddy.uniqueId];
+            __block OTRMessage *message = [self messageFromXMPPMessage:xmppMessage buddyId:messageBuddy.uniqueId];
             message.incoming = YES;
             id<OTRThreadOwner>activeThread = [[OTRAppDelegate appDelegate] activeThread];
             if([[activeThread threadIdentifier] isEqualToString:message.threadId]) {
@@ -109,7 +109,7 @@
                     // automatically renegotiate a new session when there's an error
                     [[OTRKit sharedInstance] initiateEncryptionWithUsername:username accountName:account.username protocol:account.protocolTypeString];
                 }
-                [message saveWithTransaction:transaction];
+                //[message saveWithTransaction:transaction];
                 return;
             }
             
@@ -117,6 +117,73 @@
                 DDLogWarn(@"Duplicate message received: %@", xmppMessage);
                 return;
             }
+            
+            ///////////
+            
+            /*
+             [[PINRemoteImageManager sharedImageManager]
+             downloadImageWithURL:imageUrl
+             options:PINRemoteImageManagerDownloadOptionsNone
+             progressDownload:^(int64_t completedBytes, int64_t totalBytes)
+             {
+             CGFloat progress = (float)completedBytes / (float)totalBytes;
+             NSLog(@"Download Progress: %f", progress);
+             } completion:^(PINRemoteImageManagerResult * _Nonnull result)
+             {
+             UIImage *photo = result.image;
+             
+             __block NSData *imageData = nil;
+             imageData = UIImagePNGRepresentation(photo);
+             
+             NSString *UUID = [[NSUUID UUID] UUIDString];
+             
+             NSString *uniqueId;
+             if([message isKindOfClass:[OTRXMPPRoomMessage class]]) {
+             OTRXMPPRoomMessage *msg = (OTRXMPPRoomMessage *)message;
+             uniqueId = msg.roomUniqueId;
+             } else {
+             OTRMessage *msg = (OTRMessage *)message;
+             uniqueId = msg.buddyUniqueId;
+             }
+             
+             __block OTRImageItem *imageItem  = [[OTRImageItem alloc] init];
+             imageItem.width = photo.size.width;
+             imageItem.height = photo.size.height;
+             imageItem.isIncoming = YES;
+             imageItem.filename = [UUID stringByAppendingPathExtension:(@"jpg")];
+             
+             __block OTRMessage *message = [[OTRMessage alloc] init];
+             message.read = YES;
+             message.incoming = YES;
+             message.buddyUniqueId = uniqueId;
+             message.mediaItemUniqueId = imageItem.uniqueId;
+             message.transportedSecurely = YES;
+             message.text = imageUrl.path;
+             
+             __weak __typeof__(self) weakSelf = self;
+             [weakSelf.databaseConnection asyncReadWriteWithBlock:^(YapDatabaseReadWriteTransaction *transaction) {
+             __typeof__(self) strongSelf = weakSelf;
+             [message saveWithTransaction:transaction];
+             [imageItem saveWithTransaction:transaction];
+             OTRBuddy *buddy = [[OTRBuddy fetchObjectWithUniqueID:strongSelf.threadKey transaction:transaction] copy];
+             buddy.composingMessageString = nil;
+             buddy.lastMessageDate = message.date;
+             [buddy saveWithTransaction:transaction];
+             } completionBlock:^{
+             [[OTRMediaFileManager sharedInstance] setData:imageData forItem:imageItem buddyUniqueId:uniqueId completion:^(NSInteger bytesWritten, NSError *error) {
+             [imageItem touchParentMessage];
+             if (error) {
+             message.error = error;
+             [[OTRDatabaseManager sharedInstance].readWriteDatabaseConnection readWriteWithBlock:^(YapDatabaseReadWriteTransaction *transaction) {
+             [message saveWithTransaction:transaction];
+             }];
+             }
+             } completionQueue:dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0)];
+             }];
+             }];
+             */
+            
+            ///////////
             
             if (message.text) {
                 [[OTRKit sharedInstance] decodeMessage:message.text username:messageBuddy.username accountName:account.username protocol:kOTRProtocolTypeXMPP tag:message];

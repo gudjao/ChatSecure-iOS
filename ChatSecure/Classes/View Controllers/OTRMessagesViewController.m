@@ -47,6 +47,11 @@
 #import "OTRDataHandler.h"
 #import "Cloudinary/Cloudinary.h"
 #import <ChatSecureCore/ChatSecureCore-Swift.h>
+
+#import <PINRemoteImage/PINRemoteImage.h>
+#import <PINRemoteImage/PINImageView+PINRemoteImage.h>
+#import <PINRemoteImage/PINRemoteImageCaching.h>
+
 @import YapDatabase.YapDatabaseView;
 @import PureLayout;
 
@@ -1162,11 +1167,18 @@ typedef NS_ENUM(int, OTRDropDownType) {
                   }];
               }
               
-              [weakSelf didPressSendButton:self.sendButton
-                           withMessageText:successResult[@"secure_url"]
-                                  senderId:self.senderId
-                         senderDisplayName:self.senderDisplayName
-                                      date:[NSDate date]];
+              NSLog(@"Cloudinary Image: %@ %@", successResult, context);
+              
+              [[OTRKit sharedInstance] encodeMessage:successResult[@"secure_url"] tlvs:nil username:self.buddy.username accountName:self.account.username protocol:self.account.protocolTypeString tag:message];
+              
+              /*
+               [weakSelf didPressSendButton:self.sendButton
+               withMessageText:successResult[@"secure_url"]
+               senderId:self.senderId
+               senderDisplayName:self.senderDisplayName
+               date:[NSDate date]];
+               */
+              
               
           } else {
               NSLog(@"Block upload error: %@, %lu", errorResult, (long)code);
@@ -1433,6 +1445,9 @@ typedef NS_ENUM(int, OTRDropDownType) {
             if (msg.messageIncoming && percentProgress < 1) {
                 progressString = [NSString stringWithFormat:@" %@ %.0f%%",INCOMING_STRING,percentProgress];
                 insertIndex = [attributedString length];
+            } else if(msg.messageIncoming && percentProgress >= 100) {
+                progressString = [NSString stringWithFormat:@" %@ %.0f%%",RECEIVED_STRING,percentProgress];
+                insertIndex = [attributedString length];
             } else if (!msg.messageIncoming) {
                 if(percentProgress >= 100) {
                     progressString = [NSString stringWithFormat:@"%@ %.0f%% ",SENT_STRING,percentProgress];
@@ -1472,6 +1487,9 @@ typedef NS_ENUM(int, OTRDropDownType) {
                 
                 if (mediaItem.isIncoming && mediaItem.transferProgress < 1) {
                     progressString = [NSString stringWithFormat:@" %@ %.0f%%",INCOMING_STRING,percentProgress];
+                    insertIndex = [attributedString length];
+                } else if(msg.messageIncoming && percentProgress >= 100) {
+                    progressString = [NSString stringWithFormat:@" %@ %.0f%%",RECEIVED_STRING,percentProgress];
                     insertIndex = [attributedString length];
                 } else if (!mediaItem.isIncoming) {
                     if(percentProgress >= 100) {

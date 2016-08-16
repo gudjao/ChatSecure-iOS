@@ -39,7 +39,7 @@
         usernameRow.value = account.username;
     }
     [[form formRowWithTag:kOTRXLFormPasswordTextFieldTag] setValue:account.password];
-    [[form formRowWithTag:kOTRXLFormRememberPasswordSwitchTag] setValue:@(account.rememberPassword)];
+    //[[form formRowWithTag:kOTRXLFormRememberPasswordSwitchTag] setValue:@(account.rememberPassword)];
     [[form formRowWithTag:kOTRXLFormLoginAutomaticallySwitchTag] setValue:@(account.autologin)];
     [[form formRowWithTag:kOTRXLFormHostnameTextFieldTag] setValue:account.domain];
     
@@ -86,12 +86,15 @@
         jidNode = [jidNode lowercaseString];
     }
     
+    /*
     NSNumber *rememberPassword = [[form formRowWithTag:kOTRXLFormRememberPasswordSwitchTag] value];
     if (rememberPassword) {
         account.rememberPassword = [rememberPassword boolValue];
     } else {
         account.rememberPassword = YES;
     }
+     */
+    account.rememberPassword = YES;
     
     NSString *password = [[form formRowWithTag:kOTRXLFormPasswordTextFieldTag] value];
     

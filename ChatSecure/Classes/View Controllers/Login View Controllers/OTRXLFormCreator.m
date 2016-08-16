@@ -50,7 +50,7 @@ NSString *const kOTRXLFormUseTorTag               = @"kOTRXLFormUseTorTag";
     
     [[descriptor formRowWithTag:kOTRXLFormUsernameTextFieldTag] setValue:account.username];
     [[descriptor formRowWithTag:kOTRXLFormPasswordTextFieldTag] setValue:account.password];
-    [[descriptor formRowWithTag:kOTRXLFormRememberPasswordSwitchTag] setValue:@(account.rememberPassword)];
+    //[[descriptor formRowWithTag:kOTRXLFormRememberPasswordSwitchTag] setValue:@(account.rememberPassword)];
     [[descriptor formRowWithTag:kOTRXLFormLoginAutomaticallySwitchTag] setValue:@(account.autologin)];
     
     if([account isKindOfClass:[OTRXMPPAccount class]]) {
@@ -181,7 +181,7 @@ NSString *const kOTRXLFormUseTorTag               = @"kOTRXLFormUseTorTag";
             case OTRAccountTypeXMPPTor:{
                 [basicSection addFormRow:[self usernameTextFieldRowDescriptorWithValue:nil]];
                 [basicSection addFormRow:[self passwordTextFieldRowDescriptorWithValue:nil]];
-                [basicSection addFormRow:[self rememberPasswordRowDescriptorWithValue:YES]];
+                //[basicSection addFormRow:[self rememberPasswordRowDescriptorWithValue:YES]];
                 [basicSection addFormRow:[self loginAutomaticallyRowDescriptorWithValue:YES]];
                 
                 //[advancedSection addFormRow:[self hostnameRowDescriptorWithValue:nil]];
