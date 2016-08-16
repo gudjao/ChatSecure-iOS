@@ -1051,14 +1051,14 @@ NSString *const OTRXMPPLoginErrorKey = @"OTRXMPPLoginErrorKey";
     </iq>
     */
     
+    /*
     NSArray *fields = @[
                         [XMPPMessageArchiveManagement fieldWithVar:@"with" type:nil andValue:[[XMPPJID jidWithString:buddy.username] full]]
                         ];
     
     [self.xmppMessageArchive retrieveMessageArchiveWithFields:fields
                                                 withResultSet:nil];
-    
-    //[self.xmppMessageArchive retrieveFormFields];
+     */
 }
 
 - (NSString*) accountName

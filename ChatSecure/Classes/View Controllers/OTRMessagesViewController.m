@@ -1179,7 +1179,6 @@ typedef NS_ENUM(int, OTRDropDownType) {
                date:[NSDate date]];
                */
               
-              
           } else {
               NSLog(@"Block upload error: %@, %lu", errorResult, (long)code);
           }
@@ -1225,7 +1224,7 @@ typedef NS_ENUM(int, OTRDropDownType) {
     }
     message.transportedSecurely = YES;
     
-    NSString *newPath = [OTRMediaFileManager pathForMediaItem:videoItem buddyUniqueId:message.uniqueId];
+    NSString *newPath = [OTRMediaFileManager pathForMediaItem:videoItem buddyUniqueId:message.buddyUniqueId];
     [[OTRMediaFileManager sharedInstance] copyDataFromFilePath:videoURL.path toEncryptedPath:newPath completionQueue:dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0) completion:^(NSError *error) {
         
         //        if ([[NSFileManager defaultManager] fileExistsAtPath:videoURL.path]) {

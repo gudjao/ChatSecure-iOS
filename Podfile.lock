@@ -412,7 +412,7 @@ CHECKOUT OPTIONS:
     :commit: d2ff3b17fccb0946aa8d3abafd56d06af3ea061b
     :git: https://github.com/gudjao/JSQMessagesViewController.git
   PINRemoteImage:
-    :commit: 3a6bc57ae7aadceae07e9f5064ab4a622c245710
+    :commit: d5c5c360444cf16ea768f289a2083f18efdd7586
     :git: https://github.com/pinterest/PINRemoteImage.git
 
 SPEC CHECKSUMS:
