@@ -130,9 +130,18 @@
             room.subject = subject;
         }
         
+        NSLog(@"Room JID: %@", jid);
         NSLog(@"Did create room: %@", room);
         [room saveWithTransaction:transaction];
     }];
+    
+    /*
+    
+     <message xmlns="jabber:client" from="linfiesto@upsexpress.com/converse.js-36357987" to="jalcantara29@upsexpress.com" id="ccd46189-8ad0-4d5d-8945-974127ce7e0f"><x xmlns="jabber:x:conference" jid="testroom@conference.upsexpress.com" reason=""/></message>
+     
+     <message xmlns="jabber:client" from="testgroup3@conference.upsexpress.com" to="jalcantara29@upsexpress.com" type="normal"><archived xmlns="urn:xmpp:mam:tmp" by="upsexpress.com" id="1471419254476247"/><stanza-id xmlns="urn:xmpp:sid:0" by="upsexpress.com" id="1471419254476247"/><x xmlns="http://jabber.org/protocol/muc#user"><invite from="gsabulaan2@upsexpress.com/bentanayan"><reason>Please join me in a conference</reason></invite></x><x xmlns="jabber:x:conference" jid="testgroup3@conference.upsexpress.com">Please join me in a conference</x><body>gsabulaan2@upsexpress.com/bentanayan invites you to the room testgroup3@conference.upsexpress.com (Please join me in a conference) </body></message>
+    */
+
     
     //Get history if any
     NSXMLElement *historyElement = nil;

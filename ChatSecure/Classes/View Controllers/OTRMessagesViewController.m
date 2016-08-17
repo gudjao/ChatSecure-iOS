@@ -1117,8 +1117,6 @@ typedef NS_ENUM(int, OTRDropDownType) {
 
 - (void)sendMediaCloudinaryItem:(OTRMediaItem *)mediaItem data:(id)data message:(id)message type:(NSString *)type {
     
-    __weak OTRMessagesViewController *weakSelf = self;
-    
     CLCloudinary *cloudinary = [[CLCloudinary alloc] initWithUrl:UPS_CLOUDINARY_URL];
     
     CLUploader *uploader = [[CLUploader alloc] init:cloudinary delegate:nil];
@@ -1138,6 +1136,11 @@ typedef NS_ENUM(int, OTRDropDownType) {
                              @"resource_type" : type,
                              @"format" : @"mp4"
                              };
+    } else if([type isEqualToString:@"audio"]) {
+        cloudinaryOption = @{
+                             @"resource_type" : @"auto",
+                             @"format" : @"m4a"
+                             };
     } else {
         cloudinaryOption = nil;
     }
@@ -1150,7 +1153,7 @@ typedef NS_ENUM(int, OTRDropDownType) {
               NSLog(@"Block upload success. Public ID=%@, image URL=%@", publicId, successResult[@"secure_url"]);
               
               
-              if([type isEqualToString:@"video"]) {
+              if([type isEqualToString:@"video"] || [type isEqualToString:@"audio"]) {
                   if([[NSFileManager defaultManager] fileExistsAtPath:data]) {
                       NSError *err = nil;
                       [[NSFileManager defaultManager] removeItemAtPath:data error:&err];
@@ -1167,17 +1170,7 @@ typedef NS_ENUM(int, OTRDropDownType) {
                   }];
               }
               
-              NSLog(@"Cloudinary Image: %@ %@", successResult, context);
-              
               [[OTRKit sharedInstance] encodeMessage:successResult[@"secure_url"] tlvs:nil username:self.buddy.username accountName:self.account.username protocol:self.account.protocolTypeString tag:message];
-              
-              /*
-               [weakSelf didPressSendButton:self.sendButton
-               withMessageText:successResult[@"secure_url"]
-               senderId:self.senderId
-               senderDisplayName:self.senderDisplayName
-               date:[NSDate date]];
-               */
               
           } else {
               NSLog(@"Block upload error: %@, %lu", errorResult, (long)code);
@@ -1285,7 +1278,7 @@ typedef NS_ENUM(int, OTRDropDownType) {
         
         //[self sendMediaItem:audioItem data:nil tag:message];
         if ([[NSFileManager defaultManager] fileExistsAtPath:url.path]) {
-            [self sendMediaCloudinaryItem:audioItem data:url.path message:message type:@"video"];
+            [self sendMediaCloudinaryItem:audioItem data:url.path message:message type:@"audio"];
         }
         
     }];

@@ -155,7 +155,7 @@ NSString *const OTRXMPPLoginErrorKey = @"OTRXMPPLoginErrorKey";
 
 - (void)dealloc
 {
-	[self teardownStream];
+    [self teardownStream];
 }
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -164,9 +164,9 @@ NSString *const OTRXMPPLoginErrorKey = @"OTRXMPPLoginErrorKey";
 
 - (void)setupStream
 {
-	NSAssert(_xmppStream == nil, @"Method setupStream invoked multiple times");
+    NSAssert(_xmppStream == nil, @"Method setupStream invoked multiple times");
     
-	self.xmppStream = [[XMPPStream alloc] init];
+    self.xmppStream = [[XMPPStream alloc] init];
     
     //Used to fetch correct account from XMPPStream in delegate methods especailly
     self.xmppStream.tag = self.account.uniqueId;
@@ -182,83 +182,83 @@ NSString *const OTRXMPPLoginErrorKey = @"OTRXMPPLoginErrorKey";
     self.deliveryReceipts.autoSendMessageDeliveryReceipts = NO;
     self.deliveryReceipts.autoSendMessageDeliveryRequests = YES;
     [self.deliveryReceipts activate:self.xmppStream];
-	
+    
 #if !TARGET_IPHONE_SIMULATOR
-	{
-		// Want xmpp to run in the background?
-		// 
-		// P.S. - The simulator doesn't support backgrounding yet.
-		//        When you try to set the associated property on the simulator, it simply fails.
-		//        And when you background an app on the simulator,
-		//        it just queues network traffic til the app is foregrounded again.
-		//        We are patiently waiting for a fix from Apple.
-		//        If you do enableBackgroundingOnSocket on the simulator,
-		//        you will simply see an error message from the xmpp stack when it fails to set the property.
-		
-		self.xmppStream.enableBackgroundingOnSocket = YES;
-	}
+    {
+        // Want xmpp to run in the background?
+        //
+        // P.S. - The simulator doesn't support backgrounding yet.
+        //        When you try to set the associated property on the simulator, it simply fails.
+        //        And when you background an app on the simulator,
+        //        it just queues network traffic til the app is foregrounded again.
+        //        We are patiently waiting for a fix from Apple.
+        //        If you do enableBackgroundingOnSocket on the simulator,
+        //        you will simply see an error message from the xmpp stack when it fails to set the property.
+        
+        self.xmppStream.enableBackgroundingOnSocket = YES;
+    }
 #endif
-	
+    
     self.xmppMessageArchive = [[XMPPMessageArchiveManagement alloc] init];
     
-	// Setup reconnect
-	// 
-	// The XMPPReconnect module monitors for "accidental disconnections" and
-	// automatically reconnects the stream for you.
-	// There's a bunch more information in the XMPPReconnect header file.
-	
-	self.xmppReconnect = [[XMPPReconnect alloc] init];
-	
-	// Setup roster
-	// 
-	// The XMPPRoster handles the xmpp protocol stuff related to the roster.
-	// The storage for the roster is abstracted.
-	// So you can use any storage mechanism you want.
-	// You can store it all in memory, or use core data and store it on disk, or use core data with an in-memory store,
-	// or setup your own using raw SQLite, or create your own storage mechanism.
-	// You can do it however you like! It's your application.
-	// But you do need to provide the roster with some storage facility.
+    // Setup reconnect
+    //
+    // The XMPPReconnect module monitors for "accidental disconnections" and
+    // automatically reconnects the stream for you.
+    // There's a bunch more information in the XMPPReconnect header file.
+    
+    self.xmppReconnect = [[XMPPReconnect alloc] init];
+    
+    // Setup roster
+    //
+    // The XMPPRoster handles the xmpp protocol stuff related to the roster.
+    // The storage for the roster is abstracted.
+    // So you can use any storage mechanism you want.
+    // You can store it all in memory, or use core data and store it on disk, or use core data with an in-memory store,
+    // or setup your own using raw SQLite, or create your own storage mechanism.
+    // You can do it however you like! It's your application.
+    // But you do need to provide the roster with some storage facility.
     
     //DDLogInfo(@"Unique Identifier: %@",self.account.uniqueIdentifier);
-	
+    
     OTRYapDatabaseRosterStorage * rosterStorage = [[OTRYapDatabaseRosterStorage alloc] init];
-	
-	self.xmppRoster = [[XMPPRoster alloc] initWithRosterStorage:rosterStorage];
-	
-	self.xmppRoster.autoFetchRoster = YES;
+    
+    self.xmppRoster = [[XMPPRoster alloc] initWithRosterStorage:rosterStorage];
+    
+    self.xmppRoster.autoFetchRoster = YES;
     self.xmppRoster.autoClearAllUsersAndResources = NO;
-	self.xmppRoster.autoAcceptKnownPresenceSubscriptionRequests = YES;
-	
-	// Setup vCard support
-	// 
-	// The vCard Avatar module works in conjuction with the standard vCard Temp module to download user avatars.
-	// The XMPPRoster will automatically integrate with XMPPvCardAvatarModule to cache roster photos in the roster.
-	
+    self.xmppRoster.autoAcceptKnownPresenceSubscriptionRequests = YES;
+    
+    // Setup vCard support
+    //
+    // The vCard Avatar module works in conjuction with the standard vCard Temp module to download user avatars.
+    // The XMPPRoster will automatically integrate with XMPPvCardAvatarModule to cache roster photos in the roster.
+    
     OTRvCardYapDatabaseStorage * vCardStorage  = [[OTRvCardYapDatabaseStorage alloc] init];
-	self.xmppvCardTempModule = [[XMPPvCardTempModule alloc] initWithvCardStorage:vCardStorage];
-	
-	self.xmppvCardAvatarModule = [[XMPPvCardAvatarModule alloc] initWithvCardTempModule:self.xmppvCardTempModule];
-	
-	// Setup capabilities
-	// 
-	// The XMPPCapabilities module handles all the complex hashing of the caps protocol (XEP-0115).
-	// Basically, when other clients broadcast their presence on the network
-	// they include information about what capabilities their client supports (audio, video, file transfer, etc).
-	// But as you can imagine, this list starts to get pretty big.
-	// This is where the hashing stuff comes into play.
-	// Most people running the same version of the same client are going to have the same list of capabilities.
-	// So the protocol defines a standardized way to hash the list of capabilities.
-	// Clients then broadcast the tiny hash instead of the big list.
-	// The XMPPCapabilities protocol automatically handles figuring out what these hashes mean,
-	// and also persistently storing the hashes so lookups aren't needed in the future.
-	// 
-	// Similarly to the roster, the storage of the module is abstracted.
-	// You are strongly encouraged to persist caps information across sessions.
-	// 
-	// The XMPPCapabilitiesCoreDataStorage is an ideal solution.
-	// It can also be shared amongst multiple streams to further reduce hash lookups.
-	
-	self.xmppCapabilitiesStorage = [[XMPPCapabilitiesCoreDataStorage alloc] initWithInMemoryStore];
+    self.xmppvCardTempModule = [[XMPPvCardTempModule alloc] initWithvCardStorage:vCardStorage];
+    
+    self.xmppvCardAvatarModule = [[XMPPvCardAvatarModule alloc] initWithvCardTempModule:self.xmppvCardTempModule];
+    
+    // Setup capabilities
+    //
+    // The XMPPCapabilities module handles all the complex hashing of the caps protocol (XEP-0115).
+    // Basically, when other clients broadcast their presence on the network
+    // they include information about what capabilities their client supports (audio, video, file transfer, etc).
+    // But as you can imagine, this list starts to get pretty big.
+    // This is where the hashing stuff comes into play.
+    // Most people running the same version of the same client are going to have the same list of capabilities.
+    // So the protocol defines a standardized way to hash the list of capabilities.
+    // Clients then broadcast the tiny hash instead of the big list.
+    // The XMPPCapabilities protocol automatically handles figuring out what these hashes mean,
+    // and also persistently storing the hashes so lookups aren't needed in the future.
+    //
+    // Similarly to the roster, the storage of the module is abstracted.
+    // You are strongly encouraged to persist caps information across sessions.
+    //
+    // The XMPPCapabilitiesCoreDataStorage is an ideal solution.
+    // It can also be shared amongst multiple streams to further reduce hash lookups.
+    
+    self.xmppCapabilitiesStorage = [[XMPPCapabilitiesCoreDataStorage alloc] initWithInMemoryStore];
     self.xmppCapabilities = [[XMPPCapabilities alloc] initWithCapabilitiesStorage:self.xmppCapabilitiesStorage];
     
     self.xmppCapabilities.autoFetchHashedCapabilities = YES;
@@ -266,19 +266,19 @@ NSString *const OTRXMPPLoginErrorKey = @"OTRXMPPLoginErrorKey";
     self.xmppCapabilities.autoFetchMyServerCapabilities = YES;
     
     
-	// Activate xmpp modules
+    // Activate xmpp modules
     
-	[self.xmppReconnect         activate:self.xmppStream];
-	[self.xmppRoster            activate:self.xmppStream];
-	[self.xmppvCardTempModule   activate:self.xmppStream];
-	[self.xmppvCardAvatarModule activate:self.xmppStream];
-	[self.xmppCapabilities      activate:self.xmppStream];
+    [self.xmppReconnect         activate:self.xmppStream];
+    [self.xmppRoster            activate:self.xmppStream];
+    [self.xmppvCardTempModule   activate:self.xmppStream];
+    [self.xmppvCardAvatarModule activate:self.xmppStream];
+    [self.xmppCapabilities      activate:self.xmppStream];
     [self.xmppMessageArchive    activate:self.xmppStream];
     
-	// Add ourself as a delegate to anything we may be interested in
+    // Add ourself as a delegate to anything we may be interested in
     
-	[self.xmppStream addDelegate:self delegateQueue:self.workQueue];
-	[self.xmppRoster addDelegate:self delegateQueue:self.workQueue];
+    [self.xmppStream addDelegate:self delegateQueue:self.workQueue];
+    [self.xmppRoster addDelegate:self delegateQueue:self.workQueue];
     [self.xmppCapabilities addDelegate:self delegateQueue:self.workQueue];
     [self.xmppvCardTempModule addDelegate:self delegateQueue:self.workQueue];
     [self.xmppMessageArchive addDelegate:self delegateQueue:self.workQueue];
@@ -337,7 +337,7 @@ NSString *const OTRXMPPLoginErrorKey = @"OTRXMPPLoginErrorKey";
     [_xmppMessageArchive deactivate];
     
     [_xmppStream disconnect];
-
+    
     _xmppStream = nil;
     _xmppMessageArchive = nil;
     _xmppReconnect = nil;
@@ -356,12 +356,12 @@ NSString *const OTRXMPPLoginErrorKey = @"OTRXMPPLoginErrorKey";
 
 // It's easy to create XML elments to send and to read received XML elements.
 // You have the entire NSXMLElement and NSXMLNode API's.
-// 
+//
 // In addition to this, the NSXMLElement+XMPP category provides some very handy methods for working with XMPP.
-// 
+//
 // On the iPhone, Apple chose not to include the full NSXML suite.
 // No problem - we use the KissXML library as a drop in replacement.
-// 
+//
 // For more information on working with XML elements, see the Wiki article:
 // http://code.google.com/p/xmppframework/wiki/WorkingWithElements
 
@@ -382,16 +382,16 @@ NSString *const OTRXMPPLoginErrorKey = @"OTRXMPPLoginErrorKey";
     self.connectionStatus = OTRProtocolConnectionStatusConnected;
     [[NSNotificationCenter defaultCenter]
      postNotificationName:kOTRProtocolLoginSuccess object:self];
-	XMPPPresence *presence = [XMPPPresence presence]; // type="available" is implicit
-	
-	[[self xmppStream] sendElement:presence];
+    XMPPPresence *presence = [XMPPPresence presence]; // type="available" is implicit
+    
+    [[self xmppStream] sendElement:presence];
 }
 
 - (void)goOffline
 {
-	XMPPPresence *presence = [XMPPPresence presenceWithType:@"unavailable"];
-	
-	[[self xmppStream] sendElement:presence];
+    XMPPPresence *presence = [XMPPPresence presenceWithType:@"unavailable"];
+    
+    [[self xmppStream] sendElement:presence];
 }
 
 - (NSString *)accountDomainWithError:(id)error;
@@ -425,7 +425,7 @@ NSString *const OTRXMPPLoginErrorKey = @"OTRXMPPLoginErrorKey";
     
     self.JID = [XMPPJID jidWithString:myJID resource:resource];
     
-	[self.xmppStream setMyJID:self.JID];
+    [self.xmppStream setMyJID:self.JID];
     
     self.password = myPassword;
 }
@@ -465,22 +465,22 @@ NSString *const OTRXMPPLoginErrorKey = @"OTRXMPPLoginErrorKey";
         [self.xmppStream disconnect];
     }
     
-	[self.xmppStream setMyJID:self.JID];
+    [self.xmppStream setMyJID:self.JID];
     //DDLogInfo(@"myJID %@",myJID);
-	if (![self.xmppStream isDisconnected]) {
+    if (![self.xmppStream isDisconnected]) {
         [self authenticateWithStream:self.xmppStream];
-		return YES;
-	}
+        return YES;
+    }
     
-	//
-	// If you don't want to use the Settings view to set the JID, 
-	// uncomment the section below to hard code a JID and password.
-	//
-	// Replace me with the proper JID and password:
-	//	myJID = @"user@gmail.com/xmppframework";
-	//	myPassword = @"";
+    //
+    // If you don't want to use the Settings view to set the JID,
+    // uncomment the section below to hard code a JID and password.
+    //
+    // Replace me with the proper JID and password:
+    //	myJID = @"user@gmail.com/xmppframework";
+    //	myPassword = @"";
     
-	
+    
     
     
     NSError * error = nil;
@@ -494,19 +494,19 @@ NSString *const OTRXMPPLoginErrorKey = @"OTRXMPPLoginErrorKey";
     }
     
     [self.xmppStream setHostPort:self.account.port];
-	
     
-	error = nil;
-	if (![self.xmppStream connectWithTimeout:XMPPStreamTimeoutNone error:&error])
-	{
-		[self failedToConnect:error];
-        
-		DDLogError(@"Error connecting: %@", error);
-        
-		return NO;
-	}
     
-	return YES;
+    error = nil;
+    if (![self.xmppStream connectWithTimeout:XMPPStreamTimeoutNone error:&error])
+    {
+        [self failedToConnect:error];
+        
+        DDLogError(@"Error connecting: %@", error);
+        
+        return NO;
+    }
+    
+    return YES;
 }
 
 - (void) disconnectSocketOnly:(BOOL)socketOnly {
@@ -588,15 +588,15 @@ NSString *const OTRXMPPLoginErrorKey = @"OTRXMPPLoginErrorKey";
     }
 }
 
-- (void)xmppStream:(XMPPStream *)sender socketDidConnect:(GCDAsyncSocket *)socket 
+- (void)xmppStream:(XMPPStream *)sender socketDidConnect:(GCDAsyncSocket *)socket
 {
-	DDLogVerbose(@"%@: %@", THIS_FILE, THIS_METHOD);
+    DDLogVerbose(@"%@: %@", THIS_FILE, THIS_METHOD);
     [self changeLoginStatus:OTRLoginStatusConnected error:nil];
 }
 
 - (void)xmppStream:(XMPPStream *)sender willSecureWithSettings:(NSMutableDictionary *)settings
 {
-	DDLogVerbose(@"%@: %@", THIS_FILE, THIS_METHOD);
+    DDLogVerbose(@"%@: %@", THIS_FILE, THIS_METHOD);
     
     settings[GCDAsyncSocketSSLProtocolVersionMin] = @(kTLSProtocol1);
     settings[GCDAsyncSocketSSLCipherSuites] = [OTRUtilities cipherSuites];
@@ -607,14 +607,14 @@ NSString *const OTRXMPPLoginErrorKey = @"OTRXMPPLoginErrorKey";
 
 - (void)xmppStreamDidSecure:(XMPPStream *)sender
 {
-	DDLogVerbose(@"%@: %@", THIS_FILE, THIS_METHOD);
+    DDLogVerbose(@"%@: %@", THIS_FILE, THIS_METHOD);
     
     [self changeLoginStatus:OTRLoginStatusSecured error:nil];
 }
 
 - (void)xmppStreamDidConnect:(XMPPStream *)sender
 {
-	DDLogVerbose(@"%@: %@", THIS_FILE, THIS_METHOD);
+    DDLogVerbose(@"%@: %@", THIS_FILE, THIS_METHOD);
     
     if (self.isRegisteringNewAccount) {
         [self registerNewAccountWithPassword:self.password stream:sender];
@@ -656,13 +656,13 @@ NSString *const OTRXMPPLoginErrorKey = @"OTRXMPPLoginErrorKey";
 
 - (void)xmppStreamDidAuthenticate:(XMPPStream *)sender
 {
-	DDLogVerbose(@"%@: %@", THIS_FILE, THIS_METHOD);
+    DDLogVerbose(@"%@: %@", THIS_FILE, THIS_METHOD);
     if ([sender supportsStreamManagement]) {
         [self.streamManagement enableStreamManagementWithResumption:YES maxTimeout:0];
     }
     
     self.connectionStatus = OTRProtocolConnectionStatusConnected;
-	[self goOnline];
+    [self goOnline];
     
     
     [self changeLoginStatus:OTRLoginStatusAuthenticated error:nil];
@@ -677,7 +677,7 @@ NSString *const OTRXMPPLoginErrorKey = @"OTRXMPPLoginErrorKey";
 
 - (void)xmppStream:(XMPPStream *)sender didNotAuthenticate:(NSXMLElement *)error
 {
-	DDLogVerbose(@"%@: %@", THIS_FILE, THIS_METHOD);
+    DDLogVerbose(@"%@: %@", THIS_FILE, THIS_METHOD);
     self.connectionStatus = OTRProtocolConnectionStatusDisconnected;
     NSError *err = [OTRXMPPError errorForXMLElement:error];
     [self failedToConnect:err];
@@ -687,8 +687,8 @@ NSString *const OTRXMPPLoginErrorKey = @"OTRXMPPLoginErrorKey";
 
 - (BOOL)xmppStream:(XMPPStream *)sender didReceiveIQ:(XMPPIQ *)iq
 {
-	DDLogVerbose(@"%@: %@ - %@", THIS_FILE, THIS_METHOD, iq);
-	return NO;
+    DDLogVerbose(@"%@: %@ - %@", THIS_FILE, THIS_METHOD, iq);
+    return NO;
 }
 
 - (void)xmppStreamDidRegister:(XMPPStream *)sender {
@@ -713,7 +713,7 @@ NSString *const OTRXMPPLoginErrorKey = @"OTRXMPPLoginErrorKey";
 
 - (void)xmppStream:(XMPPStream *)sender didReceiveMessage:(XMPPMessage *)xmppMessage
 {
-	DDLogVerbose(@"%@: %@ %@", THIS_FILE, THIS_METHOD, xmppMessage);
+    DDLogVerbose(@"%@: %@ %@", THIS_FILE, THIS_METHOD, xmppMessage);
 }
 
 - (void)xmppStream:(XMPPStream *)sender didReceivePresence:(XMPPPresence *)presence
@@ -725,12 +725,12 @@ NSString *const OTRXMPPLoginErrorKey = @"OTRXMPPLoginErrorKey";
         NSLog(@"STATUS: %d", [status attributeIntValueForName:@"code"]);
     }
     
-	DDLogVerbose(@"%@: %@ - %@\nType: %@\nShow: %@\nStatus: %@", THIS_FILE, THIS_METHOD, [presence from], [presence type], [presence show],[presence status]);
+    DDLogVerbose(@"%@: %@ - %@\nType: %@\nShow: %@\nStatus: %@", THIS_FILE, THIS_METHOD, [presence from], [presence type], [presence show],[presence status]);
 }
 
 - (void)xmppStream:(XMPPStream *)sender didReceiveError:(id)error
 {
-	DDLogVerbose(@"%@: %@ %@", THIS_FILE, THIS_METHOD, error);
+    DDLogVerbose(@"%@: %@ %@", THIS_FILE, THIS_METHOD, error);
 }
 
 - (void)xmppStream:(XMPPStream *)sender didFailToSendIQ:(XMPPIQ *)iq error:(NSError *)error
@@ -741,7 +741,7 @@ NSString *const OTRXMPPLoginErrorKey = @"OTRXMPPLoginErrorKey";
 - (void)xmppStream:(XMPPStream *)sender didFailToSendMessage:(XMPPMessage *)message error:(NSError *)error
 {
     DDLogVerbose(@"%@: %@ %@ %@", THIS_FILE, THIS_METHOD, message, error);
-
+    
     if ([message.elementID length]) {
         [self.databaseConnection readWriteWithBlock:^(YapDatabaseReadWriteTransaction *transaction) {
             [transaction enumerateMessagesWithId:message.elementID block:^(id<OTRMessageProtocol> _Nonnull databaseMessage, BOOL * _Null_unspecified stop) {
@@ -829,7 +829,7 @@ NSString *const OTRXMPPLoginErrorKey = @"OTRXMPPLoginErrorKey";
 
 - (void)xmppRoster:(XMPPRoster *)sender didReceiveRosterItem:(NSXMLElement *)item {
     DDLogVerbose(@"%@: %@ %@", THIS_FILE, THIS_METHOD, item);
-
+    
     // Because XMPP sucks, there's no way to know if a vCard has changed without fetching all of them again
     // To preserve user mobile data, just fetch each vCard once, only if it's never been fetched
     // Otherwise you'll only receive vCard updates if someone updates their avatar
@@ -855,7 +855,7 @@ NSString *const OTRXMPPLoginErrorKey = @"OTRXMPPLoginErrorKey";
 {
     DDLogVerbose(@"%@: %@ %@", THIS_FILE, THIS_METHOD, presence);
     
-	NSString *jidStrBare = [presence fromStr];
+    NSString *jidStrBare = [presence fromStr];
     
     [self.databaseConnection readWriteWithBlock:^(YapDatabaseReadWriteTransaction *transaction) {
         OTRXMPPPresenceSubscriptionRequest *request = [OTRXMPPPresenceSubscriptionRequest fetchPresenceSubscriptionRequestWithJID:jidStrBare accontUniqueId:self.account.uniqueId transaction:transaction];
@@ -875,33 +875,33 @@ NSString *const OTRXMPPLoginErrorKey = @"OTRXMPPLoginErrorKey";
     DDLogVerbose(@"%@: %@ %@", THIS_FILE, THIS_METHOD, iq);
     //verry unclear what this delegate call is supposed to do with jabber.ccc.de it seems to have all the subscription=both,none and jid
     /*
-    if ([iq isSetIQ] && [[[[[[iq elementsForName:@"query"] firstObject] elementsForName:@"item"] firstObject] attributeStringValueForName:@"subscription"] isEqualToString:@"from"]) {
-        NSString *jidString = [[[[[iq elementsForName:@"query"] firstObject] elementsForName:@"item"] firstObject] attributeStringValueForName:@"jid"];
-        
-        [self.databaseConnection readWriteWithBlock:^(YapDatabaseReadWriteTransaction *transaction) {
-            OTRXMPPPresenceSubscriptionRequest *request = [OTRXMPPPresenceSubscriptionRequest fetchPresenceSubscriptionRequestWithJID:jidString accontUniqueId:self.account.uniqueId transaction:transaction];
-            if (!request) {
-                request = [[OTRXMPPPresenceSubscriptionRequest alloc] init];
-            }
-            
-            request.jid = jidString;
-            request.accountUniqueId = self.account.uniqueId;
-            
-            [transaction setObject:request forKey:request.uniqueId inCollection:[OTRXMPPPresenceSubscriptionRequest collection]];
-        }];
-    }
-    else if ([iq isSetIQ] && [[[[[[iq elementsForName:@"query"] firstObject] elementsForName:@"item"] firstObject] attributeStringValueForName:@"subscription"] isEqualToString:@"none"])
-    {
-        [self.databaseConnection readWriteWithBlock:^(YapDatabaseReadWriteTransaction *transaction) {
-            NSString *jidString = [[[[[iq elementsForName:@"query"] firstObject] elementsForName:@"item"] firstObject] attributeStringValueForName:@"jid"];
-            
-            OTRXMPPBuddy *buddy = [[OTRXMPPBuddy fetchBuddyWithUsername:jidString withAccountUniqueId:self.account.uniqueId transaction:transaction] copy];
-            buddy.pendingApproval = YES;
-            [buddy saveWithTransaction:transaction];
-        }];
-    }
-    
-    */
+     if ([iq isSetIQ] && [[[[[[iq elementsForName:@"query"] firstObject] elementsForName:@"item"] firstObject] attributeStringValueForName:@"subscription"] isEqualToString:@"from"]) {
+     NSString *jidString = [[[[[iq elementsForName:@"query"] firstObject] elementsForName:@"item"] firstObject] attributeStringValueForName:@"jid"];
+     
+     [self.databaseConnection readWriteWithBlock:^(YapDatabaseReadWriteTransaction *transaction) {
+     OTRXMPPPresenceSubscriptionRequest *request = [OTRXMPPPresenceSubscriptionRequest fetchPresenceSubscriptionRequestWithJID:jidString accontUniqueId:self.account.uniqueId transaction:transaction];
+     if (!request) {
+     request = [[OTRXMPPPresenceSubscriptionRequest alloc] init];
+     }
+     
+     request.jid = jidString;
+     request.accountUniqueId = self.account.uniqueId;
+     
+     [transaction setObject:request forKey:request.uniqueId inCollection:[OTRXMPPPresenceSubscriptionRequest collection]];
+     }];
+     }
+     else if ([iq isSetIQ] && [[[[[[iq elementsForName:@"query"] firstObject] elementsForName:@"item"] firstObject] attributeStringValueForName:@"subscription"] isEqualToString:@"none"])
+     {
+     [self.databaseConnection readWriteWithBlock:^(YapDatabaseReadWriteTransaction *transaction) {
+     NSString *jidString = [[[[[iq elementsForName:@"query"] firstObject] elementsForName:@"item"] firstObject] attributeStringValueForName:@"jid"];
+     
+     OTRXMPPBuddy *buddy = [[OTRXMPPBuddy fetchBuddyWithUsername:jidString withAccountUniqueId:self.account.uniqueId transaction:transaction] copy];
+     buddy.pendingApproval = YES;
+     [buddy saveWithTransaction:transaction];
+     }];
+     }
+     
+     */
     
     
 }
@@ -970,7 +970,7 @@ NSString *const OTRXMPPLoginErrorKey = @"OTRXMPPLoginErrorKey";
         }
         [transaction setObject:account forKey:key inCollection:collection];
     }];
-    XMPPJID *nodeJID = [XMPPJID jidWithString:endpoint]; 
+    XMPPJID *nodeJID = [XMPPJID jidWithString:endpoint];
     NSString *tokenString = token.pushToken.tokenString;
     if (tokenString.length > 0) {
         PushController *pushController = [OTRAppDelegate appDelegate].pushController;
@@ -1007,57 +1007,38 @@ NSString *const OTRXMPPLoginErrorKey = @"OTRXMPPLoginErrorKey";
         NSString * messageID = message.messageId;
         XMPPMessage * xmppMessage = [XMPPMessage messageWithType:@"chat" to:[XMPPJID jidWithString:buddy.username] elementID:messageID];
         [xmppMessage addBody:text];
-
+        
         [xmppMessage addActiveChatState];
         
         if ([OTRKit stringStartsWithOTRPrefix:text]) {
             [xmppMessage addPrivateMessageCarbons];
         }
-		
-		[self.xmppStream sendElement:xmppMessage];
+        
+        [self.xmppStream sendElement:xmppMessage];
     }
     
-    // <iq type="set">
-    //   <query xmlns="jabber:iq:roster">
-    //     <item jid="bareJID" name="nickname"/>
-    //   </query>
-    // </iq>
-    
-    //NSXMLElement *item = [NSXMLElement elementWithName:@"item"];
-    //[item addAttributeWithName:@"jid" stringValue:[jid bare]];
-    //[item addAttributeWithName:@"name" stringValue:nickname];
-    
-//    NSXMLElement *query = [NSXMLElement elementWithName:@"query" xmlns:@"jabber:iq:roster"];
-//    //[query addChild:item];
-//    
-//    XMPPIQ *iq = [XMPPIQ iqWithType:@"get"];
-//    [iq addAttributeWithName:@"from" stringValue:[[XMPPJID jidWithString:buddy.username] fullUPS]];
-//    [iq addChild:query];
-//    
-//    [self.xmppStream sendElement:iq];
+    /*
+     <iq type="set" id="B881B8DF-DD45-4483-B276-A8B602D19483">
+     <query xmlns="urn:xmpp:mam:1" queryid="EDDFF06F-DFE3-4A62-882E-A826B4805533">
+     <x xmlns="jabber:x:data" type="submit">
+     <field var="FORM_TYPE" type="hidden">
+     <value>urn:xmpp:mam:1</value>
+     </field>
+     <field var="with">
+     <value>vtomol1234@upsexpress.com</value>
+     </field>
+     </x>
+     </query>
+     </iq>
+     */
     
     /*
-    <iq type="set" id="B881B8DF-DD45-4483-B276-A8B602D19483">
-        <query xmlns="urn:xmpp:mam:1" queryid="EDDFF06F-DFE3-4A62-882E-A826B4805533">
-            <x xmlns="jabber:x:data" type="submit">
-                <field var="FORM_TYPE" type="hidden">
-                    <value>urn:xmpp:mam:1</value>
-                </field>
-                <field var="with">
-                    <value>vtomol1234@upsexpress.com</value>
-                </field>
-            </x>
-        </query>
-    </iq>
-    */
-    
-    /*
-    NSArray *fields = @[
-                        [XMPPMessageArchiveManagement fieldWithVar:@"with" type:nil andValue:[[XMPPJID jidWithString:buddy.username] full]]
-                        ];
-    
-    [self.xmppMessageArchive retrieveMessageArchiveWithFields:fields
-                                                withResultSet:nil];
+     NSArray *fields = @[
+     [XMPPMessageArchiveManagement fieldWithVar:@"with" type:nil andValue:[[XMPPJID jidWithString:buddy.username] full]]
+     ];
+     
+     [self.xmppMessageArchive retrieveMessageArchiveWithFields:fields
+     withResultSet:nil];
      */
 }
 
@@ -1184,9 +1165,9 @@ NSString *const OTRXMPPLoginErrorKey = @"OTRXMPPLoginErrorKey";
     [[OTRDatabaseManager sharedInstance].readWriteDatabaseConnection readWriteWithBlock:^(YapDatabaseReadWriteTransaction *transaction) {
         [transaction removeObjectsForKeys:[buddies valueForKey:NSStringFromSelector(@selector(uniqueId))] inCollection:[OTRXMPPBuddy collection]];
     }];
-
-
-
+    
+    
+    
 }
 -(void)blockBuddies:(NSArray *)buddies
 {
@@ -1208,7 +1189,7 @@ managedBuddyObjectID
 -(NSTimer *)inactiveChatStateTimerForBuddyObjectID:(NSString *)
 managedBuddyObjectID
 {
-   return [self buddyTimersForBuddyObjectID:managedBuddyObjectID].inactiveChatStateTimer;
+    return [self buddyTimersForBuddyObjectID:managedBuddyObjectID].inactiveChatStateTimer;
     
 }
 -(NSTimer *)pausedChatStateTimerForBuddyObjectID:(NSString *)
@@ -1325,7 +1306,7 @@ managedBuddyObjectID
 // Delivery receipts
 - (void) sendDeliveryReceiptForMessage:(OTRMessage*)message {
     [self.databaseConnection asyncReadWithBlock:^(YapDatabaseReadTransaction * _Nonnull transaction) {
-        OTRBuddy *buddy = [OTRBuddy fetchObjectWithUniqueID:message.buddyUniqueId transaction:transaction];        
+        OTRBuddy *buddy = [OTRBuddy fetchObjectWithUniqueID:message.buddyUniqueId transaction:transaction];
         XMPPMessage *tempMessage = [XMPPMessage messageWithType:@"chat" elementID:message.messageId];
         [tempMessage addAttributeWithName:@"from" stringValue:buddy.username];
         XMPPMessage *receiptMessage = [tempMessage generateReceiptResponse];

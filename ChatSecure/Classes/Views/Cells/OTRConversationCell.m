@@ -80,7 +80,7 @@
     
     __block OTRAccount *account = nil;
     __block id <OTRMessageProtocol> lastMessage = nil;
-
+    
     
     [[OTRDatabaseManager sharedInstance].readOnlyDatabaseConnection readWithBlock:^(YapDatabaseReadTransaction *transaction) {
         account = [transaction objectForKey:[thread threadAccountIdentifier] inCollection:[OTRAccount collection]];
@@ -105,11 +105,17 @@
         //NSLog(@"debug last unread message: %@", lastMessage.text);
         self.nameLabel.font = [UIFont boldSystemFontOfSize:fontSize];
         self.nameLabel.textColor = [UIColor blackColor];
+        
+        self.conversationLabel.font = [UIFont systemFontOfSize:fontSize];
+        self.conversationLabel.textColor = [UIColor colorWithWhite:.1 alpha:1.0];
     }
     else {
         //NSLog(@"debug last read message: %@", lastMessage.text);
         self.nameLabel.font = [UIFont systemFontOfSize:fontSize];
         self.nameLabel.textColor = [UIColor colorWithWhite:.45 alpha:1.0];
+        
+        self.conversationLabel.font = [UIFont systemFontOfSize:fontSize];
+        self.conversationLabel.textColor = [UIColor colorWithWhite:.6 alpha:1.0];
     }
     self.dateLabel.textColor = self.nameLabel.textColor;
     
@@ -149,7 +155,7 @@
     else if (timeInterval < 60*60*25*365) {
         NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
         dateFormatter.dateFormat = [NSDateFormatter dateFormatFromTemplate:@"dMMM" options:0
-                                                                   locale:[NSLocale currentLocale]];
+                                                                    locale:[NSLocale currentLocale]];
         dateString = [dateFormatter stringFromDate:messageDate];
     }
     else {
