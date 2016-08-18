@@ -23,7 +23,7 @@
 @import Foundation;
 @import UIKit;
 
-//#import "XMPPMessageArchiveManagement.h"
+#import "XMPPFramework/XMPPResultSet.h"
 #import "XMPPFramework/XMPPMessageArchiveManagement.h"
 
 #import "OTRBuddy.h"

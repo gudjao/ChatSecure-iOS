@@ -112,6 +112,7 @@ PODS:
   - SSKeychain (1.4.1)
   - TTTAttributedLabel (1.13.4)
   - TUSafariActivity (1.0.4)
+  - UIScrollView-InfiniteScroll (0.9.1)
   - uservoice-iphone-sdk (3.2.8)
   - VTAcknowledgementsViewController (0.17)
   - XLForm (3.2.0)
@@ -370,6 +371,7 @@ DEPENDENCIES:
   - SSKeychain (~> 1.2)
   - TTTAttributedLabel (~> 1.10)
   - TUSafariActivity (~> 1.0)
+  - UIScrollView-InfiniteScroll
   - uservoice-iphone-sdk (~> 3.2)
   - VTAcknowledgementsViewController (~> 0.15)
   - XLForm (~> 3.1)
@@ -406,7 +408,7 @@ EXTERNAL SOURCES:
 
 CHECKOUT OPTIONS:
   CocoaAsyncSocket:
-    :commit: b392b5c15151b65823223713985463e6627cf3ad
+    :commit: f3cf8a6fb27de57bd70b40cf4173d695d4a17b22
     :git: https://github.com/robbiehanson/CocoaAsyncSocket.git
   JSQMessagesViewController:
     :commit: d2ff3b17fccb0946aa8d3abafd56d06af3ea061b
@@ -458,6 +460,7 @@ SPEC CHECKSUMS:
   SSKeychain: 55cc80f66f5c73da827e3077f02e43528897db41
   TTTAttributedLabel: 0a2ac7b2dd726d32a070dafb01446026b11e624f
   TUSafariActivity: afc55a00965377939107ce4fdc7f951f62454546
+  UIScrollView-InfiniteScroll: 14e204c50ca4040467e1cbfa141dad7a18919b56
   uservoice-iphone-sdk: 7e58403a8bb7d1de7d960eee728b0a5d184594ee
   VTAcknowledgementsViewController: 6056f5f5e5ed995bbf0581bed6ddd29355ca9a80
   XLForm: 2250b4e96ab8ffa5f3355838c79edd90de451782

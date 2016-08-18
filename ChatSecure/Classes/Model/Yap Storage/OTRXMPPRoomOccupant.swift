@@ -27,7 +27,11 @@ public class OTRXMPPRoomOccupant: OTRYapDatabaseObject, YapDatabaseRelationshipN
     public var roomUniqueId:String?
     
     public func avatarImage() -> UIImage {
-        return OTRImages.avatarImageWithUniqueIdentifier(self.uniqueId, avatarData: nil, displayName: nil, username: self.realJID)
+        if self.realJID != nil {
+            return OTRImages.avatarImageWithUniqueIdentifier(self.uniqueId, avatarData: nil, displayName: nil, username: self.realJID)
+        } else {
+            return OTRImages.avatarImageWithUniqueIdentifier(self.uniqueId, avatarData: nil, displayName: nil, username: self.roomName)
+        }
     }
     
     //MARK: YapDatabaseRelationshipNode Methods

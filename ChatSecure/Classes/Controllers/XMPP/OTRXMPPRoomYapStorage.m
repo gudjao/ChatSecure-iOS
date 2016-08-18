@@ -190,8 +190,6 @@
         }
         
         occupant.roomName = [presenceJID resource];
-        
-        
     
         [occupant saveWithTransaction:transaction];
     }];

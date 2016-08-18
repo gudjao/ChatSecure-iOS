@@ -77,6 +77,7 @@ target 'ChatSecureCore' do
   #pod 'JSQMessagesViewController', :git => 'https://github.com/ChatSecure/JSQMessagesViewController', :branch => '7.2.0-send_button'
   pod 'JSQMessagesViewController', :git => 'https://github.com/gudjao/JSQMessagesViewController.git', :branch => 'custom_7.3'
   pod 'JSQSystemSoundPlayer'
+  pod 'UIScrollView-InfiniteScroll'
   
   # Submodules
   pod 'ChatSecure-Push-iOS', :path => 'Submodules/ChatSecure-Push-iOS/ChatSecure-Push-iOS.podspec'

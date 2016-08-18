@@ -118,13 +118,15 @@
                     *stop = YES;
                 }];
             }];
-            if(roomOccupant) {
+            
+            if(roomOccupant.avatarImage) {
                 UIImage *avatarImage = roomOccupant.avatarImage;
                 if (avatarImage) {
                     NSUInteger diameter = MIN(avatarImage.size.width, avatarImage.size.height);
                     imageDataSource = [JSQMessagesAvatarImageFactory avatarImageWithImage:avatarImage diameter:diameter];
                 }
             }
+            
         }
         
     }

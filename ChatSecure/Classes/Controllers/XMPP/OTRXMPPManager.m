@@ -1024,21 +1024,47 @@ NSString *const OTRXMPPLoginErrorKey = @"OTRXMPPLoginErrorKey";
      <field var="FORM_TYPE" type="hidden">
      <value>urn:xmpp:mam:1</value>
      </field>
+     
      <field var="with">
      <value>vtomol1234@upsexpress.com</value>
      </field>
+     
      </x>
      </query>
      </iq>
      */
     
     /*
+     <iq type='set' id='q29303'>
+     <query xmlns='urn:xmpp:mam:1'>
+     <x xmlns='jabber:x:data' type='submit'>
+     
+     <field var='FORM_TYPE' type='hidden'><value>urn:xmpp:mam:1</value></field>>
+     
+     <field var='start'><value>2010-08-07T00:00:00Z</value></field>
+     </x>
+     
+     <set xmlns='http://jabber.org/protocol/rsm'>
+     <max>10</max>
+     <after>09af3-cc343-b409f</after>
+     </set>
+     </query>
+     </iq>
+     */
+    
+    /*
+    + (XMPPResultSet *)resultSetWithMax:(NSInteger)max
+after:(NSString *)after;
+   */
+    
+    /*
+    XMPPResultSet *set = [XMPPResultSet resultSetWithMax:5 before:@""];
+    
      NSArray *fields = @[
      [XMPPMessageArchiveManagement fieldWithVar:@"with" type:nil andValue:[[XMPPJID jidWithString:buddy.username] full]]
      ];
      
-     [self.xmppMessageArchive retrieveMessageArchiveWithFields:fields
-     withResultSet:nil];
+     [self.xmppMessageArchive retrieveMessageArchiveWithFields:fields withResultSet:set];
      */
 }
 
