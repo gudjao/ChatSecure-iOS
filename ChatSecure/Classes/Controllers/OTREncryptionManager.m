@@ -355,9 +355,12 @@ NSString *const OTRMessageStateKey = @"OTREncryptionManagerMessageStateKey";
                                  buddy.lastMessageDate = originalMessage.date;
                                  [buddy saveWithTransaction:transaction];
                                  
-                                 OTRAccount *account = [OTRAccount fetchObjectWithUniqueID:buddy.accountUniqueId transaction:transaction];
-                                 OTRXMPPManager *protocol = (OTRXMPPManager*) [[OTRProtocolManager sharedInstance] protocolForAccount:account];
-                                 [protocol sendDeliveryReceiptForMessage:originalMessage];
+                                 // Send delivery receipt
+                                 if(!originalMessage.archivedMessage) {
+                                     OTRAccount *account = [OTRAccount fetchObjectWithUniqueID:buddy.accountUniqueId transaction:transaction];
+                                     OTRXMPPManager *protocol = (OTRXMPPManager*) [[OTRProtocolManager sharedInstance] protocolForAccount:account];
+                                     [protocol sendDeliveryReceiptForMessage:originalMessage];
+                                 }
                              } completionBlock:^{
                                  [[OTRMediaFileManager sharedInstance] setData:imageData forItem:imageItem buddyUniqueId:uniqueId completion:^(NSInteger bytesWritten, NSError *error) {
                                      [imageItem touchParentMessage];
@@ -368,6 +371,7 @@ NSString *const OTRMessageStateKey = @"OTREncryptionManagerMessageStateKey";
                                          }];
                                      }
                                  } completionQueue:dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0)];
+                                 
                                  [[UIApplication sharedApplication] showLocalNotification:originalMessage];
                              }];
                          }
@@ -433,9 +437,11 @@ NSString *const OTRMessageStateKey = @"OTREncryptionManagerMessageStateKey";
                                                    [buddy saveWithTransaction:transaction];
                                                    
                                                    // Send delivery receipt
-                                                   OTRAccount *account = [OTRAccount fetchObjectWithUniqueID:buddy.accountUniqueId transaction:transaction];
-                                                   OTRXMPPManager *protocol = (OTRXMPPManager*) [[OTRProtocolManager sharedInstance] protocolForAccount:account];
-                                                   [protocol sendDeliveryReceiptForMessage:originalMessage];
+                                                   if(!originalMessage.archivedMessage) {
+                                                       OTRAccount *account = [OTRAccount fetchObjectWithUniqueID:buddy.accountUniqueId transaction:transaction];
+                                                       OTRXMPPManager *protocol = (OTRXMPPManager*) [[OTRProtocolManager sharedInstance] protocolForAccount:account];
+                                                       [protocol sendDeliveryReceiptForMessage:originalMessage];
+                                                   }
                                                } completionBlock:^{
                                                    [[UIApplication sharedApplication] showLocalNotification:originalMessage];
                                                }];
@@ -501,9 +507,11 @@ NSString *const OTRMessageStateKey = @"OTREncryptionManagerMessageStateKey";
                                                    [buddy saveWithTransaction:transaction];
                                                    
                                                    // Send delivery receipt
-                                                   OTRAccount *account = [OTRAccount fetchObjectWithUniqueID:buddy.accountUniqueId transaction:transaction];
-                                                   OTRXMPPManager *protocol = (OTRXMPPManager*) [[OTRProtocolManager sharedInstance] protocolForAccount:account];
-                                                   [protocol sendDeliveryReceiptForMessage:originalMessage];
+                                                   if(!originalMessage.archivedMessage) {
+                                                       OTRAccount *account = [OTRAccount fetchObjectWithUniqueID:buddy.accountUniqueId transaction:transaction];
+                                                       OTRXMPPManager *protocol = (OTRXMPPManager*) [[OTRProtocolManager sharedInstance] protocolForAccount:account];
+                                                       [protocol sendDeliveryReceiptForMessage:originalMessage];
+                                                   }
                                                } completionBlock:^{
                                                    [[UIApplication sharedApplication] showLocalNotification:originalMessage];
                                                }];
@@ -543,9 +551,11 @@ NSString *const OTRMessageStateKey = @"OTREncryptionManagerMessageStateKey";
         [buddy saveWithTransaction:transaction];
         
         // Send delivery receipt
-        OTRAccount *account = [OTRAccount fetchObjectWithUniqueID:buddy.accountUniqueId transaction:transaction];
-        OTRXMPPManager *protocol = (OTRXMPPManager*) [[OTRProtocolManager sharedInstance] protocolForAccount:account];
-        [protocol sendDeliveryReceiptForMessage:originalMessage];
+        if(!originalMessage.archivedMessage) {
+            OTRAccount *account = [OTRAccount fetchObjectWithUniqueID:buddy.accountUniqueId transaction:transaction];
+            OTRXMPPManager *protocol = (OTRXMPPManager*) [[OTRProtocolManager sharedInstance] protocolForAccount:account];
+            [protocol sendDeliveryReceiptForMessage:originalMessage];
+        }
     } completionBlock:^{
         [[UIApplication sharedApplication] showLocalNotification:originalMessage];
     }];

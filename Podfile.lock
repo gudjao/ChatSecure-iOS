@@ -110,6 +110,7 @@ PODS:
   - SQLCipher/fts (3.4.0):
     - SQLCipher/common
   - SSKeychain (1.4.1)
+  - SVPullToRefresh (0.4.1)
   - TTTAttributedLabel (1.13.4)
   - TUSafariActivity (1.0.4)
   - UIScrollView-InfiniteScroll (0.9.1)
@@ -369,6 +370,7 @@ DEPENDENCIES:
   - QRCodeReaderViewController (~> 4.0)
   - Reachability (~> 3)
   - SSKeychain (~> 1.2)
+  - SVPullToRefresh (from `https://github.com/gabro/SVPullToRefresh.git`, branch `top-infinitescrolling`)
   - TTTAttributedLabel (~> 1.10)
   - TUSafariActivity (~> 1.0)
   - UIScrollView-InfiniteScroll
@@ -403,6 +405,9 @@ EXTERNAL SOURCES:
     :git: https://github.com/pinterest/PINRemoteImage.git
   ProxyKit:
     :path: Submodules/ProxyKit/ProxyKit.podspec
+  SVPullToRefresh:
+    :branch: top-infinitescrolling
+    :git: https://github.com/gabro/SVPullToRefresh.git
   XMPPFramework:
     :path: Submodules/XMPPFramework/XMPPFramework.podspec
 
@@ -416,6 +421,9 @@ CHECKOUT OPTIONS:
   PINRemoteImage:
     :commit: d5c5c360444cf16ea768f289a2083f18efdd7586
     :git: https://github.com/pinterest/PINRemoteImage.git
+  SVPullToRefresh:
+    :commit: 3f88bf7a51b37fc3f19f180a67c729dcec873df2
+    :git: https://github.com/gabro/SVPullToRefresh.git
 
 SPEC CHECKSUMS:
   AFNetworking: 5e0e199f73d8626b11e79750991f5d173d1f8b67
@@ -458,6 +466,7 @@ SPEC CHECKSUMS:
   Reachability: 33e18b67625424e47b6cde6d202dce689ad7af96
   SQLCipher: 4c768761421736a247ed6cf412d9045615d53dff
   SSKeychain: 55cc80f66f5c73da827e3077f02e43528897db41
+  SVPullToRefresh: ba2e718695a43253d8bea6852d2960097dc15d8c
   TTTAttributedLabel: 0a2ac7b2dd726d32a070dafb01446026b11e624f
   TUSafariActivity: afc55a00965377939107ce4fdc7f951f62454546
   UIScrollView-InfiniteScroll: 14e204c50ca4040467e1cbfa141dad7a18919b56

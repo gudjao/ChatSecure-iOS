@@ -72,6 +72,14 @@ extension PushMessage: OTRMessageProtocol {
         return nil
     }
     
+    public func messageArchivedId() -> String! {
+        return nil;
+    }
+    
+    public func archivedMessage() -> Bool {
+        return false;
+    }
+    
     public func threadOwnerWithTransaction(transaction: YapDatabaseReadTransaction!) -> OTRThreadOwner! {
         return OTRBuddy.fetchObjectWithUniqueID(self.buddyKey, transaction: transaction)
     }

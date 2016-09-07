@@ -82,6 +82,7 @@ NSString *const OTRXMPPOldLoginStatusKey = @"OTRXMPPOldLoginStatusKey";
 NSString *const OTRXMPPNewLoginStatusKey = @"OTRXMPPNewLoginStatusKey";
 NSString *const OTRXMPPLoginErrorKey = @"OTRXMPPLoginErrorKey";
 
+extern NSString *const OTRXMPPReceivedArchivedMessagesNotificationName = @"OTRXMPPReceivedArchivedMessagesNotificationName";
 
 @interface OTRXMPPManager()
 
@@ -109,6 +110,7 @@ NSString *const OTRXMPPLoginErrorKey = @"OTRXMPPLoginErrorKey";
 @property (nonatomic, strong) OTRXMPPBuddyManager* xmppBuddyManager;
 
 @property (nonatomic, strong) XMPPMessageArchiveManagement *xmppMessageArchive;
+@property (nonatomic, strong) NSMutableArray *archivedMessages;
 
 @property (nonatomic, strong) YapDatabaseConnection *databaseConnection;
 @property (nonatomic, strong) XMPPMessageDeliveryReceipts *deliveryReceipts;
@@ -133,6 +135,8 @@ NSString *const OTRXMPPLoginErrorKey = @"OTRXMPPLoginErrorKey";
         self.connectionStatus = OTRProtocolConnectionStatusDisconnected;
         self.buddyTimers = [NSMutableDictionary dictionary];
         self.databaseConnection = [OTRDatabaseManager sharedInstance].readWriteDatabaseConnection;
+        
+        self.archivedMessages = [[NSMutableArray alloc] init];
     }
     return self;
 }
@@ -762,12 +766,101 @@ NSString *const OTRXMPPLoginErrorKey = @"OTRXMPPLoginErrorKey";
     DDLogVerbose(@"%@: %@ %@ %@", THIS_FILE, THIS_METHOD, presence, error);
 }
 
-- (void)xmppMessageArchiveManagement:(XMPPMessageArchiveManagement *)xmppMessageArchiveManagement didReceiveFormFields:(XMPPIQ *)iq {
-    DDLogVerbose(@"%@: %@", xmppMessageArchiveManagement, iq);
+#pragma mark XMPPMessageArchiveManagementDelegate
+
+- (void)xmppMessageArchiveManagement:(XMPPMessageArchiveManagement *)xmppMessageArchiveManagement didFinishReceivingMessagesWithSet:(XMPPResultSet *)resultSet {
+    DDLogVerbose(@"Archived Set: %@: %@", xmppMessageArchiveManagement, resultSet);
+    
+    __block NSArray *archMessages = [self.archivedMessages copy];
+    NSLog(@"ARRAY COUNT: %lu", (unsigned long)archMessages.count);
+    
+    if(archMessages.count > 0) {
+        [self.databaseConnection asyncReadWriteWithBlock:^(YapDatabaseReadWriteTransaction * _Nonnull transaction) {
+            if ([xmppMessageArchiveManagement.xmppStream.tag isKindOfClass:[NSString class]]) {
+                for(XMPPMessage *message in archMessages) {
+                    NSXMLElement *result = [message elementForName:@"result"];
+                    NSXMLElement *forwarded = [result elementForName:@"forwarded"];
+                    
+                    XMPPMessage *messageElement = [XMPPMessage messageFromElement:[forwarded elementForName:@"message"]];
+                    
+                    NSDate *delayedDate = [forwarded delayedDeliveryDate];
+                    
+                    NSString *username = [[messageElement from] bare];
+                    NSString *resultId = [result attributeStringValueForName:@"id"];
+                    
+                    OTRXMPPBuddy *messageBuddy = [OTRXMPPBuddy fetchBuddyWithUsername:username withAccountUniqueId:xmppMessageArchiveManagement.xmppStream.tag transaction:transaction];
+                    
+                    OTRAccount *account = [OTRAccount fetchObjectWithUniqueID:xmppMessageArchiveManagement.xmppStream.tag transaction:transaction];
+                    
+                    NSString *buddyId;
+                    __block OTRMessage *messageOtr;
+                    if (!messageBuddy) {
+                        // Own message
+                        NSString *usernameTo = [[messageElement to] bare];
+                        messageBuddy = [OTRXMPPBuddy fetchBuddyWithUsername:usernameTo withAccountUniqueId:xmppMessageArchiveManagement.xmppStream.tag transaction:transaction];
+                        
+                        buddyId = messageBuddy.uniqueId;
+                        messageOtr = [self messageFromXMPPMessage:messageElement buddyId:buddyId];
+                        messageOtr.archivedId = resultId;
+                        messageOtr.date = delayedDate;
+                        messageOtr.incoming = NO;
+                        
+                    } else {
+                        buddyId = messageBuddy.uniqueId;
+                        messageOtr = [self messageFromXMPPMessage:messageElement buddyId:buddyId];
+                        messageOtr.archivedId = resultId;
+                        messageOtr.date = delayedDate;
+                        messageOtr.incoming = YES;
+                    }
+                    
+                    id<OTRThreadOwner>activeThread = [[OTRAppDelegate appDelegate] activeThread];
+                    if([[activeThread threadIdentifier] isEqualToString:messageOtr.threadId]) {
+                        messageOtr.read = YES;
+                    }
+                    
+                    if (messageOtr.text) {
+                        messageOtr.archivedMessage = 1;
+                        [[OTRKit sharedInstance] decodeMessage:messageOtr.text username:messageBuddy.username accountName:account.username protocol:kOTRProtocolTypeXMPP tag:messageOtr];
+                    }
+                }
+            }
+        } completionBlock:^{
+            [[NSNotificationCenter defaultCenter] postNotificationName:OTRXMPPReceivedArchivedMessagesNotificationName object:[NSNumber numberWithUnsignedInteger:archMessages.count]];
+        }];
+    } else {
+        [[NSNotificationCenter defaultCenter] postNotificationName:OTRXMPPReceivedArchivedMessagesNotificationName object:[NSNumber numberWithUnsignedInteger:0]];
+    }
+    
 }
 
-- (void)xmppMessageArchiveManagement:(XMPPMessageArchiveManagement *)xmppMessageArchiveManagement didFailToReceiveFormFields:(XMPPIQ *)iq {
-    DDLogVerbose(@"%@: %@", xmppMessageArchiveManagement, iq);
+- (void)xmppMessageArchiveManagement:(XMPPMessageArchiveManagement *)xmppMessageArchiveManagement didFailToReceiveMessages:(XMPPIQ *)error {
+    DDLogVerbose(@"%@: %@", xmppMessageArchiveManagement, error);
+    
+    [[NSNotificationCenter defaultCenter] postNotificationName:OTRXMPPReceivedArchivedMessagesNotificationName object:[NSNumber numberWithUnsignedInteger:0]];
+}
+
+- (void)xmppMessageArchiveManagement:(XMPPMessageArchiveManagement *)xmppMessageArchiveManagement didReceiveMAMMessage:(XMPPMessage *)message {
+    DDLogVerbose(@"Archived Message: %@:\n%@", xmppMessageArchiveManagement, [message prettyXMLString]);
+    
+    [self.archivedMessages addObject:message];
+}
+
+- (OTRMessage *)messageFromXMPPMessage:(XMPPMessage *)xmppMessage buddyId:(NSString *)buddyId
+{
+    NSString *body = [xmppMessage body];
+    
+    NSDate * date = [xmppMessage delayedDeliveryDate];
+    
+    OTRMessage *message = [[OTRMessage alloc] init];
+    message.incoming = YES;
+    message.text = body;
+    message.buddyUniqueId = buddyId;
+    if (date) {
+        message.date = date;
+    }
+    
+    message.messageId = [xmppMessage elementID];
+    return message;
 }
 
 #pragma mark XMPPvCardTempModuleDelegate
@@ -1016,56 +1109,34 @@ NSString *const OTRXMPPLoginErrorKey = @"OTRXMPPLoginErrorKey";
         
         [self.xmppStream sendElement:xmppMessage];
     }
+}
+
+- (void)fetchArchivedMessages:(OTRMessage *)lastMessage withBuddy:(OTRBuddy *)buddy {
+    
+    self.archivedMessages = [NSMutableArray new];
+    
+    XMPPResultSet *set;
+    if(lastMessage) {
+        if(lastMessage.archivedId) {
+            set = [XMPPResultSet resultSetWithMax:10 before:lastMessage.archivedId];
+        } else {
+            set = [XMPPResultSet resultSetWithMax:10 before:@""];
+        }
+    } else {
+        set = [XMPPResultSet resultSetWithMax:15 before:@""];
+    }
+    
+    NSArray *fields = @[
+                        [XMPPMessageArchiveManagement fieldWithVar:@"with" type:nil andValue:[[XMPPJID jidWithString:buddy.username] full]]
+                        ];
+    
+    [self.xmppMessageArchive retrieveMessageArchiveWithFields:fields withResultSet:set];
     
     /*
-     <iq type="set" id="B881B8DF-DD45-4483-B276-A8B602D19483">
-     <query xmlns="urn:xmpp:mam:1" queryid="EDDFF06F-DFE3-4A62-882E-A826B4805533">
-     <x xmlns="jabber:x:data" type="submit">
-     <field var="FORM_TYPE" type="hidden">
-     <value>urn:xmpp:mam:1</value>
-     </field>
+     <message xmlns="jabber:client" from="gsabulaan2@upsexpress.com/converse.js-27885526" to="jalcantara29@upsexpress.com" type="chat" id="27400f54-ec92-481e-8eb1-28ee7fa18880"><archived xmlns="urn:xmpp:mam:tmp" by="upsexpress.com" id="1471931583749421"/><stanza-id xmlns="urn:xmpp:sid:0" by="upsexpress.com" id="1471931583749421"/><body>MOTIVE</body><active xmlns="http://jabber.org/protocol/chatstates"/></message>
      
-     <field var="with">
-     <value>vtomol1234@upsexpress.com</value>
-     </field>
-     
-     </x>
-     </query>
-     </iq>
      */
     
-    /*
-     <iq type='set' id='q29303'>
-     <query xmlns='urn:xmpp:mam:1'>
-     <x xmlns='jabber:x:data' type='submit'>
-     
-     <field var='FORM_TYPE' type='hidden'><value>urn:xmpp:mam:1</value></field>>
-     
-     <field var='start'><value>2010-08-07T00:00:00Z</value></field>
-     </x>
-     
-     <set xmlns='http://jabber.org/protocol/rsm'>
-     <max>10</max>
-     <after>09af3-cc343-b409f</after>
-     </set>
-     </query>
-     </iq>
-     */
-    
-    /*
-    + (XMPPResultSet *)resultSetWithMax:(NSInteger)max
-after:(NSString *)after;
-   */
-    
-    /*
-    XMPPResultSet *set = [XMPPResultSet resultSetWithMax:5 before:@""];
-    
-     NSArray *fields = @[
-     [XMPPMessageArchiveManagement fieldWithVar:@"with" type:nil andValue:[[XMPPJID jidWithString:buddy.username] full]]
-     ];
-     
-     [self.xmppMessageArchive retrieveMessageArchiveWithFields:fields withResultSet:set];
-     */
 }
 
 - (NSString*) accountName

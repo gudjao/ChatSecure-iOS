@@ -21,6 +21,8 @@ extern const struct OTRMessageAttributes {
     __unsafe_unretained NSString *messageId;
     __unsafe_unretained NSString *transportedSecurely;
     __unsafe_unretained NSString *mediaItem;
+    __unsafe_unretained NSString *archivedId;
+    __unsafe_unretained NSString *archivedMessage;
 } OTRMessageAttributes;
 
 @protocol OTRMessageProtocol <NSObject>
@@ -48,6 +50,8 @@ extern const struct OTRMessageAttributes {
 
 - (NSString *)remoteMessageId;
 
+- (NSString *)messageArchivedId;
+
 - (id<OTRThreadOwner>)threadOwnerWithTransaction:(YapDatabaseReadTransaction *)transaction;
 
 @end
@@ -62,9 +66,11 @@ extern const struct OTRMessageAttributes {
 @property (nonatomic, getter = isRead) BOOL read;
 @property (nonatomic, getter = isIncoming) BOOL incoming;
 @property (nonatomic, getter = isTransportedSecurely) BOOL transportedSecurely;
+@property (nonatomic, getter = isArchivedMessage) BOOL archivedMessage;
 
 @property (nonatomic, strong) NSString *mediaItemUniqueId;
 @property (nonatomic, strong) NSString *buddyUniqueId;
+@property (nonatomic, strong) NSString *archivedId;
 
 + (void)deleteAllMessagesWithTransaction:(YapDatabaseReadWriteTransaction*)transaction;
 + (void)deleteAllMessagesForBuddyId:(NSString *)uniqueBuddyId transaction:(YapDatabaseReadWriteTransaction*)transaction;

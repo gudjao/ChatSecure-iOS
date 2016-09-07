@@ -77,7 +77,7 @@ public class OTRYapViewHandler: NSObject {
     }
     
     func setupDatabseConnection() {
-        self.databaseConnection.beginLongLivedReadTransaction()
+        self.databaseConnection.beginLongLivedReadTransaction() //YapDatabaseModifiedNotification
         self.notificationToken = NSNotificationCenter.defaultCenter().addObserverForName(YapDatabaseModifiedNotification, object: self.databaseConnection.database, queue: NSOperationQueue.mainQueue()) {[weak self] (notification) -> Void in
             self?.yapDatbaseModified(notification)
         }

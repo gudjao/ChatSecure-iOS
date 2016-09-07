@@ -25,7 +25,6 @@
 		63564E101BBB1C5200EB4CA6 /* PushStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63564E0F1BBB1C5200EB4CA6 /* PushStorage.swift */; };
 		635FCC841D1B5116008F903C /* OTRStringTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 635FCC831D1B5116008F903C /* OTRStringTests.swift */; };
 		635FCC871D1B57ED008F903C /* OTRURLTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 636C63201B571B56008FEE69 /* OTRURLTests.m */; };
-		635FCC891D1B5936008F903C /* Pods_ChatSecureCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 635FCC881D1B5936008F903C /* Pods_ChatSecureCore.framework */; };
 		635FCC8A1D1B5A35008F903C /* OTRResources.bundle in Resources */ = {isa = PBXBuildFile; fileRef = D93027561BAA381F000CC975 /* OTRResources.bundle */; };
 		63636D6E1C1F78A6009F5FCD /* UINavigationController+ChatSecure.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63636D6D1C1F78A6009F5FCD /* UINavigationController+ChatSecure.swift */; };
 		63636D721C1F9D7C009F5FCD /* UIApplication+ChatSecure.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63636D711C1F9D7C009F5FCD /* UIApplication+ChatSecure.swift */; };
@@ -56,11 +55,116 @@
 		63E353F61BB9E46D005C54C3 /* OTRPushTLVHandlerProtocols.h in Headers */ = {isa = PBXBuildFile; fileRef = 63E353F51BB9E41D005C54C3 /* OTRPushTLVHandlerProtocols.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		63F614DC1BB214660083A06A /* ChatSecureModelTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63F614DB1BB214660083A06A /* ChatSecureModelTest.swift */; };
 		63FA130C1C8A4EB700AE33EF /* OTRMessagesCollectionViewFlowLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63FA130B1C8A4EB700AE33EF /* OTRMessagesCollectionViewFlowLayout.swift */; };
+		7F408CE30104F3D0A455A95A /* Pods_ChatSecureCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6C592992CC49A50D357998DA /* Pods_ChatSecureCore.framework */; };
+		B021679A1D7D7CBE001FB42C /* ARChromeActivity.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B02167991D7D7CBE001FB42C /* ARChromeActivity.framework */; };
+		B021679B1D7D7CBE001FB42C /* ARChromeActivity.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = B02167991D7D7CBE001FB42C /* ARChromeActivity.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		B021679E1D7D7CF1001FB42C /* Appirater.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = B021679C1D7D7CF1001FB42C /* Appirater.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		B021679F1D7D7D01001FB42C /* AFNetworking.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B02167911D7D7B2B001FB42C /* AFNetworking.framework */; };
+		B02167A01D7D7D01001FB42C /* AFNetworking.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = B02167911D7D7B2B001FB42C /* AFNetworking.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		B02167A21D7D7D2F001FB42C /* BBlock.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B02167A11D7D7D2F001FB42C /* BBlock.framework */; };
+		B02167A31D7D7D2F001FB42C /* BBlock.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = B02167A11D7D7D2F001FB42C /* BBlock.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		B02167A41D7D7DA1001FB42C /* AFNetworking.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B02167911D7D7B2B001FB42C /* AFNetworking.framework */; };
+		B02167A51D7D7DA1001FB42C /* AFNetworking.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = B02167911D7D7B2B001FB42C /* AFNetworking.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		B02167A81D7D7DA1001FB42C /* Appirater.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B021679C1D7D7CF1001FB42C /* Appirater.framework */; };
+		B02167AA1D7D7DA1001FB42C /* ARChromeActivity.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B02167991D7D7CBE001FB42C /* ARChromeActivity.framework */; };
+		B02167AB1D7D7DA1001FB42C /* ARChromeActivity.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = B02167991D7D7CBE001FB42C /* ARChromeActivity.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		B02167AC1D7D7DA1001FB42C /* BBlock.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B02167A11D7D7D2F001FB42C /* BBlock.framework */; };
+		B02167AD1D7D7DA1001FB42C /* BBlock.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = B02167A11D7D7D2F001FB42C /* BBlock.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		B02167AF1D7D7DA1001FB42C /* BButton.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B02167AE1D7D7DA1001FB42C /* BButton.framework */; };
+		B02167B01D7D7DA1001FB42C /* BButton.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = B02167AE1D7D7DA1001FB42C /* BButton.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		B02167B21D7D7DA1001FB42C /* ChatSecure_Push_iOS.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B02167B11D7D7DA1001FB42C /* ChatSecure_Push_iOS.framework */; };
+		B02167B31D7D7DA1001FB42C /* ChatSecure_Push_iOS.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = B02167B11D7D7DA1001FB42C /* ChatSecure_Push_iOS.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		B02167B51D7D7DA2001FB42C /* Cloudinary.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B02167B41D7D7DA2001FB42C /* Cloudinary.framework */; };
+		B02167B61D7D7DA2001FB42C /* Cloudinary.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = B02167B41D7D7DA2001FB42C /* Cloudinary.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		B02167B81D7D7DA2001FB42C /* CocoaAsyncSocket.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B02167B71D7D7DA2001FB42C /* CocoaAsyncSocket.framework */; };
+		B02167B91D7D7DA2001FB42C /* CocoaAsyncSocket.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = B02167B71D7D7DA2001FB42C /* CocoaAsyncSocket.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		B02167BB1D7D7DA2001FB42C /* CocoaLumberjack.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B02167BA1D7D7DA2001FB42C /* CocoaLumberjack.framework */; };
+		B02167BC1D7D7DA2001FB42C /* CocoaLumberjack.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = B02167BA1D7D7DA2001FB42C /* CocoaLumberjack.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		B02167C31D7D7DA2001FB42C /* FLAnimatedImage.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B02167C21D7D7DA2001FB42C /* FLAnimatedImage.framework */; };
+		B02167C41D7D7DA2001FB42C /* FLAnimatedImage.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = B02167C21D7D7DA2001FB42C /* FLAnimatedImage.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		B02167C61D7D7DA2001FB42C /* GCDWebServer.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B02167C51D7D7DA2001FB42C /* GCDWebServer.framework */; };
+		B02167C71D7D7DA2001FB42C /* GCDWebServer.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = B02167C51D7D7DA2001FB42C /* GCDWebServer.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		B02167C91D7D7DA2001FB42C /* gtm_http_fetcher.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B02167C81D7D7DA2001FB42C /* gtm_http_fetcher.framework */; };
+		B02167CA1D7D7DA2001FB42C /* gtm_http_fetcher.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = B02167C81D7D7DA2001FB42C /* gtm_http_fetcher.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		B02167CC1D7D7DA2001FB42C /* gtm_oauth2.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B02167CB1D7D7DA2001FB42C /* gtm_oauth2.framework */; };
+		B02167CD1D7D7DA2001FB42C /* gtm_oauth2.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = B02167CB1D7D7DA2001FB42C /* gtm_oauth2.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		B02167CF1D7D7DA2001FB42C /* HockeySDK_Source.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B02167CE1D7D7DA2001FB42C /* HockeySDK_Source.framework */; };
+		B02167D01D7D7DA2001FB42C /* HockeySDK_Source.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = B02167CE1D7D7DA2001FB42C /* HockeySDK_Source.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		B02167D41D7D7DA2001FB42C /* IOCipher.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B02167D31D7D7DA2001FB42C /* IOCipher.framework */; };
+		B02167D51D7D7DA2001FB42C /* IOCipher.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = B02167D31D7D7DA2001FB42C /* IOCipher.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		B02167D71D7D7DA2001FB42C /* JSQMessagesViewController.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B02167D61D7D7DA2001FB42C /* JSQMessagesViewController.framework */; };
+		B02167D81D7D7DA2001FB42C /* JSQMessagesViewController.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = B02167D61D7D7DA2001FB42C /* JSQMessagesViewController.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		B02167DA1D7D7DA2001FB42C /* JSQSystemSoundPlayer.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B02167D91D7D7DA2001FB42C /* JSQSystemSoundPlayer.framework */; };
+		B02167DB1D7D7DA2001FB42C /* JSQSystemSoundPlayer.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = B02167D91D7D7DA2001FB42C /* JSQSystemSoundPlayer.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		B02167DD1D7D7DA2001FB42C /* JTSImageViewController.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B02167DC1D7D7DA2001FB42C /* JTSImageViewController.framework */; };
+		B02167DE1D7D7DA2001FB42C /* JTSImageViewController.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = B02167DC1D7D7DA2001FB42C /* JTSImageViewController.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		B02167E01D7D7DA2001FB42C /* JVFloatLabeledTextField.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B02167DF1D7D7DA2001FB42C /* JVFloatLabeledTextField.framework */; };
+		B02167E11D7D7DA2001FB42C /* JVFloatLabeledTextField.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = B02167DF1D7D7DA2001FB42C /* JVFloatLabeledTextField.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		B02167E31D7D7DA2001FB42C /* KissXML.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B02167E21D7D7DA2001FB42C /* KissXML.framework */; };
+		B02167E41D7D7DA2001FB42C /* KissXML.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = B02167E21D7D7DA2001FB42C /* KissXML.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		B02167E61D7D7DA2001FB42C /* KVOController.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B02167E51D7D7DA2001FB42C /* KVOController.framework */; };
+		B02167E71D7D7DA2001FB42C /* KVOController.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = B02167E51D7D7DA2001FB42C /* KVOController.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		B02167E91D7D7DA2001FB42C /* libsqlfs.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B02167E81D7D7DA2001FB42C /* libsqlfs.framework */; };
+		B02167EA1D7D7DA2001FB42C /* libsqlfs.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = B02167E81D7D7DA2001FB42C /* libsqlfs.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		B02167EC1D7D7DA2001FB42C /* Mantle.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B02167EB1D7D7DA2001FB42C /* Mantle.framework */; };
+		B02167ED1D7D7DA2001FB42C /* Mantle.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = B02167EB1D7D7DA2001FB42C /* Mantle.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		B02167EF1D7D7DA2001FB42C /* MBProgressHUD.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B02167EE1D7D7DA2001FB42C /* MBProgressHUD.framework */; };
+		B02167F01D7D7DA2001FB42C /* MBProgressHUD.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = B02167EE1D7D7DA2001FB42C /* MBProgressHUD.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		B02167F21D7D7DA2001FB42C /* MWFeedParser.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B02167F11D7D7DA2001FB42C /* MWFeedParser.framework */; };
+		B02167F31D7D7DA2001FB42C /* MWFeedParser.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = B02167F11D7D7DA2001FB42C /* MWFeedParser.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		B02167F51D7D7DA2001FB42C /* Navajo.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B02167F41D7D7DA2001FB42C /* Navajo.framework */; };
+		B02167F61D7D7DA2001FB42C /* Navajo.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = B02167F41D7D7DA2001FB42C /* Navajo.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		B02167F81D7D7DA2001FB42C /* OpenInChrome.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B02167F71D7D7DA2001FB42C /* OpenInChrome.framework */; };
+		B02167F91D7D7DA2001FB42C /* OpenInChrome.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = B02167F71D7D7DA2001FB42C /* OpenInChrome.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		B02167FB1D7D7DA2001FB42C /* OTRKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B02167FA1D7D7DA2001FB42C /* OTRKit.framework */; };
+		B02167FC1D7D7DA2001FB42C /* OTRKit.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = B02167FA1D7D7DA2001FB42C /* OTRKit.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		B02167FE1D7D7DA3001FB42C /* ParkedTextField.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B02167FD1D7D7DA3001FB42C /* ParkedTextField.framework */; };
+		B02167FF1D7D7DA3001FB42C /* ParkedTextField.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = B02167FD1D7D7DA3001FB42C /* ParkedTextField.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		B02168011D7D7DA3001FB42C /* PINCache.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B02168001D7D7DA3001FB42C /* PINCache.framework */; };
+		B02168021D7D7DA3001FB42C /* PINCache.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = B02168001D7D7DA3001FB42C /* PINCache.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		B02168041D7D7DA3001FB42C /* PINRemoteImage.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B02168031D7D7DA3001FB42C /* PINRemoteImage.framework */; };
+		B02168051D7D7DA3001FB42C /* PINRemoteImage.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = B02168031D7D7DA3001FB42C /* PINRemoteImage.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		B02168061D7D7DA3001FB42C /* Pods_ChatSecureCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6C592992CC49A50D357998DA /* Pods_ChatSecureCore.framework */; };
+		B02168071D7D7DA3001FB42C /* Pods_ChatSecureCore.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 6C592992CC49A50D357998DA /* Pods_ChatSecureCore.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		B02168091D7D7DA3001FB42C /* ProxyKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B02168081D7D7DA3001FB42C /* ProxyKit.framework */; };
+		B021680A1D7D7DA3001FB42C /* ProxyKit.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = B02168081D7D7DA3001FB42C /* ProxyKit.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		B021680C1D7D7DA3001FB42C /* PureLayout.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B021680B1D7D7DA3001FB42C /* PureLayout.framework */; };
+		B021680D1D7D7DA3001FB42C /* PureLayout.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = B021680B1D7D7DA3001FB42C /* PureLayout.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		B021680F1D7D7DA3001FB42C /* QRCodeReaderViewController.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B021680E1D7D7DA3001FB42C /* QRCodeReaderViewController.framework */; };
+		B02168101D7D7DA3001FB42C /* QRCodeReaderViewController.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = B021680E1D7D7DA3001FB42C /* QRCodeReaderViewController.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		B02168121D7D7DA3001FB42C /* Reachability.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B02168111D7D7DA3001FB42C /* Reachability.framework */; };
+		B02168131D7D7DA3001FB42C /* Reachability.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = B02168111D7D7DA3001FB42C /* Reachability.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		B02168151D7D7DA3001FB42C /* SQLCipher.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B02168141D7D7DA3001FB42C /* SQLCipher.framework */; };
+		B02168161D7D7DA3001FB42C /* SQLCipher.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = B02168141D7D7DA3001FB42C /* SQLCipher.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		B02168181D7D7DA3001FB42C /* SSKeychain.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B02168171D7D7DA3001FB42C /* SSKeychain.framework */; };
+		B02168191D7D7DA3001FB42C /* SSKeychain.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = B02168171D7D7DA3001FB42C /* SSKeychain.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		B021681B1D7D7DA3001FB42C /* SVPullToRefresh.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B021681A1D7D7DA3001FB42C /* SVPullToRefresh.framework */; };
+		B021681C1D7D7DA3001FB42C /* SVPullToRefresh.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = B021681A1D7D7DA3001FB42C /* SVPullToRefresh.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		B021681E1D7D7DA3001FB42C /* TTTAttributedLabel.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B021681D1D7D7DA3001FB42C /* TTTAttributedLabel.framework */; };
+		B021681F1D7D7DA3001FB42C /* TTTAttributedLabel.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = B021681D1D7D7DA3001FB42C /* TTTAttributedLabel.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		B02168231D7D7DA3001FB42C /* TUSafariActivity.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B02168221D7D7DA3001FB42C /* TUSafariActivity.framework */; };
+		B02168241D7D7DA3001FB42C /* TUSafariActivity.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = B02168221D7D7DA3001FB42C /* TUSafariActivity.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		B02168261D7D7DA3001FB42C /* UIScrollView_InfiniteScroll.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B02168251D7D7DA3001FB42C /* UIScrollView_InfiniteScroll.framework */; };
+		B02168271D7D7DA3001FB42C /* UIScrollView_InfiniteScroll.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = B02168251D7D7DA3001FB42C /* UIScrollView_InfiniteScroll.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		B021682B1D7D7DA3001FB42C /* uservoice_iphone_sdk.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B021682A1D7D7DA3001FB42C /* uservoice_iphone_sdk.framework */; };
+		B021682C1D7D7DA3001FB42C /* uservoice_iphone_sdk.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = B021682A1D7D7DA3001FB42C /* uservoice_iphone_sdk.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		B021682E1D7D7DA3001FB42C /* VTAcknowledgementsViewController.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B021682D1D7D7DA3001FB42C /* VTAcknowledgementsViewController.framework */; };
+		B021682F1D7D7DA3001FB42C /* VTAcknowledgementsViewController.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = B021682D1D7D7DA3001FB42C /* VTAcknowledgementsViewController.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		B02168311D7D7DA3001FB42C /* XLForm.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B02168301D7D7DA3001FB42C /* XLForm.framework */; };
+		B02168321D7D7DA3001FB42C /* XLForm.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = B02168301D7D7DA3001FB42C /* XLForm.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		B02168341D7D7DA3001FB42C /* XMPPFramework.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B02168331D7D7DA3001FB42C /* XMPPFramework.framework */; };
+		B02168351D7D7DA3001FB42C /* XMPPFramework.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = B02168331D7D7DA3001FB42C /* XMPPFramework.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		B02168371D7D7DA3001FB42C /* YapDatabase.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B02168361D7D7DA3001FB42C /* YapDatabase.framework */; };
+		B02168381D7D7DA3001FB42C /* YapDatabase.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = B02168361D7D7DA3001FB42C /* YapDatabase.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		B021683A1D7D7DA3001FB42C /* ZXingObjC.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B02168391D7D7DA3001FB42C /* ZXingObjC.framework */; };
+		B021683B1D7D7DA4001FB42C /* ZXingObjC.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = B02168391D7D7DA3001FB42C /* ZXingObjC.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		B021683D1D7D7E5F001FB42C /* CPAProxy.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B02167BF1D7D7DA2001FB42C /* CPAProxy.framework */; };
+		B021683E1D7D7E5F001FB42C /* CPAProxy.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = B02167BF1D7D7DA2001FB42C /* CPAProxy.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		B04DDD801D3F7ED70052A155 /* OTRAPIClient.h in Headers */ = {isa = PBXBuildFile; fileRef = B04DDD7E1D3F7ED70052A155 /* OTRAPIClient.h */; };
 		B04DDD811D3F7ED70052A155 /* OTRAPIClient.m in Sources */ = {isa = PBXBuildFile; fileRef = B04DDD7F1D3F7ED70052A155 /* OTRAPIClient.m */; };
 		D9227C241BA78E6B00B5E1D0 /* FontAwesome.ttf in Resources */ = {isa = PBXBuildFile; fileRef = D9227C231BA78E6B00B5E1D0 /* FontAwesome.ttf */; };
 		D9227C2D1BA7952100B5E1D0 /* ChatSecureCore.h in Headers */ = {isa = PBXBuildFile; fileRef = D9227C2C1BA7952100B5E1D0 /* ChatSecureCore.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		D9227C3F1BA7952100B5E1D0 /* ChatSecureCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D9227C2A1BA7952100B5E1D0 /* ChatSecureCore.framework */; };
+		D9227C3F1BA7952100B5E1D0 /* ChatSecureCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D9227C2A1BA7952100B5E1D0 /* ChatSecureCore.framework */; settings = {ATTRIBUTES = (Required, ); }; };
 		D9227C401BA7952100B5E1D0 /* ChatSecureCore.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = D9227C2A1BA7952100B5E1D0 /* ChatSecureCore.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		D9315CAE1BB600450077D2EE /* AddFriendsView.xib in Resources */ = {isa = PBXBuildFile; fileRef = D9315CAD1BB600450077D2EE /* AddFriendsView.xib */; };
 		D9315CB01BB604FA0077D2EE /* AddFriendsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D9315CAF1BB604FA0077D2EE /* AddFriendsView.swift */; };
@@ -377,7 +481,6 @@
 		D9AE3A351BA8DAB600255537 /* OTRLanguageManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 6331051C1A16D1A300C17BAE /* OTRLanguageManager.m */; };
 		D9CBBC581C642BAA005CD715 /* EnablePushViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D9CBBC571C642BAA005CD715 /* EnablePushViewController.swift */; };
 		D9EEEDD31D2739A800B8BC54 /* OTRvCard.h in Headers */ = {isa = PBXBuildFile; fileRef = D9EEEDD11D27388600B8BC54 /* OTRvCard.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		EE22362CF225156043E19FA7 /* Pods_ChatSecureCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9B353F12AE2FDB52438B426D /* Pods_ChatSecureCore.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -425,8 +528,60 @@
 			dstPath = "";
 			dstSubfolderSpec = 10;
 			files = (
+				B021683B1D7D7DA4001FB42C /* ZXingObjC.framework in Embed Frameworks */,
+				B02168101D7D7DA3001FB42C /* QRCodeReaderViewController.framework in Embed Frameworks */,
+				B02167C41D7D7DA2001FB42C /* FLAnimatedImage.framework in Embed Frameworks */,
+				B02167F91D7D7DA2001FB42C /* OpenInChrome.framework in Embed Frameworks */,
+				B02167B91D7D7DA2001FB42C /* CocoaAsyncSocket.framework in Embed Frameworks */,
+				B021680D1D7D7DA3001FB42C /* PureLayout.framework in Embed Frameworks */,
+				B021683E1D7D7E5F001FB42C /* CPAProxy.framework in Embed Frameworks */,
+				B02167CD1D7D7DA2001FB42C /* gtm_oauth2.framework in Embed Frameworks */,
 				D9227C401BA7952100B5E1D0 /* ChatSecureCore.framework in Embed Frameworks */,
+				B02168351D7D7DA3001FB42C /* XMPPFramework.framework in Embed Frameworks */,
+				B02168191D7D7DA3001FB42C /* SSKeychain.framework in Embed Frameworks */,
+				B02167F61D7D7DA2001FB42C /* Navajo.framework in Embed Frameworks */,
+				B02167C71D7D7DA2001FB42C /* GCDWebServer.framework in Embed Frameworks */,
+				B02167A01D7D7D01001FB42C /* AFNetworking.framework in Embed Frameworks */,
+				B021681F1D7D7DA3001FB42C /* TTTAttributedLabel.framework in Embed Frameworks */,
+				B02168051D7D7DA3001FB42C /* PINRemoteImage.framework in Embed Frameworks */,
+				B02167A51D7D7DA1001FB42C /* AFNetworking.framework in Embed Frameworks */,
+				B02167E11D7D7DA2001FB42C /* JVFloatLabeledTextField.framework in Embed Frameworks */,
+				B02168131D7D7DA3001FB42C /* Reachability.framework in Embed Frameworks */,
+				B02167AD1D7D7DA1001FB42C /* BBlock.framework in Embed Frameworks */,
+				B021682C1D7D7DA3001FB42C /* uservoice_iphone_sdk.framework in Embed Frameworks */,
+				B02168241D7D7DA3001FB42C /* TUSafariActivity.framework in Embed Frameworks */,
+				B021679B1D7D7CBE001FB42C /* ARChromeActivity.framework in Embed Frameworks */,
+				B021682F1D7D7DA3001FB42C /* VTAcknowledgementsViewController.framework in Embed Frameworks */,
+				B02167ED1D7D7DA2001FB42C /* Mantle.framework in Embed Frameworks */,
+				B02168071D7D7DA3001FB42C /* Pods_ChatSecureCore.framework in Embed Frameworks */,
+				B02167E71D7D7DA2001FB42C /* KVOController.framework in Embed Frameworks */,
+				B02167A31D7D7D2F001FB42C /* BBlock.framework in Embed Frameworks */,
+				B02167EA1D7D7DA2001FB42C /* libsqlfs.framework in Embed Frameworks */,
+				B02168161D7D7DA3001FB42C /* SQLCipher.framework in Embed Frameworks */,
+				B02167CA1D7D7DA2001FB42C /* gtm_http_fetcher.framework in Embed Frameworks */,
+				B02167D81D7D7DA2001FB42C /* JSQMessagesViewController.framework in Embed Frameworks */,
+				B02167BC1D7D7DA2001FB42C /* CocoaLumberjack.framework in Embed Frameworks */,
+				B02168271D7D7DA3001FB42C /* UIScrollView_InfiniteScroll.framework in Embed Frameworks */,
+				B02167AB1D7D7DA1001FB42C /* ARChromeActivity.framework in Embed Frameworks */,
+				B02167FC1D7D7DA2001FB42C /* OTRKit.framework in Embed Frameworks */,
+				B02167F01D7D7DA2001FB42C /* MBProgressHUD.framework in Embed Frameworks */,
+				B021679E1D7D7CF1001FB42C /* Appirater.framework in Embed Frameworks */,
+				B021681C1D7D7DA3001FB42C /* SVPullToRefresh.framework in Embed Frameworks */,
+				B02167B01D7D7DA1001FB42C /* BButton.framework in Embed Frameworks */,
+				B02167B31D7D7DA1001FB42C /* ChatSecure_Push_iOS.framework in Embed Frameworks */,
+				B02167F31D7D7DA2001FB42C /* MWFeedParser.framework in Embed Frameworks */,
+				B02167D51D7D7DA2001FB42C /* IOCipher.framework in Embed Frameworks */,
+				B02167DB1D7D7DA2001FB42C /* JSQSystemSoundPlayer.framework in Embed Frameworks */,
+				B02167B61D7D7DA2001FB42C /* Cloudinary.framework in Embed Frameworks */,
+				B021680A1D7D7DA3001FB42C /* ProxyKit.framework in Embed Frameworks */,
+				B02168321D7D7DA3001FB42C /* XLForm.framework in Embed Frameworks */,
+				B02167E41D7D7DA2001FB42C /* KissXML.framework in Embed Frameworks */,
+				B02168021D7D7DA3001FB42C /* PINCache.framework in Embed Frameworks */,
+				B02167DE1D7D7DA2001FB42C /* JTSImageViewController.framework in Embed Frameworks */,
 				D9AE3A161BA8CBFA00255537 /* OTRAssets.framework in Embed Frameworks */,
+				B02168381D7D7DA3001FB42C /* YapDatabase.framework in Embed Frameworks */,
+				B02167FF1D7D7DA3001FB42C /* ParkedTextField.framework in Embed Frameworks */,
+				B02167D01D7D7DA2001FB42C /* HockeySDK_Source.framework in Embed Frameworks */,
 			);
 			name = "Embed Frameworks";
 			runOnlyForDeploymentPostprocessing = 0;
@@ -705,7 +860,6 @@
 		63564E0C1BBB114B00EB4CA6 /* PushOTRListener.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PushOTRListener.swift; sourceTree = "<group>"; };
 		63564E0F1BBB1C5200EB4CA6 /* PushStorage.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PushStorage.swift; sourceTree = "<group>"; };
 		635FCC831D1B5116008F903C /* OTRStringTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OTRStringTests.swift; sourceTree = "<group>"; };
-		635FCC881D1B5936008F903C /* Pods_ChatSecureCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Pods_ChatSecureCore.framework; path = "Pods/../build/Debug-iphoneos/Pods_ChatSecureCore.framework"; sourceTree = "<group>"; };
 		63636D6D1C1F78A6009F5FCD /* UINavigationController+ChatSecure.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UINavigationController+ChatSecure.swift"; sourceTree = "<group>"; };
 		63636D711C1F9D7C009F5FCD /* UIApplication+ChatSecure.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIApplication+ChatSecure.swift"; sourceTree = "<group>"; };
 		636985581BC875110083FC53 /* OTRXMPPRoomManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OTRXMPPRoomManager.h; sourceTree = "<group>"; };
@@ -798,7 +952,60 @@
 		63FABC8D1A410EBF009BF681 /* JSQMessagesCollectionViewCell+ChatSecure.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "JSQMessagesCollectionViewCell+ChatSecure.m"; sourceTree = "<group>"; };
 		63FABC8F1A41218E009BF681 /* NSString+ChatSecure.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSString+ChatSecure.h"; sourceTree = "<group>"; };
 		63FABC901A41218E009BF681 /* NSString+ChatSecure.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSString+ChatSecure.m"; sourceTree = "<group>"; };
-		9B353F12AE2FDB52438B426D /* Pods_ChatSecureCore.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_ChatSecureCore.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		6C592992CC49A50D357998DA /* Pods_ChatSecureCore.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_ChatSecureCore.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		B02167911D7D7B2B001FB42C /* AFNetworking.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AFNetworking.framework; path = "../../../Library/Developer/Xcode/DerivedData/ChatSecure-drkfzultsiaoxrcxgbdkrqgeuyrh/Build/Products/Debug-iphoneos/AFNetworking.framework"; sourceTree = "<group>"; };
+		B02167991D7D7CBE001FB42C /* ARChromeActivity.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; name = ARChromeActivity.framework; path = "/Users/juston/Library/Developer/Xcode/DerivedData/ChatSecure-drkfzultsiaoxrcxgbdkrqgeuyrh/Build/Products/Debug-iphoneos/ARChromeActivity.framework"; sourceTree = "<absolute>"; };
+		B021679C1D7D7CF1001FB42C /* Appirater.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; name = Appirater.framework; path = "/Users/juston/Library/Developer/Xcode/DerivedData/ChatSecure-drkfzultsiaoxrcxgbdkrqgeuyrh/Build/Products/Debug-iphoneos/Appirater.framework"; sourceTree = "<absolute>"; };
+		B02167A11D7D7D2F001FB42C /* BBlock.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; name = BBlock.framework; path = "/Users/juston/Library/Developer/Xcode/DerivedData/ChatSecure-drkfzultsiaoxrcxgbdkrqgeuyrh/Build/Products/Debug-iphoneos/BBlock.framework"; sourceTree = "<absolute>"; };
+		B02167A61D7D7DA1001FB42C /* Appirater.bundle */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; name = Appirater.bundle; path = "/Users/juston/Library/Developer/Xcode/DerivedData/ChatSecure-drkfzultsiaoxrcxgbdkrqgeuyrh/Build/Products/Debug-iphoneos/Appirater.bundle"; sourceTree = "<absolute>"; };
+		B02167AE1D7D7DA1001FB42C /* BButton.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; name = BButton.framework; path = "/Users/juston/Library/Developer/Xcode/DerivedData/ChatSecure-drkfzultsiaoxrcxgbdkrqgeuyrh/Build/Products/Debug-iphoneos/BButton.framework"; sourceTree = "<absolute>"; };
+		B02167B11D7D7DA1001FB42C /* ChatSecure_Push_iOS.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; name = ChatSecure_Push_iOS.framework; path = "/Users/juston/Library/Developer/Xcode/DerivedData/ChatSecure-drkfzultsiaoxrcxgbdkrqgeuyrh/Build/Products/Debug-iphoneos/ChatSecure_Push_iOS.framework"; sourceTree = "<absolute>"; };
+		B02167B41D7D7DA2001FB42C /* Cloudinary.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; name = Cloudinary.framework; path = "/Users/juston/Library/Developer/Xcode/DerivedData/ChatSecure-drkfzultsiaoxrcxgbdkrqgeuyrh/Build/Products/Debug-iphoneos/Cloudinary.framework"; sourceTree = "<absolute>"; };
+		B02167B71D7D7DA2001FB42C /* CocoaAsyncSocket.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; name = CocoaAsyncSocket.framework; path = "/Users/juston/Library/Developer/Xcode/DerivedData/ChatSecure-drkfzultsiaoxrcxgbdkrqgeuyrh/Build/Products/Debug-iphoneos/CocoaAsyncSocket.framework"; sourceTree = "<absolute>"; };
+		B02167BA1D7D7DA2001FB42C /* CocoaLumberjack.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; name = CocoaLumberjack.framework; path = "/Users/juston/Library/Developer/Xcode/DerivedData/ChatSecure-drkfzultsiaoxrcxgbdkrqgeuyrh/Build/Products/Debug-iphoneos/CocoaLumberjack.framework"; sourceTree = "<absolute>"; };
+		B02167BD1D7D7DA2001FB42C /* CPAProxy.bundle */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; name = CPAProxy.bundle; path = "/Users/juston/Library/Developer/Xcode/DerivedData/ChatSecure-drkfzultsiaoxrcxgbdkrqgeuyrh/Build/Products/Debug-iphoneos/CPAProxy.bundle"; sourceTree = "<absolute>"; };
+		B02167BF1D7D7DA2001FB42C /* CPAProxy.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; name = CPAProxy.framework; path = "/Users/juston/Library/Developer/Xcode/DerivedData/ChatSecure-drkfzultsiaoxrcxgbdkrqgeuyrh/Build/Products/Debug-iphoneos/CPAProxy.framework"; sourceTree = "<absolute>"; };
+		B02167C21D7D7DA2001FB42C /* FLAnimatedImage.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; name = FLAnimatedImage.framework; path = "/Users/juston/Library/Developer/Xcode/DerivedData/ChatSecure-drkfzultsiaoxrcxgbdkrqgeuyrh/Build/Products/Debug-iphoneos/FLAnimatedImage.framework"; sourceTree = "<absolute>"; };
+		B02167C51D7D7DA2001FB42C /* GCDWebServer.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; name = GCDWebServer.framework; path = "/Users/juston/Library/Developer/Xcode/DerivedData/ChatSecure-drkfzultsiaoxrcxgbdkrqgeuyrh/Build/Products/Debug-iphoneos/GCDWebServer.framework"; sourceTree = "<absolute>"; };
+		B02167C81D7D7DA2001FB42C /* gtm_http_fetcher.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; name = gtm_http_fetcher.framework; path = "/Users/juston/Library/Developer/Xcode/DerivedData/ChatSecure-drkfzultsiaoxrcxgbdkrqgeuyrh/Build/Products/Debug-iphoneos/gtm_http_fetcher.framework"; sourceTree = "<absolute>"; };
+		B02167CB1D7D7DA2001FB42C /* gtm_oauth2.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; name = gtm_oauth2.framework; path = "/Users/juston/Library/Developer/Xcode/DerivedData/ChatSecure-drkfzultsiaoxrcxgbdkrqgeuyrh/Build/Products/Debug-iphoneos/gtm_oauth2.framework"; sourceTree = "<absolute>"; };
+		B02167CE1D7D7DA2001FB42C /* HockeySDK_Source.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; name = HockeySDK_Source.framework; path = "/Users/juston/Library/Developer/Xcode/DerivedData/ChatSecure-drkfzultsiaoxrcxgbdkrqgeuyrh/Build/Products/Debug-iphoneos/HockeySDK_Source.framework"; sourceTree = "<absolute>"; };
+		B02167D11D7D7DA2001FB42C /* HockeySDKResources.bundle */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; name = HockeySDKResources.bundle; path = "/Users/juston/Library/Developer/Xcode/DerivedData/ChatSecure-drkfzultsiaoxrcxgbdkrqgeuyrh/Build/Products/Debug-iphoneos/HockeySDKResources.bundle"; sourceTree = "<absolute>"; };
+		B02167D31D7D7DA2001FB42C /* IOCipher.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; name = IOCipher.framework; path = "/Users/juston/Library/Developer/Xcode/DerivedData/ChatSecure-drkfzultsiaoxrcxgbdkrqgeuyrh/Build/Products/Debug-iphoneos/IOCipher.framework"; sourceTree = "<absolute>"; };
+		B02167D61D7D7DA2001FB42C /* JSQMessagesViewController.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; name = JSQMessagesViewController.framework; path = "/Users/juston/Library/Developer/Xcode/DerivedData/ChatSecure-drkfzultsiaoxrcxgbdkrqgeuyrh/Build/Products/Debug-iphoneos/JSQMessagesViewController.framework"; sourceTree = "<absolute>"; };
+		B02167D91D7D7DA2001FB42C /* JSQSystemSoundPlayer.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; name = JSQSystemSoundPlayer.framework; path = "/Users/juston/Library/Developer/Xcode/DerivedData/ChatSecure-drkfzultsiaoxrcxgbdkrqgeuyrh/Build/Products/Debug-iphoneos/JSQSystemSoundPlayer.framework"; sourceTree = "<absolute>"; };
+		B02167DC1D7D7DA2001FB42C /* JTSImageViewController.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; name = JTSImageViewController.framework; path = "/Users/juston/Library/Developer/Xcode/DerivedData/ChatSecure-drkfzultsiaoxrcxgbdkrqgeuyrh/Build/Products/Debug-iphoneos/JTSImageViewController.framework"; sourceTree = "<absolute>"; };
+		B02167DF1D7D7DA2001FB42C /* JVFloatLabeledTextField.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; name = JVFloatLabeledTextField.framework; path = "/Users/juston/Library/Developer/Xcode/DerivedData/ChatSecure-drkfzultsiaoxrcxgbdkrqgeuyrh/Build/Products/Debug-iphoneos/JVFloatLabeledTextField.framework"; sourceTree = "<absolute>"; };
+		B02167E21D7D7DA2001FB42C /* KissXML.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; name = KissXML.framework; path = "/Users/juston/Library/Developer/Xcode/DerivedData/ChatSecure-drkfzultsiaoxrcxgbdkrqgeuyrh/Build/Products/Debug-iphoneos/KissXML.framework"; sourceTree = "<absolute>"; };
+		B02167E51D7D7DA2001FB42C /* KVOController.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; name = KVOController.framework; path = "/Users/juston/Library/Developer/Xcode/DerivedData/ChatSecure-drkfzultsiaoxrcxgbdkrqgeuyrh/Build/Products/Debug-iphoneos/KVOController.framework"; sourceTree = "<absolute>"; };
+		B02167E81D7D7DA2001FB42C /* libsqlfs.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; name = libsqlfs.framework; path = "/Users/juston/Library/Developer/Xcode/DerivedData/ChatSecure-drkfzultsiaoxrcxgbdkrqgeuyrh/Build/Products/Debug-iphoneos/libsqlfs.framework"; sourceTree = "<absolute>"; };
+		B02167EB1D7D7DA2001FB42C /* Mantle.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; name = Mantle.framework; path = "/Users/juston/Library/Developer/Xcode/DerivedData/ChatSecure-drkfzultsiaoxrcxgbdkrqgeuyrh/Build/Products/Debug-iphoneos/Mantle.framework"; sourceTree = "<absolute>"; };
+		B02167EE1D7D7DA2001FB42C /* MBProgressHUD.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; name = MBProgressHUD.framework; path = "/Users/juston/Library/Developer/Xcode/DerivedData/ChatSecure-drkfzultsiaoxrcxgbdkrqgeuyrh/Build/Products/Debug-iphoneos/MBProgressHUD.framework"; sourceTree = "<absolute>"; };
+		B02167F11D7D7DA2001FB42C /* MWFeedParser.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; name = MWFeedParser.framework; path = "/Users/juston/Library/Developer/Xcode/DerivedData/ChatSecure-drkfzultsiaoxrcxgbdkrqgeuyrh/Build/Products/Debug-iphoneos/MWFeedParser.framework"; sourceTree = "<absolute>"; };
+		B02167F41D7D7DA2001FB42C /* Navajo.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; name = Navajo.framework; path = "/Users/juston/Library/Developer/Xcode/DerivedData/ChatSecure-drkfzultsiaoxrcxgbdkrqgeuyrh/Build/Products/Debug-iphoneos/Navajo.framework"; sourceTree = "<absolute>"; };
+		B02167F71D7D7DA2001FB42C /* OpenInChrome.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; name = OpenInChrome.framework; path = "/Users/juston/Library/Developer/Xcode/DerivedData/ChatSecure-drkfzultsiaoxrcxgbdkrqgeuyrh/Build/Products/Debug-iphoneos/OpenInChrome.framework"; sourceTree = "<absolute>"; };
+		B02167FA1D7D7DA2001FB42C /* OTRKit.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; name = OTRKit.framework; path = "/Users/juston/Library/Developer/Xcode/DerivedData/ChatSecure-drkfzultsiaoxrcxgbdkrqgeuyrh/Build/Products/Debug-iphoneos/OTRKit.framework"; sourceTree = "<absolute>"; };
+		B02167FD1D7D7DA3001FB42C /* ParkedTextField.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; name = ParkedTextField.framework; path = "/Users/juston/Library/Developer/Xcode/DerivedData/ChatSecure-drkfzultsiaoxrcxgbdkrqgeuyrh/Build/Products/Debug-iphoneos/ParkedTextField.framework"; sourceTree = "<absolute>"; };
+		B02168001D7D7DA3001FB42C /* PINCache.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; name = PINCache.framework; path = "/Users/juston/Library/Developer/Xcode/DerivedData/ChatSecure-drkfzultsiaoxrcxgbdkrqgeuyrh/Build/Products/Debug-iphoneos/PINCache.framework"; sourceTree = "<absolute>"; };
+		B02168031D7D7DA3001FB42C /* PINRemoteImage.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; name = PINRemoteImage.framework; path = "/Users/juston/Library/Developer/Xcode/DerivedData/ChatSecure-drkfzultsiaoxrcxgbdkrqgeuyrh/Build/Products/Debug-iphoneos/PINRemoteImage.framework"; sourceTree = "<absolute>"; };
+		B02168081D7D7DA3001FB42C /* ProxyKit.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; name = ProxyKit.framework; path = "/Users/juston/Library/Developer/Xcode/DerivedData/ChatSecure-drkfzultsiaoxrcxgbdkrqgeuyrh/Build/Products/Debug-iphoneos/ProxyKit.framework"; sourceTree = "<absolute>"; };
+		B021680B1D7D7DA3001FB42C /* PureLayout.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; name = PureLayout.framework; path = "/Users/juston/Library/Developer/Xcode/DerivedData/ChatSecure-drkfzultsiaoxrcxgbdkrqgeuyrh/Build/Products/Debug-iphoneos/PureLayout.framework"; sourceTree = "<absolute>"; };
+		B021680E1D7D7DA3001FB42C /* QRCodeReaderViewController.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; name = QRCodeReaderViewController.framework; path = "/Users/juston/Library/Developer/Xcode/DerivedData/ChatSecure-drkfzultsiaoxrcxgbdkrqgeuyrh/Build/Products/Debug-iphoneos/QRCodeReaderViewController.framework"; sourceTree = "<absolute>"; };
+		B02168111D7D7DA3001FB42C /* Reachability.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; name = Reachability.framework; path = "/Users/juston/Library/Developer/Xcode/DerivedData/ChatSecure-drkfzultsiaoxrcxgbdkrqgeuyrh/Build/Products/Debug-iphoneos/Reachability.framework"; sourceTree = "<absolute>"; };
+		B02168141D7D7DA3001FB42C /* SQLCipher.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; name = SQLCipher.framework; path = "/Users/juston/Library/Developer/Xcode/DerivedData/ChatSecure-drkfzultsiaoxrcxgbdkrqgeuyrh/Build/Products/Debug-iphoneos/SQLCipher.framework"; sourceTree = "<absolute>"; };
+		B02168171D7D7DA3001FB42C /* SSKeychain.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; name = SSKeychain.framework; path = "/Users/juston/Library/Developer/Xcode/DerivedData/ChatSecure-drkfzultsiaoxrcxgbdkrqgeuyrh/Build/Products/Debug-iphoneos/SSKeychain.framework"; sourceTree = "<absolute>"; };
+		B021681A1D7D7DA3001FB42C /* SVPullToRefresh.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; name = SVPullToRefresh.framework; path = "/Users/juston/Library/Developer/Xcode/DerivedData/ChatSecure-drkfzultsiaoxrcxgbdkrqgeuyrh/Build/Products/Debug-iphoneos/SVPullToRefresh.framework"; sourceTree = "<absolute>"; };
+		B021681D1D7D7DA3001FB42C /* TTTAttributedLabel.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; name = TTTAttributedLabel.framework; path = "/Users/juston/Library/Developer/Xcode/DerivedData/ChatSecure-drkfzultsiaoxrcxgbdkrqgeuyrh/Build/Products/Debug-iphoneos/TTTAttributedLabel.framework"; sourceTree = "<absolute>"; };
+		B02168201D7D7DA3001FB42C /* TUSafariActivity.bundle */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; name = TUSafariActivity.bundle; path = "/Users/juston/Library/Developer/Xcode/DerivedData/ChatSecure-drkfzultsiaoxrcxgbdkrqgeuyrh/Build/Products/Debug-iphoneos/TUSafariActivity.bundle"; sourceTree = "<absolute>"; };
+		B02168221D7D7DA3001FB42C /* TUSafariActivity.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; name = TUSafariActivity.framework; path = "/Users/juston/Library/Developer/Xcode/DerivedData/ChatSecure-drkfzultsiaoxrcxgbdkrqgeuyrh/Build/Products/Debug-iphoneos/TUSafariActivity.framework"; sourceTree = "<absolute>"; };
+		B02168251D7D7DA3001FB42C /* UIScrollView_InfiniteScroll.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; name = UIScrollView_InfiniteScroll.framework; path = "/Users/juston/Library/Developer/Xcode/DerivedData/ChatSecure-drkfzultsiaoxrcxgbdkrqgeuyrh/Build/Products/Debug-iphoneos/UIScrollView_InfiniteScroll.framework"; sourceTree = "<absolute>"; };
+		B02168281D7D7DA3001FB42C /* UserVoice.bundle */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; name = UserVoice.bundle; path = "/Users/juston/Library/Developer/Xcode/DerivedData/ChatSecure-drkfzultsiaoxrcxgbdkrqgeuyrh/Build/Products/Debug-iphoneos/UserVoice.bundle"; sourceTree = "<absolute>"; };
+		B021682A1D7D7DA3001FB42C /* uservoice_iphone_sdk.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; name = uservoice_iphone_sdk.framework; path = "/Users/juston/Library/Developer/Xcode/DerivedData/ChatSecure-drkfzultsiaoxrcxgbdkrqgeuyrh/Build/Products/Debug-iphoneos/uservoice_iphone_sdk.framework"; sourceTree = "<absolute>"; };
+		B021682D1D7D7DA3001FB42C /* VTAcknowledgementsViewController.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; name = VTAcknowledgementsViewController.framework; path = "/Users/juston/Library/Developer/Xcode/DerivedData/ChatSecure-drkfzultsiaoxrcxgbdkrqgeuyrh/Build/Products/Debug-iphoneos/VTAcknowledgementsViewController.framework"; sourceTree = "<absolute>"; };
+		B02168301D7D7DA3001FB42C /* XLForm.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; name = XLForm.framework; path = "/Users/juston/Library/Developer/Xcode/DerivedData/ChatSecure-drkfzultsiaoxrcxgbdkrqgeuyrh/Build/Products/Debug-iphoneos/XLForm.framework"; sourceTree = "<absolute>"; };
+		B02168331D7D7DA3001FB42C /* XMPPFramework.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; name = XMPPFramework.framework; path = "/Users/juston/Library/Developer/Xcode/DerivedData/ChatSecure-drkfzultsiaoxrcxgbdkrqgeuyrh/Build/Products/Debug-iphoneos/XMPPFramework.framework"; sourceTree = "<absolute>"; };
+		B02168361D7D7DA3001FB42C /* YapDatabase.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; name = YapDatabase.framework; path = "/Users/juston/Library/Developer/Xcode/DerivedData/ChatSecure-drkfzultsiaoxrcxgbdkrqgeuyrh/Build/Products/Debug-iphoneos/YapDatabase.framework"; sourceTree = "<absolute>"; };
+		B02168391D7D7DA3001FB42C /* ZXingObjC.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; name = ZXingObjC.framework; path = "/Users/juston/Library/Developer/Xcode/DerivedData/ChatSecure-drkfzultsiaoxrcxgbdkrqgeuyrh/Build/Products/Debug-iphoneos/ZXingObjC.framework"; sourceTree = "<absolute>"; };
 		B04DDD7E1D3F7ED70052A155 /* OTRAPIClient.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OTRAPIClient.h; sourceTree = "<group>"; };
 		B04DDD7F1D3F7ED70052A155 /* OTRAPIClient.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OTRAPIClient.m; sourceTree = "<group>"; };
 		CCD1F8E85C658C8D3865B584 /* Pods.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -827,7 +1034,6 @@
 		D989A84E1B5DBD90000608A9 /* OTRExistingAccountViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = OTRExistingAccountViewController.m; path = "Login View Controllers/OTRExistingAccountViewController.m"; sourceTree = "<group>"; };
 		D99F17891BAB946800604558 /* Branding.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Branding.plist; sourceTree = "<group>"; };
 		D99F178B1BAB947E00604558 /* Secrets.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Secrets.plist; sourceTree = "<group>"; };
-		D9AA24691CAB32CB00337ECA /* Pods_ChatSecureCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Pods_ChatSecureCore.framework; path = "../../../Library/Developer/Xcode/DerivedData/ChatSecure-bgbdueswhbvwehacitzrmgfutmci/Build/Products/Debug-iphonesimulator/Pods_ChatSecureCore.framework"; sourceTree = "<group>"; };
 		D9AA246B1CAB401800337ECA /* GTMOAuth2ViewTouch.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = GTMOAuth2ViewTouch.xib; path = "Pods/gtm-oauth2/Source/Touch/GTMOAuth2ViewTouch.xib"; sourceTree = SOURCE_ROOT; };
 		D9ADE5B71B606642009471FF /* OTRCircleButtonView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OTRCircleButtonView.h; sourceTree = "<group>"; };
 		D9ADE5B81B606642009471FF /* OTRCircleButtonView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OTRCircleButtonView.m; sourceTree = "<group>"; };
@@ -853,7 +1059,59 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				B02168041D7D7DA3001FB42C /* PINRemoteImage.framework in Frameworks */,
+				B021680F1D7D7DA3001FB42C /* QRCodeReaderViewController.framework in Frameworks */,
+				B02167AC1D7D7DA1001FB42C /* BBlock.framework in Frameworks */,
+				B021679A1D7D7CBE001FB42C /* ARChromeActivity.framework in Frameworks */,
+				B02168091D7D7DA3001FB42C /* ProxyKit.framework in Frameworks */,
+				B021683A1D7D7DA3001FB42C /* ZXingObjC.framework in Frameworks */,
+				B02167A41D7D7DA1001FB42C /* AFNetworking.framework in Frameworks */,
+				B021679F1D7D7D01001FB42C /* AFNetworking.framework in Frameworks */,
+				B021682B1D7D7DA3001FB42C /* uservoice_iphone_sdk.framework in Frameworks */,
 				D9227C3F1BA7952100B5E1D0 /* ChatSecureCore.framework in Frameworks */,
+				B02168061D7D7DA3001FB42C /* Pods_ChatSecureCore.framework in Frameworks */,
+				B02168311D7D7DA3001FB42C /* XLForm.framework in Frameworks */,
+				B02167AF1D7D7DA1001FB42C /* BButton.framework in Frameworks */,
+				B02167AA1D7D7DA1001FB42C /* ARChromeActivity.framework in Frameworks */,
+				B02167A81D7D7DA1001FB42C /* Appirater.framework in Frameworks */,
+				B02168341D7D7DA3001FB42C /* XMPPFramework.framework in Frameworks */,
+				B02167EF1D7D7DA2001FB42C /* MBProgressHUD.framework in Frameworks */,
+				B02168261D7D7DA3001FB42C /* UIScrollView_InfiniteScroll.framework in Frameworks */,
+				B02168121D7D7DA3001FB42C /* Reachability.framework in Frameworks */,
+				B02167C61D7D7DA2001FB42C /* GCDWebServer.framework in Frameworks */,
+				B02167F21D7D7DA2001FB42C /* MWFeedParser.framework in Frameworks */,
+				B02167F51D7D7DA2001FB42C /* Navajo.framework in Frameworks */,
+				B02167EC1D7D7DA2001FB42C /* Mantle.framework in Frameworks */,
+				B02167C91D7D7DA2001FB42C /* gtm_http_fetcher.framework in Frameworks */,
+				B021681B1D7D7DA3001FB42C /* SVPullToRefresh.framework in Frameworks */,
+				B02167E91D7D7DA2001FB42C /* libsqlfs.framework in Frameworks */,
+				B021680C1D7D7DA3001FB42C /* PureLayout.framework in Frameworks */,
+				B02168231D7D7DA3001FB42C /* TUSafariActivity.framework in Frameworks */,
+				B02167CC1D7D7DA2001FB42C /* gtm_oauth2.framework in Frameworks */,
+				B02168181D7D7DA3001FB42C /* SSKeychain.framework in Frameworks */,
+				B02167CF1D7D7DA2001FB42C /* HockeySDK_Source.framework in Frameworks */,
+				B02168011D7D7DA3001FB42C /* PINCache.framework in Frameworks */,
+				B02168151D7D7DA3001FB42C /* SQLCipher.framework in Frameworks */,
+				B02167B81D7D7DA2001FB42C /* CocoaAsyncSocket.framework in Frameworks */,
+				B02167B21D7D7DA1001FB42C /* ChatSecure_Push_iOS.framework in Frameworks */,
+				B021682E1D7D7DA3001FB42C /* VTAcknowledgementsViewController.framework in Frameworks */,
+				B02167DA1D7D7DA2001FB42C /* JSQSystemSoundPlayer.framework in Frameworks */,
+				B02167A21D7D7D2F001FB42C /* BBlock.framework in Frameworks */,
+				B02167E31D7D7DA2001FB42C /* KissXML.framework in Frameworks */,
+				B02167D41D7D7DA2001FB42C /* IOCipher.framework in Frameworks */,
+				B021681E1D7D7DA3001FB42C /* TTTAttributedLabel.framework in Frameworks */,
+				B02167B51D7D7DA2001FB42C /* Cloudinary.framework in Frameworks */,
+				B02167C31D7D7DA2001FB42C /* FLAnimatedImage.framework in Frameworks */,
+				B02167E01D7D7DA2001FB42C /* JVFloatLabeledTextField.framework in Frameworks */,
+				B02167FB1D7D7DA2001FB42C /* OTRKit.framework in Frameworks */,
+				B02167BB1D7D7DA2001FB42C /* CocoaLumberjack.framework in Frameworks */,
+				B02167D71D7D7DA2001FB42C /* JSQMessagesViewController.framework in Frameworks */,
+				B02168371D7D7DA3001FB42C /* YapDatabase.framework in Frameworks */,
+				B02167E61D7D7DA2001FB42C /* KVOController.framework in Frameworks */,
+				B02167DD1D7D7DA2001FB42C /* JTSImageViewController.framework in Frameworks */,
+				B021683D1D7D7E5F001FB42C /* CPAProxy.framework in Frameworks */,
+				B02167FE1D7D7DA3001FB42C /* ParkedTextField.framework in Frameworks */,
+				B02167F81D7D7DA2001FB42C /* OpenInChrome.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -861,7 +1119,6 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				635FCC891D1B5936008F903C /* Pods_ChatSecureCore.framework in Frameworks */,
 				631E1E9F1C583B6900E263CD /* ChatSecureCore.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -871,7 +1128,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				D9AE3A201BA8CCFE00255537 /* OTRAssets.framework in Frameworks */,
-				EE22362CF225156043E19FA7 /* Pods_ChatSecureCore.framework in Frameworks */,
+				7F408CE30104F3D0A455A95A /* Pods_ChatSecureCore.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1363,6 +1620,58 @@
 		6396AF911A169D54009F3E6C = {
 			isa = PBXGroup;
 			children = (
+				B02168391D7D7DA3001FB42C /* ZXingObjC.framework */,
+				B02168361D7D7DA3001FB42C /* YapDatabase.framework */,
+				B02168331D7D7DA3001FB42C /* XMPPFramework.framework */,
+				B02168301D7D7DA3001FB42C /* XLForm.framework */,
+				B021682D1D7D7DA3001FB42C /* VTAcknowledgementsViewController.framework */,
+				B021682A1D7D7DA3001FB42C /* uservoice_iphone_sdk.framework */,
+				B02168281D7D7DA3001FB42C /* UserVoice.bundle */,
+				B02168251D7D7DA3001FB42C /* UIScrollView_InfiniteScroll.framework */,
+				B02168221D7D7DA3001FB42C /* TUSafariActivity.framework */,
+				B02168201D7D7DA3001FB42C /* TUSafariActivity.bundle */,
+				B021681D1D7D7DA3001FB42C /* TTTAttributedLabel.framework */,
+				B021681A1D7D7DA3001FB42C /* SVPullToRefresh.framework */,
+				B02168171D7D7DA3001FB42C /* SSKeychain.framework */,
+				B02168141D7D7DA3001FB42C /* SQLCipher.framework */,
+				B02168111D7D7DA3001FB42C /* Reachability.framework */,
+				B021680E1D7D7DA3001FB42C /* QRCodeReaderViewController.framework */,
+				B021680B1D7D7DA3001FB42C /* PureLayout.framework */,
+				B02168081D7D7DA3001FB42C /* ProxyKit.framework */,
+				B02168031D7D7DA3001FB42C /* PINRemoteImage.framework */,
+				B02168001D7D7DA3001FB42C /* PINCache.framework */,
+				B02167FD1D7D7DA3001FB42C /* ParkedTextField.framework */,
+				B02167FA1D7D7DA2001FB42C /* OTRKit.framework */,
+				B02167F71D7D7DA2001FB42C /* OpenInChrome.framework */,
+				B02167F41D7D7DA2001FB42C /* Navajo.framework */,
+				B02167F11D7D7DA2001FB42C /* MWFeedParser.framework */,
+				B02167EE1D7D7DA2001FB42C /* MBProgressHUD.framework */,
+				B02167EB1D7D7DA2001FB42C /* Mantle.framework */,
+				B02167E81D7D7DA2001FB42C /* libsqlfs.framework */,
+				B02167E51D7D7DA2001FB42C /* KVOController.framework */,
+				B02167E21D7D7DA2001FB42C /* KissXML.framework */,
+				B02167DF1D7D7DA2001FB42C /* JVFloatLabeledTextField.framework */,
+				B02167DC1D7D7DA2001FB42C /* JTSImageViewController.framework */,
+				B02167D91D7D7DA2001FB42C /* JSQSystemSoundPlayer.framework */,
+				B02167D61D7D7DA2001FB42C /* JSQMessagesViewController.framework */,
+				B02167D31D7D7DA2001FB42C /* IOCipher.framework */,
+				B02167D11D7D7DA2001FB42C /* HockeySDKResources.bundle */,
+				B02167CE1D7D7DA2001FB42C /* HockeySDK_Source.framework */,
+				B02167CB1D7D7DA2001FB42C /* gtm_oauth2.framework */,
+				B02167C81D7D7DA2001FB42C /* gtm_http_fetcher.framework */,
+				B02167C51D7D7DA2001FB42C /* GCDWebServer.framework */,
+				B02167C21D7D7DA2001FB42C /* FLAnimatedImage.framework */,
+				B02167BF1D7D7DA2001FB42C /* CPAProxy.framework */,
+				B02167BD1D7D7DA2001FB42C /* CPAProxy.bundle */,
+				B02167BA1D7D7DA2001FB42C /* CocoaLumberjack.framework */,
+				B02167B71D7D7DA2001FB42C /* CocoaAsyncSocket.framework */,
+				B02167B41D7D7DA2001FB42C /* Cloudinary.framework */,
+				B02167B11D7D7DA1001FB42C /* ChatSecure_Push_iOS.framework */,
+				B02167AE1D7D7DA1001FB42C /* BButton.framework */,
+				B02167A61D7D7DA1001FB42C /* Appirater.bundle */,
+				B02167A11D7D7D2F001FB42C /* BBlock.framework */,
+				B021679C1D7D7CF1001FB42C /* Appirater.framework */,
+				B02167991D7D7CBE001FB42C /* ARChromeActivity.framework */,
 				6396AF9C1A169D54009F3E6C /* ChatSecure */,
 				6396AFB61A169D54009F3E6C /* ChatSecureTests */,
 				D9227C2B1BA7952100B5E1D0 /* ChatSecureCore */,
@@ -1561,10 +1870,9 @@
 		DB9AACD6ED82090C7A6B0076 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				635FCC881D1B5936008F903C /* Pods_ChatSecureCore.framework */,
-				D9AA24691CAB32CB00337ECA /* Pods_ChatSecureCore.framework */,
+				B02167911D7D7B2B001FB42C /* AFNetworking.framework */,
 				CCD1F8E85C658C8D3865B584 /* Pods.framework */,
-				9B353F12AE2FDB52438B426D /* Pods_ChatSecureCore.framework */,
+				6C592992CC49A50D357998DA /* Pods_ChatSecureCore.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -1752,13 +2060,10 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 6396AFBD1A169D54009F3E6C /* Build configuration list for PBXNativeTarget "ChatSecure" */;
 			buildPhases = (
-				C7FDC650D88ABA89D81EBBF7 /* Check Pods Manifest.lock */,
 				6396AF961A169D54009F3E6C /* Sources */,
 				6396AF971A169D54009F3E6C /* Frameworks */,
 				6396AF981A169D54009F3E6C /* Resources */,
-				8A2E66B35EF52AF3A8D65276 /* Copy Pods Resources */,
 				6386E24E1A16DBAD003465DC /* Run Script */,
-				A60AF14A61B7922CB2D653D0 /* Embed Pods Frameworks */,
 				D9227C481BA7952100B5E1D0 /* Embed Frameworks */,
 				B02FC37E1D475FFC001AA54E /* Fabric */,
 			);
@@ -1777,12 +2082,9 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 6396AFC01A169D54009F3E6C /* Build configuration list for PBXNativeTarget "ChatSecureTests" */;
 			buildPhases = (
-				C6209FD4E67B0AE13FA1CE51 /* Check Pods Manifest.lock */,
 				6396AFAF1A169D54009F3E6C /* Sources */,
 				6396AFB01A169D54009F3E6C /* Frameworks */,
 				6396AFB11A169D54009F3E6C /* Resources */,
-				F92CD31427EF6855AC77AF5E /* Copy Pods Resources */,
-				28B190A63625A51411C8DC25 /* Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -1799,12 +2101,12 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = D9227C471BA7952100B5E1D0 /* Build configuration list for PBXNativeTarget "ChatSecureCore" */;
 			buildPhases = (
-				ED8AB696AE0578D36330802D /* Check Pods Manifest.lock */,
+				D04BCFF4CA9A72C1DC8AFEC4 /* Check Pods Manifest.lock */,
 				D9227C251BA7952100B5E1D0 /* Sources */,
 				D9227C261BA7952100B5E1D0 /* Frameworks */,
 				D9227C271BA7952100B5E1D0 /* Headers */,
 				D9227C281BA7952100B5E1D0 /* Resources */,
-				C51DC9AFCD4F8C0D582CD146 /* Copy Pods Resources */,
+				FEA133DC76974E619D2A0BF4 /* Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -2008,21 +2310,6 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
-		28B190A63625A51411C8DC25 /* Embed Pods Frameworks */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			name = "Embed Pods Frameworks";
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-ChatSecureCore/Pods-ChatSecureCore-frameworks.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
 		6386E24E1A16DBAD003465DC /* Run Script */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -2036,36 +2323,6 @@
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "python \"${SRCROOT}/OTRAssets/Strings/StringsConverter.py\"";
-		};
-		8A2E66B35EF52AF3A8D65276 /* Copy Pods Resources */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			name = "Copy Pods Resources";
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-ChatSecureCore/Pods-ChatSecureCore-resources.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
-		A60AF14A61B7922CB2D653D0 /* Embed Pods Frameworks */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			name = "Embed Pods Frameworks";
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-ChatSecureCore/Pods-ChatSecureCore-frameworks.sh\"\n";
-			showEnvVarsInLog = 0;
 		};
 		B02FC37E1D475FFC001AA54E /* Fabric */ = {
 			isa = PBXShellScriptBuildPhase;
@@ -2081,7 +2338,22 @@
 			shellPath = /bin/sh;
 			shellScript = "\"${PODS_ROOT}/Fabric/run\" 413c90937b9528a038fc013f777ef6a27df04bce c6324207a759d8fef71de3f106ecc852d12051d8ecfefaa0245d6f8b4ac704cb";
 		};
-		C51DC9AFCD4F8C0D582CD146 /* Copy Pods Resources */ = {
+		D04BCFF4CA9A72C1DC8AFEC4 /* Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Check Pods Manifest.lock";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
+			showEnvVarsInLog = 0;
+		};
+		FEA133DC76974E619D2A0BF4 /* Copy Pods Resources */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -2094,65 +2366,6 @@
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-ChatSecureCore/Pods-ChatSecureCore-resources.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
-		C6209FD4E67B0AE13FA1CE51 /* Check Pods Manifest.lock */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			name = "Check Pods Manifest.lock";
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
-			showEnvVarsInLog = 0;
-		};
-		C7FDC650D88ABA89D81EBBF7 /* Check Pods Manifest.lock */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			name = "Check Pods Manifest.lock";
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
-			showEnvVarsInLog = 0;
-		};
-		ED8AB696AE0578D36330802D /* Check Pods Manifest.lock */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			name = "Check Pods Manifest.lock";
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
-		};
-		F92CD31427EF6855AC77AF5E /* Copy Pods Resources */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			name = "Copy Pods Resources";
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-ChatSecureCore/Pods-ChatSecureCore-resources.sh\"";
 			showEnvVarsInLog = 0;
 		};
 /* End PBXShellScriptBuildPhase section */
@@ -2500,17 +2713,130 @@
 				CLANG_ALLOW_NON_MODULAR_INCLUDES_IN_FRAMEWORK_MODULES = YES;
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_ENTITLEMENTS = ChatSecure/ChatSecure.entitlements;
-				CODE_SIGN_IDENTITY = "iPhone Distribution: Micabsystems Corp (8H5SYM9GR5)";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Micabsystems Corp (8H5SYM9GR5)";
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				DEFINES_MODULE = YES;
 				EMBEDDED_CONTENT_CONTAINS_SWIFT = YES;
+				ENABLE_BITCODE = NO;
 				INFOPLIST_FILE = ChatSecure/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				OTHER_LDFLAGS = (
+					"$(inherited)",
+					"-ObjC",
+					"-l\"c++\"",
+					"-l\"z\"",
+					"-framework",
+					"\"AFNetworking\"",
+					"-framework",
+					"\"ARChromeActivity\"",
+					"-framework",
+					"\"Appirater\"",
+					"-framework",
+					"\"BBlock\"",
+					"-framework",
+					"\"BButton\"",
+					"-framework",
+					"\"CPAProxy\"",
+					"-framework",
+					"\"ChatSecure_Push_iOS\"",
+					"-framework",
+					"\"Cloudinary\"",
+					"-framework",
+					"\"CocoaAsyncSocket\"",
+					"-framework",
+					"\"CocoaLumberjack\"",
+					"-framework",
+					"\"Crashlytics\"",
+					"-framework",
+					"\"FLAnimatedImage\"",
+					"-framework",
+					"\"Fabric\"",
+					"-framework",
+					"\"GCDWebServer\"",
+					"-framework",
+					"\"HockeySDK_Source\"",
+					"-framework",
+					"\"IOCipher\"",
+					"-framework",
+					"\"JSQMessagesViewController\"",
+					"-framework",
+					"\"JSQSystemSoundPlayer\"",
+					"-framework",
+					"\"JTSImageViewController\"",
+					"-framework",
+					"\"JVFloatLabeledTextField\"",
+					"-framework",
+					"\"KVOController\"",
+					"-framework",
+					"\"KissXML\"",
+					"-framework",
+					"\"MBProgressHUD\"",
+					"-framework",
+					"\"MWFeedParser\"",
+					"-framework",
+					"\"Mantle\"",
+					"-framework",
+					"\"Navajo\"",
+					"-framework",
+					"\"OTRKit\"",
+					"-framework",
+					"\"OpenInChrome\"",
+					"-framework",
+					"\"PINCache\"",
+					"-framework",
+					"\"PINRemoteImage\"",
+					"-framework",
+					"\"ParkedTextField\"",
+					"-framework",
+					"\"ProxyKit\"",
+					"-framework",
+					"\"PureLayout\"",
+					"-framework",
+					"\"QRCodeReaderViewController\"",
+					"-framework",
+					"\"Reachability\"",
+					"-framework",
+					"\"SQLCipher\"",
+					"-framework",
+					"\"SSKeychain\"",
+					"-framework",
+					"\"SVPullToRefresh\"",
+					"-framework",
+					"\"Security\"",
+					"-framework",
+					"\"SystemConfiguration\"",
+					"-framework",
+					"\"TTTAttributedLabel\"",
+					"-framework",
+					"\"TUSafariActivity\"",
+					"-framework",
+					"\"UIKit\"",
+					"-framework",
+					"\"UIScrollView_InfiniteScroll\"",
+					"-framework",
+					"\"VTAcknowledgementsViewController\"",
+					"-framework",
+					"\"XLForm\"",
+					"-framework",
+					"\"XMPPFramework\"",
+					"-framework",
+					"\"YapDatabase\"",
+					"-framework",
+					"\"ZXingObjC\"",
+					"-framework",
+					"\"gtm_http_fetcher\"",
+					"-framework",
+					"\"gtm_oauth2\"",
+					"-framework",
+					"\"libsqlfs\"",
+					"-framework",
+					"\"uservoice_iphone_sdk\"",
+				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.bentanayan.UPSChat;
 				PRODUCT_MODULE_NAME = "$(TARGET_NAME:c99extidentifier)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "84847330-1593-42b0-b8ac-4286dd041df1";
+				PROVISIONING_PROFILE = "";
 				PUBLIC_HEADERS_FOLDER_PATH = "$(CONTENTS_FOLDER_PATH)/Headers";
 			};
 			name = Beta;
@@ -2628,16 +2954,129 @@
 				CLANG_ALLOW_NON_MODULAR_INCLUDES_IN_FRAMEWORK_MODULES = YES;
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_ENTITLEMENTS = ChatSecure/ChatSecure.entitlements;
-				CODE_SIGN_IDENTITY = "iPhone Distribution: Micabsystems Corp (8H5SYM9GR5)";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Micabsystems Corp (8H5SYM9GR5)";
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				EMBEDDED_CONTENT_CONTAINS_SWIFT = YES;
+				ENABLE_BITCODE = NO;
 				INFOPLIST_FILE = ChatSecure/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				OTHER_LDFLAGS = (
+					"$(inherited)",
+					"-ObjC",
+					"-l\"c++\"",
+					"-l\"z\"",
+					"-framework",
+					"\"AFNetworking\"",
+					"-framework",
+					"\"ARChromeActivity\"",
+					"-framework",
+					"\"Appirater\"",
+					"-framework",
+					"\"BBlock\"",
+					"-framework",
+					"\"BButton\"",
+					"-framework",
+					"\"CPAProxy\"",
+					"-framework",
+					"\"ChatSecure_Push_iOS\"",
+					"-framework",
+					"\"Cloudinary\"",
+					"-framework",
+					"\"CocoaAsyncSocket\"",
+					"-framework",
+					"\"CocoaLumberjack\"",
+					"-framework",
+					"\"Crashlytics\"",
+					"-framework",
+					"\"FLAnimatedImage\"",
+					"-framework",
+					"\"Fabric\"",
+					"-framework",
+					"\"GCDWebServer\"",
+					"-framework",
+					"\"HockeySDK_Source\"",
+					"-framework",
+					"\"IOCipher\"",
+					"-framework",
+					"\"JSQMessagesViewController\"",
+					"-framework",
+					"\"JSQSystemSoundPlayer\"",
+					"-framework",
+					"\"JTSImageViewController\"",
+					"-framework",
+					"\"JVFloatLabeledTextField\"",
+					"-framework",
+					"\"KVOController\"",
+					"-framework",
+					"\"KissXML\"",
+					"-framework",
+					"\"MBProgressHUD\"",
+					"-framework",
+					"\"MWFeedParser\"",
+					"-framework",
+					"\"Mantle\"",
+					"-framework",
+					"\"Navajo\"",
+					"-framework",
+					"\"OTRKit\"",
+					"-framework",
+					"\"OpenInChrome\"",
+					"-framework",
+					"\"PINCache\"",
+					"-framework",
+					"\"PINRemoteImage\"",
+					"-framework",
+					"\"ParkedTextField\"",
+					"-framework",
+					"\"ProxyKit\"",
+					"-framework",
+					"\"PureLayout\"",
+					"-framework",
+					"\"QRCodeReaderViewController\"",
+					"-framework",
+					"\"Reachability\"",
+					"-framework",
+					"\"SQLCipher\"",
+					"-framework",
+					"\"SSKeychain\"",
+					"-framework",
+					"\"SVPullToRefresh\"",
+					"-framework",
+					"\"Security\"",
+					"-framework",
+					"\"SystemConfiguration\"",
+					"-framework",
+					"\"TTTAttributedLabel\"",
+					"-framework",
+					"\"TUSafariActivity\"",
+					"-framework",
+					"\"UIKit\"",
+					"-framework",
+					"\"UIScrollView_InfiniteScroll\"",
+					"-framework",
+					"\"VTAcknowledgementsViewController\"",
+					"-framework",
+					"\"XLForm\"",
+					"-framework",
+					"\"XMPPFramework\"",
+					"-framework",
+					"\"YapDatabase\"",
+					"-framework",
+					"\"ZXingObjC\"",
+					"-framework",
+					"\"gtm_http_fetcher\"",
+					"-framework",
+					"\"gtm_oauth2\"",
+					"-framework",
+					"\"libsqlfs\"",
+					"-framework",
+					"\"uservoice_iphone_sdk\"",
+				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.bentanayan.UPSChat;
 				PRODUCT_MODULE_NAME = "$(TARGET_NAME:c99extidentifier)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "84847330-1593-42b0-b8ac-4286dd041df1";
+				PROVISIONING_PROFILE = "";
 				PUBLIC_HEADERS_FOLDER_PATH = "$(CONTENTS_FOLDER_PATH)/Headers";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 			};
@@ -2653,16 +3092,129 @@
 				CLANG_ALLOW_NON_MODULAR_INCLUDES_IN_FRAMEWORK_MODULES = YES;
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_ENTITLEMENTS = ChatSecure/ChatSecure.entitlements;
-				CODE_SIGN_IDENTITY = "iPhone Distribution: Micabsystems Corp (8H5SYM9GR5)";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Micabsystems Corp (8H5SYM9GR5)";
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				EMBEDDED_CONTENT_CONTAINS_SWIFT = YES;
+				ENABLE_BITCODE = NO;
 				INFOPLIST_FILE = ChatSecure/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				OTHER_LDFLAGS = (
+					"$(inherited)",
+					"-ObjC",
+					"-l\"c++\"",
+					"-l\"z\"",
+					"-framework",
+					"\"AFNetworking\"",
+					"-framework",
+					"\"ARChromeActivity\"",
+					"-framework",
+					"\"Appirater\"",
+					"-framework",
+					"\"BBlock\"",
+					"-framework",
+					"\"BButton\"",
+					"-framework",
+					"\"CPAProxy\"",
+					"-framework",
+					"\"ChatSecure_Push_iOS\"",
+					"-framework",
+					"\"Cloudinary\"",
+					"-framework",
+					"\"CocoaAsyncSocket\"",
+					"-framework",
+					"\"CocoaLumberjack\"",
+					"-framework",
+					"\"Crashlytics\"",
+					"-framework",
+					"\"FLAnimatedImage\"",
+					"-framework",
+					"\"Fabric\"",
+					"-framework",
+					"\"GCDWebServer\"",
+					"-framework",
+					"\"HockeySDK_Source\"",
+					"-framework",
+					"\"IOCipher\"",
+					"-framework",
+					"\"JSQMessagesViewController\"",
+					"-framework",
+					"\"JSQSystemSoundPlayer\"",
+					"-framework",
+					"\"JTSImageViewController\"",
+					"-framework",
+					"\"JVFloatLabeledTextField\"",
+					"-framework",
+					"\"KVOController\"",
+					"-framework",
+					"\"KissXML\"",
+					"-framework",
+					"\"MBProgressHUD\"",
+					"-framework",
+					"\"MWFeedParser\"",
+					"-framework",
+					"\"Mantle\"",
+					"-framework",
+					"\"Navajo\"",
+					"-framework",
+					"\"OTRKit\"",
+					"-framework",
+					"\"OpenInChrome\"",
+					"-framework",
+					"\"PINCache\"",
+					"-framework",
+					"\"PINRemoteImage\"",
+					"-framework",
+					"\"ParkedTextField\"",
+					"-framework",
+					"\"ProxyKit\"",
+					"-framework",
+					"\"PureLayout\"",
+					"-framework",
+					"\"QRCodeReaderViewController\"",
+					"-framework",
+					"\"Reachability\"",
+					"-framework",
+					"\"SQLCipher\"",
+					"-framework",
+					"\"SSKeychain\"",
+					"-framework",
+					"\"SVPullToRefresh\"",
+					"-framework",
+					"\"Security\"",
+					"-framework",
+					"\"SystemConfiguration\"",
+					"-framework",
+					"\"TTTAttributedLabel\"",
+					"-framework",
+					"\"TUSafariActivity\"",
+					"-framework",
+					"\"UIKit\"",
+					"-framework",
+					"\"UIScrollView_InfiniteScroll\"",
+					"-framework",
+					"\"VTAcknowledgementsViewController\"",
+					"-framework",
+					"\"XLForm\"",
+					"-framework",
+					"\"XMPPFramework\"",
+					"-framework",
+					"\"YapDatabase\"",
+					"-framework",
+					"\"ZXingObjC\"",
+					"-framework",
+					"\"gtm_http_fetcher\"",
+					"-framework",
+					"\"gtm_oauth2\"",
+					"-framework",
+					"\"libsqlfs\"",
+					"-framework",
+					"\"uservoice_iphone_sdk\"",
+				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.bentanayan.UPSChat;
 				PRODUCT_MODULE_NAME = "$(TARGET_NAME:c99extidentifier)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "84847330-1593-42b0-b8ac-4286dd041df1";
+				PROVISIONING_PROFILE = "";
 				PUBLIC_HEADERS_FOLDER_PATH = "$(CONTENTS_FOLDER_PATH)/Headers";
 			};
 			name = Release;

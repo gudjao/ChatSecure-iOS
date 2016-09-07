@@ -24,7 +24,11 @@
 
 @end
 
-@interface OTRMessagesViewController : JSQMessagesViewController <OTRMessagesViewControllerProtocol, UIPopoverPresentationControllerDelegate>
+@interface OTRMessagesViewController : JSQMessagesViewController <OTRMessagesViewControllerProtocol, UIPopoverPresentationControllerDelegate> {
+    BOOL _isFirstLoad;
+    NSUInteger _archivedMessagesDidReceiveCount;
+    NSUInteger _archviedMessagesDidUpdatedbCount;
+}
 
 @property (nonatomic, strong) YapDatabaseConnection *databaseConnection;
 @property (nonatomic, strong) NSString *threadKey;

@@ -49,7 +49,6 @@ extern NSString *const OTRXMPPRegisterSucceededNotificationName;
 extern NSString *const OTRXMPPRegisterFailedNotificationName;
 
 
-
 /**
  This notification is sent every time there is a change in the login status and if it goes 'backwards' there
  should be an error or a user initiated disconnect.
@@ -67,6 +66,7 @@ extern NSString *const OTRXMPPOldLoginStatusKey;
 extern NSString *const OTRXMPPNewLoginStatusKey;
 extern NSString *const OTRXMPPLoginErrorKey;
 
+extern NSString *const OTRXMPPReceivedArchivedMessagesNotificationName;
 
 @interface OTRXMPPManager : NSObject <XMPPRosterDelegate, NSFetchedResultsControllerDelegate, OTRProtocol, OTRCertificatePinningDelegate>
 
@@ -112,5 +112,8 @@ extern NSString *const OTRXMPPLoginErrorKey;
 
 // Delivery receipts
 - (void) sendDeliveryReceiptForMessage:(OTRMessage*)message;
+
+// Beta MAM
+- (void)fetchArchivedMessages:(OTRMessage *)lastMessage withBuddy:(OTRBuddy *)buddy;
 
 @end

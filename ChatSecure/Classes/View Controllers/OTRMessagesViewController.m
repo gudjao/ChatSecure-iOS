@@ -48,6 +48,7 @@
 #import "Cloudinary/Cloudinary.h"
 #import <ChatSecureCore/ChatSecureCore-Swift.h>
 
+#import "SVPullToRefresh.h"
 #import <PINRemoteImage/PINRemoteImage.h>
 #import <PINRemoteImage/PINImageView+PINRemoteImage.h>
 #import <PINRemoteImage/PINRemoteImageCaching.h>
@@ -105,10 +106,12 @@ typedef NS_ENUM(int, OTRDropDownType) {
     [[NSNotificationCenter defaultCenter] removeObserver:self];
 }
 
+
 - (void)viewDidLoad
 {
     [super viewDidLoad];
     
+    ////// Auto Scroll //////
     self.automaticallyScrollsToMostRecentMessage = YES;
     
     ////// bubbles //////
@@ -164,6 +167,29 @@ typedef NS_ENUM(int, OTRDropDownType) {
     OTRMessagesCollectionViewFlowLayout *layout = [[OTRMessagesCollectionViewFlowLayout alloc] init];
     layout.sizeDelegate = self;
     self.collectionView.collectionViewLayout = layout;
+    
+    ////// Archived Messages with Infinite Scroll //////
+    _isFirstLoad = 0;
+    _archivedMessagesDidReceiveCount = 0;
+    _archviedMessagesDidUpdatedbCount = 0;
+    
+    if([self class] != [OTRMessagesGroupViewController class]) {
+        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(receivedArchivedMessagesNotification:) name:OTRXMPPReceivedArchivedMessagesNotificationName object:nil];
+        
+        __weak typeof(self)weakSelf = self;
+        [self.collectionView addInfiniteScrollingWithActionHandler:^{
+            __strong typeof(weakSelf)strongSelf = weakSelf;
+            NSInteger numOfItems = [strongSelf.collectionView numberOfItemsInSection:0];
+            if(numOfItems == 0) {
+                _isFirstLoad = 1;
+                [[strongSelf xmppManager] fetchArchivedMessages:nil withBuddy:[self buddy]];
+            } else {
+                NSIndexPath *indexPath = [NSIndexPath indexPathForItem:0 inSection:0];
+                id <OTRMessageProtocol> message = [strongSelf messageAtIndexPath:indexPath];
+                [[strongSelf xmppManager] fetchArchivedMessages:(OTRMessage *)message withBuddy:[self buddy]];
+            }
+        } direction:SVInfiniteScrollingDirectionTop];
+    }
 }
 
 - (void)viewWillAppear:(BOOL)animated
@@ -218,12 +244,15 @@ typedef NS_ENUM(int, OTRDropDownType) {
     
     
     [self.collectionView reloadData];
+    
+    NSInteger numOfItems = [self.collectionView numberOfItemsInSection:0];
+    if(numOfItems == 0) {
+        [self.collectionView triggerInfiniteScrolling];
+    }
 }
 
 - (void)viewDidAppear:(BOOL)animated {
     [super viewDidAppear:animated];
-    
-    NSLog(@"NAVIGATION: %@", self.navigationController.viewControllers);
 }
 
 - (void)viewWillDisappear:(BOOL)animated
@@ -1117,6 +1146,8 @@ typedef NS_ENUM(int, OTRDropDownType) {
 
 - (void)sendMediaCloudinaryItem:(OTRMediaItem *)mediaItem data:(id)data message:(id)message type:(NSString *)type {
     
+    __weak OTRMessagesViewController *weakSelf = self;
+    
     CLCloudinary *cloudinary = [[CLCloudinary alloc] initWithUrl:UPS_CLOUDINARY_URL];
     
     CLUploader *uploader = [[CLUploader alloc] init:cloudinary delegate:nil];
@@ -1168,10 +1199,15 @@ typedef NS_ENUM(int, OTRDropDownType) {
                       OTRXMPPRoomMessage *msg = (OTRXMPPRoomMessage *)message;
                       [msg removeWithTransaction:transaction];
                   }];
+                  
+                  [weakSelf didPressSendButton:self.sendButton
+                               withMessageText:successResult[@"secure_url"]
+                                      senderId:self.senderId
+                             senderDisplayName:self.senderDisplayName
+                                          date:[NSDate date]];
+              } else {
+                  [[OTRKit sharedInstance] encodeMessage:successResult[@"secure_url"] tlvs:nil username:self.buddy.username accountName:self.account.username protocol:self.account.protocolTypeString tag:message];
               }
-              
-              [[OTRKit sharedInstance] encodeMessage:successResult[@"secure_url"] tlvs:nil username:self.buddy.username accountName:self.account.username protocol:self.account.protocolTypeString tag:message];
-              
           } else {
               NSLog(@"Block upload error: %@, %lu", errorResult, (long)code);
           }
@@ -1584,6 +1620,21 @@ heightForCellBottomLabelAtIndexPath:(NSIndexPath *)indexPath
     }
 }
 
+#pragma - mark archive messages notification
+
+- (void)receivedArchivedMessagesNotification:(NSNotification *)notification {
+    dispatch_async(dispatch_get_main_queue(),^{
+        NSLog(@"DONE> FETCHING");
+        
+        NSNumber *arrayCount = (NSNumber *)notification.object;
+        _archivedMessagesDidReceiveCount = [arrayCount unsignedIntegerValue];
+        _archviedMessagesDidUpdatedbCount = 0;
+        
+        [self.collectionView.infiniteScrollingView stopAnimating];
+    });
+}
+
+
 #pragma - mark database view delegate
 
 - (void)didSetupMappings:(OTRYapViewHandler *)handler
@@ -1610,10 +1661,78 @@ heightForCellBottomLabelAtIndexPath:(NSIndexPath *)indexPath
             //Get last message and test if isIncoming
             NSIndexPath *lastMessageIndexPath = [NSIndexPath indexPathForRow:numberMappingsItems - 1 inSection:0];
             id <OTRMessageProtocol>lastMessage = [self messageAtIndexPath:lastMessageIndexPath];
-            if ([lastMessage messageIncoming]) {
-                [self finishReceivingMessage];
+            
+            if(![lastMessage messageArchivedId] && _archivedMessagesDidReceiveCount == 0) {
+                // New Messages
+                if ([lastMessage messageIncoming]) {
+                    [self finishReceivingMessage];
+                } else {
+                    [self finishSendingMessage];
+                }
             } else {
-                [self finishSendingMessage];
+                CGFloat bottomOffset = self.collectionView.contentSize.height - self.collectionView.contentOffset.y;
+                
+                /*
+                 NSLog(@"CONTENT SIZE HEIGHT: %f", self.collectionView.contentSize.height);
+                 NSLog(@"CONTENT OFFSET Y: %f", self.collectionView.contentOffset.y);
+                 NSLog(@"CONTENT INSET TOP: %f BOTTOM: %f", self.collectionView.contentInset.top, self.collectionView.contentInset.bottom);
+                 NSLog(@"BOTTOM OFFSET: %f", bottomOffset);
+                 */
+                
+                NSLog(@"BOTTOM OFFSET: %f", bottomOffset);
+                
+                [CATransaction begin];
+                [CATransaction setDisableActions:YES];
+                
+                [self.collectionView performBatchUpdates:^{
+                    
+                    for (YapDatabaseViewRowChange *rowChange in rowChanges)
+                    {
+                        switch (rowChange.type)
+                        {
+                            case YapDatabaseViewChangeDelete :
+                            {
+                                [self.collectionView deleteItemsAtIndexPaths:@[rowChange.indexPath]];
+                                break;
+                            }
+                            case YapDatabaseViewChangeInsert :
+                            {
+                                [self.collectionView insertItemsAtIndexPaths:@[ rowChange.newIndexPath ]];
+                                break;
+                            }
+                            case YapDatabaseViewChangeMove :
+                            {
+                                [self.collectionView moveItemAtIndexPath:rowChange.indexPath toIndexPath:rowChange.newIndexPath];
+                                break;
+                            }
+                            case YapDatabaseViewChangeUpdate :
+                            {
+                                [self.collectionView reloadItemsAtIndexPaths:@[ rowChange.indexPath]];
+                                break;
+                            }
+                        }
+                    }
+                } completion:^(BOOL finished) {
+                    _archviedMessagesDidUpdatedbCount += rowChanges.count;
+                    NSLog(@"UPDATED: %ld TOTAL: %lu", _archviedMessagesDidUpdatedbCount, (unsigned long)_archivedMessagesDidReceiveCount);
+                    if(_archviedMessagesDidUpdatedbCount >= _archivedMessagesDidReceiveCount) {
+                        if(_isFirstLoad) {
+                            //NSIndexPath *indexPath = [NSIndexPath indexPathForRow:[self.collectionView numberOfItemsInSection:0] - 1 inSection:0];
+                            //[self.collectionView scrollToItemAtIndexPath:indexPath atScrollPosition:UICollectionViewScrollPositionBottom animated:NO];
+                            [self scrollToBottomAnimated:NO];
+                            _isFirstLoad = 0;
+                            NSLog(@"DONE> ON FIRST LOAD");
+                        } else {
+                            self.collectionView.contentOffset = CGPointMake(0, self.collectionView.contentSize.height - bottomOffset + 60.0f);
+                            NSLog(@"DONE>");
+                        }
+                        
+                        [CATransaction commit];
+                        
+                        _archivedMessagesDidReceiveCount = 0;
+                        _archviedMessagesDidUpdatedbCount = 0;
+                    }
+                }];
             }
         } else {
             //deleted a message or message updated

@@ -43,6 +43,9 @@ public class OTRXMPPRoomMessage: OTRYapDatabaseObject {
     
     public var roomUniqueId:String?
     
+    public var archivedId:String?
+    public var isArchivedMessage = false
+    
     public override var hash: Int {
         get {
             return super.hash
@@ -96,6 +99,14 @@ extension OTRXMPPRoomMessage:OTRMessageProtocol {
     
     public func remoteMessageId() -> String! {
         return self.xmppId
+    }
+    
+    public func messageArchivedId() -> String! {
+        return self.archivedId;
+    }
+    
+    public func archivedMessage() -> Bool {
+        return self.isArchivedMessage;
     }
     
     public func threadOwnerWithTransaction(transaction: YapDatabaseReadTransaction!) -> OTRThreadOwner! {

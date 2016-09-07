@@ -78,6 +78,8 @@ target 'ChatSecureCore' do
   pod 'JSQMessagesViewController', :git => 'https://github.com/gudjao/JSQMessagesViewController.git', :branch => 'custom_7.3'
   pod 'JSQSystemSoundPlayer'
   pod 'UIScrollView-InfiniteScroll'
+  #pod 'SVPullToRefresh', :git => 'https://github.com/gudjao/SVPullToRefresh.git', :branch => 'dev'
+  pod 'SVPullToRefresh', :git => 'https://github.com/gabro/SVPullToRefresh.git', :branch => 'top-infinitescrolling'
   
   # Submodules
   pod 'ChatSecure-Push-iOS', :path => 'Submodules/ChatSecure-Push-iOS/ChatSecure-Push-iOS.podspec'

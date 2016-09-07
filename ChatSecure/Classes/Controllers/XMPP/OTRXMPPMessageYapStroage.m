@@ -81,9 +81,14 @@
             OTRXMPPBuddy *messageBuddy = [OTRXMPPBuddy fetchBuddyWithUsername:username withAccountUniqueId:stream.tag transaction:transaction];
             if (!messageBuddy) {
                 // message from server
-                DDLogWarn(@"No buddy for message: %@", xmppMessage);
+                
+               DDLogWarn(@"No buddy for message: %@", xmppMessage);
                 return;
             }
+            
+            /*
+            <message xmlns="jabber:client" from="jalcantara29@upsexpress.com" to="jalcantara29@upsexpress.com/bentanayan54871"><result xmlns="urn:xmpp:mam:1" id="1471843591626919" queryid="98A435D7-3414-4EB8-9296-F8F13F728B40"><forwarded xmlns="urn:xmpp:forward:0"><message xmlns="jabber:client" from="gsabulaan2@upsexpress.com/converse.js-93520316" to="jalcantara29@upsexpress.com" type="chat" id="46e44c3d-7511-436a-94fc-f6b2a918bb8d"><body>RAWR TO ME</body><active xmlns="http://jabber.org/protocol/chatstates"/></message><delay xmlns="urn:xmpp:delay" from="upsexpress.com" stamp="2016-08-22T05:26:31.627Z"/></forwarded></result></message>
+            */
             
             __block OTRMessage *message = [self messageFromXMPPMessage:xmppMessage buddyId:messageBuddy.uniqueId];
             message.incoming = YES;

@@ -19,14 +19,16 @@
 #import <ChatSecureCore/ChatSecureCore-Swift.h>
 
 const struct OTRMessageAttributes OTRMessageAttributes = {
-	.date = @"date",
-	.text = @"text",
-	.delivered = @"delivered",
-	.read = @"read",
-	.incoming = @"incoming",
+    .date = @"date",
+    .text = @"text",
+    .delivered = @"delivered",
+    .read = @"read",
+    .incoming = @"incoming",
     .messageId = @"messageId",
     .transportedSecurely = @"transportedSecurely",
-    .mediaItem = @"mediaItem"
+    .mediaItem = @"mediaItem",
+    .archivedId = @"archivedId",
+    .archivedMessage = @"archivedMessage"
 };
 
 
@@ -39,6 +41,7 @@ const struct OTRMessageAttributes OTRMessageAttributes = {
         self.messageId = [[NSUUID UUID] UUIDString];
         self.delivered = NO;
         self.read = NO;
+        self.archivedMessage = 0;
     }
     return self;
 }
@@ -121,6 +124,14 @@ const struct OTRMessageAttributes OTRMessageAttributes = {
     return self.messageId;
 }
 
+- (NSString *)messageArchivedId {
+    return self.archivedId;
+}
+
+- (BOOL)archivedMessage {
+    return self.archivedMessage;
+}
+
 - (id<OTRThreadOwner>)threadOwnerWithTransaction:(YapDatabaseReadTransaction *)transaction
 {
     return [OTRBuddy fetchObjectWithUniqueID:self.buddyUniqueId transaction:transaction];
@@ -166,7 +177,7 @@ const struct OTRMessageAttributes OTRMessageAttributes = {
             }
         }
     }];
-
+    
     if (deliveredMessage) {
         deliveredMessage.delivered = YES;
         [deliveredMessage saveWithTransaction:transaction];

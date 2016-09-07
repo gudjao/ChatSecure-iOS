@@ -118,7 +118,6 @@
                     *stop = YES;
                 }];
             }];
-            
             if(roomOccupant.avatarImage) {
                 UIImage *avatarImage = roomOccupant.avatarImage;
                 if (avatarImage) {
@@ -126,7 +125,6 @@
                     imageDataSource = [JSQMessagesAvatarImageFactory avatarImageWithImage:avatarImage diameter:diameter];
                 }
             }
-            
         }
         
     }
