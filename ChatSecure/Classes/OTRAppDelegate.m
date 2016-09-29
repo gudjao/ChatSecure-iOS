@@ -106,7 +106,14 @@
     
     if ([OTRDatabaseManager existsYapDatabase] && ![[OTRDatabaseManager sharedInstance] hasPassphrase]) {
         // user needs to enter password for current database
-        rootViewController = [[OTRDatabaseUnlockViewController alloc] init];
+        //rootViewController = [[OTRDatabaseUnlockViewController alloc] init];
+        NSLog(@"HAS PASSPHRASE: %d PASSPHRASE %@", [[OTRDatabaseManager sharedInstance] hasPassphrase], [[OTRDatabaseManager sharedInstance] databasePassphrase]);
+        /*
+        [[OTRDatabaseManager sharedInstance] setDatabasePassphrase:[[OTRDatabaseManager sharedInstance] databasePassphrase] remember:YES error:nil];
+        if ([[OTRDatabaseManager sharedInstance] setupDatabaseWithName:OTRYapDatabaseName]) {
+            [[OTRAppDelegate appDelegate] showConversationViewController];
+        }
+         */
     } else {
         ////// Normal launch to conversationViewController //////
         if (![OTRDatabaseManager existsYapDatabase]) {

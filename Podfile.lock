@@ -40,9 +40,9 @@ PODS:
     - CocoaLumberjack/Default
   - CPAProxy (1.1.0):
     - CocoaAsyncSocket
-  - Crashlytics (3.7.3):
+  - Crashlytics (3.8.2):
     - Fabric (~> 1.6.3)
-  - Fabric (1.6.8)
+  - Fabric (1.6.9)
   - FLAnimatedImage (1.0.12)
   - GCDWebServer/CocoaLumberjack (3.3.3):
     - CocoaLumberjack (~> 2)
@@ -96,7 +96,7 @@ PODS:
     - FLAnimatedImage (>= 1.0)
     - PINRemoteImage/Core
   - PINRemoteImage/PINCache (3.0.0-beta.3):
-    - PINCache (>= 3.0.0-beta)
+    - PINCache (>= 3.0.1-beta)
     - PINRemoteImage/Core
   - ProxyKit/Client (1.1.0):
     - ProxyKit/common
@@ -106,18 +106,18 @@ PODS:
   - PureLayout (3.0.2)
   - QRCodeReaderViewController (4.0.2)
   - Reachability (3.2)
-  - SAMKeychain (1.5.1)
+  - SAMKeychain (1.5.2)
   - SQLCipher (3.4.0):
     - SQLCipher/standard (= 3.4.0)
   - SQLCipher/common (3.4.0)
   - SQLCipher/fts (3.4.0):
     - SQLCipher/common
-  - SSKeychain (1.4.1)
-  - SVPullToRefresh (0.4.1)
-  - UIScrollView-InfiniteScroll (0.9.1)
   - SQLCipher/standard (3.4.0):
     - SQLCipher/common
+  - SVPullToRefresh (0.4.1)
   - TTTAttributedLabel (1.13.4)
+  - TUSafariActivity (1.0.4)
+  - UIScrollView-InfiniteScroll (0.9.1)
   - uservoice-iphone-sdk (3.2.9)
   - VTAcknowledgementsViewController (0.17)
   - XLForm (3.2.0)
@@ -349,8 +349,7 @@ DEPENDENCIES:
   - BButton (~> 4.0)
   - ChatSecure-Push-iOS (from `Submodules/ChatSecure-Push-iOS/ChatSecure-Push-iOS.podspec`)
   - Cloudinary
-  - CocoaAsyncSocket (from `https://github.com/robbiehanson/CocoaAsyncSocket.git`,
-    branch `master`)
+  - CocoaAsyncSocket (from `https://github.com/robbiehanson/CocoaAsyncSocket.git`, branch `master`)
   - CocoaLumberjack (~> 2.3.0)
   - CPAProxy (from `Submodules/CPAProxy/CPAProxy.podspec`)
   - Crashlytics
@@ -359,8 +358,7 @@ DEPENDENCIES:
   - gtm-oauth2 (from `Podspecs/gtm-oauth2.podspec`)
   - HockeySDK-Source (~> 3.7)
   - IOCipher/GCDWebServer (from `Submodules/IOCipher/IOCipher.podspec`)
-  - JSQMessagesViewController (from `https://github.com/gudjao/JSQMessagesViewController.git`,
-    branch `custom_7.3`)
+  - JSQMessagesViewController (from `https://github.com/gudjao/JSQMessagesViewController.git`, branch `custom_7.3`)
   - JSQSystemSoundPlayer
   - JTSImageViewController (~> 1.4)
   - JVFloatLabeledTextField (~> 1.0)
@@ -372,18 +370,15 @@ DEPENDENCIES:
   - Navajo (~> 0.0)
   - OpenInChrome (~> 0.0)
   - OTRKit (from `Submodules/OTRKit/OTRKit.podspec`)
-  - ParkedTextField (~> 0.2)
-  - PINRemoteImage (from `https://github.com/pinterest/PINRemoteImage.git`, branch
-    `master`)
-  - ParkedTextField (from `Submodules/ParkedTextField/ParkedTextField.podspec`)
+  - ParkedTextField
+  - PINRemoteImage (from `https://github.com/pinterest/PINRemoteImage.git`, branch `master`)
   - ProxyKit/Client (from `Submodules/ProxyKit/ProxyKit.podspec`)
   - PureLayout (~> 3.0)
   - QRCodeReaderViewController (~> 4.0)
   - Reachability (~> 3)
-  - SSKeychain (~> 1.2)
-  - SVPullToRefresh (from `https://github.com/gabro/SVPullToRefresh.git`, branch `top-infinitescrolling`)
   - SAMKeychain (~> 1.5)
   - SQLCipher (from `Podspecs/SQLCipher.podspec.json`)
+  - SVPullToRefresh (from `https://github.com/gabro/SVPullToRefresh.git`, branch `top-infinitescrolling`)
   - TTTAttributedLabel (~> 1.10)
   - TUSafariActivity (~> 1.0)
   - UIScrollView-InfiniteScroll
@@ -411,22 +406,20 @@ EXTERNAL SOURCES:
   JSQMessagesViewController:
     :branch: custom_7.3
     :git: https://github.com/gudjao/JSQMessagesViewController.git
-  PINRemoteImage:
-    :branch: master
-    :git: https://github.com/pinterest/PINRemoteImage.git
-  SVPullToRefresh:
-    :branch: top-infinitescrolling
-    :git: https://github.com/gabro/SVPullToRefresh.git
   libsqlfs:
     :podspec: Podspecs/libsqlfs.podspec
   OTRKit:
     :path: Submodules/OTRKit/OTRKit.podspec
-  ParkedTextField:
-    :path: Submodules/ParkedTextField/ParkedTextField.podspec
+  PINRemoteImage:
+    :branch: master
+    :git: https://github.com/pinterest/PINRemoteImage.git
   ProxyKit:
     :path: Submodules/ProxyKit/ProxyKit.podspec
   SQLCipher:
     :podspec: Podspecs/SQLCipher.podspec.json
+  SVPullToRefresh:
+    :branch: top-infinitescrolling
+    :git: https://github.com/gabro/SVPullToRefresh.git
   XMPPFramework:
     :path: Submodules/XMPPFramework/XMPPFramework.podspec
 
@@ -438,7 +431,7 @@ CHECKOUT OPTIONS:
     :commit: d2ff3b17fccb0946aa8d3abafd56d06af3ea061b
     :git: https://github.com/gudjao/JSQMessagesViewController.git
   PINRemoteImage:
-    :commit: d5c5c360444cf16ea768f289a2083f18efdd7586
+    :commit: aefee50a61b0361194e4374a7010b9edb7e3c5c7
     :git: https://github.com/pinterest/PINRemoteImage.git
   SVPullToRefresh:
     :commit: 3f88bf7a51b37fc3f19f180a67c729dcec873df2
@@ -454,10 +447,10 @@ SPEC CHECKSUMS:
   Cloudinary: f80af4565ec08c521d5e58cb56d9fbe1e4595e40
   CocoaAsyncSocket: e0a7e93b2ffa411592ff87e58524fbbc9b95b4fa
   CocoaLumberjack: 97fab7ee5f507fe54445cca7ea80f926729cfd15
-  Crashlytics: 76f6beaff70acf226139582c09c78461597c2b98
-  Fabric: 5755268d0171435ab167e3d0878a28a777deaf10
+  CPAProxy: 40278db66c183fd64452825f3db54ec27e27a0b3
+  Crashlytics: 27acca95a01b042a8294291dd6dff27f8f6af6d7
+  Fabric: bc5bec42cef4bcf1ee3ce0e218fc518e4b44dfbb
   FLAnimatedImage: 4a0b56255d9b05f18b6dd7ee06871be5d3b89e31
-  CPAProxy: cfd27b25328d6517b1f8570c4f0045838353e888
   GCDWebServer: 1c39a1f0763e4eb492bee021e4270fce097d3555
   gtm-http-fetcher: 4e7de79fc9e774b291eae66a240f17b3a5277ec7
   gtm-oauth2: b31c9d7c82f773f7b7094cbb7da8dc7b5968ce16
@@ -478,25 +471,24 @@ SPEC CHECKSUMS:
   OTRKit: c38c29e73b6e0794a11a0b661f8faec2410fd518
   ParkedTextField: 72d02a5fdadc089ff25efac04ea21dcc5a2467d3
   PINCache: 6911fe422a633e18b3d3ddf2bd4f0e55e36e2892
-  PINRemoteImage: 837165b18a33aabc177c2919c04015367c24fe8f
+  PINRemoteImage: 909c740cc2878fa6b45a3cc093b87d8195a7e0fa
   ProxyKit: 1f35adc913debc7ca6748c02487361dabaaea532
   PureLayout: 4d550abe49a94f24c2808b9b95db9131685fe4cd
-  SSKeychain: 55cc80f66f5c73da827e3077f02e43528897db41
-  SVPullToRefresh: ba2e718695a43253d8bea6852d2960097dc15d8c
-  UIScrollView-InfiniteScroll: 14e204c50ca4040467e1cbfa141dad7a18919b56  
   QRCodeReaderViewController: e8f27d035b3e72b1d4b1c61ff66458287e3be0ff
   Reachability: 33e18b67625424e47b6cde6d202dce689ad7af96
-  SAMKeychain: 6b04852a20684167aea97bdf8ba12c95d3616376
+  SAMKeychain: 1865333198217411f35327e8da61b43de79b635b
   SQLCipher: 5edce62bad2091ed65a422927fedee15149ad04c
+  SVPullToRefresh: ba2e718695a43253d8bea6852d2960097dc15d8c
   TTTAttributedLabel: 0a2ac7b2dd726d32a070dafb01446026b11e624f
   TUSafariActivity: afc55a00965377939107ce4fdc7f951f62454546
+  UIScrollView-InfiniteScroll: 14e204c50ca4040467e1cbfa141dad7a18919b56
   uservoice-iphone-sdk: 82b5c44465fe900b6e54ee856328733d2abfa947
   VTAcknowledgementsViewController: 6056f5f5e5ed995bbf0581bed6ddd29355ca9a80
   XLForm: 2250b4e96ab8ffa5f3355838c79edd90de451782
-  XMPPFramework: bf1218e824424ed82cd5f5983f2c25c59dbb4245
+  XMPPFramework: 9ea2d57a15ec47c184bc250675442459e7b77441
   YapDatabase: b1e43555a34a5298e23a045be96817a5ef0da58f
   ZXingObjC: bf15b3814f7a105b6d99f47da2333c93a063650a
 
-PODFILE CHECKSUM: 2809ccc3c1094c39c67bffcb7b53cc359830dce4
+PODFILE CHECKSUM: 2294397f1543ddba1f681439d8204d20a3a47156
 
 COCOAPODS: 1.1.0.rc.2

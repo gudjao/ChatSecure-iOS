@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		3FAC98F6768BCD01FB68E4AD /* Pods_ChatSecureCorePods_ChatSecureTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 281981F599E0F5C8397E6A3F /* Pods_ChatSecureCorePods_ChatSecureTests.framework */; };
 		62541784C9130738A1DC0C3C /* Pods_ChatSecureCorePods_ChatSecure.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9F52F68785B05428F442DF47 /* Pods_ChatSecureCorePods_ChatSecure.framework */; };
 		6308D1451CA20762002F5F30 /* Pods-ChatSecureCorePods-ChatSecure-acknowledgements.plist in Resources */ = {isa = PBXBuildFile; fileRef = 6308D1441CA20762002F5F30 /* Pods-ChatSecureCorePods-ChatSecure-acknowledgements.plist */; };
 		631098B11BD6FED000494A47 /* YapDatabse+ChatSecure.swift in Sources */ = {isa = PBXBuildFile; fileRef = 631098B01BD6FED000494A47 /* YapDatabse+ChatSecure.swift */; };
@@ -56,6 +57,8 @@
 		63E353F61BB9E46D005C54C3 /* OTRPushTLVHandlerProtocols.h in Headers */ = {isa = PBXBuildFile; fileRef = 63E353F51BB9E41D005C54C3 /* OTRPushTLVHandlerProtocols.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		63F614DC1BB214660083A06A /* ChatSecureModelTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63F614DB1BB214660083A06A /* ChatSecureModelTest.swift */; };
 		63FA130C1C8A4EB700AE33EF /* OTRMessagesCollectionViewFlowLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63FA130B1C8A4EB700AE33EF /* OTRMessagesCollectionViewFlowLayout.swift */; };
+		B04C7B651D9CEA81000DDD44 /* OTRAPIClient.h in Headers */ = {isa = PBXBuildFile; fileRef = B04C7B631D9CEA81000DDD44 /* OTRAPIClient.h */; };
+		B04C7B661D9CEA81000DDD44 /* OTRAPIClient.m in Sources */ = {isa = PBXBuildFile; fileRef = B04C7B641D9CEA81000DDD44 /* OTRAPIClient.m */; };
 		D9227C241BA78E6B00B5E1D0 /* FontAwesome.ttf in Resources */ = {isa = PBXBuildFile; fileRef = D9227C231BA78E6B00B5E1D0 /* FontAwesome.ttf */; };
 		D9227C2D1BA7952100B5E1D0 /* ChatSecureCore.h in Headers */ = {isa = PBXBuildFile; fileRef = D9227C2C1BA7952100B5E1D0 /* ChatSecureCore.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		D9227C3F1BA7952100B5E1D0 /* ChatSecureCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D9227C2A1BA7952100B5E1D0 /* ChatSecureCore.framework */; settings = {ATTRIBUTES = (Required, ); }; };
@@ -423,60 +426,8 @@
 			dstPath = "";
 			dstSubfolderSpec = 10;
 			files = (
-				B021683B1D7D7DA4001FB42C /* ZXingObjC.framework in Embed Frameworks */,
-				B02168101D7D7DA3001FB42C /* QRCodeReaderViewController.framework in Embed Frameworks */,
-				B02167C41D7D7DA2001FB42C /* FLAnimatedImage.framework in Embed Frameworks */,
-				B02167F91D7D7DA2001FB42C /* OpenInChrome.framework in Embed Frameworks */,
-				B02167B91D7D7DA2001FB42C /* CocoaAsyncSocket.framework in Embed Frameworks */,
-				B021680D1D7D7DA3001FB42C /* PureLayout.framework in Embed Frameworks */,
-				B021683E1D7D7E5F001FB42C /* CPAProxy.framework in Embed Frameworks */,
-				B02167CD1D7D7DA2001FB42C /* gtm_oauth2.framework in Embed Frameworks */,
 				D9227C401BA7952100B5E1D0 /* ChatSecureCore.framework in Embed Frameworks */,
-				B02168351D7D7DA3001FB42C /* XMPPFramework.framework in Embed Frameworks */,
-				B02168191D7D7DA3001FB42C /* SSKeychain.framework in Embed Frameworks */,
-				B02167F61D7D7DA2001FB42C /* Navajo.framework in Embed Frameworks */,
-				B02167C71D7D7DA2001FB42C /* GCDWebServer.framework in Embed Frameworks */,
-				B02167A01D7D7D01001FB42C /* AFNetworking.framework in Embed Frameworks */,
-				B021681F1D7D7DA3001FB42C /* TTTAttributedLabel.framework in Embed Frameworks */,
-				B02168051D7D7DA3001FB42C /* PINRemoteImage.framework in Embed Frameworks */,
-				B02167A51D7D7DA1001FB42C /* AFNetworking.framework in Embed Frameworks */,
-				B02167E11D7D7DA2001FB42C /* JVFloatLabeledTextField.framework in Embed Frameworks */,
-				B02168131D7D7DA3001FB42C /* Reachability.framework in Embed Frameworks */,
-				B02167AD1D7D7DA1001FB42C /* BBlock.framework in Embed Frameworks */,
-				B021682C1D7D7DA3001FB42C /* uservoice_iphone_sdk.framework in Embed Frameworks */,
-				B02168241D7D7DA3001FB42C /* TUSafariActivity.framework in Embed Frameworks */,
-				B021679B1D7D7CBE001FB42C /* ARChromeActivity.framework in Embed Frameworks */,
-				B021682F1D7D7DA3001FB42C /* VTAcknowledgementsViewController.framework in Embed Frameworks */,
-				B02167ED1D7D7DA2001FB42C /* Mantle.framework in Embed Frameworks */,
-				B02168071D7D7DA3001FB42C /* Pods_ChatSecureCore.framework in Embed Frameworks */,
-				B02167E71D7D7DA2001FB42C /* KVOController.framework in Embed Frameworks */,
-				B02167A31D7D7D2F001FB42C /* BBlock.framework in Embed Frameworks */,
-				B02167EA1D7D7DA2001FB42C /* libsqlfs.framework in Embed Frameworks */,
-				B02168161D7D7DA3001FB42C /* SQLCipher.framework in Embed Frameworks */,
-				B02167CA1D7D7DA2001FB42C /* gtm_http_fetcher.framework in Embed Frameworks */,
-				B02167D81D7D7DA2001FB42C /* JSQMessagesViewController.framework in Embed Frameworks */,
-				B02167BC1D7D7DA2001FB42C /* CocoaLumberjack.framework in Embed Frameworks */,
-				B02168271D7D7DA3001FB42C /* UIScrollView_InfiniteScroll.framework in Embed Frameworks */,
-				B02167AB1D7D7DA1001FB42C /* ARChromeActivity.framework in Embed Frameworks */,
-				B02167FC1D7D7DA2001FB42C /* OTRKit.framework in Embed Frameworks */,
-				B02167F01D7D7DA2001FB42C /* MBProgressHUD.framework in Embed Frameworks */,
-				B021679E1D7D7CF1001FB42C /* Appirater.framework in Embed Frameworks */,
-				B021681C1D7D7DA3001FB42C /* SVPullToRefresh.framework in Embed Frameworks */,
-				B02167B01D7D7DA1001FB42C /* BButton.framework in Embed Frameworks */,
-				B02167B31D7D7DA1001FB42C /* ChatSecure_Push_iOS.framework in Embed Frameworks */,
-				B02167F31D7D7DA2001FB42C /* MWFeedParser.framework in Embed Frameworks */,
-				B02167D51D7D7DA2001FB42C /* IOCipher.framework in Embed Frameworks */,
-				B02167DB1D7D7DA2001FB42C /* JSQSystemSoundPlayer.framework in Embed Frameworks */,
-				B02167B61D7D7DA2001FB42C /* Cloudinary.framework in Embed Frameworks */,
-				B021680A1D7D7DA3001FB42C /* ProxyKit.framework in Embed Frameworks */,
-				B02168321D7D7DA3001FB42C /* XLForm.framework in Embed Frameworks */,
-				B02167E41D7D7DA2001FB42C /* KissXML.framework in Embed Frameworks */,
-				B02168021D7D7DA3001FB42C /* PINCache.framework in Embed Frameworks */,
-				B02167DE1D7D7DA2001FB42C /* JTSImageViewController.framework in Embed Frameworks */,
 				D9AE3A161BA8CBFA00255537 /* OTRAssets.framework in Embed Frameworks */,
-				B02168381D7D7DA3001FB42C /* YapDatabase.framework in Embed Frameworks */,
-				B02167FF1D7D7DA3001FB42C /* ParkedTextField.framework in Embed Frameworks */,
-				B02167D01D7D7DA2001FB42C /* HockeySDK_Source.framework in Embed Frameworks */,
 			);
 			name = "Embed Frameworks";
 			runOnlyForDeploymentPostprocessing = 0;
@@ -851,6 +802,8 @@
 		63FABC8F1A41218E009BF681 /* NSString+ChatSecure.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSString+ChatSecure.h"; sourceTree = "<group>"; };
 		63FABC901A41218E009BF681 /* NSString+ChatSecure.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSString+ChatSecure.m"; sourceTree = "<group>"; };
 		9F52F68785B05428F442DF47 /* Pods_ChatSecureCorePods_ChatSecure.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_ChatSecureCorePods_ChatSecure.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		B04C7B631D9CEA81000DDD44 /* OTRAPIClient.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OTRAPIClient.h; sourceTree = "<group>"; };
+		B04C7B641D9CEA81000DDD44 /* OTRAPIClient.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OTRAPIClient.m; sourceTree = "<group>"; };
 		CCD1F8E85C658C8D3865B584 /* Pods.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		D913A56C1B747B62006C5ACD /* Onboarding.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; name = Onboarding.storyboard; path = Interface/Onboarding.storyboard; sourceTree = "<group>"; };
 		D913A56E1B7481AD006C5ACD /* OTRWelcomeViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = OTRWelcomeViewController.swift; path = Onboarding/OTRWelcomeViewController.swift; sourceTree = "<group>"; };
@@ -902,15 +855,6 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				B02168041D7D7DA3001FB42C /* PINRemoteImage.framework in Frameworks */,
-				B021680F1D7D7DA3001FB42C /* QRCodeReaderViewController.framework in Frameworks */,
-				B02167AC1D7D7DA1001FB42C /* BBlock.framework in Frameworks */,
-				B021679A1D7D7CBE001FB42C /* ARChromeActivity.framework in Frameworks */,
-				B02168091D7D7DA3001FB42C /* ProxyKit.framework in Frameworks */,
-				B021683A1D7D7DA3001FB42C /* ZXingObjC.framework in Frameworks */,
-				B02167A41D7D7DA1001FB42C /* AFNetworking.framework in Frameworks */,
-				B021679F1D7D7D01001FB42C /* AFNetworking.framework in Frameworks */,
-				B021682B1D7D7DA3001FB42C /* uservoice_iphone_sdk.framework in Frameworks */,
 				D9227C3F1BA7952100B5E1D0 /* ChatSecureCore.framework in Frameworks */,
 				62541784C9130738A1DC0C3C /* Pods_ChatSecureCorePods_ChatSecure.framework in Frameworks */,
 			);
@@ -921,7 +865,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				631E1E9F1C583B6900E263CD /* ChatSecureCore.framework in Frameworks */,
-				7A6540ECCA04445E88F06962 /* Pods_ChatSecureCorePods_ChatSecureTests.framework in Frameworks */,
+				3FAC98F6768BCD01FB68E4AD /* Pods_ChatSecureCorePods_ChatSecureTests.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1047,8 +991,8 @@
 				6354BBE31A96C67400E8EBAC /* OTRMediaFileManager.m */,
 				63DDD8AE1A9D3C0400C0A918 /* OTRMediaServer.h */,
 				63DDD8AF1A9D3C0400C0A918 /* OTRMediaServer.m */,
-				B04DDD7E1D3F7ED70052A155 /* OTRAPIClient.h */,
-				B04DDD7F1D3F7ED70052A155 /* OTRAPIClient.m */,
+				B04C7B631D9CEA81000DDD44 /* OTRAPIClient.h */,
+				B04C7B641D9CEA81000DDD44 /* OTRAPIClient.m */,
 				637645C81B98F9BF00B3402F /* PushController.swift */,
 				63564E0F1BBB1C5200EB4CA6 /* PushStorage.swift */,
 				63564E0C1BBB114B00EB4CA6 /* PushOTRListener.swift */,
@@ -1422,58 +1366,6 @@
 		6396AF911A169D54009F3E6C = {
 			isa = PBXGroup;
 			children = (
-				B02168391D7D7DA3001FB42C /* ZXingObjC.framework */,
-				B02168361D7D7DA3001FB42C /* YapDatabase.framework */,
-				B02168331D7D7DA3001FB42C /* XMPPFramework.framework */,
-				B02168301D7D7DA3001FB42C /* XLForm.framework */,
-				B021682D1D7D7DA3001FB42C /* VTAcknowledgementsViewController.framework */,
-				B021682A1D7D7DA3001FB42C /* uservoice_iphone_sdk.framework */,
-				B02168281D7D7DA3001FB42C /* UserVoice.bundle */,
-				B02168251D7D7DA3001FB42C /* UIScrollView_InfiniteScroll.framework */,
-				B02168221D7D7DA3001FB42C /* TUSafariActivity.framework */,
-				B02168201D7D7DA3001FB42C /* TUSafariActivity.bundle */,
-				B021681D1D7D7DA3001FB42C /* TTTAttributedLabel.framework */,
-				B021681A1D7D7DA3001FB42C /* SVPullToRefresh.framework */,
-				B02168171D7D7DA3001FB42C /* SSKeychain.framework */,
-				B02168141D7D7DA3001FB42C /* SQLCipher.framework */,
-				B02168111D7D7DA3001FB42C /* Reachability.framework */,
-				B021680E1D7D7DA3001FB42C /* QRCodeReaderViewController.framework */,
-				B021680B1D7D7DA3001FB42C /* PureLayout.framework */,
-				B02168081D7D7DA3001FB42C /* ProxyKit.framework */,
-				B02168031D7D7DA3001FB42C /* PINRemoteImage.framework */,
-				B02168001D7D7DA3001FB42C /* PINCache.framework */,
-				B02167FD1D7D7DA3001FB42C /* ParkedTextField.framework */,
-				B02167FA1D7D7DA2001FB42C /* OTRKit.framework */,
-				B02167F71D7D7DA2001FB42C /* OpenInChrome.framework */,
-				B02167F41D7D7DA2001FB42C /* Navajo.framework */,
-				B02167F11D7D7DA2001FB42C /* MWFeedParser.framework */,
-				B02167EE1D7D7DA2001FB42C /* MBProgressHUD.framework */,
-				B02167EB1D7D7DA2001FB42C /* Mantle.framework */,
-				B02167E81D7D7DA2001FB42C /* libsqlfs.framework */,
-				B02167E51D7D7DA2001FB42C /* KVOController.framework */,
-				B02167E21D7D7DA2001FB42C /* KissXML.framework */,
-				B02167DF1D7D7DA2001FB42C /* JVFloatLabeledTextField.framework */,
-				B02167DC1D7D7DA2001FB42C /* JTSImageViewController.framework */,
-				B02167D91D7D7DA2001FB42C /* JSQSystemSoundPlayer.framework */,
-				B02167D61D7D7DA2001FB42C /* JSQMessagesViewController.framework */,
-				B02167D31D7D7DA2001FB42C /* IOCipher.framework */,
-				B02167D11D7D7DA2001FB42C /* HockeySDKResources.bundle */,
-				B02167CE1D7D7DA2001FB42C /* HockeySDK_Source.framework */,
-				B02167CB1D7D7DA2001FB42C /* gtm_oauth2.framework */,
-				B02167C81D7D7DA2001FB42C /* gtm_http_fetcher.framework */,
-				B02167C51D7D7DA2001FB42C /* GCDWebServer.framework */,
-				B02167C21D7D7DA2001FB42C /* FLAnimatedImage.framework */,
-				B02167BF1D7D7DA2001FB42C /* CPAProxy.framework */,
-				B02167BD1D7D7DA2001FB42C /* CPAProxy.bundle */,
-				B02167BA1D7D7DA2001FB42C /* CocoaLumberjack.framework */,
-				B02167B71D7D7DA2001FB42C /* CocoaAsyncSocket.framework */,
-				B02167B41D7D7DA2001FB42C /* Cloudinary.framework */,
-				B02167B11D7D7DA1001FB42C /* ChatSecure_Push_iOS.framework */,
-				B02167AE1D7D7DA1001FB42C /* BButton.framework */,
-				B02167A61D7D7DA1001FB42C /* Appirater.bundle */,
-				B02167A11D7D7D2F001FB42C /* BBlock.framework */,
-				B021679C1D7D7CF1001FB42C /* Appirater.framework */,
-				B02167991D7D7CBE001FB42C /* ARChromeActivity.framework */,
 				6396AF9C1A169D54009F3E6C /* ChatSecure */,
 				6396AFB61A169D54009F3E6C /* ChatSecureTests */,
 				D9227C2B1BA7952100B5E1D0 /* ChatSecureCore */,
@@ -1736,7 +1628,7 @@
 				D93DDB741BA79A8000CD8331 /* OTRToastOptions.h in Headers */,
 				D93DDB751BA79A8000CD8331 /* OTRBoolSetting.h in Headers */,
 				D93DDB761BA79A8100CD8331 /* OTRCertificateSetting.h in Headers */,
-				B04DDD801D3F7ED70052A155 /* OTRAPIClient.h in Headers */,
+				B04C7B651D9CEA81000DDD44 /* OTRAPIClient.h in Headers */,
 				D93DDB771BA79A8100CD8331 /* OTRDonateSetting.h in Headers */,
 				D93DDB781BA79A8200CD8331 /* OTRDoubleSetting.h in Headers */,
 				D93DDB791BA79A8200CD8331 /* OTRFeedbackSetting.h in Headers */,
@@ -1976,7 +1868,6 @@
 				TargetAttributes = {
 					6396AF991A169D54009F3E6C = {
 						CreatedOnToolsVersion = 6.1;
-						DevelopmentTeam = 4T8JLQR6GR;
 						LastSwiftMigration = 0800;
 						ProvisioningStyle = Manual;
 						SystemCapabilities = {
@@ -2309,7 +2200,7 @@
 				D93DDA881BA79A2400CD8331 /* OTROAuthRefresher.m in Sources */,
 				6340431B1BD5BCD800ECA95A /* OTRXMPPRoomMessage.swift in Sources */,
 				D93DDA891BA79A2400CD8331 /* OTRProtocolManager.m in Sources */,
-				B04DDD811D3F7ED70052A155 /* OTRAPIClient.m in Sources */,
+				B04C7B661D9CEA81000DDD44 /* OTRAPIClient.m in Sources */,
 				63DC417B1BB3767100D42857 /* Errors.swift in Sources */,
 				D93DDA8A1BA79A2400CD8331 /* OTRSettingsManager.m in Sources */,
 				D93DDA8B1BA79A2400CD8331 /* OTRTorManager.m in Sources */,
@@ -2694,8 +2585,6 @@
 					"-framework",
 					"\"SQLCipher\"",
 					"-framework",
-					"\"SSKeychain\"",
-					"-framework",
 					"\"SVPullToRefresh\"",
 					"-framework",
 					"\"Security\"",
@@ -2944,8 +2833,6 @@
 					"-framework",
 					"\"SQLCipher\"",
 					"-framework",
-					"\"SSKeychain\"",
-					"-framework",
 					"\"SVPullToRefresh\"",
 					"-framework",
 					"\"Security\"",
@@ -2981,7 +2868,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.bentanayan.UPSChat;
 				PRODUCT_MODULE_NAME = "$(TARGET_NAME:c99extidentifier)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "fe68233f-f26b-451f-b85b-69c7e737d52b";
+				PROVISIONING_PROFILE = "";
 				PROVISIONING_PROFILE_SPECIFIER = "ChatSecure Dev Profile";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 2.3;
@@ -3083,8 +2970,6 @@
 					"-framework",
 					"\"SQLCipher\"",
 					"-framework",
-					"\"SSKeychain\"",
-					"-framework",
 					"\"SVPullToRefresh\"",
 					"-framework",
 					"\"Security\"",
@@ -3120,7 +3005,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.bentanayan.UPSChat;
 				PRODUCT_MODULE_NAME = "$(TARGET_NAME:c99extidentifier)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "a8b97d8c-efab-48eb-9c83-20f8985bafbf";
+				PROVISIONING_PROFILE = "";
 				PROVISIONING_PROFILE_SPECIFIER = "ChatSecure Ad Hoc";
 				SWIFT_VERSION = 2.3;
 			};
