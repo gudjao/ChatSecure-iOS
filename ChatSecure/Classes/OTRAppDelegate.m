@@ -36,7 +36,7 @@
 #import "OTRSettingsManager.h"
 #import "OTRSecrets.h"
 #import "OTRDatabaseManager.h"
-#import <SSKeychain/SSKeychain.h>
+#import <SAMKeychain/SAMKeychain.h>
 
 #import "OTRLog.h"
 #import "DDTTYLogger.h"
@@ -59,6 +59,7 @@
 #import "OTRTheme.h"
 #import <ChatSecureCore/ChatSecureCore-Swift.h>
 #import "OTRMessagesViewController.h"
+#import <HockeySDK_Source/HockeySDK.h>
 @import OTRAssets;
 
 #import <Fabric/Fabric.h>
@@ -68,7 +69,7 @@
 #import "OTRChatDemo.h"
 #endif
 
-@interface OTRAppDelegate ()
+@interface OTRAppDelegate () <BITHockeyManagerDelegate>
 
 @property (nonatomic, strong) OTRSplitViewCoordinator *splitViewCoordinator;
 @property (nonatomic, strong) OTRSplitViewControllerDelegateObject *splitViewControllerDelegate;
@@ -93,7 +94,7 @@
     _theme = [[[self themeClass] alloc] init];
     [self.theme setupGlobalTheme];
     
-    [SSKeychain setAccessibilityType:kSecAttrAccessibleAfterFirstUnlockThisDeviceOnly];
+    [SAMKeychain setAccessibilityType:kSecAttrAccessibleAfterFirstUnlockThisDeviceOnly];
     
     UIViewController *rootViewController = nil;
     
@@ -168,7 +169,12 @@
     [application setMinimumBackgroundFetchInterval:UIApplicationBackgroundFetchIntervalMinimum];
     
     [self removeFacebookAccounts];
-        
+    
+    // For disabling screen dimming while plugged in
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(batteryStateDidChange:) name:UIDeviceBatteryStateDidChangeNotification object:nil];
+    [UIDevice currentDevice].batteryMonitoringEnabled = YES;
+    [self batteryStateDidChange:nil];
+    
     return YES;
 }
 
@@ -302,8 +308,9 @@
     
     self.backgroundTask = [application beginBackgroundTaskWithExpirationHandler: ^{
         dispatch_async(dispatch_get_main_queue(), ^{
-            DDLogInfo(@"Background task expired");
-            if (self.backgroundTimer) 
+            DDLogInfo(@"Background task expired, disconnecting all accounts. Remaining: %f", application.backgroundTimeRemaining);
+            [[OTRProtocolManager sharedInstance] disconnectAllAccountsSocketOnly:YES];
+            if (self.backgroundTimer)
             {
                 [self.backgroundTimer invalidate];
                 self.backgroundTimer = nil;
@@ -320,34 +327,8 @@
                                 
 - (void) timerUpdate:(NSTimer*)timer {
     UIApplication *application = [UIApplication sharedApplication];
-
     NSTimeInterval timeRemaining = application.backgroundTimeRemaining;
     DDLogVerbose(@"Timer update, background time left: %f", timeRemaining);
-    
-    if (timeRemaining < 60 && !self.didShowDisconnectionWarning && [OTRSettingsManager boolForOTRSettingKey:kOTRSettingKeyShowDisconnectionWarning])
-    {
-        UILocalNotification *localNotif = [[UILocalNotification alloc] init];
-        if (localNotif) {
-            localNotif.alertBody = EXPIRATION_STRING;
-            localNotif.alertAction = OK_STRING;
-            localNotif.soundName = UILocalNotificationDefaultSoundName;
-            [application presentLocalNotificationNow:localNotif];
-        }
-        self.didShowDisconnectionWarning = YES;
-    }
-    if (timeRemaining < 3)
-    {
-        // Clean up here
-        [self.backgroundTimer invalidate];
-        self.backgroundTimer = nil;
-        
-        [[OTRProtocolManager sharedInstance] disconnectAllAccountsSocketOnly:YES];
-        
-        dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.1 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
-            [application endBackgroundTask:self.backgroundTask];
-            self.backgroundTask = UIBackgroundTaskInvalid;
-        });
-    }
 }
 
 /** Doesn't stop autoLogin if previous crash when it's a background launch */
@@ -371,6 +352,7 @@
     /*
      Restart any tasks that were paused (or not yet started) while the application was inactive. If the application was previously in the background, optionally refresh the user interface.
      */
+    [self batteryStateDidChange:nil];
     
     DDLogInfo(@"Application became active");
     
@@ -554,6 +536,16 @@
 - (void)application:(UIApplication *)app didFailToRegisterForRemoteNotificationsWithError:(NSError *)err {
     [[NSNotificationCenter defaultCenter] postNotificationName:OTRFailedRemoteNotificationRegistration object:self userInfo:@{kOTRNotificationErrorKey:err}];
     DDLogError(@"Error in registration. Error: %@%@", [err localizedDescription], [err userInfo]);
+}
+
+// To improve usability, keep the app open when you're plugged in
+- (void) batteryStateDidChange:(NSNotification*)notification {
+    UIDeviceBatteryState currentState = [[UIDevice currentDevice] batteryState];
+    if (currentState == UIDeviceBatteryStateCharging || currentState == UIDeviceBatteryStateFull) {
+        [[UIApplication sharedApplication] setIdleTimerDisabled:YES];
+    } else {
+        [[UIApplication sharedApplication] setIdleTimerDisabled:NO];
+    }
 }
 
 #pragma - mark Getters and Setters

@@ -7,7 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		6308D1451CA20762002F5F30 /* Pods-ChatSecureCore-acknowledgements.plist in Resources */ = {isa = PBXBuildFile; fileRef = 6308D1441CA20762002F5F30 /* Pods-ChatSecureCore-acknowledgements.plist */; };
+		62541784C9130738A1DC0C3C /* Pods_ChatSecureCorePods_ChatSecure.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9F52F68785B05428F442DF47 /* Pods_ChatSecureCorePods_ChatSecure.framework */; };
+		6308D1451CA20762002F5F30 /* Pods-ChatSecureCorePods-ChatSecure-acknowledgements.plist in Resources */ = {isa = PBXBuildFile; fileRef = 6308D1441CA20762002F5F30 /* Pods-ChatSecureCorePods-ChatSecure-acknowledgements.plist */; };
 		631098B11BD6FED000494A47 /* YapDatabse+ChatSecure.swift in Sources */ = {isa = PBXBuildFile; fileRef = 631098B01BD6FED000494A47 /* YapDatabse+ChatSecure.swift */; };
 		631E1E9F1C583B6900E263CD /* ChatSecureCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D9227C2A1BA7952100B5E1D0 /* ChatSecureCore.framework */; };
 		633107201A16D1A300C17BAE /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 633106661A16D1A300C17BAE /* LaunchScreen.xib */; };
@@ -55,113 +56,6 @@
 		63E353F61BB9E46D005C54C3 /* OTRPushTLVHandlerProtocols.h in Headers */ = {isa = PBXBuildFile; fileRef = 63E353F51BB9E41D005C54C3 /* OTRPushTLVHandlerProtocols.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		63F614DC1BB214660083A06A /* ChatSecureModelTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63F614DB1BB214660083A06A /* ChatSecureModelTest.swift */; };
 		63FA130C1C8A4EB700AE33EF /* OTRMessagesCollectionViewFlowLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63FA130B1C8A4EB700AE33EF /* OTRMessagesCollectionViewFlowLayout.swift */; };
-		7F408CE30104F3D0A455A95A /* Pods_ChatSecureCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6C592992CC49A50D357998DA /* Pods_ChatSecureCore.framework */; };
-		B021679A1D7D7CBE001FB42C /* ARChromeActivity.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B02167991D7D7CBE001FB42C /* ARChromeActivity.framework */; };
-		B021679B1D7D7CBE001FB42C /* ARChromeActivity.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = B02167991D7D7CBE001FB42C /* ARChromeActivity.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
-		B021679E1D7D7CF1001FB42C /* Appirater.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = B021679C1D7D7CF1001FB42C /* Appirater.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
-		B021679F1D7D7D01001FB42C /* AFNetworking.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B02167911D7D7B2B001FB42C /* AFNetworking.framework */; };
-		B02167A01D7D7D01001FB42C /* AFNetworking.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = B02167911D7D7B2B001FB42C /* AFNetworking.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
-		B02167A21D7D7D2F001FB42C /* BBlock.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B02167A11D7D7D2F001FB42C /* BBlock.framework */; };
-		B02167A31D7D7D2F001FB42C /* BBlock.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = B02167A11D7D7D2F001FB42C /* BBlock.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
-		B02167A41D7D7DA1001FB42C /* AFNetworking.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B02167911D7D7B2B001FB42C /* AFNetworking.framework */; };
-		B02167A51D7D7DA1001FB42C /* AFNetworking.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = B02167911D7D7B2B001FB42C /* AFNetworking.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
-		B02167A81D7D7DA1001FB42C /* Appirater.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B021679C1D7D7CF1001FB42C /* Appirater.framework */; };
-		B02167AA1D7D7DA1001FB42C /* ARChromeActivity.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B02167991D7D7CBE001FB42C /* ARChromeActivity.framework */; };
-		B02167AB1D7D7DA1001FB42C /* ARChromeActivity.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = B02167991D7D7CBE001FB42C /* ARChromeActivity.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
-		B02167AC1D7D7DA1001FB42C /* BBlock.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B02167A11D7D7D2F001FB42C /* BBlock.framework */; };
-		B02167AD1D7D7DA1001FB42C /* BBlock.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = B02167A11D7D7D2F001FB42C /* BBlock.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
-		B02167AF1D7D7DA1001FB42C /* BButton.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B02167AE1D7D7DA1001FB42C /* BButton.framework */; };
-		B02167B01D7D7DA1001FB42C /* BButton.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = B02167AE1D7D7DA1001FB42C /* BButton.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
-		B02167B21D7D7DA1001FB42C /* ChatSecure_Push_iOS.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B02167B11D7D7DA1001FB42C /* ChatSecure_Push_iOS.framework */; };
-		B02167B31D7D7DA1001FB42C /* ChatSecure_Push_iOS.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = B02167B11D7D7DA1001FB42C /* ChatSecure_Push_iOS.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
-		B02167B51D7D7DA2001FB42C /* Cloudinary.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B02167B41D7D7DA2001FB42C /* Cloudinary.framework */; };
-		B02167B61D7D7DA2001FB42C /* Cloudinary.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = B02167B41D7D7DA2001FB42C /* Cloudinary.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
-		B02167B81D7D7DA2001FB42C /* CocoaAsyncSocket.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B02167B71D7D7DA2001FB42C /* CocoaAsyncSocket.framework */; };
-		B02167B91D7D7DA2001FB42C /* CocoaAsyncSocket.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = B02167B71D7D7DA2001FB42C /* CocoaAsyncSocket.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
-		B02167BB1D7D7DA2001FB42C /* CocoaLumberjack.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B02167BA1D7D7DA2001FB42C /* CocoaLumberjack.framework */; };
-		B02167BC1D7D7DA2001FB42C /* CocoaLumberjack.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = B02167BA1D7D7DA2001FB42C /* CocoaLumberjack.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
-		B02167C31D7D7DA2001FB42C /* FLAnimatedImage.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B02167C21D7D7DA2001FB42C /* FLAnimatedImage.framework */; };
-		B02167C41D7D7DA2001FB42C /* FLAnimatedImage.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = B02167C21D7D7DA2001FB42C /* FLAnimatedImage.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
-		B02167C61D7D7DA2001FB42C /* GCDWebServer.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B02167C51D7D7DA2001FB42C /* GCDWebServer.framework */; };
-		B02167C71D7D7DA2001FB42C /* GCDWebServer.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = B02167C51D7D7DA2001FB42C /* GCDWebServer.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
-		B02167C91D7D7DA2001FB42C /* gtm_http_fetcher.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B02167C81D7D7DA2001FB42C /* gtm_http_fetcher.framework */; };
-		B02167CA1D7D7DA2001FB42C /* gtm_http_fetcher.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = B02167C81D7D7DA2001FB42C /* gtm_http_fetcher.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
-		B02167CC1D7D7DA2001FB42C /* gtm_oauth2.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B02167CB1D7D7DA2001FB42C /* gtm_oauth2.framework */; };
-		B02167CD1D7D7DA2001FB42C /* gtm_oauth2.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = B02167CB1D7D7DA2001FB42C /* gtm_oauth2.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
-		B02167CF1D7D7DA2001FB42C /* HockeySDK_Source.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B02167CE1D7D7DA2001FB42C /* HockeySDK_Source.framework */; };
-		B02167D01D7D7DA2001FB42C /* HockeySDK_Source.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = B02167CE1D7D7DA2001FB42C /* HockeySDK_Source.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
-		B02167D41D7D7DA2001FB42C /* IOCipher.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B02167D31D7D7DA2001FB42C /* IOCipher.framework */; };
-		B02167D51D7D7DA2001FB42C /* IOCipher.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = B02167D31D7D7DA2001FB42C /* IOCipher.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
-		B02167D71D7D7DA2001FB42C /* JSQMessagesViewController.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B02167D61D7D7DA2001FB42C /* JSQMessagesViewController.framework */; };
-		B02167D81D7D7DA2001FB42C /* JSQMessagesViewController.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = B02167D61D7D7DA2001FB42C /* JSQMessagesViewController.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
-		B02167DA1D7D7DA2001FB42C /* JSQSystemSoundPlayer.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B02167D91D7D7DA2001FB42C /* JSQSystemSoundPlayer.framework */; };
-		B02167DB1D7D7DA2001FB42C /* JSQSystemSoundPlayer.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = B02167D91D7D7DA2001FB42C /* JSQSystemSoundPlayer.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
-		B02167DD1D7D7DA2001FB42C /* JTSImageViewController.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B02167DC1D7D7DA2001FB42C /* JTSImageViewController.framework */; };
-		B02167DE1D7D7DA2001FB42C /* JTSImageViewController.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = B02167DC1D7D7DA2001FB42C /* JTSImageViewController.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
-		B02167E01D7D7DA2001FB42C /* JVFloatLabeledTextField.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B02167DF1D7D7DA2001FB42C /* JVFloatLabeledTextField.framework */; };
-		B02167E11D7D7DA2001FB42C /* JVFloatLabeledTextField.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = B02167DF1D7D7DA2001FB42C /* JVFloatLabeledTextField.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
-		B02167E31D7D7DA2001FB42C /* KissXML.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B02167E21D7D7DA2001FB42C /* KissXML.framework */; };
-		B02167E41D7D7DA2001FB42C /* KissXML.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = B02167E21D7D7DA2001FB42C /* KissXML.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
-		B02167E61D7D7DA2001FB42C /* KVOController.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B02167E51D7D7DA2001FB42C /* KVOController.framework */; };
-		B02167E71D7D7DA2001FB42C /* KVOController.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = B02167E51D7D7DA2001FB42C /* KVOController.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
-		B02167E91D7D7DA2001FB42C /* libsqlfs.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B02167E81D7D7DA2001FB42C /* libsqlfs.framework */; };
-		B02167EA1D7D7DA2001FB42C /* libsqlfs.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = B02167E81D7D7DA2001FB42C /* libsqlfs.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
-		B02167EC1D7D7DA2001FB42C /* Mantle.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B02167EB1D7D7DA2001FB42C /* Mantle.framework */; };
-		B02167ED1D7D7DA2001FB42C /* Mantle.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = B02167EB1D7D7DA2001FB42C /* Mantle.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
-		B02167EF1D7D7DA2001FB42C /* MBProgressHUD.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B02167EE1D7D7DA2001FB42C /* MBProgressHUD.framework */; };
-		B02167F01D7D7DA2001FB42C /* MBProgressHUD.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = B02167EE1D7D7DA2001FB42C /* MBProgressHUD.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
-		B02167F21D7D7DA2001FB42C /* MWFeedParser.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B02167F11D7D7DA2001FB42C /* MWFeedParser.framework */; };
-		B02167F31D7D7DA2001FB42C /* MWFeedParser.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = B02167F11D7D7DA2001FB42C /* MWFeedParser.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
-		B02167F51D7D7DA2001FB42C /* Navajo.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B02167F41D7D7DA2001FB42C /* Navajo.framework */; };
-		B02167F61D7D7DA2001FB42C /* Navajo.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = B02167F41D7D7DA2001FB42C /* Navajo.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
-		B02167F81D7D7DA2001FB42C /* OpenInChrome.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B02167F71D7D7DA2001FB42C /* OpenInChrome.framework */; };
-		B02167F91D7D7DA2001FB42C /* OpenInChrome.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = B02167F71D7D7DA2001FB42C /* OpenInChrome.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
-		B02167FB1D7D7DA2001FB42C /* OTRKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B02167FA1D7D7DA2001FB42C /* OTRKit.framework */; };
-		B02167FC1D7D7DA2001FB42C /* OTRKit.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = B02167FA1D7D7DA2001FB42C /* OTRKit.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
-		B02167FE1D7D7DA3001FB42C /* ParkedTextField.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B02167FD1D7D7DA3001FB42C /* ParkedTextField.framework */; };
-		B02167FF1D7D7DA3001FB42C /* ParkedTextField.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = B02167FD1D7D7DA3001FB42C /* ParkedTextField.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
-		B02168011D7D7DA3001FB42C /* PINCache.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B02168001D7D7DA3001FB42C /* PINCache.framework */; };
-		B02168021D7D7DA3001FB42C /* PINCache.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = B02168001D7D7DA3001FB42C /* PINCache.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
-		B02168041D7D7DA3001FB42C /* PINRemoteImage.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B02168031D7D7DA3001FB42C /* PINRemoteImage.framework */; };
-		B02168051D7D7DA3001FB42C /* PINRemoteImage.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = B02168031D7D7DA3001FB42C /* PINRemoteImage.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
-		B02168061D7D7DA3001FB42C /* Pods_ChatSecureCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6C592992CC49A50D357998DA /* Pods_ChatSecureCore.framework */; };
-		B02168071D7D7DA3001FB42C /* Pods_ChatSecureCore.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 6C592992CC49A50D357998DA /* Pods_ChatSecureCore.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
-		B02168091D7D7DA3001FB42C /* ProxyKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B02168081D7D7DA3001FB42C /* ProxyKit.framework */; };
-		B021680A1D7D7DA3001FB42C /* ProxyKit.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = B02168081D7D7DA3001FB42C /* ProxyKit.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
-		B021680C1D7D7DA3001FB42C /* PureLayout.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B021680B1D7D7DA3001FB42C /* PureLayout.framework */; };
-		B021680D1D7D7DA3001FB42C /* PureLayout.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = B021680B1D7D7DA3001FB42C /* PureLayout.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
-		B021680F1D7D7DA3001FB42C /* QRCodeReaderViewController.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B021680E1D7D7DA3001FB42C /* QRCodeReaderViewController.framework */; };
-		B02168101D7D7DA3001FB42C /* QRCodeReaderViewController.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = B021680E1D7D7DA3001FB42C /* QRCodeReaderViewController.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
-		B02168121D7D7DA3001FB42C /* Reachability.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B02168111D7D7DA3001FB42C /* Reachability.framework */; };
-		B02168131D7D7DA3001FB42C /* Reachability.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = B02168111D7D7DA3001FB42C /* Reachability.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
-		B02168151D7D7DA3001FB42C /* SQLCipher.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B02168141D7D7DA3001FB42C /* SQLCipher.framework */; };
-		B02168161D7D7DA3001FB42C /* SQLCipher.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = B02168141D7D7DA3001FB42C /* SQLCipher.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
-		B02168181D7D7DA3001FB42C /* SSKeychain.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B02168171D7D7DA3001FB42C /* SSKeychain.framework */; };
-		B02168191D7D7DA3001FB42C /* SSKeychain.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = B02168171D7D7DA3001FB42C /* SSKeychain.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
-		B021681B1D7D7DA3001FB42C /* SVPullToRefresh.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B021681A1D7D7DA3001FB42C /* SVPullToRefresh.framework */; };
-		B021681C1D7D7DA3001FB42C /* SVPullToRefresh.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = B021681A1D7D7DA3001FB42C /* SVPullToRefresh.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
-		B021681E1D7D7DA3001FB42C /* TTTAttributedLabel.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B021681D1D7D7DA3001FB42C /* TTTAttributedLabel.framework */; };
-		B021681F1D7D7DA3001FB42C /* TTTAttributedLabel.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = B021681D1D7D7DA3001FB42C /* TTTAttributedLabel.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
-		B02168231D7D7DA3001FB42C /* TUSafariActivity.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B02168221D7D7DA3001FB42C /* TUSafariActivity.framework */; };
-		B02168241D7D7DA3001FB42C /* TUSafariActivity.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = B02168221D7D7DA3001FB42C /* TUSafariActivity.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
-		B02168261D7D7DA3001FB42C /* UIScrollView_InfiniteScroll.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B02168251D7D7DA3001FB42C /* UIScrollView_InfiniteScroll.framework */; };
-		B02168271D7D7DA3001FB42C /* UIScrollView_InfiniteScroll.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = B02168251D7D7DA3001FB42C /* UIScrollView_InfiniteScroll.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
-		B021682B1D7D7DA3001FB42C /* uservoice_iphone_sdk.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B021682A1D7D7DA3001FB42C /* uservoice_iphone_sdk.framework */; };
-		B021682C1D7D7DA3001FB42C /* uservoice_iphone_sdk.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = B021682A1D7D7DA3001FB42C /* uservoice_iphone_sdk.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
-		B021682E1D7D7DA3001FB42C /* VTAcknowledgementsViewController.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B021682D1D7D7DA3001FB42C /* VTAcknowledgementsViewController.framework */; };
-		B021682F1D7D7DA3001FB42C /* VTAcknowledgementsViewController.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = B021682D1D7D7DA3001FB42C /* VTAcknowledgementsViewController.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
-		B02168311D7D7DA3001FB42C /* XLForm.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B02168301D7D7DA3001FB42C /* XLForm.framework */; };
-		B02168321D7D7DA3001FB42C /* XLForm.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = B02168301D7D7DA3001FB42C /* XLForm.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
-		B02168341D7D7DA3001FB42C /* XMPPFramework.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B02168331D7D7DA3001FB42C /* XMPPFramework.framework */; };
-		B02168351D7D7DA3001FB42C /* XMPPFramework.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = B02168331D7D7DA3001FB42C /* XMPPFramework.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
-		B02168371D7D7DA3001FB42C /* YapDatabase.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B02168361D7D7DA3001FB42C /* YapDatabase.framework */; };
-		B02168381D7D7DA3001FB42C /* YapDatabase.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = B02168361D7D7DA3001FB42C /* YapDatabase.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
-		B021683A1D7D7DA3001FB42C /* ZXingObjC.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B02168391D7D7DA3001FB42C /* ZXingObjC.framework */; };
-		B021683B1D7D7DA4001FB42C /* ZXingObjC.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = B02168391D7D7DA3001FB42C /* ZXingObjC.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
-		B021683D1D7D7E5F001FB42C /* CPAProxy.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B02167BF1D7D7DA2001FB42C /* CPAProxy.framework */; };
-		B021683E1D7D7E5F001FB42C /* CPAProxy.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = B02167BF1D7D7DA2001FB42C /* CPAProxy.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
-		B04DDD801D3F7ED70052A155 /* OTRAPIClient.h in Headers */ = {isa = PBXBuildFile; fileRef = B04DDD7E1D3F7ED70052A155 /* OTRAPIClient.h */; };
-		B04DDD811D3F7ED70052A155 /* OTRAPIClient.m in Sources */ = {isa = PBXBuildFile; fileRef = B04DDD7F1D3F7ED70052A155 /* OTRAPIClient.m */; };
 		D9227C241BA78E6B00B5E1D0 /* FontAwesome.ttf in Resources */ = {isa = PBXBuildFile; fileRef = D9227C231BA78E6B00B5E1D0 /* FontAwesome.ttf */; };
 		D9227C2D1BA7952100B5E1D0 /* ChatSecureCore.h in Headers */ = {isa = PBXBuildFile; fileRef = D9227C2C1BA7952100B5E1D0 /* ChatSecureCore.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		D9227C3F1BA7952100B5E1D0 /* ChatSecureCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D9227C2A1BA7952100B5E1D0 /* ChatSecureCore.framework */; settings = {ATTRIBUTES = (Required, ); }; };
@@ -481,6 +375,7 @@
 		D9AE3A351BA8DAB600255537 /* OTRLanguageManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 6331051C1A16D1A300C17BAE /* OTRLanguageManager.m */; };
 		D9CBBC581C642BAA005CD715 /* EnablePushViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D9CBBC571C642BAA005CD715 /* EnablePushViewController.swift */; };
 		D9EEEDD31D2739A800B8BC54 /* OTRvCard.h in Headers */ = {isa = PBXBuildFile; fileRef = D9EEEDD11D27388600B8BC54 /* OTRvCard.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		DDE1CAF4312DE1C724A33B72 /* Pods_ChatSecureCorePods_ChatSecureCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 31610826406FD0CB714045AD /* Pods_ChatSecureCorePods_ChatSecureCore.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -589,9 +484,12 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		281981F599E0F5C8397E6A3F /* Pods_ChatSecureCorePods_ChatSecureTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_ChatSecureCorePods_ChatSecureTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		31610826406FD0CB714045AD /* Pods_ChatSecureCorePods_ChatSecureCore.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_ChatSecureCorePods_ChatSecureCore.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		46AAC6968EC686E61C8E8EA4 /* Pods_ChatSecureCore.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_ChatSecureCore.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		63039E961B0D43FE007C9978 /* OTRXMPPServerListViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OTRXMPPServerListViewController.h; sourceTree = "<group>"; };
 		63039E971B0D43FE007C9978 /* OTRXMPPServerListViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OTRXMPPServerListViewController.m; sourceTree = "<group>"; };
-		6308D1441CA20762002F5F30 /* Pods-ChatSecureCore-acknowledgements.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = "Pods-ChatSecureCore-acknowledgements.plist"; path = "Pods/Target Support Files/Pods-ChatSecureCore/Pods-ChatSecureCore-acknowledgements.plist"; sourceTree = "<group>"; };
+		6308D1441CA20762002F5F30 /* Pods-ChatSecureCorePods-ChatSecure-acknowledgements.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = "Pods-ChatSecureCorePods-ChatSecure-acknowledgements.plist"; path = "Pods/Target Support Files/Pods-ChatSecureCorePods-ChatSecure/Pods-ChatSecureCorePods-ChatSecure-acknowledgements.plist"; sourceTree = "<group>"; };
 		631098B01BD6FED000494A47 /* YapDatabse+ChatSecure.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "YapDatabse+ChatSecure.swift"; sourceTree = "<group>"; };
 		633104D51A169EC800C17BAE /* Base */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = Base; path = Base.lproj/Localizable.strings; sourceTree = "<group>"; };
 		633104D81A169F0E00C17BAE /* de */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = de; path = de.lproj/Localizable.strings; sourceTree = "<group>"; };
@@ -952,62 +850,7 @@
 		63FABC8D1A410EBF009BF681 /* JSQMessagesCollectionViewCell+ChatSecure.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "JSQMessagesCollectionViewCell+ChatSecure.m"; sourceTree = "<group>"; };
 		63FABC8F1A41218E009BF681 /* NSString+ChatSecure.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSString+ChatSecure.h"; sourceTree = "<group>"; };
 		63FABC901A41218E009BF681 /* NSString+ChatSecure.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSString+ChatSecure.m"; sourceTree = "<group>"; };
-		6C592992CC49A50D357998DA /* Pods_ChatSecureCore.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_ChatSecureCore.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		B02167911D7D7B2B001FB42C /* AFNetworking.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AFNetworking.framework; path = "../../../Library/Developer/Xcode/DerivedData/ChatSecure-drkfzultsiaoxrcxgbdkrqgeuyrh/Build/Products/Debug-iphoneos/AFNetworking.framework"; sourceTree = "<group>"; };
-		B02167991D7D7CBE001FB42C /* ARChromeActivity.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; name = ARChromeActivity.framework; path = "/Users/juston/Library/Developer/Xcode/DerivedData/ChatSecure-drkfzultsiaoxrcxgbdkrqgeuyrh/Build/Products/Debug-iphoneos/ARChromeActivity.framework"; sourceTree = "<absolute>"; };
-		B021679C1D7D7CF1001FB42C /* Appirater.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; name = Appirater.framework; path = "/Users/juston/Library/Developer/Xcode/DerivedData/ChatSecure-drkfzultsiaoxrcxgbdkrqgeuyrh/Build/Products/Debug-iphoneos/Appirater.framework"; sourceTree = "<absolute>"; };
-		B02167A11D7D7D2F001FB42C /* BBlock.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; name = BBlock.framework; path = "/Users/juston/Library/Developer/Xcode/DerivedData/ChatSecure-drkfzultsiaoxrcxgbdkrqgeuyrh/Build/Products/Debug-iphoneos/BBlock.framework"; sourceTree = "<absolute>"; };
-		B02167A61D7D7DA1001FB42C /* Appirater.bundle */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; name = Appirater.bundle; path = "/Users/juston/Library/Developer/Xcode/DerivedData/ChatSecure-drkfzultsiaoxrcxgbdkrqgeuyrh/Build/Products/Debug-iphoneos/Appirater.bundle"; sourceTree = "<absolute>"; };
-		B02167AE1D7D7DA1001FB42C /* BButton.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; name = BButton.framework; path = "/Users/juston/Library/Developer/Xcode/DerivedData/ChatSecure-drkfzultsiaoxrcxgbdkrqgeuyrh/Build/Products/Debug-iphoneos/BButton.framework"; sourceTree = "<absolute>"; };
-		B02167B11D7D7DA1001FB42C /* ChatSecure_Push_iOS.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; name = ChatSecure_Push_iOS.framework; path = "/Users/juston/Library/Developer/Xcode/DerivedData/ChatSecure-drkfzultsiaoxrcxgbdkrqgeuyrh/Build/Products/Debug-iphoneos/ChatSecure_Push_iOS.framework"; sourceTree = "<absolute>"; };
-		B02167B41D7D7DA2001FB42C /* Cloudinary.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; name = Cloudinary.framework; path = "/Users/juston/Library/Developer/Xcode/DerivedData/ChatSecure-drkfzultsiaoxrcxgbdkrqgeuyrh/Build/Products/Debug-iphoneos/Cloudinary.framework"; sourceTree = "<absolute>"; };
-		B02167B71D7D7DA2001FB42C /* CocoaAsyncSocket.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; name = CocoaAsyncSocket.framework; path = "/Users/juston/Library/Developer/Xcode/DerivedData/ChatSecure-drkfzultsiaoxrcxgbdkrqgeuyrh/Build/Products/Debug-iphoneos/CocoaAsyncSocket.framework"; sourceTree = "<absolute>"; };
-		B02167BA1D7D7DA2001FB42C /* CocoaLumberjack.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; name = CocoaLumberjack.framework; path = "/Users/juston/Library/Developer/Xcode/DerivedData/ChatSecure-drkfzultsiaoxrcxgbdkrqgeuyrh/Build/Products/Debug-iphoneos/CocoaLumberjack.framework"; sourceTree = "<absolute>"; };
-		B02167BD1D7D7DA2001FB42C /* CPAProxy.bundle */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; name = CPAProxy.bundle; path = "/Users/juston/Library/Developer/Xcode/DerivedData/ChatSecure-drkfzultsiaoxrcxgbdkrqgeuyrh/Build/Products/Debug-iphoneos/CPAProxy.bundle"; sourceTree = "<absolute>"; };
-		B02167BF1D7D7DA2001FB42C /* CPAProxy.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; name = CPAProxy.framework; path = "/Users/juston/Library/Developer/Xcode/DerivedData/ChatSecure-drkfzultsiaoxrcxgbdkrqgeuyrh/Build/Products/Debug-iphoneos/CPAProxy.framework"; sourceTree = "<absolute>"; };
-		B02167C21D7D7DA2001FB42C /* FLAnimatedImage.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; name = FLAnimatedImage.framework; path = "/Users/juston/Library/Developer/Xcode/DerivedData/ChatSecure-drkfzultsiaoxrcxgbdkrqgeuyrh/Build/Products/Debug-iphoneos/FLAnimatedImage.framework"; sourceTree = "<absolute>"; };
-		B02167C51D7D7DA2001FB42C /* GCDWebServer.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; name = GCDWebServer.framework; path = "/Users/juston/Library/Developer/Xcode/DerivedData/ChatSecure-drkfzultsiaoxrcxgbdkrqgeuyrh/Build/Products/Debug-iphoneos/GCDWebServer.framework"; sourceTree = "<absolute>"; };
-		B02167C81D7D7DA2001FB42C /* gtm_http_fetcher.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; name = gtm_http_fetcher.framework; path = "/Users/juston/Library/Developer/Xcode/DerivedData/ChatSecure-drkfzultsiaoxrcxgbdkrqgeuyrh/Build/Products/Debug-iphoneos/gtm_http_fetcher.framework"; sourceTree = "<absolute>"; };
-		B02167CB1D7D7DA2001FB42C /* gtm_oauth2.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; name = gtm_oauth2.framework; path = "/Users/juston/Library/Developer/Xcode/DerivedData/ChatSecure-drkfzultsiaoxrcxgbdkrqgeuyrh/Build/Products/Debug-iphoneos/gtm_oauth2.framework"; sourceTree = "<absolute>"; };
-		B02167CE1D7D7DA2001FB42C /* HockeySDK_Source.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; name = HockeySDK_Source.framework; path = "/Users/juston/Library/Developer/Xcode/DerivedData/ChatSecure-drkfzultsiaoxrcxgbdkrqgeuyrh/Build/Products/Debug-iphoneos/HockeySDK_Source.framework"; sourceTree = "<absolute>"; };
-		B02167D11D7D7DA2001FB42C /* HockeySDKResources.bundle */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; name = HockeySDKResources.bundle; path = "/Users/juston/Library/Developer/Xcode/DerivedData/ChatSecure-drkfzultsiaoxrcxgbdkrqgeuyrh/Build/Products/Debug-iphoneos/HockeySDKResources.bundle"; sourceTree = "<absolute>"; };
-		B02167D31D7D7DA2001FB42C /* IOCipher.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; name = IOCipher.framework; path = "/Users/juston/Library/Developer/Xcode/DerivedData/ChatSecure-drkfzultsiaoxrcxgbdkrqgeuyrh/Build/Products/Debug-iphoneos/IOCipher.framework"; sourceTree = "<absolute>"; };
-		B02167D61D7D7DA2001FB42C /* JSQMessagesViewController.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; name = JSQMessagesViewController.framework; path = "/Users/juston/Library/Developer/Xcode/DerivedData/ChatSecure-drkfzultsiaoxrcxgbdkrqgeuyrh/Build/Products/Debug-iphoneos/JSQMessagesViewController.framework"; sourceTree = "<absolute>"; };
-		B02167D91D7D7DA2001FB42C /* JSQSystemSoundPlayer.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; name = JSQSystemSoundPlayer.framework; path = "/Users/juston/Library/Developer/Xcode/DerivedData/ChatSecure-drkfzultsiaoxrcxgbdkrqgeuyrh/Build/Products/Debug-iphoneos/JSQSystemSoundPlayer.framework"; sourceTree = "<absolute>"; };
-		B02167DC1D7D7DA2001FB42C /* JTSImageViewController.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; name = JTSImageViewController.framework; path = "/Users/juston/Library/Developer/Xcode/DerivedData/ChatSecure-drkfzultsiaoxrcxgbdkrqgeuyrh/Build/Products/Debug-iphoneos/JTSImageViewController.framework"; sourceTree = "<absolute>"; };
-		B02167DF1D7D7DA2001FB42C /* JVFloatLabeledTextField.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; name = JVFloatLabeledTextField.framework; path = "/Users/juston/Library/Developer/Xcode/DerivedData/ChatSecure-drkfzultsiaoxrcxgbdkrqgeuyrh/Build/Products/Debug-iphoneos/JVFloatLabeledTextField.framework"; sourceTree = "<absolute>"; };
-		B02167E21D7D7DA2001FB42C /* KissXML.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; name = KissXML.framework; path = "/Users/juston/Library/Developer/Xcode/DerivedData/ChatSecure-drkfzultsiaoxrcxgbdkrqgeuyrh/Build/Products/Debug-iphoneos/KissXML.framework"; sourceTree = "<absolute>"; };
-		B02167E51D7D7DA2001FB42C /* KVOController.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; name = KVOController.framework; path = "/Users/juston/Library/Developer/Xcode/DerivedData/ChatSecure-drkfzultsiaoxrcxgbdkrqgeuyrh/Build/Products/Debug-iphoneos/KVOController.framework"; sourceTree = "<absolute>"; };
-		B02167E81D7D7DA2001FB42C /* libsqlfs.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; name = libsqlfs.framework; path = "/Users/juston/Library/Developer/Xcode/DerivedData/ChatSecure-drkfzultsiaoxrcxgbdkrqgeuyrh/Build/Products/Debug-iphoneos/libsqlfs.framework"; sourceTree = "<absolute>"; };
-		B02167EB1D7D7DA2001FB42C /* Mantle.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; name = Mantle.framework; path = "/Users/juston/Library/Developer/Xcode/DerivedData/ChatSecure-drkfzultsiaoxrcxgbdkrqgeuyrh/Build/Products/Debug-iphoneos/Mantle.framework"; sourceTree = "<absolute>"; };
-		B02167EE1D7D7DA2001FB42C /* MBProgressHUD.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; name = MBProgressHUD.framework; path = "/Users/juston/Library/Developer/Xcode/DerivedData/ChatSecure-drkfzultsiaoxrcxgbdkrqgeuyrh/Build/Products/Debug-iphoneos/MBProgressHUD.framework"; sourceTree = "<absolute>"; };
-		B02167F11D7D7DA2001FB42C /* MWFeedParser.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; name = MWFeedParser.framework; path = "/Users/juston/Library/Developer/Xcode/DerivedData/ChatSecure-drkfzultsiaoxrcxgbdkrqgeuyrh/Build/Products/Debug-iphoneos/MWFeedParser.framework"; sourceTree = "<absolute>"; };
-		B02167F41D7D7DA2001FB42C /* Navajo.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; name = Navajo.framework; path = "/Users/juston/Library/Developer/Xcode/DerivedData/ChatSecure-drkfzultsiaoxrcxgbdkrqgeuyrh/Build/Products/Debug-iphoneos/Navajo.framework"; sourceTree = "<absolute>"; };
-		B02167F71D7D7DA2001FB42C /* OpenInChrome.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; name = OpenInChrome.framework; path = "/Users/juston/Library/Developer/Xcode/DerivedData/ChatSecure-drkfzultsiaoxrcxgbdkrqgeuyrh/Build/Products/Debug-iphoneos/OpenInChrome.framework"; sourceTree = "<absolute>"; };
-		B02167FA1D7D7DA2001FB42C /* OTRKit.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; name = OTRKit.framework; path = "/Users/juston/Library/Developer/Xcode/DerivedData/ChatSecure-drkfzultsiaoxrcxgbdkrqgeuyrh/Build/Products/Debug-iphoneos/OTRKit.framework"; sourceTree = "<absolute>"; };
-		B02167FD1D7D7DA3001FB42C /* ParkedTextField.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; name = ParkedTextField.framework; path = "/Users/juston/Library/Developer/Xcode/DerivedData/ChatSecure-drkfzultsiaoxrcxgbdkrqgeuyrh/Build/Products/Debug-iphoneos/ParkedTextField.framework"; sourceTree = "<absolute>"; };
-		B02168001D7D7DA3001FB42C /* PINCache.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; name = PINCache.framework; path = "/Users/juston/Library/Developer/Xcode/DerivedData/ChatSecure-drkfzultsiaoxrcxgbdkrqgeuyrh/Build/Products/Debug-iphoneos/PINCache.framework"; sourceTree = "<absolute>"; };
-		B02168031D7D7DA3001FB42C /* PINRemoteImage.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; name = PINRemoteImage.framework; path = "/Users/juston/Library/Developer/Xcode/DerivedData/ChatSecure-drkfzultsiaoxrcxgbdkrqgeuyrh/Build/Products/Debug-iphoneos/PINRemoteImage.framework"; sourceTree = "<absolute>"; };
-		B02168081D7D7DA3001FB42C /* ProxyKit.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; name = ProxyKit.framework; path = "/Users/juston/Library/Developer/Xcode/DerivedData/ChatSecure-drkfzultsiaoxrcxgbdkrqgeuyrh/Build/Products/Debug-iphoneos/ProxyKit.framework"; sourceTree = "<absolute>"; };
-		B021680B1D7D7DA3001FB42C /* PureLayout.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; name = PureLayout.framework; path = "/Users/juston/Library/Developer/Xcode/DerivedData/ChatSecure-drkfzultsiaoxrcxgbdkrqgeuyrh/Build/Products/Debug-iphoneos/PureLayout.framework"; sourceTree = "<absolute>"; };
-		B021680E1D7D7DA3001FB42C /* QRCodeReaderViewController.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; name = QRCodeReaderViewController.framework; path = "/Users/juston/Library/Developer/Xcode/DerivedData/ChatSecure-drkfzultsiaoxrcxgbdkrqgeuyrh/Build/Products/Debug-iphoneos/QRCodeReaderViewController.framework"; sourceTree = "<absolute>"; };
-		B02168111D7D7DA3001FB42C /* Reachability.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; name = Reachability.framework; path = "/Users/juston/Library/Developer/Xcode/DerivedData/ChatSecure-drkfzultsiaoxrcxgbdkrqgeuyrh/Build/Products/Debug-iphoneos/Reachability.framework"; sourceTree = "<absolute>"; };
-		B02168141D7D7DA3001FB42C /* SQLCipher.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; name = SQLCipher.framework; path = "/Users/juston/Library/Developer/Xcode/DerivedData/ChatSecure-drkfzultsiaoxrcxgbdkrqgeuyrh/Build/Products/Debug-iphoneos/SQLCipher.framework"; sourceTree = "<absolute>"; };
-		B02168171D7D7DA3001FB42C /* SSKeychain.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; name = SSKeychain.framework; path = "/Users/juston/Library/Developer/Xcode/DerivedData/ChatSecure-drkfzultsiaoxrcxgbdkrqgeuyrh/Build/Products/Debug-iphoneos/SSKeychain.framework"; sourceTree = "<absolute>"; };
-		B021681A1D7D7DA3001FB42C /* SVPullToRefresh.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; name = SVPullToRefresh.framework; path = "/Users/juston/Library/Developer/Xcode/DerivedData/ChatSecure-drkfzultsiaoxrcxgbdkrqgeuyrh/Build/Products/Debug-iphoneos/SVPullToRefresh.framework"; sourceTree = "<absolute>"; };
-		B021681D1D7D7DA3001FB42C /* TTTAttributedLabel.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; name = TTTAttributedLabel.framework; path = "/Users/juston/Library/Developer/Xcode/DerivedData/ChatSecure-drkfzultsiaoxrcxgbdkrqgeuyrh/Build/Products/Debug-iphoneos/TTTAttributedLabel.framework"; sourceTree = "<absolute>"; };
-		B02168201D7D7DA3001FB42C /* TUSafariActivity.bundle */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; name = TUSafariActivity.bundle; path = "/Users/juston/Library/Developer/Xcode/DerivedData/ChatSecure-drkfzultsiaoxrcxgbdkrqgeuyrh/Build/Products/Debug-iphoneos/TUSafariActivity.bundle"; sourceTree = "<absolute>"; };
-		B02168221D7D7DA3001FB42C /* TUSafariActivity.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; name = TUSafariActivity.framework; path = "/Users/juston/Library/Developer/Xcode/DerivedData/ChatSecure-drkfzultsiaoxrcxgbdkrqgeuyrh/Build/Products/Debug-iphoneos/TUSafariActivity.framework"; sourceTree = "<absolute>"; };
-		B02168251D7D7DA3001FB42C /* UIScrollView_InfiniteScroll.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; name = UIScrollView_InfiniteScroll.framework; path = "/Users/juston/Library/Developer/Xcode/DerivedData/ChatSecure-drkfzultsiaoxrcxgbdkrqgeuyrh/Build/Products/Debug-iphoneos/UIScrollView_InfiniteScroll.framework"; sourceTree = "<absolute>"; };
-		B02168281D7D7DA3001FB42C /* UserVoice.bundle */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; name = UserVoice.bundle; path = "/Users/juston/Library/Developer/Xcode/DerivedData/ChatSecure-drkfzultsiaoxrcxgbdkrqgeuyrh/Build/Products/Debug-iphoneos/UserVoice.bundle"; sourceTree = "<absolute>"; };
-		B021682A1D7D7DA3001FB42C /* uservoice_iphone_sdk.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; name = uservoice_iphone_sdk.framework; path = "/Users/juston/Library/Developer/Xcode/DerivedData/ChatSecure-drkfzultsiaoxrcxgbdkrqgeuyrh/Build/Products/Debug-iphoneos/uservoice_iphone_sdk.framework"; sourceTree = "<absolute>"; };
-		B021682D1D7D7DA3001FB42C /* VTAcknowledgementsViewController.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; name = VTAcknowledgementsViewController.framework; path = "/Users/juston/Library/Developer/Xcode/DerivedData/ChatSecure-drkfzultsiaoxrcxgbdkrqgeuyrh/Build/Products/Debug-iphoneos/VTAcknowledgementsViewController.framework"; sourceTree = "<absolute>"; };
-		B02168301D7D7DA3001FB42C /* XLForm.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; name = XLForm.framework; path = "/Users/juston/Library/Developer/Xcode/DerivedData/ChatSecure-drkfzultsiaoxrcxgbdkrqgeuyrh/Build/Products/Debug-iphoneos/XLForm.framework"; sourceTree = "<absolute>"; };
-		B02168331D7D7DA3001FB42C /* XMPPFramework.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; name = XMPPFramework.framework; path = "/Users/juston/Library/Developer/Xcode/DerivedData/ChatSecure-drkfzultsiaoxrcxgbdkrqgeuyrh/Build/Products/Debug-iphoneos/XMPPFramework.framework"; sourceTree = "<absolute>"; };
-		B02168361D7D7DA3001FB42C /* YapDatabase.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; name = YapDatabase.framework; path = "/Users/juston/Library/Developer/Xcode/DerivedData/ChatSecure-drkfzultsiaoxrcxgbdkrqgeuyrh/Build/Products/Debug-iphoneos/YapDatabase.framework"; sourceTree = "<absolute>"; };
-		B02168391D7D7DA3001FB42C /* ZXingObjC.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; name = ZXingObjC.framework; path = "/Users/juston/Library/Developer/Xcode/DerivedData/ChatSecure-drkfzultsiaoxrcxgbdkrqgeuyrh/Build/Products/Debug-iphoneos/ZXingObjC.framework"; sourceTree = "<absolute>"; };
-		B04DDD7E1D3F7ED70052A155 /* OTRAPIClient.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OTRAPIClient.h; sourceTree = "<group>"; };
-		B04DDD7F1D3F7ED70052A155 /* OTRAPIClient.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OTRAPIClient.m; sourceTree = "<group>"; };
+		9F52F68785B05428F442DF47 /* Pods_ChatSecureCorePods_ChatSecure.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_ChatSecureCorePods_ChatSecure.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		CCD1F8E85C658C8D3865B584 /* Pods.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		D913A56C1B747B62006C5ACD /* Onboarding.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; name = Onboarding.storyboard; path = Interface/Onboarding.storyboard; sourceTree = "<group>"; };
 		D913A56E1B7481AD006C5ACD /* OTRWelcomeViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = OTRWelcomeViewController.swift; path = Onboarding/OTRWelcomeViewController.swift; sourceTree = "<group>"; };
@@ -1027,7 +870,7 @@
 		D95AD2221B67FD6A007DEBC3 /* OTRCircleView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OTRCircleView.h; sourceTree = "<group>"; };
 		D95AD2231B67FD6A007DEBC3 /* OTRCircleView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OTRCircleView.m; sourceTree = "<group>"; };
 		D95AD2281B684AE1007DEBC3 /* xmpp-server-list */ = {isa = PBXFileReference; lastKnownFileType = folder; name = "xmpp-server-list"; path = "Submodules/xmpp-server-list"; sourceTree = SOURCE_ROOT; };
-		D973D7051A2D4094004D353E /* Pods-ChatSecureCore-acknowledgements.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = "Pods-ChatSecureCore-acknowledgements.plist"; path = "Pods/Target Support Files/Pods-ChatSecureCore/Pods-ChatSecureCore-acknowledgements.plist"; sourceTree = SOURCE_ROOT; };
+		D973D7051A2D4094004D353E /* Pods-ChatSecureCorePods-ChatSecure-acknowledgements.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = "Pods-ChatSecureCorePods-ChatSecure-acknowledgements.plist"; path = "Pods/Target Support Files/Pods-ChatSecureCorePods-ChatSecure/Pods-ChatSecureCorePods-ChatSecure-acknowledgements.plist"; sourceTree = SOURCE_ROOT; };
 		D978BC901BABE0F4009246CF /* OTRTheme.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OTRTheme.h; sourceTree = "<group>"; };
 		D978BC911BABE0F4009246CF /* OTRTheme.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OTRTheme.m; sourceTree = "<group>"; };
 		D989A84D1B5DBD90000608A9 /* OTRExistingAccountViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = OTRExistingAccountViewController.h; path = "Login View Controllers/OTRExistingAccountViewController.h"; sourceTree = "<group>"; };
@@ -1069,49 +912,7 @@
 				B021679F1D7D7D01001FB42C /* AFNetworking.framework in Frameworks */,
 				B021682B1D7D7DA3001FB42C /* uservoice_iphone_sdk.framework in Frameworks */,
 				D9227C3F1BA7952100B5E1D0 /* ChatSecureCore.framework in Frameworks */,
-				B02168061D7D7DA3001FB42C /* Pods_ChatSecureCore.framework in Frameworks */,
-				B02168311D7D7DA3001FB42C /* XLForm.framework in Frameworks */,
-				B02167AF1D7D7DA1001FB42C /* BButton.framework in Frameworks */,
-				B02167AA1D7D7DA1001FB42C /* ARChromeActivity.framework in Frameworks */,
-				B02167A81D7D7DA1001FB42C /* Appirater.framework in Frameworks */,
-				B02168341D7D7DA3001FB42C /* XMPPFramework.framework in Frameworks */,
-				B02167EF1D7D7DA2001FB42C /* MBProgressHUD.framework in Frameworks */,
-				B02168261D7D7DA3001FB42C /* UIScrollView_InfiniteScroll.framework in Frameworks */,
-				B02168121D7D7DA3001FB42C /* Reachability.framework in Frameworks */,
-				B02167C61D7D7DA2001FB42C /* GCDWebServer.framework in Frameworks */,
-				B02167F21D7D7DA2001FB42C /* MWFeedParser.framework in Frameworks */,
-				B02167F51D7D7DA2001FB42C /* Navajo.framework in Frameworks */,
-				B02167EC1D7D7DA2001FB42C /* Mantle.framework in Frameworks */,
-				B02167C91D7D7DA2001FB42C /* gtm_http_fetcher.framework in Frameworks */,
-				B021681B1D7D7DA3001FB42C /* SVPullToRefresh.framework in Frameworks */,
-				B02167E91D7D7DA2001FB42C /* libsqlfs.framework in Frameworks */,
-				B021680C1D7D7DA3001FB42C /* PureLayout.framework in Frameworks */,
-				B02168231D7D7DA3001FB42C /* TUSafariActivity.framework in Frameworks */,
-				B02167CC1D7D7DA2001FB42C /* gtm_oauth2.framework in Frameworks */,
-				B02168181D7D7DA3001FB42C /* SSKeychain.framework in Frameworks */,
-				B02167CF1D7D7DA2001FB42C /* HockeySDK_Source.framework in Frameworks */,
-				B02168011D7D7DA3001FB42C /* PINCache.framework in Frameworks */,
-				B02168151D7D7DA3001FB42C /* SQLCipher.framework in Frameworks */,
-				B02167B81D7D7DA2001FB42C /* CocoaAsyncSocket.framework in Frameworks */,
-				B02167B21D7D7DA1001FB42C /* ChatSecure_Push_iOS.framework in Frameworks */,
-				B021682E1D7D7DA3001FB42C /* VTAcknowledgementsViewController.framework in Frameworks */,
-				B02167DA1D7D7DA2001FB42C /* JSQSystemSoundPlayer.framework in Frameworks */,
-				B02167A21D7D7D2F001FB42C /* BBlock.framework in Frameworks */,
-				B02167E31D7D7DA2001FB42C /* KissXML.framework in Frameworks */,
-				B02167D41D7D7DA2001FB42C /* IOCipher.framework in Frameworks */,
-				B021681E1D7D7DA3001FB42C /* TTTAttributedLabel.framework in Frameworks */,
-				B02167B51D7D7DA2001FB42C /* Cloudinary.framework in Frameworks */,
-				B02167C31D7D7DA2001FB42C /* FLAnimatedImage.framework in Frameworks */,
-				B02167E01D7D7DA2001FB42C /* JVFloatLabeledTextField.framework in Frameworks */,
-				B02167FB1D7D7DA2001FB42C /* OTRKit.framework in Frameworks */,
-				B02167BB1D7D7DA2001FB42C /* CocoaLumberjack.framework in Frameworks */,
-				B02167D71D7D7DA2001FB42C /* JSQMessagesViewController.framework in Frameworks */,
-				B02168371D7D7DA3001FB42C /* YapDatabase.framework in Frameworks */,
-				B02167E61D7D7DA2001FB42C /* KVOController.framework in Frameworks */,
-				B02167DD1D7D7DA2001FB42C /* JTSImageViewController.framework in Frameworks */,
-				B021683D1D7D7E5F001FB42C /* CPAProxy.framework in Frameworks */,
-				B02167FE1D7D7DA3001FB42C /* ParkedTextField.framework in Frameworks */,
-				B02167F81D7D7DA2001FB42C /* OpenInChrome.framework in Frameworks */,
+				62541784C9130738A1DC0C3C /* Pods_ChatSecureCorePods_ChatSecure.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1120,6 +921,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				631E1E9F1C583B6900E263CD /* ChatSecureCore.framework in Frameworks */,
+				7A6540ECCA04445E88F06962 /* Pods_ChatSecureCorePods_ChatSecureTests.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1128,7 +930,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				D9AE3A201BA8CCFE00255537 /* OTRAssets.framework in Frameworks */,
-				7F408CE30104F3D0A455A95A /* Pods_ChatSecureCore.framework in Frameworks */,
+				DDE1CAF4312DE1C724A33B72 /* Pods_ChatSecureCorePods_ChatSecureCore.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1156,7 +958,7 @@
 				633106661A16D1A300C17BAE /* LaunchScreen.xib */,
 				D9227C231BA78E6B00B5E1D0 /* FontAwesome.ttf */,
 				D95AD2281B684AE1007DEBC3 /* xmpp-server-list */,
-				D973D7051A2D4094004D353E /* Pods-ChatSecureCore-acknowledgements.plist */,
+				D973D7051A2D4094004D353E /* Pods-ChatSecureCorePods-ChatSecure-acknowledgements.plist */,
 				D9365E791A1EB0050006434A /* torrc */,
 				633107291A16D1F200C17BAE /* DemoImages.xcassets */,
 				6331072A1A16D1F200C17BAE /* Images.xcassets */,
@@ -1804,7 +1606,7 @@
 			isa = PBXGroup;
 			children = (
 				63DC0EB21A1ABC3E002C9598 /* Configurations */,
-				6308D1441CA20762002F5F30 /* Pods-ChatSecureCore-acknowledgements.plist */,
+				6308D1441CA20762002F5F30 /* Pods-ChatSecureCorePods-ChatSecure-acknowledgements.plist */,
 			);
 			name = Pods;
 			sourceTree = "<group>";
@@ -1870,9 +1672,11 @@
 		DB9AACD6ED82090C7A6B0076 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				B02167911D7D7B2B001FB42C /* AFNetworking.framework */,
 				CCD1F8E85C658C8D3865B584 /* Pods.framework */,
-				6C592992CC49A50D357998DA /* Pods_ChatSecureCore.framework */,
+				46AAC6968EC686E61C8E8EA4 /* Pods_ChatSecureCore.framework */,
+				9F52F68785B05428F442DF47 /* Pods_ChatSecureCorePods_ChatSecure.framework */,
+				31610826406FD0CB714045AD /* Pods_ChatSecureCorePods_ChatSecureCore.framework */,
+				281981F599E0F5C8397E6A3F /* Pods_ChatSecureCorePods_ChatSecureTests.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -2060,12 +1864,14 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 6396AFBD1A169D54009F3E6C /* Build configuration list for PBXNativeTarget "ChatSecure" */;
 			buildPhases = (
+				26A8ED395C5418B361347335 /* [CP] Check Pods Manifest.lock */,
 				6396AF961A169D54009F3E6C /* Sources */,
 				6396AF971A169D54009F3E6C /* Frameworks */,
 				6396AF981A169D54009F3E6C /* Resources */,
-				6386E24E1A16DBAD003465DC /* Run Script */,
+				6386E24E1A16DBAD003465DC /* ShellScript */,
 				D9227C481BA7952100B5E1D0 /* Embed Frameworks */,
-				B02FC37E1D475FFC001AA54E /* Fabric */,
+				1B1F00C90AA4375388D309AF /* [CP] Embed Pods Frameworks */,
+				B54AA4231DBE4A463B56D596 /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -2082,9 +1888,12 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 6396AFC01A169D54009F3E6C /* Build configuration list for PBXNativeTarget "ChatSecureTests" */;
 			buildPhases = (
+				77A00DC28BB2926A0668095F /* [CP] Check Pods Manifest.lock */,
 				6396AFAF1A169D54009F3E6C /* Sources */,
 				6396AFB01A169D54009F3E6C /* Frameworks */,
 				6396AFB11A169D54009F3E6C /* Resources */,
+				3465A939CCAAAAC0480C0795 /* [CP] Embed Pods Frameworks */,
+				A32A5DF4737208630E1EA1F8 /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -2101,12 +1910,12 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = D9227C471BA7952100B5E1D0 /* Build configuration list for PBXNativeTarget "ChatSecureCore" */;
 			buildPhases = (
-				D04BCFF4CA9A72C1DC8AFEC4 /* Check Pods Manifest.lock */,
+				A6D5997FD889EEEABB9C430A /* [CP] Check Pods Manifest.lock */,
 				D9227C251BA7952100B5E1D0 /* Sources */,
 				D9227C261BA7952100B5E1D0 /* Frameworks */,
 				D9227C271BA7952100B5E1D0 /* Headers */,
 				D9227C281BA7952100B5E1D0 /* Resources */,
-				FEA133DC76974E619D2A0BF4 /* Copy Pods Resources */,
+				4A17E470489F79ACE0124841 /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -2162,14 +1971,19 @@
 				CLASSPREFIX = OTR;
 				LastSwiftMigration = 0700;
 				LastSwiftUpdateCheck = 0720;
-				LastUpgradeCheck = 0700;
+				LastUpgradeCheck = 0800;
 				ORGANIZATIONNAME = "Chris Ballinger";
 				TargetAttributes = {
 					6396AF991A169D54009F3E6C = {
 						CreatedOnToolsVersion = 6.1;
-						DevelopmentTeam = 8H5SYM9GR5;
+						DevelopmentTeam = 4T8JLQR6GR;
+						LastSwiftMigration = 0800;
+						ProvisioningStyle = Manual;
 						SystemCapabilities = {
 							com.apple.DataProtection = {
+								enabled = 1;
+							};
+							com.apple.Keychain = {
 								enabled = 1;
 							};
 							com.apple.Push = {
@@ -2185,10 +1999,12 @@
 					};
 					6396AFB21A169D54009F3E6C = {
 						CreatedOnToolsVersion = 6.1;
+						LastSwiftMigration = 0800;
 					};
 					D9227C291BA7952100B5E1D0 = {
 						CreatedOnToolsVersion = 7.0;
-						DevelopmentTeam = 8H5SYM9GR5;
+						DevelopmentTeam = 4T8JLQR6GR;
+						LastSwiftMigration = 0800;
 					};
 					D93027551BAA381F000CC975 = {
 						CreatedOnToolsVersion = 7.0;
@@ -2260,7 +2076,7 @@
 				D99F178E1BAB9B2100604558 /* OTRResources.bundle in Resources */,
 				D9227C241BA78E6B00B5E1D0 /* FontAwesome.ttf in Resources */,
 				6331072C1A16D1F200C17BAE /* Images.xcassets in Resources */,
-				6308D1451CA20762002F5F30 /* Pods-ChatSecureCore-acknowledgements.plist in Resources */,
+				6308D1451CA20762002F5F30 /* Pods-ChatSecureCorePods-ChatSecure-acknowledgements.plist in Resources */,
 				D9365E7A1A1EB0050006434A /* torrc in Resources */,
 				6331072B1A16D1F200C17BAE /* DemoImages.xcassets in Resources */,
 				633107201A16D1A300C17BAE /* LaunchScreen.xib in Resources */,
@@ -2310,62 +2126,137 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
-		6386E24E1A16DBAD003465DC /* Run Script */ = {
+		1B1F00C90AA4375388D309AF /* [CP] Embed Pods Frameworks */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 			);
 			inputPaths = (
 			);
-			name = "Run Script";
+			name = "[CP] Embed Pods Frameworks";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-ChatSecureCorePods-ChatSecure/Pods-ChatSecureCorePods-ChatSecure-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		26A8ED395C5418B361347335 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
+			showEnvVarsInLog = 0;
+		};
+		3465A939CCAAAAC0480C0795 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-ChatSecureCorePods-ChatSecureTests/Pods-ChatSecureCorePods-ChatSecureTests-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		4A17E470489F79ACE0124841 /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-ChatSecureCorePods-ChatSecureCore/Pods-ChatSecureCorePods-ChatSecureCore-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		6386E24E1A16DBAD003465DC /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
 			outputPaths = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "python \"${SRCROOT}/OTRAssets/Strings/StringsConverter.py\"";
 		};
-		B02FC37E1D475FFC001AA54E /* Fabric */ = {
+		77A00DC28BB2926A0668095F /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 			);
 			inputPaths = (
 			);
-			name = Fabric;
+			name = "[CP] Check Pods Manifest.lock";
 			outputPaths = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\"${PODS_ROOT}/Fabric/run\" 413c90937b9528a038fc013f777ef6a27df04bce c6324207a759d8fef71de3f106ecc852d12051d8ecfefaa0245d6f8b4ac704cb";
-		};
-		D04BCFF4CA9A72C1DC8AFEC4 /* Check Pods Manifest.lock */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			name = "Check Pods Manifest.lock";
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
 			showEnvVarsInLog = 0;
 		};
-		FEA133DC76974E619D2A0BF4 /* Copy Pods Resources */ = {
+		A32A5DF4737208630E1EA1F8 /* [CP] Copy Pods Resources */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 			);
 			inputPaths = (
 			);
-			name = "Copy Pods Resources";
+			name = "[CP] Copy Pods Resources";
 			outputPaths = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-ChatSecureCore/Pods-ChatSecureCore-resources.sh\"\n";
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-ChatSecureCorePods-ChatSecureTests/Pods-ChatSecureCorePods-ChatSecureTests-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		A6D5997FD889EEEABB9C430A /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
+			showEnvVarsInLog = 0;
+		};
+		B54AA4231DBE4A463B56D596 /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-ChatSecureCorePods-ChatSecure/Pods-ChatSecureCorePods-ChatSecure-resources.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 /* End PBXShellScriptBuildPhase section */
@@ -2668,6 +2559,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = YES;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
 				CLANG_CXX_LIBRARY = "libc++";
 				CLANG_ENABLE_MODULES = YES;
@@ -2677,8 +2569,10 @@
 				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
 				CLANG_WARN_EMPTY_BODY = YES;
 				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
@@ -2687,6 +2581,7 @@
 				ENABLE_NS_ASSERTIONS = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_NO_COMMON_BLOCKS = YES;
 				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
 				GCC_WARN_UNDECLARED_SELECTOR = YES;
@@ -2707,6 +2602,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 63DC0EB61A1ABC86002C9598 /* OTR_Release.xcconfig */;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				BUNDLE_DISPLAY_NAME_SUFFIX = " β";
 				BUNDLE_ID_SUFFIX = .beta;
@@ -2716,8 +2612,7 @@
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				DEFINES_MODULE = YES;
-				EMBEDDED_CONTENT_CONTAINS_SWIFT = YES;
-				ENABLE_BITCODE = NO;
+				DEVELOPMENT_TEAM = "";
 				INFOPLIST_FILE = ChatSecure/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
@@ -2837,7 +2732,7 @@
 				PRODUCT_MODULE_NAME = "$(TARGET_NAME:c99extidentifier)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
-				PUBLIC_HEADERS_FOLDER_PATH = "$(CONTENTS_FOLDER_PATH)/Headers";
+				SWIFT_VERSION = 2.3;
 			};
 			name = Beta;
 		};
@@ -2845,6 +2740,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 63DC0EB61A1ABC86002C9598 /* OTR_Release.xcconfig */;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				CLANG_ENABLE_MODULES = YES;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(SDKROOT)/Developer/Library/Frameworks",
@@ -2856,6 +2752,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = "com.chrisballinger.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_OBJC_BRIDGING_HEADER = "ChatSecureTests/ChatSecureTests-Bridging-Header.h";
+				SWIFT_VERSION = 2.3;
 			};
 			name = Beta;
 		};
@@ -2863,6 +2760,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = YES;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
 				CLANG_CXX_LIBRARY = "libc++";
 				CLANG_ENABLE_MODULES = YES;
@@ -2872,8 +2770,10 @@
 				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
 				CLANG_WARN_EMPTY_BODY = YES;
 				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
@@ -2883,6 +2783,7 @@
 				ENABLE_TESTABILITY = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
 				GCC_OPTIMIZATION_LEVEL = 0;
 				GCC_PREPROCESSOR_DEFINITIONS = (
 					"DEBUG=1",
@@ -2909,6 +2810,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = YES;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
 				CLANG_CXX_LIBRARY = "libc++";
 				CLANG_ENABLE_MODULES = YES;
@@ -2918,8 +2820,10 @@
 				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
 				CLANG_WARN_EMPTY_BODY = YES;
 				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
@@ -2928,6 +2832,7 @@
 				ENABLE_NS_ASSERTIONS = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_NO_COMMON_BLOCKS = YES;
 				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
 				GCC_WARN_UNDECLARED_SELECTOR = YES;
@@ -2938,7 +2843,7 @@
 				MTL_ENABLE_DEBUG_INFO = NO;
 				PROVISIONING_PROFILE = "";
 				SDKROOT = iphoneos;
-				SWIFT_OBJC_BRIDGING_HEADER = "";
+				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
 				TARGETED_DEVICE_FAMILY = "1,2";
 				VALIDATE_PRODUCT = YES;
 			};
@@ -2948,6 +2853,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 63DC0EB41A1ABC86002C9598 /* OTR_Debug.xcconfig */;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				BUNDLE_DISPLAY_NAME_SUFFIX = "";
 				BUNDLE_ID_SUFFIX = "";
@@ -2956,8 +2862,7 @@
 				CODE_SIGN_ENTITLEMENTS = ChatSecure/ChatSecure.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
-				EMBEDDED_CONTENT_CONTAINS_SWIFT = YES;
-				ENABLE_BITCODE = NO;
+				DEVELOPMENT_TEAM = 4T8JLQR6GR;
 				INFOPLIST_FILE = ChatSecure/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
@@ -3076,9 +2981,10 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.bentanayan.UPSChat;
 				PRODUCT_MODULE_NAME = "$(TARGET_NAME:c99extidentifier)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "";
-				PUBLIC_HEADERS_FOLDER_PATH = "$(CONTENTS_FOLDER_PATH)/Headers";
+				PROVISIONING_PROFILE = "fe68233f-f26b-451f-b85b-69c7e737d52b";
+				PROVISIONING_PROFILE_SPECIFIER = "ChatSecure Dev Profile";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_VERSION = 2.3;
 			};
 			name = Debug;
 		};
@@ -3086,6 +2992,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 63DC0EB61A1ABC86002C9598 /* OTR_Release.xcconfig */;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				BUNDLE_DISPLAY_NAME_SUFFIX = "";
 				BUNDLE_ID_SUFFIX = "";
@@ -3093,9 +3000,8 @@
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_ENTITLEMENTS = ChatSecure/ChatSecure.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
-				EMBEDDED_CONTENT_CONTAINS_SWIFT = YES;
-				ENABLE_BITCODE = NO;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
+				DEVELOPMENT_TEAM = 4T8JLQR6GR;
 				INFOPLIST_FILE = ChatSecure/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
@@ -3214,8 +3120,9 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.bentanayan.UPSChat;
 				PRODUCT_MODULE_NAME = "$(TARGET_NAME:c99extidentifier)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "";
-				PUBLIC_HEADERS_FOLDER_PATH = "$(CONTENTS_FOLDER_PATH)/Headers";
+				PROVISIONING_PROFILE = "a8b97d8c-efab-48eb-9c83-20f8985bafbf";
+				PROVISIONING_PROFILE_SPECIFIER = "ChatSecure Ad Hoc";
+				SWIFT_VERSION = 2.3;
 			};
 			name = Release;
 		};
@@ -3223,6 +3130,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 63DC0EB41A1ABC86002C9598 /* OTR_Debug.xcconfig */;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				FRAMEWORK_SEARCH_PATHS = (
@@ -3241,6 +3149,7 @@
 				PROVISIONING_PROFILE = "655d2ab0-dc16-43ae-a2c0-e13fa3fcb791";
 				SWIFT_OBJC_BRIDGING_HEADER = "ChatSecureTests/ChatSecureTests-Bridging-Header.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_VERSION = 2.3;
 			};
 			name = Debug;
 		};
@@ -3248,6 +3157,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 63DC0EB61A1ABC86002C9598 /* OTR_Release.xcconfig */;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				CLANG_ENABLE_MODULES = YES;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(SDKROOT)/Developer/Library/Frameworks",
@@ -3259,6 +3169,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = "com.chrisballinger.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_OBJC_BRIDGING_HEADER = "ChatSecureTests/ChatSecureTests-Bridging-Header.h";
+				SWIFT_VERSION = 2.3;
 			};
 			name = Release;
 		};
@@ -3266,16 +3177,16 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 63DC0EB41A1ABC86002C9598 /* OTR_Debug.xcconfig */;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				CLANG_ALLOW_NON_MODULAR_INCLUDES_IN_FRAMEWORK_MODULES = YES;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
 				CURRENT_PROJECT_VERSION = 1;
 				DEBUG_INFORMATION_FORMAT = dwarf;
 				DEFINES_MODULE = YES;
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
-				EMBEDDED_CONTENT_CONTAINS_SWIFT = NO;
 				GCC_NO_COMMON_BLOCKS = YES;
 				INFOPLIST_FILE = ChatSecureCore/Info.plist;
 				INSTALL_PATH = ../;
@@ -3286,6 +3197,7 @@
 				PROVISIONING_PROFILE = "";
 				SKIP_INSTALL = YES;
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_VERSION = 2.3;
 				VERSIONING_SYSTEM = "apple-generic";
 				VERSION_INFO_PREFIX = "";
 			};
@@ -3295,9 +3207,10 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 63DC0EB61A1ABC86002C9598 /* OTR_Release.xcconfig */;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				CLANG_ALLOW_NON_MODULAR_INCLUDES_IN_FRAMEWORK_MODULES = YES;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
 				COPY_PHASE_STRIP = NO;
 				CURRENT_PROJECT_VERSION = 1;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
@@ -3305,7 +3218,6 @@
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
-				EMBEDDED_CONTENT_CONTAINS_SWIFT = NO;
 				GCC_NO_COMMON_BLOCKS = YES;
 				INFOPLIST_FILE = ChatSecureCore/Info.plist;
 				INSTALL_PATH = ../;
@@ -3315,6 +3227,7 @@
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
 				SKIP_INSTALL = YES;
+				SWIFT_VERSION = 2.3;
 				VERSIONING_SYSTEM = "apple-generic";
 				VERSION_INFO_PREFIX = "";
 			};
@@ -3324,9 +3237,10 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 63DC0EB61A1ABC86002C9598 /* OTR_Release.xcconfig */;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				CLANG_ALLOW_NON_MODULAR_INCLUDES_IN_FRAMEWORK_MODULES = YES;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
 				COPY_PHASE_STRIP = NO;
 				CURRENT_PROJECT_VERSION = 1;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
@@ -3334,7 +3248,6 @@
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
-				EMBEDDED_CONTENT_CONTAINS_SWIFT = NO;
 				GCC_NO_COMMON_BLOCKS = YES;
 				INFOPLIST_FILE = ChatSecureCore/Info.plist;
 				INSTALL_PATH = ../;
@@ -3344,6 +3257,7 @@
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
 				SKIP_INSTALL = YES;
+				SWIFT_VERSION = 2.3;
 				VERSIONING_SYSTEM = "apple-generic";
 				VERSION_INFO_PREFIX = "";
 			};
@@ -3353,9 +3267,9 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 63DC0EB41A1ABC86002C9598 /* OTR_Debug.xcconfig */;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				COMBINE_HIDPI_IMAGES = YES;
 				DEBUG_INFORMATION_FORMAT = dwarf;
-				EMBEDDED_CONTENT_CONTAINS_SWIFT = NO;
 				GCC_NO_COMMON_BLOCKS = YES;
 				INFOPLIST_FILE = OTRResources/Info.plist;
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Bundles";
@@ -3372,10 +3286,10 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 63DC0EB61A1ABC86002C9598 /* OTR_Release.xcconfig */;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				COMBINE_HIDPI_IMAGES = YES;
 				COPY_PHASE_STRIP = NO;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
-				EMBEDDED_CONTENT_CONTAINS_SWIFT = NO;
 				GCC_NO_COMMON_BLOCKS = YES;
 				INFOPLIST_FILE = OTRResources/Info.plist;
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Bundles";
@@ -3392,10 +3306,10 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 63DC0EB61A1ABC86002C9598 /* OTR_Release.xcconfig */;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				COMBINE_HIDPI_IMAGES = YES;
 				COPY_PHASE_STRIP = NO;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
-				EMBEDDED_CONTENT_CONTAINS_SWIFT = NO;
 				GCC_NO_COMMON_BLOCKS = YES;
 				INFOPLIST_FILE = OTRResources/Info.plist;
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Bundles";
@@ -3412,15 +3326,15 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 63DC0EB41A1ABC86002C9598 /* OTR_Debug.xcconfig */;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
 				CURRENT_PROJECT_VERSION = 1;
 				DEBUG_INFORMATION_FORMAT = dwarf;
 				DEFINES_MODULE = YES;
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
-				EMBEDDED_CONTENT_CONTAINS_SWIFT = NO;
 				GCC_NO_COMMON_BLOCKS = YES;
 				INFOPLIST_FILE = OTRAssets/Info.plist;
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
@@ -3440,8 +3354,9 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 63DC0EB61A1ABC86002C9598 /* OTR_Release.xcconfig */;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
 				COPY_PHASE_STRIP = NO;
 				CURRENT_PROJECT_VERSION = 1;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
@@ -3449,7 +3364,6 @@
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
-				EMBEDDED_CONTENT_CONTAINS_SWIFT = NO;
 				GCC_NO_COMMON_BLOCKS = YES;
 				INFOPLIST_FILE = OTRAssets/Info.plist;
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
@@ -3469,8 +3383,9 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 63DC0EB61A1ABC86002C9598 /* OTR_Release.xcconfig */;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
 				COPY_PHASE_STRIP = NO;
 				CURRENT_PROJECT_VERSION = 1;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
@@ -3478,7 +3393,6 @@
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
-				EMBEDDED_CONTENT_CONTAINS_SWIFT = NO;
 				GCC_NO_COMMON_BLOCKS = YES;
 				INFOPLIST_FILE = OTRAssets/Info.plist;
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";

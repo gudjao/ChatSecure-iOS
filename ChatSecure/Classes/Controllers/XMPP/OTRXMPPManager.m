@@ -514,6 +514,7 @@ extern NSString *const OTRXMPPReceivedArchivedMessagesNotificationName = @"OTRXM
 }
 
 - (void) disconnectSocketOnly:(BOOL)socketOnly {
+    DDLogVerbose(@"%@: %@ %d", THIS_FILE, THIS_METHOD, socketOnly);
     if (socketOnly) {
         [self.xmppStream disconnect];
         self.connectionStatus = OTRProtocolConnectionStatusDisconnected;

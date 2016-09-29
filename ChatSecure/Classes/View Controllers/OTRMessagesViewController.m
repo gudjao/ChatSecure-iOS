@@ -328,6 +328,7 @@ typedef NS_ENUM(int, OTRDropDownType) {
     [self.viewHandler.keyCollectionObserver stopObserving:oldKey collection:oldCollection];
     [self.viewHandler.keyCollectionObserver observe:self.threadKey collection:self.threadCollection];
     [self updateViewWithKey:self.threadKey colleciton:self.threadCollection];
+    [self.viewHandler setup:OTRChatDatabaseViewExtensionName groups:@[self.threadKey]];
     [self moveLastComposingTextForThreadKey:self.threadKey colleciton:self.threadCollection toTextView:self.inputToolbar.contentView.textView];
     [self.collectionView reloadData];
 }
@@ -1298,7 +1299,13 @@ typedef NS_ENUM(int, OTRDropDownType) {
     
     [[OTRMediaFileManager sharedInstance] copyDataFromFilePath:url.path toEncryptedPath:newPath completionQueue:dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0) completion:^(NSError *error) {
         
+        //        NSData *data = nil;
         //        if ([[NSFileManager defaultManager] fileExistsAtPath:url.path]) {
+        //            long long fileSize = [[[NSFileManager defaultManager] attributesOfItemAtPath:url.path error:nil][NSFileSize] longLongValue];
+        //            if (fileSize < 1024 * 1024 * 1) {
+        //                // Smaller than 1Mb
+        //                data = [NSData dataWithContentsOfFile:url.path];
+        //            }
         //            NSError *err = nil;
         //            [[NSFileManager defaultManager] removeItemAtPath:url.path error:&err];
         //            if (err) {
