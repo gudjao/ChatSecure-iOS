@@ -1679,7 +1679,7 @@ heightForCellBottomLabelAtIndexPath:(NSIndexPath *)indexPath
                  NSLog(@"BOTTOM OFFSET: %f", bottomOffset);
                  */
                 
-                NSLog(@"BOTTOM OFFSET: %f", bottomOffset);
+                //NSLog(@"BOTTOM OFFSET: %f", bottomOffset);
                 
                 [CATransaction begin];
                 [CATransaction setDisableActions:YES];
