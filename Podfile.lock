@@ -114,10 +114,9 @@ PODS:
     - SQLCipher/common
   - SQLCipher/standard (3.4.0):
     - SQLCipher/common
-  - SVPullToRefresh (0.4.1)
+  - SVPullToRefresh (0.4.5.1)
   - TTTAttributedLabel (1.13.4)
   - TUSafariActivity (1.0.4)
-  - UIScrollView-InfiniteScroll (0.9.1)
   - uservoice-iphone-sdk (3.2.9)
   - VTAcknowledgementsViewController (0.17)
   - XLForm (3.2.0)
@@ -376,12 +375,11 @@ DEPENDENCIES:
   - PureLayout (~> 3.0)
   - QRCodeReaderViewController (~> 4.0)
   - Reachability (~> 3)
-  - SAMKeychain (~> 1.5)
+  - SAMKeychain
   - SQLCipher (from `Podspecs/SQLCipher.podspec.json`)
-  - SVPullToRefresh (from `https://github.com/gabro/SVPullToRefresh.git`, branch `top-infinitescrolling`)
+  - SVPullToRefresh (from `https://github.com/gudjao/SVPullToRefresh.git`, branch `dev`)
   - TTTAttributedLabel (~> 1.10)
   - TUSafariActivity (~> 1.0)
-  - UIScrollView-InfiniteScroll
   - uservoice-iphone-sdk (~> 3.2)
   - VTAcknowledgementsViewController (~> 0.15)
   - XLForm (~> 3.1)
@@ -418,8 +416,8 @@ EXTERNAL SOURCES:
   SQLCipher:
     :podspec: Podspecs/SQLCipher.podspec.json
   SVPullToRefresh:
-    :branch: top-infinitescrolling
-    :git: https://github.com/gabro/SVPullToRefresh.git
+    :branch: dev
+    :git: https://github.com/gudjao/SVPullToRefresh.git
   XMPPFramework:
     :path: Submodules/XMPPFramework/XMPPFramework.podspec
 
@@ -434,8 +432,8 @@ CHECKOUT OPTIONS:
     :commit: aefee50a61b0361194e4374a7010b9edb7e3c5c7
     :git: https://github.com/pinterest/PINRemoteImage.git
   SVPullToRefresh:
-    :commit: 3f88bf7a51b37fc3f19f180a67c729dcec873df2
-    :git: https://github.com/gabro/SVPullToRefresh.git
+    :commit: 1d7b813e2cfae22d36a885aaedbb5238ee890e8c
+    :git: https://github.com/gudjao/SVPullToRefresh.git
 
 SPEC CHECKSUMS:
   AFNetworking: 5e0e199f73d8626b11e79750991f5d173d1f8b67
@@ -478,10 +476,9 @@ SPEC CHECKSUMS:
   Reachability: 33e18b67625424e47b6cde6d202dce689ad7af96
   SAMKeychain: 1865333198217411f35327e8da61b43de79b635b
   SQLCipher: 5edce62bad2091ed65a422927fedee15149ad04c
-  SVPullToRefresh: ba2e718695a43253d8bea6852d2960097dc15d8c
+  SVPullToRefresh: 9d0b53581e5d01be2861dae8e92481a8e932190c
   TTTAttributedLabel: 0a2ac7b2dd726d32a070dafb01446026b11e624f
   TUSafariActivity: afc55a00965377939107ce4fdc7f951f62454546
-  UIScrollView-InfiniteScroll: 14e204c50ca4040467e1cbfa141dad7a18919b56
   uservoice-iphone-sdk: 82b5c44465fe900b6e54ee856328733d2abfa947
   VTAcknowledgementsViewController: 6056f5f5e5ed995bbf0581bed6ddd29355ca9a80
   XLForm: 2250b4e96ab8ffa5f3355838c79edd90de451782
@@ -489,6 +486,6 @@ SPEC CHECKSUMS:
   YapDatabase: b1e43555a34a5298e23a045be96817a5ef0da58f
   ZXingObjC: bf15b3814f7a105b6d99f47da2333c93a063650a
 
-PODFILE CHECKSUM: 2294397f1543ddba1f681439d8204d20a3a47156
+PODFILE CHECKSUM: 84cc63b433c7cb34187304e5f5276354af40ca88
 
 COCOAPODS: 1.1.0.rc.2

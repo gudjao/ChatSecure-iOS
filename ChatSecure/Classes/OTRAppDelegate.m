@@ -83,7 +83,7 @@
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
     [Fabric with:@[[Crashlytics class]]];
-
+    
     [DDLog addLogger:[DDTTYLogger sharedInstance]];
     
     [[BITHockeyManager sharedHockeyManager] configureWithBetaIdentifier:[OTRSecrets hockeyBetaIdentifier]
@@ -103,18 +103,25 @@
     self.conversationViewController = [[[self.theme conversationViewControllerClass] alloc] init];
     self.messagesViewController = [[self.theme messagesViewControllerClass] messagesViewController];
     
-    
     if ([OTRDatabaseManager existsYapDatabase] && ![[OTRDatabaseManager sharedInstance] hasPassphrase]) {
         // user needs to enter password for current database
         //rootViewController = [[OTRDatabaseUnlockViewController alloc] init];
-        NSLog(@"HAS PASSPHRASE: %d PASSPHRASE %@", [[OTRDatabaseManager sharedInstance] hasPassphrase], [[OTRDatabaseManager sharedInstance] databasePassphrase]);
-        /*
-        [[OTRDatabaseManager sharedInstance] setDatabasePassphrase:[[OTRDatabaseManager sharedInstance] databasePassphrase] remember:YES error:nil];
-        if ([[OTRDatabaseManager sharedInstance] setupDatabaseWithName:OTRYapDatabaseName]) {
-            [[OTRAppDelegate appDelegate] showConversationViewController];
+        DDLogDebug(@"HAS PASSPHRASE: %d PASSPHRASE %@ DB NAME: %@", [[OTRDatabaseManager sharedInstance] hasPassphrase], [[OTRDatabaseManager sharedInstance] databasePassphrase], OTRYapDatabaseName);
+        
+        if([[NSFileManager defaultManager] removeItemAtPath:[OTRDatabaseManager yapDatabasePathWithName:OTRYapDatabaseName] error:nil]) {
+            DDLogDebug(@"Database Removed");
         }
-         */
+        
+        NSString *newPassword = [OTRPasswordGenerator passwordWithLength:OTRDefaultPasswordLength];
+        NSError *error = nil;
+        [[OTRDatabaseManager sharedInstance] setDatabasePassphrase:newPassword remember:YES error:&error];
+        if (error) {
+            DDLogError(@"Password Error: %@",error);
+        }
+        
+        rootViewController = [self setupDefaultSplitViewControllerWithLeadingViewController:[[UINavigationController alloc] initWithRootViewController:self.conversationViewController]];
     } else {
+        DDLogDebug(@"Normal Launch");
         ////// Normal launch to conversationViewController //////
         if (![OTRDatabaseManager existsYapDatabase]) {
             /**
@@ -128,7 +135,7 @@
                 DDLogError(@"Password Error: %@",error);
             }
         }
-
+        
         [[OTRDatabaseManager sharedInstance] setupDatabaseWithName:OTRYapDatabaseName];
         rootViewController = [self setupDefaultSplitViewControllerWithLeadingViewController:[[UINavigationController alloc] initWithRootViewController:self.conversationViewController]];
 #if CHATSECURE_DEMO
@@ -137,18 +144,18 @@
     }
     self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
     self.window.rootViewController = rootViewController;
-
+    
     /*
-    /////////// testing invite VC
-    OTRInviteViewController *inviteVC = [[OTRInviteViewController alloc] init];
-    OTRAccount *account = [[OTRAccount alloc] init];
-    account.username = @"test@example.com";
-    inviteVC.account = account;
-    UINavigationController *nav = [[UINavigationController alloc] initWithRootViewController:inviteVC];
-    self.window.rootViewController = nav;
-    ////////////
-    */
-     
+     /////////// testing invite VC
+     OTRInviteViewController *inviteVC = [[OTRInviteViewController alloc] init];
+     OTRAccount *account = [[OTRAccount alloc] init];
+     account.username = @"test@example.com";
+     inviteVC.account = account;
+     UINavigationController *nav = [[UINavigationController alloc] initWithRootViewController:inviteVC];
+     self.window.rootViewController = nav;
+     ////////////
+     */
+    
     [self.window makeKeyAndVisible];
     
     application.applicationIconBadgeNumber = 0;
@@ -159,7 +166,7 @@
     if ([PushController getPushPreference] == PushPreferenceEnabled) {
         [PushController registerForPushNotifications];
     }
-  
+    
     [Appirater setAppId:@"464200063"];
     [Appirater setOpenInAppStore:NO];
     [Appirater appLaunched:YES];
@@ -278,7 +285,7 @@
             void (^moreInfoBlock)(void) = ^void(void) {
                 [[UIApplication sharedApplication] openURL:[NSURL URLWithString:@"https://developers.facebook.com/docs/chat"]];
             };
-        
+            
             UIAlertController *alertController = [UIAlertController alertControllerWithTitle:FACEBOOK_REMOVED_STRING message:FACEBOOK_REMOVED_MESSAGE_STRING preferredStyle:UIAlertControllerStyleAlert];
             
             UIAlertAction *okAction = [UIAlertAction actionWithTitle:OK_STRING style:UIAlertActionStyleDefault handler:nil];
@@ -331,7 +338,7 @@
         self.backgroundTimer = [NSTimer scheduledTimerWithTimeInterval:1 target:self selector:@selector(timerUpdate:) userInfo:nil repeats:YES];
     });
 }
-                                
+
 - (void) timerUpdate:(NSTimer*)timer {
     UIApplication *application = [UIApplication sharedApplication];
     NSTimeInterval timeRemaining = application.backgroundTimeRemaining;
@@ -363,12 +370,12 @@
     
     DDLogInfo(@"Application became active");
     
-    if (self.backgroundTimer) 
+    if (self.backgroundTimer)
     {
         [self.backgroundTimer invalidate];
         self.backgroundTimer = nil;
     }
-    if (self.backgroundTask != UIBackgroundTaskInvalid) 
+    if (self.backgroundTask != UIBackgroundTaskInvalid)
     {
         [application endBackgroundTask:self.backgroundTask];
         self.backgroundTask = UIBackgroundTaskInvalid;
@@ -562,7 +569,7 @@
         NSURL *pushAPIEndpoint = [OTRBranding pushAPIURL];
         OTRPushTLVHandler *tlvHandler = [OTRProtocolManager sharedInstance].encryptionManager.pushTLVHandler;
         _pushController = [[PushController alloc] initWithBaseURL:pushAPIEndpoint sessionConfiguration:[NSURLSessionConfiguration ephemeralSessionConfiguration] databaseConnection:[OTRDatabaseManager sharedInstance].readWriteDatabaseConnection tlvHandler:tlvHandler];
-
+        
     }
     return _pushController;
 }

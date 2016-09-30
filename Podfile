@@ -26,7 +26,7 @@ abstract_target 'ChatSecureCorePods' do
   pod 'CocoaLumberjack', '~> 2.3.0'
   pod 'HockeySDK-Source', '~> 3.7'
   pod 'MBProgressHUD', '~> 0.9'
-  pod 'SAMKeychain', '~> 1.5'
+  pod 'SAMKeychain'
   # pod 'gtm-oauth2', '~> 0.1.0' # Trunk is outdated, using local podspec
   pod 'YapDatabase/SQLCipher', '~> 2.9'
   pod 'Mantle', '~> 2.0'
@@ -82,9 +82,9 @@ abstract_target 'ChatSecureCorePods' do
   #pod 'JSQMessagesViewController', :git => 'https://github.com/ChatSecure/JSQMessagesViewController', :branch => '7.2.0-send_button'
   pod 'JSQMessagesViewController', :git => 'https://github.com/gudjao/JSQMessagesViewController.git', :branch => 'custom_7.3'
   pod 'JSQSystemSoundPlayer'
-  pod 'UIScrollView-InfiniteScroll'
-  #pod 'SVPullToRefresh', :git => 'https://github.com/gudjao/SVPullToRefresh.git', :branch => 'dev'
-  pod 'SVPullToRefresh', :git => 'https://github.com/gabro/SVPullToRefresh.git', :branch => 'top-infinitescrolling'
+  #pod 'UIScrollView-InfiniteScroll'
+  pod 'SVPullToRefresh', :git => 'https://github.com/gudjao/SVPullToRefresh.git', :branch => 'dev'
+  #pod 'SVPullToRefresh', :git => 'https://github.com/gabro/SVPullToRefresh.git', :branch => 'top-infinitescrolling'
   
   # Submodules
   pod 'ChatSecure-Push-iOS', :path => 'Submodules/ChatSecure-Push-iOS/ChatSecure-Push-iOS.podspec'

@@ -62,6 +62,7 @@
 - (UIView *)mediaView
 {
     UIImage *image = [OTRImages imageWithIdentifier:self.uniqueId];
+    NSLog(@"Unique Id: %@ Image %@", self.uniqueId, image);
     if (image) {
         CGSize size = [self mediaViewDisplaySize];
         UIImageView *imageView = [[UIImageView alloc] initWithImage:image];

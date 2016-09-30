@@ -111,6 +111,9 @@ typedef NS_ENUM(int, OTRDropDownType) {
 {
     [super viewDidLoad];
     
+    if ([self respondsToSelector:@selector(edgesForExtendedLayout)])
+        self.edgesForExtendedLayout = UIRectEdgeNone;
+    
     ////// Auto Scroll //////
     self.automaticallyScrollsToMostRecentMessage = YES;
     
@@ -173,6 +176,7 @@ typedef NS_ENUM(int, OTRDropDownType) {
     _archivedMessagesDidReceiveCount = 0;
     _archviedMessagesDidUpdatedbCount = 0;
     
+    /*
     if([self class] != [OTRMessagesGroupViewController class]) {
         [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(receivedArchivedMessagesNotification:) name:OTRXMPPReceivedArchivedMessagesNotificationName object:nil];
         
@@ -190,6 +194,7 @@ typedef NS_ENUM(int, OTRDropDownType) {
             }
         } direction:SVInfiniteScrollingDirectionTop];
     }
+     */
 }
 
 - (void)viewWillAppear:(BOOL)animated
@@ -1115,6 +1120,7 @@ typedef NS_ENUM(int, OTRDropDownType) {
                 
             } else {
                 uniqueId = self.buddy.uniqueId;
+                NSLog(@"Unique Id: %@ Media Unique Id %@", uniqueId, imageItem.uniqueId);
                 
                 __block OTRMessage *message = [[OTRMessage alloc] init];
                 message.read = YES;
