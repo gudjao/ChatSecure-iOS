@@ -55,7 +55,7 @@ NSString *const OTRYapDatabaseUnreadMessageSecondaryIndexColumnName = @"OTRYapDa
     //Enumerate all files in yap database directory and exclude from backup
     if (success) success = [[NSFileManager defaultManager] otr_excudeFromBackUpFilesInDirectory:databaseDirectory];
     //fix file protection on existing files
-     if (success) success = [[NSFileManager defaultManager] otr_setFileProtection:NSFileProtectionCompleteUntilFirstUserAuthentication forFilesInDirectory:databaseDirectory];
+    if (success) success = [[NSFileManager defaultManager] otr_setFileProtection:NSFileProtectionCompleteUntilFirstUserAuthentication forFilesInDirectory:databaseDirectory];
     return success;
 }
 
@@ -64,7 +64,27 @@ NSString *const OTRYapDatabaseUnreadMessageSecondaryIndexColumnName = @"OTRYapDa
     NSString *password = [self databasePassphrase];
     NSString *path = [OTRDatabaseManager yapDatabasePathWithName:nil];
     path = [path stringByAppendingPathComponent:@"ChatSecure-media.sqlite"];
+    
+    // Debug - Force Delete DB //
+    //[[NSFileManager defaultManager] removeItemAtPath:path error:nil];
+    // Debug - Force Delete DB //
+    
     BOOL success = [[OTRMediaFileManager sharedInstance] setupWithPath:path password:password];
+    
+    if ([[NSFileManager defaultManager] fileExistsAtPath:path isDirectory:NULL] && !success) {
+        // Media DB Error - Force Delete DB.
+        int count;
+        
+        NSArray *directoryContent = [[NSFileManager defaultManager] contentsOfDirectoryAtPath:path error:NULL];
+        for (count = 0; count < (int)[directoryContent count]; count++)
+        {
+            NSLog(@"File %d: %@", (count + 1), [directoryContent objectAtIndex:count]);
+        }
+        
+        [[NSFileManager defaultManager] removeItemAtPath:path error:nil];
+        
+        success = [[OTRMediaFileManager sharedInstance] setupWithPath:path password:password];
+    }
     
     self.mediaServer = [OTRMediaServer sharedInstance];
     NSError *error = nil;

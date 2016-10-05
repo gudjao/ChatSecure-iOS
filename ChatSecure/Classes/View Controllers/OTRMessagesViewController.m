@@ -176,7 +176,6 @@ typedef NS_ENUM(int, OTRDropDownType) {
     _archivedMessagesDidReceiveCount = 0;
     _archviedMessagesDidUpdatedbCount = 0;
     
-    /*
     if([self class] != [OTRMessagesGroupViewController class]) {
         [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(receivedArchivedMessagesNotification:) name:OTRXMPPReceivedArchivedMessagesNotificationName object:nil];
         
@@ -194,7 +193,6 @@ typedef NS_ENUM(int, OTRDropDownType) {
             }
         } direction:SVInfiniteScrollingDirectionTop];
     }
-     */
 }
 
 - (void)viewWillAppear:(BOOL)animated
@@ -874,9 +872,14 @@ typedef NS_ENUM(int, OTRDropDownType) {
 - (void)showImage:(OTRImageItem *)imageItem fromCollectionView:(JSQMessagesCollectionView *)collectionView atIndexPath:(NSIndexPath *)indexPath
 {
     //FIXME: Possible for image to not be in cache?
-    UIImage *image = [OTRImages imageWithIdentifier:imageItem.uniqueId];
     JTSImageInfo *imageInfo = [[JTSImageInfo alloc] init];
-    imageInfo.image = image;
+    UIImage *image = [OTRImages imageWithIdentifier:imageItem.uniqueId];
+    if (image) {
+        imageInfo.image = image;
+    } else {
+        FLAnimatedImage *animatedImage = [OTRImages animatedImageWithIdentifier:imageItem.uniqueId];
+        imageInfo.imageData = animatedImage.data;
+    }
     
     UICollectionViewCell *cell = [collectionView cellForItemAtIndexPath:indexPath];
     if ([cell isKindOfClass:[JSQMessagesCollectionViewCell class]]) {
@@ -898,8 +901,21 @@ typedef NS_ENUM(int, OTRDropDownType) {
 {
     if (videoItem.filename) {
         NSURL *videoURL = [[OTRMediaServer sharedInstance] urlForMediaItem:videoItem buddyUniqueId:self.buddy.uniqueId];
-        MPMoviePlayerViewController *moviePlayerViewController = [[MPMoviePlayerViewController alloc] initWithContentURL:videoURL];
-        [self presentViewController:moviePlayerViewController animated:YES completion:nil];
+        //MPMoviePlayerViewController *moviePlayerViewController = [[MPMoviePlayerViewController alloc] initWithContentURL:videoURL];
+        //[self presentViewController:moviePlayerViewController animated:YES completion:nil];
+        
+        AVPlayer *player = nil;
+        if(videoItem.videoUrl) {
+            player = [AVPlayer playerWithURL:videoItem.videoUrl];
+        } else {
+            player = [AVPlayer playerWithURL:videoURL];
+        }
+        
+        AVPlayerViewController *playerViewController = [[AVPlayerViewController alloc] init];
+        playerViewController.player = player;
+        [player play];
+        
+        [self presentViewController:playerViewController animated:YES completion:nil];
     }
 }
 
@@ -1120,7 +1136,6 @@ typedef NS_ENUM(int, OTRDropDownType) {
                 
             } else {
                 uniqueId = self.buddy.uniqueId;
-                NSLog(@"Unique Id: %@ Media Unique Id %@", uniqueId, imageItem.uniqueId);
                 
                 __block OTRMessage *message = [[OTRMessage alloc] init];
                 message.read = YES;
@@ -1305,19 +1320,19 @@ typedef NS_ENUM(int, OTRDropDownType) {
     
     [[OTRMediaFileManager sharedInstance] copyDataFromFilePath:url.path toEncryptedPath:newPath completionQueue:dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0) completion:^(NSError *error) {
         
-        //        NSData *data = nil;
-        //        if ([[NSFileManager defaultManager] fileExistsAtPath:url.path]) {
-        //            long long fileSize = [[[NSFileManager defaultManager] attributesOfItemAtPath:url.path error:nil][NSFileSize] longLongValue];
-        //            if (fileSize < 1024 * 1024 * 1) {
-        //                // Smaller than 1Mb
-        //                data = [NSData dataWithContentsOfFile:url.path];
-        //            }
-        //            NSError *err = nil;
-        //            [[NSFileManager defaultManager] removeItemAtPath:url.path error:&err];
-        //            if (err) {
-        //                DDLogError(@"Error Removing Audio File");
-        //            }
-        //        }
+//                NSData *data = nil;
+//                if ([[NSFileManager defaultManager] fileExistsAtPath:url.path]) {
+//                    long long fileSize = [[[NSFileManager defaultManager] attributesOfItemAtPath:url.path error:nil][NSFileSize] longLongValue];
+//                    if (fileSize < 1024 * 1024 * 1) {
+//                        // Smaller than 1Mb
+//                        data = [NSData dataWithContentsOfFile:url.path];
+//                    }
+//                    NSError *err = nil;
+//                    [[NSFileManager defaultManager] removeItemAtPath:url.path error:&err];
+//                    if (err) {
+//                        DDLogError(@"Error Removing Audio File");
+//                    }
+//                }
         
         message.error = error;
         [[OTRDatabaseManager sharedInstance].readWriteDatabaseConnection readWriteWithBlock:^(YapDatabaseReadWriteTransaction *transaction) {
@@ -1736,7 +1751,8 @@ heightForCellBottomLabelAtIndexPath:(NSIndexPath *)indexPath
                             _isFirstLoad = 0;
                             NSLog(@"DONE> ON FIRST LOAD");
                         } else {
-                            self.collectionView.contentOffset = CGPointMake(0, self.collectionView.contentSize.height - bottomOffset + 60.0f);
+                            NSLog(@"CONTENT HEIGHT: %f - BOTTOM OFFSET: %f = %f", self.collectionView.contentSize.height, bottomOffset, self.collectionView.contentSize.height - bottomOffset);
+                            self.collectionView.contentOffset = CGPointMake(0, self.collectionView.contentSize.height - bottomOffset);
                             NSLog(@"DONE>");
                         }
                         

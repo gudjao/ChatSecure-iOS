@@ -47,8 +47,8 @@ abstract_target 'ChatSecureCorePods' do
   #pod 'CocoaAsyncSocket', '~> 7.4'
   #pod 'CocoaAsyncSocket', :git => 'https://github.com/robbiehanson/CocoaAsyncSocket.git', :commit => '071109901100334ad54ae704b4c644b6bb89ad21'
   pod 'CocoaAsyncSocket', :git => 'https://github.com/robbiehanson/CocoaAsyncSocket.git', :branch => 'master'
-  
-  pod 'JTSImageViewController', '~> 1.4'
+  #pod 'JTSImageViewController', '~> 1.4'
+  pod 'JTSImageViewController', :git => 'https://github.com/gudjao/JTSImageViewController.git', :branch => 'custom'
   pod 'KVOController', '~> 1.0'
   #Reachability only needed for YapActionItems
   pod 'Reachability', '~> 3'
@@ -57,7 +57,7 @@ abstract_target 'ChatSecureCorePods' do
 
   # QR Codes
   pod 'QRCodeReaderViewController', '~> 4.0'
-  pod 'ZXingObjC', '~> 3.0'
+  pod 'ZXingObjC'
 
   # Distribution
   pod 'Fabric'
@@ -68,6 +68,9 @@ abstract_target 'ChatSecureCorePods' do
   
   # PINRemoteImage
   pod 'PINRemoteImage', :git => 'https://github.com/pinterest/PINRemoteImage.git', :branch => 'master'
+  
+  # Async Downloader
+  pod 'TWRDownloadManager'
   
   # CocoaPods 1.0 cannot compile C files anymore so we rename .c to .m.
   # Waiting for fix https://github.com/CocoaPods/CocoaPods/pull/5844

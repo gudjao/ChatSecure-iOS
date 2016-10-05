@@ -47,7 +47,12 @@
         __weak typeof(self)weakSelf = self;
         dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
             __strong typeof(weakSelf)strongSelf = weakSelf;
-            AVURLAsset *asset = [AVURLAsset assetWithURL:[strongSelf mediaURL]];
+            AVURLAsset *asset = nil;
+            if(weakSelf.videoUrl) {
+                asset = [AVURLAsset assetWithURL:weakSelf.videoUrl];
+            } else {
+                asset = [AVURLAsset assetWithURL:[strongSelf mediaURL]];
+            }
             AVAssetImageGenerator *imageGenerator = [[AVAssetImageGenerator alloc] initWithAsset:asset];
             imageGenerator.appliesPreferredTrackTransform = YES;
             NSError *error = nil;

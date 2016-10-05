@@ -9,6 +9,8 @@
 #import <Foundation/Foundation.h>
 #import "OTRConstants.h"
 
+#import <PINRemoteImage/FLAnimatedImageView+PINRemoteImage.h>
+
 @class OTRComposingImageView;
 
 typedef NS_ENUM(NSUInteger, OTRBubbleMessageType) {
@@ -44,8 +46,10 @@ typedef NS_ENUM(NSUInteger, OTRBubbleMessageType) {
 + (UIImage *)microphoneWithColor:(UIColor *)color size:(CGSize)size;
 
 + (UIImage *)imageWithIdentifier:(NSString *)identifier;
++ (FLAnimatedImage *)animatedImageWithIdentifier:(NSString *)identifier;
 + (void)removeImageWithIdentifier:(NSString *)identifier;
 + (void)setImage:(UIImage *)image forIdentifier:(NSString *)identifier;
++ (void)setAnimatedImage:(FLAnimatedImage *)animatedImage forIdentifier:(NSString *)identifier;
 
 + (UIImage *)avatarImageWithUsername:(NSString *)username;
 

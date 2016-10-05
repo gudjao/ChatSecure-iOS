@@ -829,7 +829,22 @@ NSString *const OTRDuckDuckGoImageKey = @"OTRMicrophoneImageKey";
 
 + (UIImage *)imageWithIdentifier:(NSString *)identifier
 {
-    return [[self imageCache] objectForKey:identifier];
+    id image = [[self imageCache] objectForKey:identifier];
+    if([image isKindOfClass:[UIImage class]]) {
+        return image;
+    } else {
+        return nil;
+    }
+}
+
++ (FLAnimatedImage *)animatedImageWithIdentifier:(NSString *)identifier
+{
+    id image = [[self imageCache] objectForKey:identifier];
+    if([image isKindOfClass:[FLAnimatedImage class]]) {
+        return image;
+    } else {
+        return nil;
+    }
 }
 
 + (void)removeImageWithIdentifier:(NSString *)identifier
@@ -848,6 +863,20 @@ NSString *const OTRDuckDuckGoImageKey = @"OTRMicrophoneImageKey";
         [[self imageCache] setObject:image forKey:identifier];
         
     } else if (!image) {
+        [self removeImageWithIdentifier:identifier];
+    }
+}
+
++ (void)setAnimatedImage:(FLAnimatedImage *)animatedImage forIdentifier:(NSString *)identifier {
+    if (![identifier length]) {
+        return;
+    }
+    
+    if (animatedImage && [animatedImage isKindOfClass:[FLAnimatedImage class]]) {
+        
+        [[self imageCache] setObject:animatedImage forKey:identifier];
+        
+    } else if (!animatedImage) {
         [self removeImageWithIdentifier:identifier];
     }
 }

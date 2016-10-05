@@ -13,6 +13,7 @@
 #import "OTRDatabaseManager.h"
 #import "OTRMessage.h"
 
+#import <PINRemoteImage/FLAnimatedImageView+PINRemoteImage.h>
 
 @implementation OTRImageItem
 
@@ -39,8 +40,15 @@
             [[OTRMediaFileManager sharedInstance] dataForItem:strongSelf buddyUniqueId:buddyUniqueId completion:^(NSData *data, NSError *error) {
                 if([data length]) {
                     __strong typeof(weakSelf)strongSelf = weakSelf;
-                    UIImage *image = [UIImage imageWithData:data];
-                    [OTRImages setImage:image forIdentifier:strongSelf.uniqueId];
+                    
+                    FLAnimatedImage *animatedImage = [FLAnimatedImage animatedImageWithGIFData:data];
+                    if(animatedImage) {
+                        [OTRImages setAnimatedImage:animatedImage forIdentifier:strongSelf.uniqueId];
+                    } else {
+                        UIImage *image = [UIImage imageWithData:data];
+                        [OTRImages setImage:image forIdentifier:strongSelf.uniqueId];
+                    }
+                    
                     [strongSelf touchParentMessage];
                 }
             } completionQueue:dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0)];

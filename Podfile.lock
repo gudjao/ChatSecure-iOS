@@ -60,7 +60,7 @@ PODS:
   - JSQMessagesViewController (7.3.4.1):
     - JSQSystemSoundPlayer (~> 2.0.1)
   - JSQSystemSoundPlayer (2.0.1)
-  - JTSImageViewController (1.5.1)
+  - JTSImageViewController (1.5.3)
   - JVFloatLabeledTextField (1.1.1)
   - KissXML (5.1.2):
     - KissXML/Core (= 5.1.2)
@@ -117,6 +117,7 @@ PODS:
   - SVPullToRefresh (0.4.5.1)
   - TTTAttributedLabel (1.13.4)
   - TUSafariActivity (1.0.4)
+  - TWRDownloadManager (1.1.1)
   - uservoice-iphone-sdk (3.2.9)
   - VTAcknowledgementsViewController (0.17)
   - XLForm (3.2.0)
@@ -359,7 +360,7 @@ DEPENDENCIES:
   - IOCipher/GCDWebServer (from `Submodules/IOCipher/IOCipher.podspec`)
   - JSQMessagesViewController (from `https://github.com/gudjao/JSQMessagesViewController.git`, branch `custom_7.3`)
   - JSQSystemSoundPlayer
-  - JTSImageViewController (~> 1.4)
+  - JTSImageViewController (from `https://github.com/gudjao/JTSImageViewController.git`, branch `custom`)
   - JVFloatLabeledTextField (~> 1.0)
   - KVOController (~> 1.0)
   - libsqlfs/SQLCipher (from `Podspecs/libsqlfs.podspec`)
@@ -380,12 +381,13 @@ DEPENDENCIES:
   - SVPullToRefresh (from `https://github.com/gudjao/SVPullToRefresh.git`, branch `dev`)
   - TTTAttributedLabel (~> 1.10)
   - TUSafariActivity (~> 1.0)
+  - TWRDownloadManager
   - uservoice-iphone-sdk (~> 3.2)
   - VTAcknowledgementsViewController (~> 0.15)
   - XLForm (~> 3.1)
   - XMPPFramework (from `Submodules/XMPPFramework/XMPPFramework.podspec`)
   - YapDatabase/SQLCipher (~> 2.9)
-  - ZXingObjC (~> 3.0)
+  - ZXingObjC
 
 EXTERNAL SOURCES:
   ChatSecure-Push-iOS:
@@ -404,6 +406,9 @@ EXTERNAL SOURCES:
   JSQMessagesViewController:
     :branch: custom_7.3
     :git: https://github.com/gudjao/JSQMessagesViewController.git
+  JTSImageViewController:
+    :branch: custom
+    :git: https://github.com/gudjao/JTSImageViewController.git
   libsqlfs:
     :podspec: Podspecs/libsqlfs.podspec
   OTRKit:
@@ -428,6 +433,9 @@ CHECKOUT OPTIONS:
   JSQMessagesViewController:
     :commit: d2ff3b17fccb0946aa8d3abafd56d06af3ea061b
     :git: https://github.com/gudjao/JSQMessagesViewController.git
+  JTSImageViewController:
+    :commit: 777ac60292b5381e4942933af5305c3c74f68e24
+    :git: https://github.com/gudjao/JTSImageViewController.git
   PINRemoteImage:
     :commit: aefee50a61b0361194e4374a7010b9edb7e3c5c7
     :git: https://github.com/pinterest/PINRemoteImage.git
@@ -456,7 +464,7 @@ SPEC CHECKSUMS:
   IOCipher: 4cb4cd9a5998f69f4578a51501987dc5951ff092
   JSQMessagesViewController: 61999f68b1c068918101a5d8412e9ed1f0137494
   JSQSystemSoundPlayer: c5850e77a4363ffd374cd851154b9af93264ed8d
-  JTSImageViewController: 1f8ce1cc93dab0d0af8e53badeea7528560cfec9
+  JTSImageViewController: d0daa369f34185fdc7a6a68cbc4bfa110b4c56b8
   JVFloatLabeledTextField: 0e5524b097f102036214dd8279edc8ecf08b5e18
   KissXML: 246c842586bb77110e04fb88e19376d96245c856
   KVOController: d72ace34afea42468329623b3379ab3cd1d286b6
@@ -479,6 +487,7 @@ SPEC CHECKSUMS:
   SVPullToRefresh: 9d0b53581e5d01be2861dae8e92481a8e932190c
   TTTAttributedLabel: 0a2ac7b2dd726d32a070dafb01446026b11e624f
   TUSafariActivity: afc55a00965377939107ce4fdc7f951f62454546
+  TWRDownloadManager: 34193d7d1ab6e6b4243d74fa4f686cc2ed5ef40f
   uservoice-iphone-sdk: 82b5c44465fe900b6e54ee856328733d2abfa947
   VTAcknowledgementsViewController: 6056f5f5e5ed995bbf0581bed6ddd29355ca9a80
   XLForm: 2250b4e96ab8ffa5f3355838c79edd90de451782
@@ -486,6 +495,6 @@ SPEC CHECKSUMS:
   YapDatabase: b1e43555a34a5298e23a045be96817a5ef0da58f
   ZXingObjC: bf15b3814f7a105b6d99f47da2333c93a063650a
 
-PODFILE CHECKSUM: 84cc63b433c7cb34187304e5f5276354af40ca88
+PODFILE CHECKSUM: b1b027eb3b969626f39177f7a947c5b32c64b741
 
 COCOAPODS: 1.1.0.rc.2

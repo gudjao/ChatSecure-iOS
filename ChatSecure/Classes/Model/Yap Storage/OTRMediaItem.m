@@ -15,6 +15,8 @@
 #import "OTRMessage.h"
 #import <ChatSecureCore/ChatSecureCore-Swift.h>
 
+#import <PINRemoteImage/FLAnimatedImageView+PINRemoteImage.h>
+
 @implementation OTRMediaItem
 
 - (instancetype) init {
@@ -62,7 +64,6 @@
 - (UIView *)mediaView
 {
     UIImage *image = [OTRImages imageWithIdentifier:self.uniqueId];
-    NSLog(@"Unique Id: %@ Image %@", self.uniqueId, image);
     if (image) {
         CGSize size = [self mediaViewDisplaySize];
         UIImageView *imageView = [[UIImageView alloc] initWithImage:image];
@@ -71,6 +72,20 @@
         imageView.clipsToBounds = YES;
         [JSQMessagesMediaViewBubbleImageMasker applyBubbleImageMaskToMediaView:imageView isOutgoing:!self.isIncoming];
         return imageView;
+    } else {
+        FLAnimatedImage *animatedImage = [OTRImages animatedImageWithIdentifier:self.uniqueId];
+        if(animatedImage) {
+            CGSize size = [self mediaViewDisplaySize];
+            FLAnimatedImageView *imageView = [[FLAnimatedImageView alloc] init];
+            imageView.animatedImage = animatedImage;
+            imageView.frame = CGRectMake(0, 0, size.width, size.height);
+            imageView.contentMode = UIViewContentModeScaleAspectFill;
+            imageView.clipsToBounds = YES;
+            [JSQMessagesMediaViewBubbleImageMasker applyBubbleImageMaskToMediaView:imageView isOutgoing:!self.isIncoming];
+            return imageView;
+        } else {
+            return nil;
+        }
     }
     return nil;
 }

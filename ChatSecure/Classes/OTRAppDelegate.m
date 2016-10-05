@@ -134,9 +134,12 @@
             if (error) {
                 DDLogError(@"Password Error: %@",error);
             }
+            DDLogDebug(@"First Launch");
         }
         
-        [[OTRDatabaseManager sharedInstance] setupDatabaseWithName:OTRYapDatabaseName];
+        if([[OTRDatabaseManager sharedInstance] setupDatabaseWithName:OTRYapDatabaseName]) {
+            DDLogDebug(@"Sucesss Launch");
+        }
         rootViewController = [self setupDefaultSplitViewControllerWithLeadingViewController:[[UINavigationController alloc] initWithRootViewController:self.conversationViewController]];
 #if CHATSECURE_DEMO
         [self performSelector:@selector(loadDemoData) withObject:nil afterDelay:0.0];

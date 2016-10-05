@@ -101,6 +101,7 @@ NSString *const kOTRRootMediaDirectory = @"media";
             });
             return;
         }
+        
         __block NSInteger written = [self.ioCipher writeDataToFileAtPath:path data:data offset:0 error:&error];
         
         dispatch_async(completionQueue, ^{

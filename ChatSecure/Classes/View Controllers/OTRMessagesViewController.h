@@ -10,8 +10,11 @@
 
 #import <JSQMessagesViewController/JSQMessagesViewController.h>
 #import "OTRBuddy.h"
+
 @import OTRKit;
 @import JSQMessagesViewController;
+@import AVFoundation;
+@import AVKit;
 
 @class OTRBuddy, OTRXMPPManager, OTRAccount, YapDatabaseConnection, OTRYapDatabaseObject, MessagesViewControllerState;
 

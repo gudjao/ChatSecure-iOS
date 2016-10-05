@@ -82,7 +82,7 @@ NSString *const OTRXMPPOldLoginStatusKey = @"OTRXMPPOldLoginStatusKey";
 NSString *const OTRXMPPNewLoginStatusKey = @"OTRXMPPNewLoginStatusKey";
 NSString *const OTRXMPPLoginErrorKey = @"OTRXMPPLoginErrorKey";
 
-extern NSString *const OTRXMPPReceivedArchivedMessagesNotificationName = @"OTRXMPPReceivedArchivedMessagesNotificationName";
+NSString *const OTRXMPPReceivedArchivedMessagesNotificationName = @"OTRXMPPReceivedArchivedMessagesNotificationName";
 
 @interface OTRXMPPManager()
 
