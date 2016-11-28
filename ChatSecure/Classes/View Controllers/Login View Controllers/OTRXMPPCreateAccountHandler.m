@@ -153,15 +153,17 @@ NSString* const RegistrationFormValidationErrorDomain = @"RegistrationValidation
     [self prepareForXMPPConnectionFrom:form account:(OTRXMPPAccount *)account];
     XLFormRowDescriptor *passwordRow = [form formRowWithTag:kOTRXLFormPasswordTextFieldTag];
     NSString *passwordFromForm = [passwordRow value];
+    NSString *password = nil;
     if (passwordRow.sectionDescriptor.isHidden == NO &&
         passwordRow.isHidden == NO &&
         passwordFromForm.length > 0) {
-        _password = passwordFromForm;
+        password = passwordFromForm;
     } else {
         // if no password provided, generate a strong one
-        _password = [OTRPasswordGenerator passwordWithLength:11];
+        password = [OTRPasswordGenerator passwordWithLength:11];
     }
-    [self.xmppManager registerNewAccountWithPassword:self.password];
+    account.password = password;
+    [self.xmppManager startRegisteringNewAccount];
 }
 
 #pragma mark - Helpers

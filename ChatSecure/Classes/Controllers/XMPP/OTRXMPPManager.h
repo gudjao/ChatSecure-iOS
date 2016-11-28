@@ -22,10 +22,7 @@
 
 @import Foundation;
 @import UIKit;
-
-#import "XMPPFramework/XMPPResultSet.h"
-#import "XMPPFramework/XMPPMessageArchiveManagement.h"
-
+@import XMPPFramework;
 #import "OTRBuddy.h"
 #import "OTRMessage.h"
 #import "XMPPFramework.h"
@@ -41,63 +38,25 @@
 #import "OTRCertificatePinning.h"
 #import "OTRXMPPError.h"
 #import "OTRConstants.h"
-#import <ChatSecureCore/ChatSecureCore-swift.h>
 
-@class OTRYapDatabaseRosterStorage,OTRXMPPAccount, OTRvCardYapDatabaseStorage, OTRXMPPManager, OTRXMPPRoomManager;
-
-extern NSString *const OTRXMPPRegisterSucceededNotificationName;
-extern NSString *const OTRXMPPRegisterFailedNotificationName;
-
-
-/**
- This notification is sent every time there is a change in the login status and if it goes 'backwards' there
- should be an error or a user initiated disconnect.
- 
- @{
-        OTRXMPPOldLoginStatusKey : @(OTRLoginStatus)
-        OTRXMPPNewLoginStatusKey : @(OTRLoginStatus)
-        OTRXMPPLoginErrorKey     : NSError*
- }
-*/
-
-extern NSString *const OTRXMPPLoginStatusNotificationName;
-
-extern NSString *const OTRXMPPOldLoginStatusKey;
-extern NSString *const OTRXMPPNewLoginStatusKey;
-extern NSString *const OTRXMPPLoginErrorKey;
+@class OTRXMPPAccount, OTRXMPPRoomManager;
+@class OTROMEMOSignalCoordinator;
 
 extern NSString *const OTRXMPPReceivedArchivedMessagesNotificationName;
 
-@interface OTRXMPPManager : NSObject <XMPPRosterDelegate, NSFetchedResultsControllerDelegate, OTRProtocol, OTRCertificatePinningDelegate>
-
-@property (nonatomic, readonly) XMPPStream *xmppStream;
-@property (nonatomic, readonly) XMPPReconnect *xmppReconnect;
-@property (nonatomic, readonly) XMPPRoster *xmppRoster;
-@property (nonatomic, readonly) OTRYapDatabaseRosterStorage *xmppRosterStorage;
-@property (nonatomic, readonly) XMPPvCardTempModule *xmppvCardTempModule;
-@property (nonatomic, readonly) XMPPvCardAvatarModule *xmppvCardAvatarModule;
-@property (nonatomic, readonly) XMPPCapabilities *xmppCapabilities;
-@property (nonatomic, readonly) XMPPCapabilitiesCoreDataStorage *xmppCapabilitiesStorage;
-@property (nonatomic, readonly) OTRCertificatePinning * certificatePinningModule;
-@property (nonatomic, readonly) OTRXMPPRoomManager *roomManager;
-
-@property (nonatomic, readonly) XMPPMessageArchiveManagement *xmppMessageArchive;
-
-@property BOOL didSecure;
+@interface OTRXMPPManager : NSObject <XMPPRosterDelegate, NSFetchedResultsControllerDelegate, OTRProtocol>
 
 @property (nonatomic, strong, readonly) OTRXMPPAccount *account;
+
+@property (nonatomic, readonly) XMPPRoster *xmppRoster;
+@property (nonatomic, readonly) OTRXMPPRoomManager *roomManager;
+@property (nonatomic, strong) XMPPMessageArchiveManagement *xmppMessageArchive;
+@property (nonatomic, strong) OTROMEMOSignalCoordinator *omemoSignalCoordinator;
 @property (nonatomic, weak) id <PushControllerProtocol> pushController;
 
-- (BOOL)connectWithJID:(NSString*) myJID password:(NSString*)myPassword;
-- (void)disconnect;
 
-- (void) teardownStream;
-
-- (NSString *)accountName;
-
-- (void)failedToConnect:(NSError *)error;
-
-- (void)registerNewAccountWithPassword:(NSString *)newPassword;
+/** Call this if you want to register a new account on a compatible server */
+- (BOOL)startRegisteringNewAccount;
 
 
 //Chat State
@@ -117,3 +76,21 @@ extern NSString *const OTRXMPPReceivedArchivedMessagesNotificationName;
 - (void)fetchArchivedMessages:(OTRMessage *)lastMessage withBuddy:(OTRBuddy *)buddy;
 
 @end
+
+
+/**
+ This notification is sent every time there is a change in the login status and if it goes 'backwards' there
+ should be an error or a user initiated disconnect.
+ 
+ @{
+ OTRXMPPOldLoginStatusKey : @(OTRLoginStatus)
+ OTRXMPPNewLoginStatusKey : @(OTRLoginStatus)
+ OTRXMPPLoginErrorKey     : NSError*
+ }
+ */
+extern NSString *const OTRXMPPLoginStatusNotificationName;
+extern NSString *const OTRXMPPOldLoginStatusKey;
+extern NSString *const OTRXMPPNewLoginStatusKey;
+extern NSString *const OTRXMPPLoginErrorKey;
+extern NSString *const OTRXMPPRegisterSucceededNotificationName;
+extern NSString *const OTRXMPPRegisterFailedNotificationName;

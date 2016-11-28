@@ -20,7 +20,6 @@
 #import "OTRTorManager.h"
 
 @interface OTRXMPPLoginHandler()
-@property (nonatomic, strong) NSString *password;
 @end
 
 @implementation OTRXMPPLoginHandler
@@ -87,26 +86,23 @@
     }
     
     /*
-    NSNumber *rememberPassword = [[form formRowWithTag:kOTRXLFormRememberPasswordSwitchTag] value];
-    if (rememberPassword) {
-        account.rememberPassword = [rememberPassword boolValue];
-    } else {
-        account.rememberPassword = YES;
-    }
+     NSNumber *rememberPassword = [[form formRowWithTag:kOTRXLFormRememberPasswordSwitchTag] value];
+     if (rememberPassword) {
+     account.rememberPassword = [rememberPassword boolValue];
+     } else {
+     account.rememberPassword = YES;
+     }
      */
     account.rememberPassword = YES;
     
     NSString *password = [[form formRowWithTag:kOTRXLFormPasswordTextFieldTag] value];
     
     if (password && password.length > 0) {
-        self.password = password;
+        account.password = password;
     } else if (account.password.length == 0) {
         // No password in field, generate strong password for user
-        self.password = [OTRPasswordGenerator passwordWithLength:20];
-    } else {
-        self.password = account.password;
+        account.password = [OTRPasswordGenerator passwordWithLength:20];
     }
-    
     
     NSNumber *autologin = [[form formRowWithTag:kOTRXLFormLoginAutomaticallySwitchTag] value];
     if (autologin) {
@@ -135,7 +131,7 @@
         }
     }
     account.domain = hostname;
-        
+    
     if (port) {
         account.port = [port intValue];
     }
@@ -231,7 +227,10 @@
 - (void) finishConnectingWithForm:(XLFormDescriptor *)form account:(OTRXMPPAccount *)account {
     [self prepareForXMPPConnectionFrom:form account:account];
     NSString *password = [[form formRowWithTag:kOTRXLFormPasswordTextFieldTag] value];
-    [self.xmppManager connectWithPassword:password userInitiated:YES];
+    if (password.length > 0) {
+        account.password = password;
+    }
+    [self.xmppManager connectUserInitiated:YES];
 }
 
 - (void)receivedNotification:(NSNotification *)notification
@@ -241,9 +240,6 @@
     OTRAccount *account = self.xmppManager.account;
     
     if (newStatus == OTRLoginStatusAuthenticated) {
-        // Account has been created, so save the password
-        account.password = self.password;
-        
         if (self.completion) {
             self.completion(account,nil);
         }
