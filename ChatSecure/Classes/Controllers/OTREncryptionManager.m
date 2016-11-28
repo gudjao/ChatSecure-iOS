@@ -344,7 +344,8 @@ NSString *const OTRMessageStateKey = @"OTREncryptionManagerMessageStateKey";
                          
                          if(result.image || result.alternativeRepresentation) {
                              
-                             NSString *UUID = result.UUID.UUIDString;
+                             NSString *UUID = [[NSUUID UUID] UUIDString];
+                             //NSString *UUID = result.UUID.UUIDString;
                              
                              NSString *uniqueId;
                              if([originalMessage isKindOfClass:[OTRXMPPRoomMessage class]]) {

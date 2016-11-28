@@ -770,14 +770,15 @@ NSString *const OTRXMPPReceivedArchivedMessagesNotificationName = @"OTRXMPPRecei
 #pragma mark XMPPMessageArchiveManagementDelegate
 
 - (void)xmppMessageArchiveManagement:(XMPPMessageArchiveManagement *)xmppMessageArchiveManagement didFinishReceivingMessagesWithSet:(XMPPResultSet *)resultSet {
-    DDLogVerbose(@"Archived Set: %@: %@", xmppMessageArchiveManagement, resultSet);
+    DDLogVerbose(@"Archived did finish receiving set: %@: %@", xmppMessageArchiveManagement, resultSet);
     
     __block NSArray *archMessages = [self.archivedMessages copy];
-    NSLog(@"ARRAY COUNT: %lu", (unsigned long)archMessages.count);
+    DDLogDebug(@"ARRAY COUNT: %lu", (unsigned long)archMessages.count);
     
     if(archMessages.count > 0) {
         [self.databaseConnection asyncReadWriteWithBlock:^(YapDatabaseReadWriteTransaction * _Nonnull transaction) {
             if ([xmppMessageArchiveManagement.xmppStream.tag isKindOfClass:[NSString class]]) {
+                int msgCount = 0;
                 for(XMPPMessage *message in archMessages) {
                     NSXMLElement *result = [message elementForName:@"result"];
                     NSXMLElement *forwarded = [result elementForName:@"forwarded"];
@@ -820,8 +821,18 @@ NSString *const OTRXMPPReceivedArchivedMessagesNotificationName = @"OTRXMPPRecei
                     }
                     
                     if (messageOtr.text) {
+                        msgCount++;
                         messageOtr.archivedMessage = 1;
-                        [[OTRKit sharedInstance] decodeMessage:messageOtr.text username:messageBuddy.username accountName:account.username protocol:kOTRProtocolTypeXMPP tag:messageOtr];
+                        if([OTRKit stringStartsWithOTRPrefix:messageOtr.text]) {
+                            
+                            OTRBuddy *buddy = [OTRBuddy fetchObjectWithUniqueID:messageOtr.buddyUniqueId transaction:transaction];
+                            buddy.lastMessageDate = messageOtr.date;
+                            [buddy saveWithTransaction:transaction];
+                            
+                            [messageOtr saveWithTransaction:transaction];
+                        } else {
+                            [[OTRKit sharedInstance] decodeMessage:messageOtr.text username:messageBuddy.username accountName:account.username protocol:kOTRProtocolTypeXMPP tag:messageOtr];
+                        }
                     }
                 }
             }
@@ -841,7 +852,7 @@ NSString *const OTRXMPPReceivedArchivedMessagesNotificationName = @"OTRXMPPRecei
 }
 
 - (void)xmppMessageArchiveManagement:(XMPPMessageArchiveManagement *)xmppMessageArchiveManagement didReceiveMAMMessage:(XMPPMessage *)message {
-    DDLogVerbose(@"Archived Message: %@:\n%@", xmppMessageArchiveManagement, [message prettyXMLString]);
+    DDLogVerbose(@"Archived Message: %@", xmppMessageArchiveManagement);
     
     [self.archivedMessages addObject:message];
 }

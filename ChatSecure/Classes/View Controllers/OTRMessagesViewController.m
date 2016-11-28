@@ -161,6 +161,9 @@ typedef NS_ENUM(int, OTRDropDownType) {
     ////// TextViewUpdates //////
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(receivedTextViewChangedNotification:) name:UITextViewTextDidChangeNotification object:self.inputToolbar.contentView.textView];
     
+    ////// Disable Encryption /////
+    [[OTRKit sharedInstance] disableEncryptionWithUsername:self.buddy.username accountName:self.account.username protocol:self.account.protocolTypeString];
+    
     /** Setup databse view handler*/
     YapDatabaseConnection *connection = [self.databaseConnection.database newConnection];
     self.viewHandler = [[OTRYapViewHandler alloc] initWithDatabaseConnection:connection];
@@ -172,6 +175,7 @@ typedef NS_ENUM(int, OTRDropDownType) {
     self.collectionView.collectionViewLayout = layout;
     
     ////// Archived Messages with Infinite Scroll //////
+#warning Please fix duplicate chat when using archived.
     _isFirstLoad = 0;
     _archivedMessagesDidReceiveCount = 0;
     _archviedMessagesDidUpdatedbCount = 0;
@@ -1320,19 +1324,19 @@ typedef NS_ENUM(int, OTRDropDownType) {
     
     [[OTRMediaFileManager sharedInstance] copyDataFromFilePath:url.path toEncryptedPath:newPath completionQueue:dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0) completion:^(NSError *error) {
         
-//                NSData *data = nil;
-//                if ([[NSFileManager defaultManager] fileExistsAtPath:url.path]) {
-//                    long long fileSize = [[[NSFileManager defaultManager] attributesOfItemAtPath:url.path error:nil][NSFileSize] longLongValue];
-//                    if (fileSize < 1024 * 1024 * 1) {
-//                        // Smaller than 1Mb
-//                        data = [NSData dataWithContentsOfFile:url.path];
-//                    }
-//                    NSError *err = nil;
-//                    [[NSFileManager defaultManager] removeItemAtPath:url.path error:&err];
-//                    if (err) {
-//                        DDLogError(@"Error Removing Audio File");
-//                    }
-//                }
+        //                NSData *data = nil;
+        //                if ([[NSFileManager defaultManager] fileExistsAtPath:url.path]) {
+        //                    long long fileSize = [[[NSFileManager defaultManager] attributesOfItemAtPath:url.path error:nil][NSFileSize] longLongValue];
+        //                    if (fileSize < 1024 * 1024 * 1) {
+        //                        // Smaller than 1Mb
+        //                        data = [NSData dataWithContentsOfFile:url.path];
+        //                    }
+        //                    NSError *err = nil;
+        //                    [[NSFileManager defaultManager] removeItemAtPath:url.path error:&err];
+        //                    if (err) {
+        //                        DDLogError(@"Error Removing Audio File");
+        //                    }
+        //                }
         
         message.error = error;
         [[OTRDatabaseManager sharedInstance].readWriteDatabaseConnection readWriteWithBlock:^(YapDatabaseReadWriteTransaction *transaction) {
@@ -1652,7 +1656,7 @@ heightForCellBottomLabelAtIndexPath:(NSIndexPath *)indexPath
 
 - (void)receivedArchivedMessagesNotification:(NSNotification *)notification {
     dispatch_async(dispatch_get_main_queue(),^{
-        NSLog(@"DONE> FETCHING");
+        DDLogDebug(@"DONE> FETCHING");
         
         NSNumber *arrayCount = (NSNumber *)notification.object;
         _archivedMessagesDidReceiveCount = [arrayCount unsignedIntegerValue];
@@ -1700,15 +1704,6 @@ heightForCellBottomLabelAtIndexPath:(NSIndexPath *)indexPath
             } else {
                 CGFloat bottomOffset = self.collectionView.contentSize.height - self.collectionView.contentOffset.y;
                 
-                /*
-                 NSLog(@"CONTENT SIZE HEIGHT: %f", self.collectionView.contentSize.height);
-                 NSLog(@"CONTENT OFFSET Y: %f", self.collectionView.contentOffset.y);
-                 NSLog(@"CONTENT INSET TOP: %f BOTTOM: %f", self.collectionView.contentInset.top, self.collectionView.contentInset.bottom);
-                 NSLog(@"BOTTOM OFFSET: %f", bottomOffset);
-                 */
-                
-                //NSLog(@"BOTTOM OFFSET: %f", bottomOffset);
-                
                 [CATransaction begin];
                 [CATransaction setDisableActions:YES];
                 
@@ -1742,25 +1737,23 @@ heightForCellBottomLabelAtIndexPath:(NSIndexPath *)indexPath
                     }
                 } completion:^(BOOL finished) {
                     _archviedMessagesDidUpdatedbCount += rowChanges.count;
-                    NSLog(@"UPDATED: %ld TOTAL: %lu", _archviedMessagesDidUpdatedbCount, (unsigned long)_archivedMessagesDidReceiveCount);
+                    DDLogDebug(@"UPDATED: %ld TOTAL: %lu", _archviedMessagesDidUpdatedbCount, (unsigned long)_archivedMessagesDidReceiveCount);
                     if(_archviedMessagesDidUpdatedbCount >= _archivedMessagesDidReceiveCount) {
                         if(_isFirstLoad) {
                             //NSIndexPath *indexPath = [NSIndexPath indexPathForRow:[self.collectionView numberOfItemsInSection:0] - 1 inSection:0];
                             //[self.collectionView scrollToItemAtIndexPath:indexPath atScrollPosition:UICollectionViewScrollPositionBottom animated:NO];
                             [self scrollToBottomAnimated:NO];
                             _isFirstLoad = 0;
-                            NSLog(@"DONE> ON FIRST LOAD");
                         } else {
-                            NSLog(@"CONTENT HEIGHT: %f - BOTTOM OFFSET: %f = %f", self.collectionView.contentSize.height, bottomOffset, self.collectionView.contentSize.height - bottomOffset);
                             self.collectionView.contentOffset = CGPointMake(0, self.collectionView.contentSize.height - bottomOffset);
-                            NSLog(@"DONE>");
                         }
-                        
-                        [CATransaction commit];
                         
                         _archivedMessagesDidReceiveCount = 0;
                         _archviedMessagesDidUpdatedbCount = 0;
+                        
+                        DDLogDebug(@"DONE>>");
                     }
+                    [CATransaction commit];
                 }];
             }
         } else {

@@ -78,7 +78,7 @@ NSString *const OTRYapDatabaseUnreadMessageSecondaryIndexColumnName = @"OTRYapDa
         NSArray *directoryContent = [[NSFileManager defaultManager] contentsOfDirectoryAtPath:path error:NULL];
         for (count = 0; count < (int)[directoryContent count]; count++)
         {
-            NSLog(@"File %d: %@", (count + 1), [directoryContent objectAtIndex:count]);
+            DDLogDebug(@"File %d: %@", (count + 1), [directoryContent objectAtIndex:count]);
         }
         
         [[NSFileManager defaultManager] removeItemAtPath:path error:nil];
