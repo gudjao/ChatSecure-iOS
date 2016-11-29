@@ -51,6 +51,7 @@ extern NSString *const OTRXMPPReceivedArchivedMessagesNotificationName;
 @property (nonatomic, readonly) XMPPRoster *xmppRoster;
 @property (nonatomic, readonly) OTRXMPPRoomManager *roomManager;
 @property (nonatomic, strong) XMPPMessageArchiveManagement *xmppMessageArchive;
+@property (nonatomic, strong) NSMutableArray *archivedMessages;
 @property (nonatomic, strong) OTROMEMOSignalCoordinator *omemoSignalCoordinator;
 @property (nonatomic, weak) id <PushControllerProtocol> pushController;
 

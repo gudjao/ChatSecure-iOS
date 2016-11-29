@@ -53,7 +53,7 @@ public class OTRWelcomeViewController: UIViewController {
     @IBAction func loginAccountButtonPressed(sender : AnyObject) {
         let loginVC = OTRBaseLoginViewController(nibName:nil, bundle: nil)
         loginVC.form = OTRXLFormCreator.formForAccountType(OTRAccountType.Jabber , createAccount: false)
-        loginVC.createLoginHandler = OTRXMPPLoginHandler();
+        loginVC.loginHandler = OTRXMPPLoginHandler();
         navigationController?.pushViewController(loginVC, animated: true)
     }
     
